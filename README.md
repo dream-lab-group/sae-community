@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center" id="top"> 
+  <img src="./public/dreamlab-logo.png" alt="Sae Community" width="400" />
 
-## Getting Started
+&#xa0;
 
-First, run the development server:
+  <!-- <a href="https://saecommunity.netlify.app">Demo</a> -->
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<h1 align="center">Sae Community</h1>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Important Information</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+</p>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+<br>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## :dart: About
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<p>This is a bachelor project on behalf of the SAE Institute in Zurich.</p>
+<p>We strive to create a platform from students for students to make the local community more tightly knit and enhance the natural of meeting and exchanges.</p>
 
-## Learn More
+## :rocket: Technologies
 
-To learn more about Next.js, take a look at the following resources:
+The following tools were used in this project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [Directus](https://directus.io/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## :white_check_mark: Requirements
 
-## Deploy on Vercel
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## :checkered_flag: Starting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project will not properly run on your local computer, since it requires a headless CMS as a backend, as well as the data structure we decided.
+
+## :memo: License
+
+This project is under license from MIT.
+
+<div align="center" id="bottom">
+  <p>Made with ❤️</p>
+  <p>Hadrian Chio</p>
+  <p>Sarah Candolfi</p>
+  <p>Jasmin Fischli</p>
+  <p>Fiona Hilpertshauser</p>
+  <p>Nikola Vucic</p>
+  <p>Claudio Mühle</p>
+  <p>Manuela Pfister</p>
+  <p>Michel Weber</p>
+</div>
+
+&#xa0;
+
+<div align="center">
+<a href="#top">Back to top</a>
+</div>
