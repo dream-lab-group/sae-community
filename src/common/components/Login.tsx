@@ -53,6 +53,11 @@ export const Login = () => {
             Login
           </Button>
         </Grid>
+        <Grid item sx={{ marginTop: "30px" }}>
+          <Button variant="contained" color="error">
+            Login
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
