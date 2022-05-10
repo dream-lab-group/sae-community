@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import { Login } from "../common/components/Login";
+import type { NextPage } from 'next';
+import { LoginRegistration } from '../common/components/login-registration/login-registraion';
 
 const Home: NextPage = () => {
   return (
     <>
-      <Login />
+      <LoginRegistration />
     </>
   );
 };
