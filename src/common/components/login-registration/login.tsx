@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 export type LoginContextProps = {
   loginContext: string;
   setLoginContext: React.Dispatch<SetStateAction<string>>;
+  className?: string;
 };
 
 export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
@@ -15,15 +16,18 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
   } = useFormContext();
   return (
     <>
-      <Typography variant="h2" sx={{ color: '#ff533d', fontWeight: 700 }}>
-        Welcome Back!
+      <Typography variant="h4" sx={{ fontWeight: 700 }}>
+        Melde dich an!
+      </Typography>
+      <Typography variant="h5" sx={{ fontWeight: 700 }}>
+        SAE Community Plattform
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <TextField
           {...register('username', { required: true })}
           id="username"
           label="Username"
-          variant="standard"
+          variant="outlined"
           sx={{ marginTop: '20px' }}
         />
         {errors.username && (
@@ -35,7 +39,7 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
           {...register('password', { required: true })}
           id="password"
           label="Password"
-          variant="standard"
+          variant="outlined"
           sx={{ marginTop: '20px', marginBottom: '10px' }}
         />
         {errors.password && (
@@ -56,7 +60,7 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
             marginLeft: '5px',
             textTransform: 'none',
           }}
-          onClick={() => setLoginContext('register')}
+          onClick={() => setLoginContext('konto erstellen')}
         >
           Sign up now!
         </Button>
@@ -64,7 +68,7 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Button
           variant="contained"
-          color="error"
+          color="secondary"
           type="submit"
           sx={{ alignSelf: 'flex-start', width: '150px', marginBottom: '10px' }}
         >

@@ -1,10 +1,21 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { LoginContextProps } from './login';
 
 export const Registration = ({
   loginContext,
   setLoginContext,
+  className,
 }: LoginContextProps) => {
   const {
     register,
@@ -12,14 +23,20 @@ export const Registration = ({
     control,
   } = useFormContext();
   return (
-    <>
-      <Typography variant="h2" sx={{ color: '#ff533d', fontWeight: 700 }}>
-        Hey there!
+    <Box sx={{ width: '470px' }}>
+      <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
+        Erstelle ein benutzerkonto
+      </Typography>
+      <Typography
+        variant="h2"
+        sx={{ fontWeight: 400, fontSize: '20px', marginTop: '7px' }}
+      >
+        SAE Community Plattform
       </Typography>
       <Box
         sx={{
           display: 'flex',
-          marginBottom: '20px',
+          marginTop: '37px',
         }}
       >
         <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
@@ -32,17 +49,17 @@ export const Registration = ({
               },
             })}
             id="name"
-            label="name"
-            variant="standard"
-            sx={{ width: '200px' }}
+            label="Vorname"
+            variant="outlined"
+            sx={{ width: '225px' }}
           />
           {errors.name && (
             <Typography color="error" sx={{ fontSize: '14px' }}>
-              Kein password
+              Vorname darf nicht leer sein
             </Typography>
           )}
         </Box>
-        <Box sx={{ width: '200px' }}>
+        <Box sx={{ width: '225px' }}>
           <TextField
             {...register('lastname', {
               required: true,
@@ -52,48 +69,13 @@ export const Registration = ({
               },
             })}
             id="lastname"
-            label="lastname"
-            variant="standard"
-            sx={{ width: '200px' }}
+            label="Nachname"
+            variant="outlined"
+            sx={{ width: '225px' }}
           />
           {errors.lastname && (
             <Typography color="error" sx={{ fontSize: '14px' }}>
-              Kein password
-            </Typography>
-          )}
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          marginBottom: '20px',
-        }}
-      >
-        <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
-          <TextField
-            {...register('username', { required: true })}
-            id="userame"
-            label="username"
-            variant="standard"
-            sx={{ width: '200px' }}
-          />
-          {errors.username && (
-            <Typography color="error" sx={{ fontSize: '14px' }}>
-              Kein password
-            </Typography>
-          )}
-        </Box>
-        <Box sx={{ width: '200px' }}>
-          <TextField
-            {...register('password', { required: true })}
-            id="password"
-            label="password"
-            variant="standard"
-            sx={{ width: '200px' }}
-          />
-          {errors.password && (
-            <Typography color="error" sx={{ fontSize: '14px' }}>
-              Kein password
+              Nachnamedarf nicht leer sein
             </Typography>
           )}
         </Box>
@@ -108,9 +90,9 @@ export const Registration = ({
           },
         })}
         id="email"
-        label="email"
-        variant="standard"
-        sx={{ width: '100%' }}
+        label="E-Mail"
+        variant="outlined"
+        sx={{ width: '100%', marginTop: ' 20px' }}
       />
       {errors.email && (
         <Typography
@@ -120,31 +102,110 @@ export const Registration = ({
           keine gültige E-mail Adresse
         </Typography>
       )}
-      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography>Already a member?</Typography>
-        <Button
-          variant="text"
-          color="error"
-          sx={{
-            padding: 0,
-            fontFamily: `'Karla', sans-serif`,
-            fontSize: '16px',
-            marginLeft: '5px',
-            textTransform: 'none',
-          }}
-          onClick={() => setLoginContext('login')}
-        >
-          Sign in now!
-        </Button>
-      </Box>
-      <Button
-        variant="contained"
-        color="error"
-        type="submit"
-        sx={{ alignSelf: 'flex-start', width: '150px' }}
+      <Box
+        sx={{
+          display: 'flex',
+          marginTop: '20px',
+        }}
       >
-        {loginContext}
-      </Button>
-    </>
+        <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
+          <TextField
+            {...register('username', { required: true })}
+            id="userame"
+            label="Username"
+            variant="outlined"
+            sx={{ width: '225px' }}
+          />
+          {errors.username && (
+            <Typography color="error" sx={{ fontSize: '14px' }}>
+              Kein password
+            </Typography>
+          )}
+        </Box>
+        <Box sx={{ width: '225px' }}>
+          <TextField
+            {...register('password', { required: true })}
+            id="password"
+            label="Passwort"
+            variant="outlined"
+            sx={{ width: '225px' }}
+          />
+          {errors.password && (
+            <Typography color="error" sx={{ fontSize: '14px' }}>
+              Kein password
+            </Typography>
+          )}
+        </Box>
+      </Box>
+      <FormControl fullWidth sx={{ marginTop: '20px' }}>
+        <InputLabel id="course">Fachrichtung</InputLabel>
+        <Select labelId="course" id="course" label="Fachrictung">
+          <MenuItem>Webdesign & Development</MenuItem>
+          <MenuItem>Game Art & 3D Animation</MenuItem>
+          <MenuItem>Games Programming</MenuItem>
+          <MenuItem>Film Production</MenuItem>
+          <MenuItem>Visual Effects & 3D Animation</MenuItem>
+          <MenuItem>Audio Engineering / Music Production</MenuItem>
+          <MenuItem>Content Creation & Online Marketing</MenuItem>
+        </Select>
+      </FormControl>
+      <Box sx={{ display: 'flex', marginTop: '16px' }}>
+        <Checkbox
+          sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
+        />
+        <Typography sx={{ fontSize: '12px', lineHeight: '15px' }}>
+          Wenn Sie ein Konto erstellen, erklären Sie sich mit unseren
+          Nutzungsbedingungen, Datenschutzrichtlinien und unseren
+          Standardeinstellungen für Benachrichtigungen einverstanden.
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          diplay: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{
+            width: '470px',
+            height: '56px',
+            marginTop: '34px',
+            background: '#8519F6',
+          }}
+        >
+          {loginContext}
+        </Button>
+        <Box
+          sx={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '21px',
+          }}
+        >
+          <Typography sx={{ fontSize: '14px', marginRight: '5px' }}>
+            Sie haben bereits in Konto?
+          </Typography>
+          <Button
+            variant="text"
+            sx={{
+              padding: 0,
+              fontFamily: `Outfit', sans-serif`,
+              fontSize: '14px',
+              marginLeft: '5px',
+              textTransform: 'none',
+            }}
+            onClick={() => setLoginContext('login')}
+          >
+            Hier anmelden
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 };
