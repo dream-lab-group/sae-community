@@ -1,10 +1,13 @@
 import { Box } from '@mui/material';
 import { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { Login } from './login';
 import { Registration } from './registration';
+import { ResetPassword } from './reset-password';
 
 export const LoginRegistration = () => {
   const [loginContext, setLoginContext] = useState('login');
+  const methods = useForm();
   return (
     <Box
       sx={{
@@ -27,17 +30,30 @@ export const LoginRegistration = () => {
           minWidth: '550px',
         }}
       >
-        {loginContext === 'login' ? (
-          <Login
-            loginContext={loginContext}
-            setLoginContext={setLoginContext}
-          />
-        ) : (
-          <Registration
-            loginContext={loginContext}
-            setLoginContext={setLoginContext}
-          />
-        )}
+        <FormProvider {...methods}>
+          <form
+            onSubmit={methods.handleSubmit(() => {
+              console.log('submitted');
+            })}
+          >
+            {loginContext === 'login' ? (
+              <Login
+                loginContext={loginContext}
+                setLoginContext={setLoginContext}
+              />
+            ) : loginContext === 'register' ? (
+              <Registration
+                loginContext={loginContext}
+                setLoginContext={setLoginContext}
+              />
+            ) : (
+              <ResetPassword
+                loginContext={loginContext}
+                setLoginContext={setLoginContext}
+              />
+            )}
+          </form>
+        </FormProvider>
       </Box>
     </Box>
   );
