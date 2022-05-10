@@ -12,9 +12,16 @@ export const ResetPassword = ({
     control,
   } = useFormContext();
   return (
-    <>
-      <Typography variant="h2" sx={{ color: '#ff533d', fontWeight: 700 }}>
-        It happens!
+    <Box sx={{ width: '470px' }}>
+      <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
+        Passwort vergessen?
+      </Typography>
+      <Typography
+        sx={{ fontSize: '20px', lineHeight: '25px', marginTop: '7px' }}
+      >
+        Gib deine E-Mail ein, die du bei der Anmeldung verwendet hast, und wir
+        schicken dir eine E-Mail mit der Möglichkeit, dein Passwort
+        zurückzusetzen.
       </Typography>
       <TextField
         {...register('email', {
@@ -26,9 +33,9 @@ export const ResetPassword = ({
           },
         })}
         id="email"
-        label="email"
-        variant="standard"
-        sx={{ width: '100%' }}
+        label="E-Mail"
+        variant="outlined"
+        sx={{ width: '100%', marginTop: '34px' }}
       />
       {errors.email && (
         <Typography
@@ -38,31 +45,47 @@ export const ResetPassword = ({
           keine gültige E-mail Adresse
         </Typography>
       )}
-      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography>Already a member?</Typography>
-        <Button
-          variant="text"
-          color="error"
-          sx={{
-            padding: 0,
-            fontFamily: `'Karla', sans-serif`,
-            fontSize: '16px',
-            marginLeft: '5px',
-            textTransform: 'none',
-          }}
-          onClick={() => setLoginContext('login')}
-        >
-          Sign in now!
-        </Button>
-      </Box>
       <Button
         variant="contained"
         color="error"
         type="submit"
-        sx={{ alignSelf: 'flex-start', width: '150px' }}
+        sx={{
+          width: '100%',
+          height: '56px',
+          background: '#8519F6',
+          marginTop: '20px',
+        }}
       >
         {loginContext}
       </Button>
-    </>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          marginTop: '20px',
+        }}
+      >
+        <Typography sx={{ fontSize: '14px' }}>
+          Hast du dich an dein Passwort erinnert?
+        </Typography>
+        <Button
+          variant="text"
+          sx={{
+            padding: 0,
+            fontFamily: `'Outift', sans-serif`,
+            fontSize: '14px',
+            marginLeft: '5px',
+            fontWeight: 700,
+            color: '#000',
+            textTransform: 'none',
+          }}
+          onClick={() => setLoginContext('anmelden')}
+        >
+          Hier anmelden
+        </Button>
+      </Box>
+    </Box>
   );
 };

@@ -6,6 +6,10 @@ import { createTheme, ThemeProvider } from '@mui/material';
 const appTheme = createTheme({
   typography: {
     fontFamily: `'Outfit', sans-serif`,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700,
   },
 });
 

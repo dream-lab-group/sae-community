@@ -6,7 +6,7 @@ import { Registration } from './registration';
 import { ResetPassword } from './reset-password';
 
 export const LoginRegistration = () => {
-  const [loginContext, setLoginContext] = useState('login');
+  const [loginContext, setLoginContext] = useState('anmelden');
   const methods = useForm();
   return (
     <Grid
@@ -17,7 +17,13 @@ export const LoginRegistration = () => {
         alignItems: 'center',
       }}
     >
-      <Grid item xs={12} sm={7} md={7} sx={{ height: '100vh' }}>
+      <Grid
+        item
+        xs={12}
+        sm={7}
+        md={7}
+        sx={{ height: '100vh', position: 'relative' }}
+      >
         <Box
           sx={{
             height: ' 100%',
@@ -33,7 +39,7 @@ export const LoginRegistration = () => {
                 console.log('submitted');
               })}
             >
-              {loginContext === 'login' ? (
+              {loginContext === 'anmelden' ? (
                 <Login
                   loginContext={loginContext}
                   setLoginContext={setLoginContext}
@@ -52,6 +58,16 @@ export const LoginRegistration = () => {
             </form>
           </FormProvider>
         </Box>
+        <Typography
+          sx={{
+            fontSize: '14px',
+            position: 'absolute',
+            bottom: '35px',
+            left: '37px',
+          }}
+        >
+          © dream lab 2022
+        </Typography>
       </Grid>
       <Grid
         item
@@ -95,42 +111,6 @@ export const LoginRegistration = () => {
           </Box>
         </Box>
       </Grid>
-      {/* <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          background: '#f5f5f5',
-          paddingY: '40px',
-          paddingX: '60px',
-          borderRadius: '10px',
-          minWidth: '550px',
-        }}
-      >
-        <FormProvider {...methods}>
-          <form
-            onSubmit={methods.handleSubmit(() => {
-              console.log('submitted');
-            })}
-          >
-            {loginContext === 'login' ? (
-              <Login
-                loginContext={loginContext}
-                setLoginContext={setLoginContext}
-              />
-            ) : loginContext === 'register' ? (
-              <Registration
-                loginContext={loginContext}
-                setLoginContext={setLoginContext}
-              />
-            ) : (
-              <ResetPassword
-                loginContext={loginContext}
-                setLoginContext={setLoginContext}
-              />
-            )}
-          </form>
-        </FormProvider>
-      </Box> */}
     </Grid>
   );
 };

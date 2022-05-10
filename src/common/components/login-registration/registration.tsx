@@ -105,37 +105,23 @@ export const Registration = ({
       <Box
         sx={{
           display: 'flex',
+          flexDirection: 'column',
           marginTop: '20px',
+          width: '100%',
         }}
       >
-        <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
-          <TextField
-            {...register('username', { required: true })}
-            id="userame"
-            label="Username"
-            variant="outlined"
-            sx={{ width: '225px' }}
-          />
-          {errors.username && (
-            <Typography color="error" sx={{ fontSize: '14px' }}>
-              Kein password
-            </Typography>
-          )}
-        </Box>
-        <Box sx={{ width: '225px' }}>
-          <TextField
-            {...register('password', { required: true })}
-            id="password"
-            label="Passwort"
-            variant="outlined"
-            sx={{ width: '225px' }}
-          />
-          {errors.password && (
-            <Typography color="error" sx={{ fontSize: '14px' }}>
-              Kein password
-            </Typography>
-          )}
-        </Box>
+        <TextField
+          {...register('password', { required: true })}
+          id="password"
+          label="Passwort"
+          variant="outlined"
+          sx={{ width: '100%' }}
+        />
+        {errors.password && (
+          <Typography color="error" sx={{ fontSize: '14px' }}>
+            Kein password
+          </Typography>
+        )}
       </Box>
       <FormControl fullWidth sx={{ marginTop: '20px' }}>
         <InputLabel id="course">Fachrichtung</InputLabel>
@@ -154,7 +140,7 @@ export const Registration = ({
           sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
         />
         <Typography sx={{ fontSize: '12px', lineHeight: '15px' }}>
-          Wenn Sie ein Konto erstellen, erklären Sie sich mit unseren
+          Wenn du ein Konto erstellst, erklären du dich mit unseren
           Nutzungsbedingungen, Datenschutzrichtlinien und unseren
           Standardeinstellungen für Benachrichtigungen einverstanden.
         </Typography>
@@ -188,19 +174,21 @@ export const Registration = ({
             marginTop: '21px',
           }}
         >
-          <Typography sx={{ fontSize: '14px', marginRight: '5px' }}>
+          <Typography sx={{ fontSize: '14px' }}>
             Sie haben bereits in Konto?
           </Typography>
           <Button
             variant="text"
             sx={{
               padding: 0,
-              fontFamily: `Outfit', sans-serif`,
+              fontFamily: `'Outfit', sans-serif`,
               fontSize: '14px',
               marginLeft: '5px',
+              fontWeight: 700,
+              color: '#000',
               textTransform: 'none',
             }}
-            onClick={() => setLoginContext('login')}
+            onClick={() => setLoginContext('anmelden')}
           >
             Hier anmelden
           </Button>
