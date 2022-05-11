@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { SetStateAction } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 export type LoginContextProps = {
   loginContext: string;
@@ -14,40 +15,43 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
     formState: { errors },
     control,
   } = useFormContext();
+  const { t, i18n } = useTranslation();
   return (
     <Box sx={{ width: '470px' }}>
       <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
-        Wilkommen zurück!
+        {t('loginRegistration.welcomeBack')}
       </Typography>
       <Typography
         variant="h2"
         sx={{ fontWeight: 400, fontSize: '20px', marginTop: '7px' }}
       >
-        SAE Community Plattform
+        {t('general.saeCommunityPlatform')}
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <TextField
           {...register('email', { required: true })}
           id="email"
           label="E-Mail"
+          type="email"
           variant="outlined"
           sx={{ marginTop: '20px', marginBottom: '10px' }}
         />
         {errors.email && (
           <Typography color="error" sx={{ fontSize: '14px' }}>
-            Kein E-Mail
+            {t('error.loginRegistration.required')}
           </Typography>
         )}
         <TextField
           {...register('password', { required: true })}
           id="password"
           label="Password"
+          type="password"
           variant="outlined"
           sx={{ marginTop: '20px', marginBottom: '10px' }}
         />
         {errors.password && (
           <Typography color="error" sx={{ fontSize: '14px' }}>
-            Kein password
+            {t('error.loginRegistration.required')}
           </Typography>
         )}
       </Box>
@@ -86,7 +90,7 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
             }}
             onClick={() => setLoginContext('Passwort zurücksetzen')}
           >
-            Passwort vergessen?
+            {t('loginRegistration.forgotPassword')}
           </Button>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography sx={{ fontSize: '14px' }}>Noch kein Konto?</Typography>
@@ -104,7 +108,7 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
               }}
               onClick={() => setLoginContext('konto erstellen')}
             >
-              Hier registrieren
+              {t('loginRegistration.register')}
             </Button>
           </Box>
         </Box>
