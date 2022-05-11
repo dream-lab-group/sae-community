@@ -37,8 +37,8 @@ export const LoginRegistration = () => {
         >
           <FormProvider {...methods}>
             <form
-              onSubmit={methods.handleSubmit(() => {
-                console.log('submitted');
+              onSubmit={methods.handleSubmit((event) => {
+                console.log(event);
               })}
             >
               {loginContext === 'anmelden' ? (

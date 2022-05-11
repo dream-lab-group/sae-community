@@ -6,10 +6,12 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import React, { ChangeEvent, useState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Globals } from '../../../utils';
 import { LoginContextProps } from './login';
@@ -18,12 +20,23 @@ export const Registration = ({
   loginContext,
   setLoginContext,
 }: LoginContextProps) => {
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [checkedTermsOfUse, setCheckedTermsOfUse] = useState(false);
   const {
     register,
     formState: { errors },
     control,
   } = useFormContext();
   const { t } = useTranslation();
+
+  const handleCourseChange = (event: SelectChangeEvent) => {
+    setSelectedCourse(event.target.value as string);
+  };
+
+  const handleTermsOfUseChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCheckedTermsOfUse(event.target.checked);
+  };
+
   return (
     <Box sx={{ width: '470px' }}>
       <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
@@ -131,17 +144,50 @@ export const Registration = ({
           </Typography>
         )}
       </Box>
-      <FormControl fullWidth sx={{ marginTop: '20px' }}>
-        <InputLabel id="course">Fachrichtung</InputLabel>
-        <Select labelId="course" id="course" label="Fachrictung">
-          {Globals.allCourses.map((course) => (
-            <MenuItem>{course}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Controller
+        name="course"
+        control={control}
+        render={() => (
+          <FormControl fullWidth sx={{ marginTop: '20px' }}>
+            <InputLabel id="course">Fachrichtung</InputLabel>
+            <Select
+              {...register('course')}
+              labelId="course"
+              id="course"
+              name="course"
+              label="Fachrictung"
+              value={selectedCourse}
+              onChange={(event) => {
+                if (event) {
+                  handleCourseChange(event);
+                }
+              }}
+            >
+              {Globals.allCourses.map((course) => (
+                <MenuItem key={course} value={course}>
+                  {course}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
+      />
       <Box sx={{ display: 'flex', marginTop: '16px' }}>
-        <Checkbox
-          sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
+        <Controller
+          name="termsOfUse"
+          control={control}
+          defaultValue={false}
+          render={() => (
+            <Checkbox
+              {...register('termsOfUse')}
+              checked={checkedTermsOfUse}
+              onChange={(event) => {
+                handleTermsOfUseChange(event);
+              }}
+              inputProps={{ 'aria-label': 'controlled' }}
+              sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
+            />
+          )}
         />
         <Typography sx={{ fontSize: '12px', lineHeight: '15px' }}>
           {t('loginRegistration.termsOfUse')}
