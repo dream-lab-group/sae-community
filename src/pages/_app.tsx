@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { createTheme, ThemeProvider } from '@mui/material';
 import '../common/i18n/config';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const appTheme = createTheme({
   typography: {
@@ -14,12 +15,18 @@ const appTheme = createTheme({
   },
 });
 
+const endpoint = 'http://146.190.227.58/graphql/system';
+
+const queryClient = new QueryClient();
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider>
-      <ThemeProvider theme={appTheme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={appTheme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </QueryClientProvider>
     </SessionProvider>
   );
 }
