@@ -26,5 +26,35 @@
     "loginRegistration": {
       "required": "Darf nicht leer sein"
     }
+  },
+  "courses": {
+    "webdesign": {
+      "id": "adsd",
+      "label": "Webdesign & Development"
+    },
+    "gameArt": {
+      "id": "adsd",
+      "label": "Game Art & 3D Animation"
+    },
+    "gamesProgramming": {
+      "id": "adsd",
+      "label": "Games Programming"
+    },
+    "film": {
+      "id": "adsd",
+      "label": "Film Production"
+    },
+    "visualEffects": {
+      "id": "adsd",
+      "label": "Visual Effects & 3D Animation"
+    },
+    "audio": {
+      "id": "adsd",
+      "label": "Audio Engineering / Music Production"
+    },
+    "contentCreation": {
+      "id": "adsd",
+      "label": "Content Creation & Online Marketing"
+    }
   }
 }

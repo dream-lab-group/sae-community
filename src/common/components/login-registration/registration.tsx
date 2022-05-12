@@ -165,7 +165,8 @@ export const Registration = ({
             >
               {Globals.allCourses.map((course) => (
                 <MenuItem key={course} value={course}>
-                  {course}
+                  {/* @ts-ignore */}
+                  {t(`courses.${course}.label`)}
                 </MenuItem>
               ))}
             </Select>

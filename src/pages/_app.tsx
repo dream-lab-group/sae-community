@@ -4,6 +4,7 @@ import { SessionProvider } from 'next-auth/react';
 import { createTheme, ThemeProvider } from '@mui/material';
 import '../common/i18n/config';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 const appTheme = createTheme({
   typography: {
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={appTheme}>
           <Component {...pageProps} />
         </ThemeProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </SessionProvider>
   );
