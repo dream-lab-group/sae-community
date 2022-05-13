@@ -6,32 +6,47 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import React, { ChangeEvent, useState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { Globals } from '../../../utils';
 import { LoginContextProps } from './login';
 
 export const Registration = ({
   loginContext,
   setLoginContext,
-  className,
 }: LoginContextProps) => {
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [checkedTermsOfUse, setCheckedTermsOfUse] = useState(false);
   const {
     register,
     formState: { errors },
     control,
   } = useFormContext();
+  const { t } = useTranslation();
+
+  const handleCourseChange = (event: SelectChangeEvent) => {
+    setSelectedCourse(event.target.value as string);
+  };
+
+  const handleTermsOfUseChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCheckedTermsOfUse(event.target.checked);
+  };
+
   return (
     <Box sx={{ width: '470px' }}>
       <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
-        Erstelle ein benutzerkonto
+        {t('loginRegistration.createAccount')}
       </Typography>
       <Typography
         variant="h2"
         sx={{ fontWeight: 400, fontSize: '20px', marginTop: '7px' }}
       >
-        SAE Community Plattform
+        {t('general.saeCommunityPlatform')}
       </Typography>
       <Box
         sx={{
@@ -41,21 +56,22 @@ export const Registration = ({
       >
         <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
           <TextField
-            {...register('name', {
+            {...register('firstname', {
               required: true,
               pattern: {
                 value: /^[a-zA-Z ]*$/,
                 message: 'Only letters are allowed',
               },
             })}
-            id="name"
+            id="firstname"
+            name="firstname"
             label="Vorname"
             variant="outlined"
             sx={{ width: '225px' }}
           />
           {errors.name && (
             <Typography color="error" sx={{ fontSize: '14px' }}>
-              Vorname darf nicht leer sein
+              {t('error.loginRegistration.required')}
             </Typography>
           )}
         </Box>
@@ -69,13 +85,14 @@ export const Registration = ({
               },
             })}
             id="lastname"
+            name="lastname"
             label="Nachname"
             variant="outlined"
             sx={{ width: '225px' }}
           />
           {errors.lastname && (
             <Typography color="error" sx={{ fontSize: '14px' }}>
-              Nachnamedarf nicht leer sein
+              {t('error.loginRegistration.required')}
             </Typography>
           )}
         </Box>
@@ -90,7 +107,9 @@ export const Registration = ({
           },
         })}
         id="email"
+        name="email"
         label="E-Mail"
+        type="email"
         variant="outlined"
         sx={{ width: '100%', marginTop: ' 20px' }}
       />
@@ -99,7 +118,7 @@ export const Registration = ({
           color="error"
           sx={{ fontSize: '14px', marginBottom: '5px' }}
         >
-          keine gültige E-mail Adresse
+          {t('error.loginRegistration.required')}
         </Typography>
       )}
       <Box
@@ -113,36 +132,66 @@ export const Registration = ({
         <TextField
           {...register('password', { required: true })}
           id="password"
+          name="password"
           label="Passwort"
+          type="password"
           variant="outlined"
           sx={{ width: '100%' }}
         />
         {errors.password && (
           <Typography color="error" sx={{ fontSize: '14px' }}>
-            Kein password
+            {t('error.loginRegistration.required')}
           </Typography>
         )}
       </Box>
-      <FormControl fullWidth sx={{ marginTop: '20px' }}>
-        <InputLabel id="course">Fachrichtung</InputLabel>
-        <Select labelId="course" id="course" label="Fachrictung">
-          <MenuItem>Webdesign & Development</MenuItem>
-          <MenuItem>Game Art & 3D Animation</MenuItem>
-          <MenuItem>Games Programming</MenuItem>
-          <MenuItem>Film Production</MenuItem>
-          <MenuItem>Visual Effects & 3D Animation</MenuItem>
-          <MenuItem>Audio Engineering / Music Production</MenuItem>
-          <MenuItem>Content Creation & Online Marketing</MenuItem>
-        </Select>
-      </FormControl>
+      <Controller
+        name="course"
+        control={control}
+        render={() => (
+          <FormControl fullWidth sx={{ marginTop: '20px' }}>
+            <InputLabel id="course">Fachrichtung</InputLabel>
+            <Select
+              {...register('course')}
+              labelId="course"
+              id="course"
+              name="course"
+              label="Fachrictung"
+              value={selectedCourse}
+              onChange={(event) => {
+                if (event) {
+                  handleCourseChange(event);
+                }
+              }}
+            >
+              {Globals.allCourses.map((course) => (
+                <MenuItem key={course} value={course}>
+                  {/* @ts-ignore */}
+                  {t(`courses.${course}.label`)}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
+      />
       <Box sx={{ display: 'flex', marginTop: '16px' }}>
-        <Checkbox
-          sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
+        <Controller
+          name="termsOfUse"
+          control={control}
+          defaultValue={false}
+          render={() => (
+            <Checkbox
+              {...register('termsOfUse')}
+              checked={checkedTermsOfUse}
+              onChange={(event) => {
+                handleTermsOfUseChange(event);
+              }}
+              inputProps={{ 'aria-label': 'controlled' }}
+              sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
+            />
+          )}
         />
         <Typography sx={{ fontSize: '12px', lineHeight: '15px' }}>
-          Wenn du ein Konto erstellst, erklären du dich mit unseren
-          Nutzungsbedingungen, Datenschutzrichtlinien und unseren
-          Standardeinstellungen für Benachrichtigungen einverstanden.
+          {t('loginRegistration.termsOfUse')}
         </Typography>
       </Box>
       <Box
@@ -175,7 +224,7 @@ export const Registration = ({
           }}
         >
           <Typography sx={{ fontSize: '14px' }}>
-            Sie haben bereits in Konto?
+            {t('loginRegistration.noAccount')}
           </Typography>
           <Button
             variant="text"

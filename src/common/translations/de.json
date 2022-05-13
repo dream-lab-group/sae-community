@@ -1,0 +1,56 @@
+{
+  "Routes": {
+    "HOME": "Home",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "PROFILE": "Profil"
+  },
+  "general": {
+    "saeCommunityPlatform": "SAE Community Plattform",
+    "platformForStudents": "Plattform von Studenten",
+    "fromStudents": "für Studenten"
+  },
+  "loginRegistration": {
+    "createAccount": "Erstelle ein Benutzerkonto",
+    "termsOfUse": "Wenn du ein Konto erstellst, erklären du dich mit unseren Nutzungsbedingungen, Datenschutzrichtlinien und unseren Standardeinstellungen für Benachrichtigungen einverstanden.",
+    "login": "Hier anmelden",
+    "existingUser": "Sie haben bereits ein Konto?",
+    "welcomeBack": "Willkommen zurück!",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Noch kein Konto?",
+    "register": "Hier registrieren",
+    "rememberedPassword": "Hast du dich an dein Passwort erinnert?",
+    "passwordResetInstruction": "Gib deine E-Mail ein, die du bei der Anmeldung verwendet hast, und wir schicken dir eine E-Mail mit der Möglichkeit, dein Passwort zurückzusetzen."
+  },
+  "error": {
+    "loginRegistration": {
+      "required": "Darf nicht leer sein"
+    }
+  },
+  "courses": {
+    "webdesign": {
+      "label": "Webdesign & Development"
+    },
+    "gameart": {
+      "label": "Game Art & 3D Animation"
+    },
+    "gamesprogramming": {
+      "label": "Games Programming"
+    },
+    "film": {
+      "label": "Film Production"
+    },
+    "visualeffects": {
+      "label": "Visual Effects & 3D Animation"
+    },
+    "audio": {
+      "label": "Audio Engineering & Music Production"
+    },
+    "contentcreation": {
+      "label": "Content Creation & Online Marketing"
+    },
+    "alumni": {
+      "label": "Alumni"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Button, TextField, Typography, Box } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { LoginContextProps } from './login';
 
 export const ResetPassword = ({
@@ -11,6 +12,7 @@ export const ResetPassword = ({
     formState: { errors },
     control,
   } = useFormContext();
+  const { t } = useTranslation();
   return (
     <Box sx={{ width: '470px' }}>
       <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
@@ -19,9 +21,7 @@ export const ResetPassword = ({
       <Typography
         sx={{ fontSize: '20px', lineHeight: '25px', marginTop: '7px' }}
       >
-        Gib deine E-Mail ein, die du bei der Anmeldung verwendet hast, und wir
-        schicken dir eine E-Mail mit der Möglichkeit, dein Passwort
-        zurückzusetzen.
+        {t('loginRegistration.passwordResetInstruction')}
       </Typography>
       <TextField
         {...register('email', {
@@ -42,7 +42,7 @@ export const ResetPassword = ({
           color="error"
           sx={{ fontSize: '14px', marginBottom: '5px' }}
         >
-          keine gültige E-mail Adresse
+          {t('error.loginRegistration.required')}
         </Typography>
       )}
       <Button
@@ -68,7 +68,7 @@ export const ResetPassword = ({
         }}
       >
         <Typography sx={{ fontSize: '14px' }}>
-          Hast du dich an dein Passwort erinnert?
+          {t('loginRegistration.rememberedPassword')}
         </Typography>
         <Button
           variant="text"
@@ -83,7 +83,7 @@ export const ResetPassword = ({
           }}
           onClick={() => setLoginContext('anmelden')}
         >
-          Hier anmelden
+          {t('loginRegistration.login')}
         </Button>
       </Box>
     </Box>

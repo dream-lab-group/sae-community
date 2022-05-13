@@ -1,6 +1,9 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { handleCreateNewUser } from '../../data/login-registration/hooks';
+
 import { Login } from './login';
 import { Registration } from './registration';
 import { ResetPassword } from './reset-password';
@@ -8,6 +11,8 @@ import { ResetPassword } from './reset-password';
 export const LoginRegistration = () => {
   const [loginContext, setLoginContext] = useState('anmelden');
   const methods = useForm();
+  const { t } = useTranslation();
+
   return (
     <Grid
       container
@@ -35,9 +40,15 @@ export const LoginRegistration = () => {
         >
           <FormProvider {...methods}>
             <form
-              onSubmit={methods.handleSubmit(() => {
-                console.log('submitted');
-              })}
+              onSubmit={methods.handleSubmit((event) =>
+                handleCreateNewUser({
+                  firstname: event.firstname,
+                  lastname: event.lastname,
+                  email: event.email,
+                  password: event.password,
+                  course: event.course,
+                }),
+              )}
             >
               {loginContext === 'anmelden' ? (
                 <Login
@@ -96,7 +107,7 @@ export const LoginRegistration = () => {
                 letterSpacing: '0.04em',
               }}
             >
-              Plattform von Studenten
+              {t('general.platformForStudents')}
             </Typography>
             <Typography
               color="white"
@@ -106,7 +117,7 @@ export const LoginRegistration = () => {
                 letterSpacing: '0.04em',
               }}
             >
-              für Studenten
+              {t('general.fromStudents')}
             </Typography>
           </Box>
         </Box>
