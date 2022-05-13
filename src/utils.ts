@@ -23,7 +23,7 @@ export class Globals {
     'film',
     'visualeffects',
     'audio',
-    'contentCreation',
+    'contentcreation',
     'alumni',
   ];
 }

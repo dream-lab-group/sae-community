@@ -1,12 +1,12 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { SetStateAction } from 'react';
+import React, { SetStateAction } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { UserDto, UserRegistration } from '../../data/types/types';
 
 export type LoginContextProps = {
   loginContext: string;
   setLoginContext: React.Dispatch<SetStateAction<string>>;
-  className?: string;
 };
 
 export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
