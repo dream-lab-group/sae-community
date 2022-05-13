@@ -29,32 +29,28 @@
   },
   "courses": {
     "webdesign": {
-      "id": "adsd",
       "label": "Webdesign & Development"
     },
-    "gameArt": {
-      "id": "adsd",
+    "gameart": {
       "label": "Game Art & 3D Animation"
     },
-    "gamesProgramming": {
-      "id": "adsd",
+    "gamesprogramming": {
       "label": "Games Programming"
     },
     "film": {
-      "id": "adsd",
       "label": "Film Production"
     },
-    "visualEffects": {
-      "id": "adsd",
+    "visualeffects": {
       "label": "Visual Effects & 3D Animation"
     },
     "audio": {
-      "id": "adsd",
-      "label": "Audio Engineering / Music Production"
+      "label": "Audio Engineering & Music Production"
     },
-    "contentCreation": {
-      "id": "adsd",
+    "contentcreation": {
       "label": "Content Creation & Online Marketing"
+    },
+    "alumni": {
+      "label": "Alumni"
     }
   }
 }

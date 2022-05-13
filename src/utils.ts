@@ -18,11 +18,12 @@ export class Globals {
 
   public static readonly allCourses = [
     'webdesign',
-    'gameArt',
-    'gamesProgramming',
+    'gameart',
+    'gamesprogramming',
     'film',
-    'visualEffects',
+    'visualeffects',
     'audio',
     'contentCreation',
+    'alumni',
   ];
 }
