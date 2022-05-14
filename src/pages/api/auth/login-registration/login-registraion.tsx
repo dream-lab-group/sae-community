@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { handleCreateNewUser } from '../../data/login-registration/hooks';
+import { handleCreateNewUser } from '../../../../common/data/login-registration/hooks';
 
 import { Login } from './login';
 import { Registration } from './registration';
