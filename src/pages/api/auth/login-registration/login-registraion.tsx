@@ -42,8 +42,8 @@ export const LoginRegistration = () => {
             <form
               onSubmit={methods.handleSubmit((event) =>
                 handleCreateNewUser({
-                  firstname: event.firstname,
-                  lastname: event.lastname,
+                  first_name: event.first_name,
+                  last_name: event.last_name,
                   email: event.email,
                   password: event.password,
                   course: event.course,

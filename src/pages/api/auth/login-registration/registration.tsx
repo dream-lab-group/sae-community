@@ -57,15 +57,15 @@ export const Registration = ({
       >
         <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
           <TextField
-            {...register('firstname', {
+            {...register('first_name', {
               required: true,
               pattern: {
                 value: /^[a-zA-Z ]*$/,
                 message: 'Only letters are allowed',
               },
             })}
-            id="firstname"
-            name="firstname"
+            id="first_name"
+            name="first_name"
             label="Vorname"
             variant="outlined"
             sx={{ width: '225px' }}
@@ -78,15 +78,15 @@ export const Registration = ({
         </Box>
         <Box sx={{ width: '225px' }}>
           <TextField
-            {...register('lastname', {
+            {...register('last_name', {
               required: true,
               pattern: {
                 value: /^[a-zA-Z ]*$/,
                 message: 'Only letters are allowed',
               },
             })}
-            id="lastname"
-            name="lastname"
+            id="last_name"
+            name="last_name"
             label="Nachname"
             variant="outlined"
             sx={{ width: '225px' }}
