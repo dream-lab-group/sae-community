@@ -2,8 +2,12 @@ import { apiClient } from '../apiClient';
 import { RequestResult } from '../fetch/restuls';
 import { UserDto, UserLogin, UserRegistration } from '../types/types';
 
-export const getUserInformation = async (): Promise<RequestResult<UserDto>> => {
-  const response = await apiClient.get('users');
+export const getInitialUserInformation = async (): Promise<
+  RequestResult<UserDto>
+> => {
+  const response = await apiClient.get(
+    'users/6bed6ef8-cf24-415e-91f9-0fbc895b5515',
+  );
   return response.data;
 };
 

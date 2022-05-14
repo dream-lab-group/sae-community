@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { RequestResult } from '../fetch/restuls';
 import { UserDto, UserLogin, UserRegistration } from '../types/types';
-import { createNewUser, getUserInformation, loginUser } from './request';
+import { createNewUser, getInitialUserInformation, loginUser } from './request';
 
 export const handleCreateNewUser = (event: UserRegistration) => {
   createNewUser(event);
@@ -22,7 +22,7 @@ export function fetchUser(): [
   useEffect(() => {
     async function getUserProfile() {
       if (user.status === 'initial' || user.status === 'error') {
-        const result = await getUserInformation();
+        const result = await getInitialUserInformation();
         if (result.status === 'success') {
           console.log('successfull');
         } else if (result.status === 'error') {
