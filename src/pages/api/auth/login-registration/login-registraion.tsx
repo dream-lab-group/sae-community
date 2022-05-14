@@ -3,11 +3,9 @@ import { SetStateAction, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { RequestResult } from '../../../../common/data/fetch/restuls';
-import {
-  handleCreateNewUser,
-  handleLoginUser,
-} from '../../../../common/data/login-registration/hooks';
-import { UserDto } from '../../../../common/data/types/types';
+import { handleCreateNewUser } from '../../../../common/data/login-registration/hooks';
+import { loginUser } from '../../../../common/data/login-registration/request';
+import { UserDto, UserLogin } from '../../../../common/data/types/types';
 
 import { Login } from './login';
 import { Registration } from './registration';
@@ -29,6 +27,12 @@ export const LoginRegistration = ({
   console.log(user);
   const methods = useForm();
   const { t } = useTranslation();
+
+  const handleLoginUser = (event: UserLogin) => {
+    loginUser(event);
+    setLoginContext('angemeldet');
+  };
+
   return (
     <Grid
       container

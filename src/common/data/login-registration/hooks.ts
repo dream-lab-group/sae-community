@@ -7,10 +7,6 @@ export const handleCreateNewUser = (event: UserRegistration) => {
   createNewUser(event);
 };
 
-export const handleLoginUser = (event: UserLogin) => {
-  loginUser(event);
-};
-
 export function fetchUser(): [
   RequestResult<UserDto>,
   React.Dispatch<RequestResult<UserDto>>,

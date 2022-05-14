@@ -6,6 +6,7 @@ import { RequestResult } from '../common/data/fetch/restuls';
 import { fetchUser } from '../common/data/login-registration/hooks';
 import { UserDto } from '../common/data/types/types';
 import { LoginRegistration } from './api/auth/login-registration/login-registraion';
+import Projects from './projects';
 
 const Home: NextPage = () => {
   const [user, setUser] = fetchUser();
@@ -14,12 +15,18 @@ const Home: NextPage = () => {
   return (
     <>
       <UserContext.Provider value={{ user: user, setUser: setUser }}>
-        <LoginRegistration
-          user={user}
-          setUser={setUser}
-          loginContext={loginContext}
-          setLoginContext={setLoginContext}
-        />
+        {loginContext === 'anmelden' || loginContext === 'konto erstellen' ? (
+          <LoginRegistration
+            user={user}
+            setUser={setUser}
+            loginContext={loginContext}
+            setLoginContext={setLoginContext}
+          />
+        ) : loginContext === 'angemeldet' ? (
+          <Projects />
+        ) : (
+          <></>
+        )}
       </UserContext.Provider>
     </>
   );
