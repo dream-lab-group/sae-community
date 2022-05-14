@@ -1,5 +1,5 @@
 export interface UserDto {
-  id?: number | null;
+  id?: string | null;
   first_name: string;
   last_name: string;
   email: string;
@@ -21,4 +21,9 @@ export type UserRegistration = Omit<
   about?: string | null;
   interests?: {} | null;
   programs?: {} | null;
+};
+
+export type UserLogin = {
+  email: string;
+  password: string;
 };

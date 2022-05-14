@@ -1,18 +1,34 @@
 import { Box, Grid, Typography } from '@mui/material';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { handleCreateNewUser } from '../../../../common/data/login-registration/hooks';
+import { RequestResult } from '../../../../common/data/fetch/restuls';
+import {
+  handleCreateNewUser,
+  handleLoginUser,
+} from '../../../../common/data/login-registration/hooks';
+import { UserDto } from '../../../../common/data/types/types';
 
 import { Login } from './login';
 import { Registration } from './registration';
 import { ResetPassword } from './reset-password';
 
-export const LoginRegistration = () => {
-  const [loginContext, setLoginContext] = useState('anmelden');
+export type LoginContextProps = {
+  user: RequestResult<UserDto>;
+  setUser: React.Dispatch<RequestResult<UserDto>>;
+  loginContext: string;
+  setLoginContext: React.Dispatch<SetStateAction<string>>;
+};
+
+export const LoginRegistration = ({
+  user,
+  setUser,
+  loginContext,
+  setLoginContext,
+}: LoginContextProps) => {
+  console.log(user);
   const methods = useForm();
   const { t } = useTranslation();
-
   return (
     <Grid
       container
@@ -39,34 +55,47 @@ export const LoginRegistration = () => {
           }}
         >
           <FormProvider {...methods}>
-            <form
-              onSubmit={methods.handleSubmit((event) =>
-                handleCreateNewUser({
-                  first_name: event.first_name,
-                  last_name: event.last_name,
-                  email: event.email,
-                  password: event.password,
-                  course: event.course,
-                }),
-              )}
-            >
-              {loginContext === 'anmelden' ? (
+            {loginContext === 'anmelden' ? (
+              <form
+                onSubmit={methods.handleSubmit((event) =>
+                  handleLoginUser({
+                    email: event.email,
+                    password: event.password,
+                  }),
+                )}
+              >
                 <Login
+                  user={user}
+                  setUser={setUser}
                   loginContext={loginContext}
                   setLoginContext={setLoginContext}
                 />
-              ) : loginContext === 'konto erstellen' ? (
+              </form>
+            ) : loginContext === 'konto erstellen' ? (
+              <form
+                onSubmit={methods.handleSubmit((event) =>
+                  handleCreateNewUser({
+                    first_name: event.first_name,
+                    last_name: event.last_name,
+                    email: event.email,
+                    password: event.password,
+                    course: event.course,
+                  }),
+                )}
+              >
                 <Registration
+                  user={user}
+                  setUser={setUser}
                   loginContext={loginContext}
                   setLoginContext={setLoginContext}
                 />
-              ) : (
-                <ResetPassword
-                  loginContext={loginContext}
-                  setLoginContext={setLoginContext}
-                />
-              )}
-            </form>
+              </form>
+            ) : (
+              <ResetPassword
+                loginContext={loginContext}
+                setLoginContext={setLoginContext}
+              />
+            )}
           </FormProvider>
         </Box>
         <Typography

@@ -14,8 +14,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Globals } from '../../../../utils';
-
-import { LoginContextProps } from './login';
+import { LoginContextProps } from './login-registraion';
 
 export const Registration = ({
   loginContext,

@@ -2,19 +2,14 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { SetStateAction } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-
-export type LoginContextProps = {
-  loginContext: string;
-  setLoginContext: React.Dispatch<SetStateAction<string>>;
-};
+import { LoginContextProps } from './login-registraion';
 
 export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
   const {
     register,
     formState: { errors },
-    control,
   } = useFormContext();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Box sx={{ width: '470px' }}>
       <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
@@ -28,8 +23,16 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <TextField
-          {...register('email', { required: true })}
+          {...register('email', {
+            required: true,
+            pattern: {
+              value:
+                /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              message: 'Invalid E-Mail adress',
+            },
+          })}
           id="email"
+          name="email"
           label="E-Mail"
           type="email"
           variant="outlined"
@@ -43,6 +46,7 @@ export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
         <TextField
           {...register('password', { required: true })}
           id="password"
+          name="password"
           label="Password"
           type="password"
           variant="outlined"

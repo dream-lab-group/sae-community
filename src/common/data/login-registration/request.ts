@@ -1,5 +1,11 @@
 import { apiClient } from '../apiClient';
-import { UserRegistration } from '../types/types';
+import { RequestResult } from '../fetch/restuls';
+import { UserDto, UserLogin, UserRegistration } from '../types/types';
+
+export const getUserInformation = async (): Promise<RequestResult<UserDto>> => {
+  const response = await apiClient.get('users');
+  return response.data;
+};
 
 export const createNewUser = async ({
   first_name,
@@ -90,5 +96,27 @@ export const createNewUser = async ({
     return response.data;
   } else {
     return 'no-course-selected';
+  }
+};
+
+export const loginUser = async ({ email, password }: UserLogin) => {
+  const fetchedUser = await apiClient.get(
+    `users?filter={ "email": { "_eq": "${email}" }}`,
+  );
+
+  if (fetchedUser.data) {
+    if (fetchedUser.data.data[0].email === email) {
+      const checkedUser = await apiClient.post('auth/login', {
+        email: `${email}`,
+        password: `${password}`,
+      });
+
+      const checkedPasswordHash = checkedUser.data;
+      return checkedPasswordHash.data.access_token;
+    } else {
+      return 'email-does-not-match';
+    }
+  } else {
+    return 'no-user-found';
   }
 };
