@@ -2,7 +2,6 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { SetStateAction } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { UserDto, UserRegistration } from '../../data/types/types';
 
 export type LoginContextProps = {
   loginContext: string;

@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { handleCreateNewUser } from '../../data/login-registration/hooks';
+import { handleCreateNewUser } from '../../../../common/data/login-registration/hooks';
 
 import { Login } from './login';
 import { Registration } from './registration';
@@ -42,8 +42,8 @@ export const LoginRegistration = () => {
             <form
               onSubmit={methods.handleSubmit((event) =>
                 handleCreateNewUser({
-                  firstname: event.firstname,
-                  lastname: event.lastname,
+                  first_name: event.first_name,
+                  last_name: event.last_name,
                   email: event.email,
                   password: event.password,
                   course: event.course,

@@ -1,10 +1,11 @@
 export interface UserDto {
   id?: number | null;
-  firstname: string;
-  lastname: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   course: string;
+  role?: string;
   avatar?: string | null;
   about?: string | null;
   interests?: {} | null;
