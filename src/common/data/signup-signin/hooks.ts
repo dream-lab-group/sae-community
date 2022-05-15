@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { UserDto, UserRegistration } from '../../types/types';
 import { RequestResult } from '../fetch/restuls';
-import { UserDto, UserLogin, UserRegistration } from '../types/types';
-import { createNewUser, getInitialUserInformation, loginUser } from './request';
+
+import { createNewUser, getInitialUserInformation } from './request';
 
 export const handleCreateNewUser = (event: UserRegistration) => {
   createNewUser(event);

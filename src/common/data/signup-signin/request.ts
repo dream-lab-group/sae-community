@@ -1,6 +1,6 @@
-import { apiClient } from '../apiClient';
+import { apiClient } from '../../../pages/api/apiClient';
+import { UserDto, UserLogin, UserRegistration } from '../../types/types';
 import { RequestResult } from '../fetch/restuls';
-import { UserDto, UserLogin, UserRegistration } from '../types/types';
 
 export const getInitialUserInformation = async (): Promise<
   RequestResult<UserDto>

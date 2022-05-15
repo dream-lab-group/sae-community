@@ -1,12 +1,9 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import { SessionProvider } from 'next-auth/react';
-import { createTheme, ThemeProvider } from '@mui/material';
-import '../common/i18n/config';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import "../common/i18n/config";
+import { createTheme, ThemeProvider } from "@mui/material";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const appTheme = createTheme({
     typography: {
       fontFamily: `'Outfit', sans-serif`,
@@ -16,18 +13,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       fontWeightBold: 700,
     },
   });
-
-  const queryClient = new QueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <SessionProvider session={session}>
-        <ThemeProvider theme={appTheme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </SessionProvider>
-    </QueryClientProvider>
+    <ThemeProvider theme={appTheme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 

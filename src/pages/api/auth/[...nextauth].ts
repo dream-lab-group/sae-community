@@ -1,7 +1,7 @@
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { apiClient } from '../../../common/data/apiClient';
-import { JSONArray, UserDto } from '../../../common/data/types/types';
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { JSONArray } from "../../../common/types/types";
+import { apiClient } from "../apiClient";
 
 const nextEndpoint = process.env.NEXTAUTH_URL;
 
@@ -20,10 +20,10 @@ type ReqResProps = {
 const options = {
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: "Credentials",
       credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         const payload = {
@@ -32,17 +32,17 @@ const options = {
         };
 
         const res = await fetch(`${apiClient}auth/login`, {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify(payload),
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
 
         const user = await res.json();
 
         if (!res.ok) {
-          throw new Error('wrong username or password');
+          throw new Error("wrong username or password");
         }
 
         if (res.ok && user) {
@@ -58,7 +58,7 @@ const options = {
   },
   jwt: {
     secret:
-      'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY1MjYxNzk4NiwiaWF0IjoxNjUyNjE3OTg2fQ.q_Fo9GoBO2xKZZiJ_W1J4hw3PS5UACCkkG9fRTuAuv8',
+      "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY1MjYxNzk4NiwiaWF0IjoxNjUyNjE3OTg2fQ.q_Fo9GoBO2xKZZiJ_W1J4hw3PS5UACCkkG9fRTuAuv8",
   },
   callbacks: {
     async jwt({ token, user, account }: UserCredentialProps) {
@@ -81,11 +81,11 @@ const options = {
     },
   },
   pages: {
-    loginRegistration: '/signin-signup',
+    loginRegistration: "/signin-signup",
   },
 };
 
-export default (req, res) => NextAuth(req, res, options);
+// export default (req, res) => NextAuth(req, res, options);
 
 // export default NextAuth({
 //   providers: [

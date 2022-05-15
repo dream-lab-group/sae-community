@@ -1,31 +1,27 @@
-import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
-import { useState } from 'react';
-import UserContext from '../common/context/user-context';
-import { fetchUser } from '../common/data/login-registration/hooks';
-import Projects from './projects';
-import { SignInSignUp } from './signin-signup.tsx/signIn-signUp';
+import type { NextPage } from "next";
+import { getSession } from "next-auth/react";
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/session",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 const Home: NextPage = () => {
-  const [user, setUser] = fetchUser();
-  const [loginContext, setLoginContext] = useState('anmelden');
-  const { data: session, status } = useSession();
   return (
     <>
-      <UserContext.Provider value={{ user: user, setUser: setUser }}>
-        {loginContext === 'anmelden' || loginContext === 'konto erstellen' ? (
-          <SignInSignUp
-            user={user}
-            setUser={setUser}
-            loginContext={loginContext}
-            setLoginContext={setLoginContext}
-          />
-        ) : loginContext === 'angemeldet' ? (
-          <Projects />
-        ) : (
-          <></>
-        )}
-      </UserContext.Provider>
+      <h1>This is the landing page</h1>
     </>
   );
 };

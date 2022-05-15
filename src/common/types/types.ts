@@ -31,7 +31,7 @@ export interface UserDto {
 
 export type UserRegistration = Omit<
   UserDto,
-  'id' | 'avatar' | 'description' | 'interests' | 'programs'
+  "id" | "avatar" | "description" | "interests" | "programs"
 > & {
   id?: number;
   avatar?: string | null;
