@@ -1,6 +1,6 @@
 import React from 'react';
-import { RequestResult } from '../data/fetch/restuls';
-import { UserDto } from '../data/types/types';
+import { RequestResult } from '../data/fetch/restults';
+import { UserDto } from '../types/types';
 
 type userContextProps = {
   user: RequestResult<UserDto>;

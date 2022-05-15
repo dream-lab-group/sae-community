@@ -1,27 +1,19 @@
-import type { NextPage } from "next";
-import { getSession } from "next-auth/react";
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/session",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}
+import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
+import Session from './session';
 
 const Home: NextPage = () => {
+  const { data: session, status } = useSession();
+  if (session && status === 'authenticated') {
+    return (
+      <>
+        <h1>This is the landing page</h1>
+      </>
+    );
+  }
   return (
     <>
-      <h1>This is the landing page</h1>
+      <Session />
     </>
   );
 };

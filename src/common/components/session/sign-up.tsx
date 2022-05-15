@@ -9,28 +9,24 @@ import {
   SelectChangeEvent,
   TextField,
   Typography,
-} from "@mui/material";
-import { useRouter } from "next/router";
-import React, { ChangeEvent, useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { SessionContextProps } from "../../../pages/session";
-import { Globals } from "../../../utils";
+} from '@mui/material';
+import React, { ChangeEvent, useState } from 'react';
+import { Controller, useForm, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { SessionContextProps } from '../../../pages/session';
+import { Globals } from '../../../utils';
+import { handleCreateNewUser } from '../../data/signup-signin/hooks';
 
 export const SignUp = ({ setSessionContext }: SessionContextProps) => {
-  const router = useRouter();
-  const [selectedCourse, setSelectedCourse] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState('');
   const [checkedTermsOfUse, setCheckedTermsOfUse] = useState(false);
   const {
     register,
-    formState: { errors },
     control,
-  } = useFormContext();
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const { t } = useTranslation();
-
-  const loadSessionPageHandler = () => {
-    router.push("/session");
-  };
 
   const handleCourseChange = (event: SelectChangeEvent) => {
     setSelectedCourse(event.target.value as string);
@@ -41,73 +37,83 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
   };
 
   return (
-    <form>
-      <Box sx={{ width: "470px" }}>
-        <Typography variant="h2" sx={{ fontWeight: 700, fontSize: "35px" }}>
-          {t("loginRegistration.createAccount")}
+    <form
+      onSubmit={handleSubmit((event) =>
+        handleCreateNewUser({
+          first_name: event.first_name,
+          last_name: event.last_name,
+          email: event.email,
+          password: event.password,
+          course: event.course,
+        }),
+      )}
+    >
+      <Box sx={{ width: '470px' }}>
+        <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
+          {t('loginRegistration.createAccount')}
         </Typography>
         <Typography
           variant="h2"
-          sx={{ fontWeight: 400, fontSize: "20px", marginTop: "7px" }}
+          sx={{ fontWeight: 400, fontSize: '20px', marginTop: '7px' }}
         >
-          {t("general.saeCommunityPlatform")}
+          {t('general.saeCommunityPlatform')}
         </Typography>
         <Box
           sx={{
-            display: "flex",
-            marginTop: "37px",
+            display: 'flex',
+            marginTop: '37px',
           }}
         >
-          <Box sx={{ width: "100%", justifyContent: "space-between" }}>
+          <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
             <TextField
-              {...register("first_name", {
+              {...register('first_name', {
                 required: true,
                 pattern: {
                   value: /^[a-zA-Z ]*$/,
-                  message: "Only letters are allowed",
+                  message: 'Only letters are allowed',
                 },
               })}
               id="first_name"
               name="first_name"
               label="Vorname"
               variant="outlined"
-              sx={{ width: "225px" }}
+              sx={{ width: '225px' }}
             />
             {errors.name && (
-              <Typography color="error" sx={{ fontSize: "14px" }}>
-                {t("error.loginRegistration.required")}
+              <Typography color="error" sx={{ fontSize: '14px' }}>
+                {t('error.loginRegistration.required')}
               </Typography>
             )}
           </Box>
-          <Box sx={{ width: "225px" }}>
+          <Box sx={{ width: '225px' }}>
             <TextField
-              {...register("last_name", {
+              {...register('last_name', {
                 required: true,
                 pattern: {
                   value: /^[a-zA-Z ]*$/,
-                  message: "Only letters are allowed",
+                  message: 'Only letters are allowed',
                 },
               })}
               id="last_name"
               name="last_name"
               label="Nachname"
               variant="outlined"
-              sx={{ width: "225px" }}
+              sx={{ width: '225px' }}
             />
             {errors.lastname && (
-              <Typography color="error" sx={{ fontSize: "14px" }}>
-                {t("error.loginRegistration.required")}
+              <Typography color="error" sx={{ fontSize: '14px' }}>
+                {t('error.loginRegistration.required')}
               </Typography>
             )}
           </Box>
         </Box>
         <TextField
-          {...register("email", {
+          {...register('email', {
             required: true,
             pattern: {
               value:
                 /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: "Invalid E-Mail adress",
+              message: 'Invalid E-Mail adress',
             },
           })}
           id="email"
@@ -115,36 +121,36 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           label="E-Mail"
           type="email"
           variant="outlined"
-          sx={{ width: "100%", marginTop: " 20px" }}
+          sx={{ width: '100%', marginTop: ' 20px' }}
         />
         {errors.email && (
           <Typography
             color="error"
-            sx={{ fontSize: "14px", marginBottom: "5px" }}
+            sx={{ fontSize: '14px', marginBottom: '5px' }}
           >
-            {t("error.loginRegistration.required")}
+            {t('error.loginRegistration.required')}
           </Typography>
         )}
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "20px",
-            width: "100%",
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '20px',
+            width: '100%',
           }}
         >
           <TextField
-            {...register("password", { required: true })}
+            {...register('password', { required: true })}
             id="password"
             name="password"
             label="Passwort"
             type="password"
             variant="outlined"
-            sx={{ width: "100%" }}
+            sx={{ width: '100%' }}
           />
           {errors.password && (
-            <Typography color="error" sx={{ fontSize: "14px" }}>
-              {t("error.loginRegistration.required")}
+            <Typography color="error" sx={{ fontSize: '14px' }}>
+              {t('error.loginRegistration.required')}
             </Typography>
           )}
         </Box>
@@ -152,10 +158,10 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           name="course"
           control={control}
           render={() => (
-            <FormControl fullWidth sx={{ marginTop: "20px" }}>
+            <FormControl fullWidth sx={{ marginTop: '20px' }}>
               <InputLabel id="course">Fachrichtung</InputLabel>
               <Select
-                {...register("course")}
+                {...register('course')}
                 labelId="course"
                 id="course"
                 name="course"
@@ -177,71 +183,71 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
             </FormControl>
           )}
         />
-        <Box sx={{ display: "flex", marginTop: "16px" }}>
+        <Box sx={{ display: 'flex', marginTop: '16px' }}>
           <Controller
             name="termsOfUse"
             control={control}
             defaultValue={false}
             render={() => (
               <Checkbox
-                {...register("termsOfUse")}
+                {...register('termsOfUse')}
                 checked={checkedTermsOfUse}
                 onChange={(event) => {
                   handleTermsOfUseChange(event);
                 }}
-                inputProps={{ "aria-label": "controlled" }}
-                sx={{ padding: 0, marginRight: "4px", alignSelf: "flex-start" }}
+                inputProps={{ 'aria-label': 'controlled' }}
+                sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
               />
             )}
           />
-          <Typography sx={{ fontSize: "12px", lineHeight: "15px" }}>
-            {t("loginRegistration.termsOfUse")}
+          <Typography sx={{ fontSize: '12px', lineHeight: '15px' }}>
+            {t('loginRegistration.termsOfUse')}
           </Typography>
         </Box>
         <Box
           sx={{
-            diplay: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
+            diplay: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
           }}
         >
           <Button
             variant="contained"
             type="submit"
             sx={{
-              width: "470px",
-              height: "56px",
-              marginTop: "34px",
-              background: "#8519F6",
+              width: '470px',
+              height: '56px',
+              marginTop: '34px',
+              background: '#8519F6',
             }}
           >
             SingUp
           </Button>
           <Box
             sx={{
-              display: "flex",
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "21px",
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: '21px',
             }}
           >
-            <Typography sx={{ fontSize: "14px" }}>
-              {t("loginRegistration.noAccount")}
+            <Typography sx={{ fontSize: '14px' }}>
+              {t('loginRegistration.noAccount')}
             </Typography>
             <Button
               variant="text"
               sx={{
                 padding: 0,
                 fontFamily: `'Outfit', sans-serif`,
-                fontSize: "14px",
-                marginLeft: "5px",
+                fontSize: '14px',
+                marginLeft: '5px',
                 fontWeight: 700,
-                color: "#000",
-                textTransform: "none",
+                color: '#000',
+                textTransform: 'none',
               }}
-              onClick={() => setSessionContext("signin")}
+              onClick={() => setSessionContext('signin')}
             >
               Hier anmelden
             </Button>

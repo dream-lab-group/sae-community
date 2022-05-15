@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { UserDto, UserRegistration } from '../../types/types';
-import { RequestResult } from '../fetch/restuls';
+import { RequestResult } from '../fetch/restults';
 
 import { createNewUser, getInitialUserInformation } from './request';
 
