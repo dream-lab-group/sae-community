@@ -2,9 +2,12 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { SetStateAction } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { LoginContextProps } from './login-registraion';
+import { LoginContextProps } from './signIn-signUp';
 
-export const Login = ({ loginContext, setLoginContext }: LoginContextProps) => {
+export const SignIn = ({
+  loginContext,
+  setLoginContext,
+}: LoginContextProps) => {
   const {
     register,
     formState: { errors },

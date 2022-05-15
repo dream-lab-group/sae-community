@@ -2,14 +2,13 @@ import { Box, Grid, Typography } from '@mui/material';
 import { SetStateAction, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { RequestResult } from '../../../../common/data/fetch/restuls';
-import { handleCreateNewUser } from '../../../../common/data/login-registration/hooks';
-import { loginUser } from '../../../../common/data/login-registration/request';
-import { UserDto, UserLogin } from '../../../../common/data/types/types';
-
-import { Login } from './login';
-import { Registration } from './registration';
+import { RequestResult } from '../../common/data/fetch/restuls';
+import { handleCreateNewUser } from '../../common/data/login-registration/hooks';
+import { loginUser } from '../../common/data/login-registration/request';
+import { UserDto, UserLogin } from '../../common/data/types/types';
 import { ResetPassword } from './reset-password';
+import { SignIn } from './signIn';
+import { SignUp } from './signUp';
 
 export type LoginContextProps = {
   user: RequestResult<UserDto>;
@@ -18,7 +17,7 @@ export type LoginContextProps = {
   setLoginContext: React.Dispatch<SetStateAction<string>>;
 };
 
-export const LoginRegistration = ({
+export const SignInSignUp = ({
   user,
   setUser,
   loginContext,
@@ -68,7 +67,7 @@ export const LoginRegistration = ({
                   }),
                 )}
               >
-                <Login
+                <SignIn
                   user={user}
                   setUser={setUser}
                   loginContext={loginContext}
@@ -87,7 +86,7 @@ export const LoginRegistration = ({
                   }),
                 )}
               >
-                <Registration
+                <SignUp
                   user={user}
                   setUser={setUser}
                   loginContext={loginContext}
@@ -96,6 +95,8 @@ export const LoginRegistration = ({
               </form>
             ) : (
               <ResetPassword
+                user={user}
+                setUser={setUser}
                 loginContext={loginContext}
                 setLoginContext={setLoginContext}
               />

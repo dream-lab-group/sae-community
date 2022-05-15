@@ -5,7 +5,6 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import '../common/i18n/config';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { fetchUser } from '../common/data/login-registration/hooks';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const appTheme = createTheme({

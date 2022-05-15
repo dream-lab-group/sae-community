@@ -13,10 +13,10 @@ import {
 import React, { ChangeEvent, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Globals } from '../../../../utils';
-import { LoginContextProps } from './login-registraion';
+import { Globals } from '../../utils';
+import { LoginContextProps } from './signIn-signUp';
 
-export const Registration = ({
+export const SignUp = ({
   loginContext,
   setLoginContext,
 }: LoginContextProps) => {

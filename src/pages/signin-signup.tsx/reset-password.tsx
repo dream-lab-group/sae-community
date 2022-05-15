@@ -1,8 +1,7 @@
 import { Button, TextField, Typography, Box } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { LoginContextProps } from './login';
-
+import { LoginContextProps } from './signIn-signUp';
 export const ResetPassword = ({
   loginContext,
   setLoginContext,
