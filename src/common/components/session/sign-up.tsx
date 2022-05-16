@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
-import { Controller, useForm, useFormContext } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/session';
 import { Globals } from '../../../utils';
@@ -38,15 +38,16 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
 
   return (
     <form
-      onSubmit={handleSubmit((event) =>
-        handleCreateNewUser({
-          first_name: event.first_name,
-          last_name: event.last_name,
-          email: event.email,
-          password: event.password,
-          course: event.course,
-        }),
-      )}
+      onSubmit={handleSubmit(async (data) => {
+        const result = await handleCreateNewUser({
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          password: data.password,
+          course: data.course,
+        });
+        console.log(result);
+      })}
     >
       <Box sx={{ width: '470px' }}>
         <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>

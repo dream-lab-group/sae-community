@@ -1,19 +1,30 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useForm, useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/session';
+import { handleLoginUser } from '../../data/signup-signin/hooks';
 
 export const SignIn = ({ setSessionContext }: SessionContextProps) => {
   const router = useRouter();
   const {
     register,
     formState: { errors },
+    handleSubmit,
   } = useForm();
   const { t } = useTranslation();
 
   return (
-    <form>
+    <form
+      onSubmit={handleSubmit(async (data) => {
+        const result = await handleLoginUser({
+          email: data.email,
+          password: data.password,
+        });
+        console.log(result);
+      })}
+    >
       <Box sx={{ width: '470px' }}>
         <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
           {t('loginRegistration.welcomeBack')}
