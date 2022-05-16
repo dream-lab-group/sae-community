@@ -1,15 +1,16 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
-import HomePage from './home';
+import { useUser } from '@auth0/nextjs-auth0';
 import Session from './session';
+import HomePage from './home';
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession();
-
-  if (session && status === 'authenticated') {
+  const { user, error, isLoading } = useUser();
+  console.log(user);
+  if (user) {
     return (
       <>
         <HomePage />
+        <a href="/api/auth/logout">Logout</a>
       </>
     );
   }
