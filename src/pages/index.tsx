@@ -1,19 +1,10 @@
 import type { NextPage } from 'next';
-import { useUser } from '@auth0/nextjs-auth0';
+
 import Session from './session';
-import HomePage from './home';
+
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Home: NextPage = () => {
-  const { user, error, isLoading } = useUser();
-  console.log(user);
-  if (user) {
-    return (
-      <>
-        <HomePage />
-        <a href="/api/auth/logout">Logout</a>
-      </>
-    );
-  }
   return (
     <>
       <Session />
