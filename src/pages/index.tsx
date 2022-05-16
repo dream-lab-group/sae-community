@@ -1,12 +1,13 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
-import { LoginRegistration } from './api/auth/login-registration/login-registraion';
+
+import Session from './session';
+
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession();
   return (
     <>
-      <LoginRegistration />
+      <Session />
     </>
   );
 };

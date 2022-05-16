@@ -1,17 +1,19 @@
 import { Box, Grid, Typography } from '@mui/material';
-import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { NextPage } from 'next';
+import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { handleCreateNewUser } from '../../../../common/data/login-registration/hooks';
+import { ResetPassword } from '../../common/components/session/reset-password';
+import { SignIn } from '../../common/components/session/sign-in';
+import { SignUp } from '../../common/components/session/sign-up';
 
-import { Login } from './login';
-import { Registration } from './registration';
-import { ResetPassword } from './reset-password';
+export type SessionContextProps = {
+  setSessionContext: React.Dispatch<SetStateAction<string>>;
+};
 
-export const LoginRegistration = () => {
-  const [loginContext, setLoginContext] = useState('anmelden');
-  const methods = useForm();
+const Session: NextPage = () => {
   const { t } = useTranslation();
+
+  const [sessionContext, setSessionContext] = useState('signin');
 
   return (
     <Grid
@@ -38,36 +40,13 @@ export const LoginRegistration = () => {
             alignItems: 'center',
           }}
         >
-          <FormProvider {...methods}>
-            <form
-              onSubmit={methods.handleSubmit((event) =>
-                handleCreateNewUser({
-                  first_name: event.first_name,
-                  last_name: event.last_name,
-                  email: event.email,
-                  password: event.password,
-                  course: event.course,
-                }),
-              )}
-            >
-              {loginContext === 'anmelden' ? (
-                <Login
-                  loginContext={loginContext}
-                  setLoginContext={setLoginContext}
-                />
-              ) : loginContext === 'konto erstellen' ? (
-                <Registration
-                  loginContext={loginContext}
-                  setLoginContext={setLoginContext}
-                />
-              ) : (
-                <ResetPassword
-                  loginContext={loginContext}
-                  setLoginContext={setLoginContext}
-                />
-              )}
-            </form>
-          </FormProvider>
+          {sessionContext === 'signin' ? (
+            <SignIn setSessionContext={setSessionContext} />
+          ) : sessionContext === 'signup' ? (
+            <SignUp setSessionContext={setSessionContext} />
+          ) : (
+            <ResetPassword setSessionContext={setSessionContext} />
+          )}
         </Box>
         <Typography
           sx={{
@@ -125,3 +104,5 @@ export const LoginRegistration = () => {
     </Grid>
   );
 };
+
+export default Session;
