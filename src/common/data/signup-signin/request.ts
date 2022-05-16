@@ -1,16 +1,15 @@
 import { apiClient } from '../../../pages/api/apiClient';
-import { UserDto, UserLogin, UserRegistration } from '../../types/types';
-import { RequestResult } from '../fetch/restults';
+import { UserLogin, UserRegistration } from '../../types/types';
 
-export const getInitialUserInformation = async (): Promise<
-  RequestResult<UserDto>
-> => {
-  const response = await apiClient.get(
-    'users/6bed6ef8-cf24-415e-91f9-0fbc895b5515',
-  );
+// export const getInitialUserInformation = async (): Promise<
+//   RequestResult<UserDto>
+// > => {
+//   const response = await apiClient.get(
+//     'users/6bed6ef8-cf24-415e-91f9-0fbc895b5515',
+//   );
 
-  return response.data;
-};
+//   return response.data;
+// };
 
 export const createNewUser = async ({
   first_name,
@@ -111,12 +110,16 @@ export const loginUser = async ({ email, password }: UserLogin) => {
 
   if (fetchedUser.data) {
     if (fetchedUser.data.data[0].email === email) {
-      const checkedUser = await apiClient.post('auth/login', {
+      const data = await apiClient.post('auth/login', {
         email: `${email}`,
         password: `${password}`,
       });
 
-      return checkedUser;
+      return {
+        data: data.data,
+        status: data.status,
+        statusText: data.statusText,
+      };
     } else {
       return 'email-does-not-match';
     }

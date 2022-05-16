@@ -46,6 +46,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           password: data.password,
           course: data.course,
         });
+        //result is
         console.log(result);
       })}
     >

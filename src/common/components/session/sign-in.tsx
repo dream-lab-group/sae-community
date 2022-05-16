@@ -22,7 +22,11 @@ export const SignIn = ({ setSessionContext }: SessionContextProps) => {
           email: data.email,
           password: data.password,
         });
-        console.log(result);
+        // type error, but data is reachable
+        // @ts-ignore: Unreachable code error
+        if (result.loginUserStatus.statusText === 'OK') {
+          console.log(result);
+        }
       })}
     >
       <Box sx={{ width: '470px' }}>

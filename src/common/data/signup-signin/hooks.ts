@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { UserDto, UserLogin, UserRegistration } from '../../types/types';
-import { RequestResult } from '../fetch/restults';
 
 import { createNewUser, loginUser } from './request';
 
@@ -11,7 +10,7 @@ export const handleCreateNewUser = async (event: UserRegistration) => {
 
 export const handleLoginUser = async (data: UserLogin) => {
   const loginUserStatus = await loginUser(data);
-  return loginUserStatus;
+  return { loginUserStatus };
 };
 
 // export function fetchUser(): [
