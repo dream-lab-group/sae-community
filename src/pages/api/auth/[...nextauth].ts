@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { apiClient } from '../apiClient';
 
 export default NextAuth({
   providers: [
@@ -28,7 +29,7 @@ export default NextAuth({
           password: credentials!.password,
         };
 
-        const res = await fetch('http://localhost:5000/api/tokens', {
+        const res = await fetch(`${apiClient}auth/login`, {
           method: 'POST',
           body: JSON.stringify(payload),
           headers: {

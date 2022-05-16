@@ -1,32 +1,69 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, FormControl, TextField, Typography } from '@mui/material';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
-import { handleLoginUser } from '../../data/signup-signin/hooks';
 
 export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   const router = useRouter();
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const [error, setError] = useState(false);
   const { t } = useTranslation();
+
+  const defaultValues = {
+    email: '',
+    password: '',
+  };
+
+  const [formValues, setFormValues] = useState(defaultValues);
+  // @ts-ignore: Unreachable code error
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
+  // @ts-ignore: Unreachable code error
+  const handleLoginSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formValues);
+    const res = await signIn('credentials', {
+      redirect: false,
+      email: formValues.email,
+      password: formValues.password,
+      callbackUrl: `/home`,
+    });
+    console.log(res);
+    // @ts-ignore: Unreachable code error
+    // if (res?.error) {
+    //   setError(true);
+    // } else {
+    //   console.log(router.push('/home'));
+    // }
+    if (res.ok === true) {
+      router.push('/home');
+    } else {
+      router.push('/');
+    }
+  };
 
   return (
     <form
-      onSubmit={handleSubmit(async (data) => {
-        const result = await handleLoginUser({
-          email: data.email,
-          password: data.password,
-        });
-        // type error, but data is reachable
-        // @ts-ignore: Unreachable code error
-        if (result.loginUserStatus.statusText === 'OK') {
-          console.log(result);
-        }
-      })}
+      onSubmit={handleLoginSubmit}
+      // onSubmit={handleSubmit(async (data) => {
+      //   const result = await signIn({
+      //     redirect: false,
+      //     email: data.email,
+      //     password: data.password,
+      //     callbackUrl: `/home`,
+      //   });
+      //   // type error, but data is reachable
+      //   // @ts-ignore: Unreachable code error
+      //   if (result.loginUserStatus.statusText === 'OK') {
+      //     console.log(result);
+      //   }
     >
       <Box sx={{ width: '470px' }}>
         <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
@@ -40,40 +77,23 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <TextField
-            {...register('email', {
-              required: true,
-              pattern: {
-                value:
-                  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: 'Invalid E-Mail adress',
-              },
-            })}
             id="email"
             name="email"
             label="E-Mail"
             type="email"
             variant="outlined"
+            onChange={handleInputChange}
             sx={{ marginTop: '20px', marginBottom: '10px' }}
           />
-          {errors.email && (
-            <Typography color="error" sx={{ fontSize: '14px' }}>
-              {t('error.loginRegistration.required')}
-            </Typography>
-          )}
           <TextField
-            {...register('password', { required: true })}
             id="password"
             name="password"
             label="Password"
             type="password"
             variant="outlined"
+            onChange={handleInputChange}
             sx={{ marginTop: '20px', marginBottom: '10px' }}
           />
-          {errors.password && (
-            <Typography color="error" sx={{ fontSize: '14px' }}>
-              {t('error.loginRegistration.required')}
-            </Typography>
-          )}
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Button
