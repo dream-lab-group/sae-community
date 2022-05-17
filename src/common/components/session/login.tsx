@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
+import { loginUser } from '../../data/signup-signin/request';
 
 export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   const router = useRouter();
@@ -28,21 +29,13 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   // @ts-ignore: Unreachable code error
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    console.log(formValues);
-    const res = await signIn('credentials', {
-      redirect: false,
+    const res = await loginUser({
       email: formValues.email,
       password: formValues.password,
-      callbackUrl: `/home`,
     });
+    // check for the console.log
     console.log(res);
-    // @ts-ignore: Unreachable code error
-    // if (res?.error) {
-    //   setError(true);
-    // } else {
-    //   console.log(router.push('/home'));
-    // }
-    if (res.ok === true) {
+    if (res!.status === 200) {
       router.push('/home');
     } else {
       router.push('/');

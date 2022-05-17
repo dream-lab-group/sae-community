@@ -1,16 +1,15 @@
 import type { NextPage } from 'next';
-import { useSession, signIn, signOut, getCsrfToken } from 'next-auth/react';
+import { useState } from 'react';
 import 'react-loading-skeleton/dist/skeleton.css';
 import HomePage from './home';
 import Login from './signin';
 
 const Home: NextPage = () => {
-  const { data: session } = useSession();
-  if (session) {
+  const [appContext, setAppContext] = useState(false);
+  if (appContext === true) {
     return (
       <>
         <HomePage />
-        <button onClick={() => signOut()}>Sign Out</button>
       </>
     );
   }

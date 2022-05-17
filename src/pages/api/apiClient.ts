@@ -6,3 +6,5 @@ export const apiClient = axios.create({
     'Content-type': 'application/json',
   },
 });
+
+export const baseApi = 'http://146.190.227.58/';

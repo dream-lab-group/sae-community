@@ -5,11 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { ResetPassword } from '../common/components/session/reset-password';
 import { LogIn } from '../common/components/session/login';
 import { SignUp } from '../common/components/session/sign-up';
-import { getCsrfToken } from 'next-auth/react';
 
 export type SessionContextProps = {
   setSessionContext: React.Dispatch<SetStateAction<string>>;
-  csrfToken?: string;
+  setAppContext?: React.Dispatch<SetStateAction<boolean>>;
 };
 
 const SignIn: NextPage = () => {
@@ -107,12 +106,3 @@ const SignIn: NextPage = () => {
 };
 
 export default SignIn;
-
-// @ts-ignore: Unreachable code error
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  };
-}
