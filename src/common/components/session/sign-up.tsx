@@ -11,30 +11,51 @@ import {
   Typography,
 } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
 import { Globals } from '../../../utils';
 
+const signUpValidationSchema = yup.object({
+  first_name: yup.string().required('Bitte Vorname angeben'),
+  last_name: yup.string().required('Bitte Nachname angeben'),
+  email: yup
+    .string()
+    .email('Keine gültige E-Mail Adresse')
+    .required('Darf nicht leer sein'),
+  password: yup
+    .string()
+    .min(8, 'Password should be of minimum 8 characters length')
+    .required('Darf nicht leer sein'),
+  repeatpassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwort stimmt nicht überein'),
+  course: yup.string().required('Bitte ein Fachrichtung auswählen'),
+  termsOfUse: yup.boolean().oneOf([true]),
+});
+
 export const SignUp = ({ setSessionContext }: SessionContextProps) => {
-  const [selectedCourse, setSelectedCourse] = useState('');
-  const [checkedTermsOfUse, setCheckedTermsOfUse] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      repeatpassword: '',
+      course: '',
+      termsOfUse: false,
+    },
+    validationSchema: signUpValidationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
 
   const { t } = useTranslation();
 
-  const handleCourseChange = (event: SelectChangeEvent) => {
-    setSelectedCourse(event.target.value as string);
-  };
-
-  const handleTermsOfUseChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCheckedTermsOfUse(event.target.checked);
-  };
-
-  const handleSignUpSubmit = async (event: any) => {
-    event.preventDefault();
-  };
-
   return (
-    <form onSubmit={handleSignUpSubmit}>
+    <form onSubmit={formik.handleSubmit}>
       <Box sx={{ width: '470px' }}>
         <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
           {t('loginRegistration.createAccount')}
@@ -59,6 +80,12 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
               label={t('loginRegistration.firstname')}
               variant="outlined"
               sx={{ width: '225px' }}
+              value={formik.values.first_name}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.first_name && Boolean(formik.errors.first_name)
+              }
+              helperText={formik.touched.first_name && formik.errors.first_name}
             />
           </Box>
           <Box sx={{ width: '225px' }}>
@@ -69,6 +96,12 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
               label={t('loginRegistration.lastname')}
               variant="outlined"
               sx={{ width: '225px' }}
+              value={formik.values.last_name}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.last_name && Boolean(formik.errors.last_name)
+              }
+              helperText={formik.touched.last_name && formik.errors.last_name}
             />
           </Box>
         </Box>
@@ -79,7 +112,12 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           label={t('loginRegistration.email')}
           type="email"
           variant="outlined"
-          sx={{ width: '100%', marginTop: ' 20px' }}
+          fullWidth
+          sx={{ marginTop: ' 20px' }}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
           id="password"
@@ -88,7 +126,12 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           label={t('loginRegistration.password')}
           type="password"
           variant="outlined"
-          sx={{ width: '100%', marginTop: '20px' }}
+          fullWidth
+          sx={{ marginTop: '20px' }}
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
         />
         <TextField
           id="repeatpassword"
@@ -97,7 +140,17 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           label={t('loginRegistration.repeatPassword')}
           type="password"
           variant="outlined"
-          sx={{ width: '100%', marginTop: '20px' }}
+          fullWidth
+          sx={{ marginTop: '20px' }}
+          value={formik.values.repeatpassword}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.repeatpassword &&
+            Boolean(formik.errors.repeatpassword)
+          }
+          helperText={
+            formik.touched.repeatpassword && formik.errors.repeatpassword
+          }
         />
         <FormControl fullWidth sx={{ marginTop: '20px' }}>
           <InputLabel id="course">Fachrichtung</InputLabel>
@@ -106,16 +159,13 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
             id="course"
             name="course"
             label="Fachrictung"
-            value={selectedCourse}
-            onChange={(event) => {
-              if (event) {
-                handleCourseChange(event);
-              }
-            }}
+            value={formik.values.course}
+            onChange={formik.handleChange}
+            error={formik.touched.course && Boolean(formik.errors.course)}
           >
             {Globals.allCourses.map((course) => (
               <MenuItem key={course} value={course}>
-                {/* @ts-ignore */}
+                {/* @ts-expect-error Translation keys only exist during runtime */}
                 {t(`courses.${course}.label`)}
               </MenuItem>
             ))}
@@ -123,10 +173,11 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
         </FormControl>
         <Box sx={{ display: 'flex', marginTop: '16px' }}>
           <Checkbox
-            checked={checkedTermsOfUse}
-            onChange={(event) => {
-              handleTermsOfUseChange(event);
-            }}
+            checked={formik.values.termsOfUse}
+            onChange={formik.handleChange}
+            name="termsOfUse"
+            required
+            aria-label="termsOfUse"
             inputProps={{ 'aria-label': 'controlled' }}
             sx={{ padding: 0, marginRight: '4px', alignSelf: 'flex-start' }}
           />
@@ -152,7 +203,8 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
               background: '#8519F6',
             }}
           >
-            SingUp
+            {/* @ts-expect-error Translation keys only exist during runtime */}
+            {t('loginRegistration.signup')}
           </Button>
           <Box
             sx={{

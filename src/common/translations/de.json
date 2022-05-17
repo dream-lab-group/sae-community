@@ -26,7 +26,8 @@
     "email": "E-Mail",
     "password": "Passwort",
     "repeatPassword": "Passwort erneut eingeben",
-    "course": "Fachrichtung"
+    "course": "Fachrichtung",
+    "signup": "Registrieren"
   },
   "error": {
     "loginRegistration": {
