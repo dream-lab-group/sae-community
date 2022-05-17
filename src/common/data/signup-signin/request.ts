@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { apiClient } from '../../../pages/api/apiClient';
 import { UserLogin, UserRegistration } from '../../types/types';
 
@@ -108,22 +109,30 @@ export const loginUser = async ({ email, password }: UserLogin) => {
     `users?filter={ "email": { "_eq": "${email}" }}`,
   );
 
-  if (fetchedUser.data) {
-    if (fetchedUser.data.data[0].email === email) {
-      const data = await apiClient.post('auth/login', {
+  try {
+    const { data, status }: { data: any; status: number } =
+      await apiClient.post('auth/login', {
         email: `${email}`,
         password: `${password}`,
       });
-
+    if (status === 200) {
       return {
-        data: data.data,
-        status: data.status,
-        statusText: data.statusText,
+        status: status,
+        user: {
+          email: email,
+          password: password,
+        },
+        access_token: data.data.access_token,
+        refresh_token: data.data.refresh_token,
+        message: data.message,
       };
-    } else {
-      return 'email-does-not-match';
     }
-  } else {
-    return 'no-user-found';
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        name: error.name,
+        message: error.message,
+      };
+    }
   }
 };

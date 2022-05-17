@@ -2,17 +2,17 @@ import { Box, Grid, Typography } from '@mui/material';
 import { NextPage } from 'next';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResetPassword } from '../../common/components/session/reset-password';
-import { SignIn } from '../../common/components/session/sign-in';
-import { SignUp } from '../../common/components/session/sign-up';
+import { ResetPassword } from '../common/components/session/reset-password';
+import { LogIn } from '../common/components/session/login';
+import { SignUp } from '../common/components/session/sign-up';
 
 export type SessionContextProps = {
   setSessionContext: React.Dispatch<SetStateAction<string>>;
+  setAppContext?: React.Dispatch<SetStateAction<boolean>>;
 };
 
-const Session: NextPage = () => {
+const SignIn: NextPage = () => {
   const { t } = useTranslation();
-
   const [sessionContext, setSessionContext] = useState('signin');
 
   return (
@@ -41,7 +41,7 @@ const Session: NextPage = () => {
           }}
         >
           {sessionContext === 'signin' ? (
-            <SignIn setSessionContext={setSessionContext} />
+            <LogIn setSessionContext={setSessionContext} />
           ) : sessionContext === 'signup' ? (
             <SignUp setSessionContext={setSessionContext} />
           ) : (
@@ -105,4 +105,4 @@ const Session: NextPage = () => {
   );
 };
 
-export default Session;
+export default SignIn;

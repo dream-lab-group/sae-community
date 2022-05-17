@@ -13,7 +13,7 @@ import {
 import React, { ChangeEvent, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { SessionContextProps } from '../../../pages/session';
+import { SessionContextProps } from '../../../pages/signin';
 import { Globals } from '../../../utils';
 import { handleCreateNewUser } from '../../data/signup-signin/hooks';
 

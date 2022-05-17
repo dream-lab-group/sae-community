@@ -2,7 +2,7 @@ import { Button, TextField, Typography, Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { SessionContextProps } from '../../../pages/session';
+import { SessionContextProps } from '../../../pages/signin';
 
 export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
   const router = useRouter();

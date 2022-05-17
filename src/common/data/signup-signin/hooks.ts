@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { UserDto, UserLogin, UserRegistration } from '../../types/types';
+import { UserLogin, UserRegistration } from '../../types/types';
 
 import { createNewUser, loginUser } from './request';
 
