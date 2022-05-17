@@ -1,5 +1,4 @@
-import { Box, Button, FormControl, TextField, Typography } from '@mui/material';
-import { signIn } from 'next-auth/react';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
