@@ -26,7 +26,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   };
 
   // @ts-ignore: Unreachable code error
-  const handleLoginSubmit = async (event) => {
+  const handleLoginSubmit = async (event: any) => {
     event.preventDefault();
     const res = await loginUser({
       email: formValues.email,
@@ -42,21 +42,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   };
 
   return (
-    <form
-      onSubmit={handleLoginSubmit}
-      // onSubmit={handleSubmit(async (data) => {
-      //   const result = await signIn({
-      //     redirect: false,
-      //     email: data.email,
-      //     password: data.password,
-      //     callbackUrl: `/home`,
-      //   });
-      //   // type error, but data is reachable
-      //   // @ts-ignore: Unreachable code error
-      //   if (result.loginUserStatus.statusText === 'OK') {
-      //     console.log(result);
-      //   }
-    >
+    <form onSubmit={handleLoginSubmit}>
       <Box sx={{ width: '470px' }}>
         <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
           {t('loginRegistration.welcomeBack')}
