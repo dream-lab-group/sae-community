@@ -25,7 +25,6 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
     });
   };
 
-  // @ts-ignore: Unreachable code error
   const handleLoginSubmit = async (event: any) => {
     event.preventDefault();
     const res = await loginUser({
