@@ -1,47 +1,48 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
 import { loginUser } from '../../data/signup-signin/request';
+
+const loginValidationSchema = yup.object({
+  email: yup
+    .string()
+    .email('Keine gültige E-Mail Adresse')
+    .required('Darf nicht leer sein'),
+  password: yup
+    .string()
+    .min(8, 'Password should be of minimum 8 characters length')
+    .required('Darf nicht leer sein'),
+});
 
 export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   const router = useRouter();
-  const [error, setError] = useState(false);
   const { t } = useTranslation();
 
-  const defaultValues = {
-    email: '',
-    password: '',
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: loginValidationSchema,
+    onSubmit: async (values: any) => {
+      const response = await loginUser({
+        email: values.email,
+        password: values.password,
+      });
 
-  const [formValues, setFormValues] = useState(defaultValues);
-  // @ts-ignore: Unreachable code error
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
-
-  const handleLoginSubmit = async (event: any) => {
-    event.preventDefault();
-    const res = await loginUser({
-      email: formValues.email,
-      password: formValues.password,
-    });
-    // check for the console.log
-    console.log(res);
-    if (res!.status === 200) {
-      router.push('/home');
-    } else {
-      router.push('/');
-    }
-  };
+      if (response!.status === 200) {
+        router.push('/home');
+      } else {
+        router.push('/');
+      }
+    },
+  });
 
   return (
-    <form onSubmit={handleLoginSubmit}>
+    <form onSubmit={formik.handleSubmit}>
       <Box sx={{ width: '470px' }}>
         <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
           {t('loginRegistration.welcomeBack')}
@@ -59,7 +60,10 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
             label="E-Mail"
             type="email"
             variant="outlined"
-            onChange={handleInputChange}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
             sx={{ marginTop: '20px', marginBottom: '10px' }}
           />
           <TextField
@@ -68,7 +72,10 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
             label="Password"
             type="password"
             variant="outlined"
-            onChange={handleInputChange}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
             sx={{ marginTop: '20px', marginBottom: '10px' }}
           />
         </Box>
