@@ -76,8 +76,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
         course: values.course,
       });
 
-      console.log(response);
-
       // @ts-ignore: Unreachable code error
       if (response!.createNewUserStatus!.status === 200) {
         handleOpen();

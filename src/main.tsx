@@ -1,9 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./app/App";
-import "./styles/globals.css";
-import "./common/i18n/config";
-import { createTheme, ThemeProvider } from "@mui/material";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './app/app';
+import './styles/globals.css';
+import './common/i18n/config';
+import { createTheme, ThemeProvider } from '@mui/material';
 
 const appTheme = createTheme({
   typography: {
@@ -15,12 +16,15 @@ const appTheme = createTheme({
   },
 });
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   // @ts-expect-error: Error due Directus JS-SDK
   <React.StrictMode>
     {/* @ts-expect-error: Error due Directus JS-SDK */}
     <ThemeProvider theme={appTheme}>
-      <App />
+      <BrowserRouter>
+        {/* @ts-expect-error: Error due Directus JS-SDK */}
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
