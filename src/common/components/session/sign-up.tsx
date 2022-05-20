@@ -76,6 +76,8 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
         course: values.course,
       });
 
+      console.log(response);
+
       // @ts-ignore: Unreachable code error
       if (response!.createNewUserStatus!.status === 200) {
         handleOpen();
@@ -110,7 +112,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
               <TextField
                 id="first_name"
                 name="first_name"
-                // @ts-expect-error Translation keys only exist during runtime
                 label={t('loginRegistration.firstname')}
                 variant="outlined"
                 sx={{ width: '225px' }}
@@ -128,7 +129,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
               <TextField
                 id="last_name"
                 name="last_name"
-                // @ts-expect-error Translation keys only exist during runtime
                 label={t('loginRegistration.lastname')}
                 variant="outlined"
                 sx={{ width: '225px' }}
@@ -144,7 +144,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           <TextField
             id="email"
             name="email"
-            // @ts-expect-error Translation keys only exist during runtime
             label={t('loginRegistration.email')}
             type="email"
             variant="outlined"
@@ -158,7 +157,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           <TextField
             id="password"
             name="password"
-            // @ts-expect-error Translation keys only exist during runtime
             label={t('loginRegistration.password')}
             type="password"
             variant="outlined"
@@ -172,7 +170,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           <TextField
             id="repeatpassword"
             name="repeatpassword"
-            // @ts-expect-error Translation keys only exist during runtime
             label={t('loginRegistration.repeatPassword')}
             type="password"
             variant="outlined"
@@ -239,7 +236,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
                 background: '#8519F6',
               }}
             >
-              {/* @ts-expect-error Translation keys only exist during runtime */}
               {t('loginRegistration.signup')}
             </Button>
             <Box

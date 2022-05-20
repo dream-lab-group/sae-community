@@ -1,10 +1,8 @@
 import { Button, TextField, Typography, Box } from '@mui/material';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
 
 export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
-  const router = useRouter();
   const { t } = useTranslation();
 
   return (

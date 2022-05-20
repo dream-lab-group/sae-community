@@ -1,11 +1,18 @@
-import { NextPage } from 'next';
+import { Directus } from '@directus/sdk';
+import { useRouter } from 'next/router';
 
-const HomePage: NextPage = () => {
-  return (
-    <>
-      <h1>FUCK YOU MADAFACKA</h1>
-    </>
-  );
+const directus = new Directus('http://146.190.227.5');
+const HomePage = () => {
+  const token = directus.auth.token;
+  if (token) {
+    return (
+      <>
+        <h1>THIS IS THE HOMEPAGE</h1>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default HomePage;
