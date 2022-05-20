@@ -5,6 +5,12 @@ import App from './app/app';
 import './styles/globals.css';
 import './common/i18n/config';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { Directus } from '@directus/sdk';
+import SignIn from './pages/signin';
+
+const directus = new Directus('http://146.190.227.5');
+
+const token = directus.auth.token;
 
 const appTheme = createTheme({
   typography: {
@@ -23,7 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ThemeProvider theme={appTheme}>
       <BrowserRouter>
         {/* @ts-expect-error: Error due Directus JS-SDK */}
-        <App />
+        {!token ? <SignIn /> : <App />}
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

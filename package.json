@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "env-cmd -f .env.local vite",
+    "build": "env-cmd -f .env.local tsc && vite build",
+    "preview": "env-cmd -f .env.local vite preview"
   },
   "dependencies": {
     "@directus/sdk": "^9.11.0",
