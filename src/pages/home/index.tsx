@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 const HomePage: NextPage = () => {
   return (
     <>
-      <h1>FUCK YOU MADAFACKA</h1>
+      <h1>THIS IS THE HOMEPAGE</h1>
     </>
   );
 };
