@@ -1,17 +1,10 @@
 import { Button, TextField, Typography, Box } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
 
 export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
   const router = useRouter();
-  const {
-    register,
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
   const { t } = useTranslation();
 
   return (
@@ -26,27 +19,11 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
           {t('loginRegistration.passwordResetInstruction')}
         </Typography>
         <TextField
-          {...register('email', {
-            required: true,
-            pattern: {
-              value:
-                /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: 'Invalid E-Mail adress',
-            },
-          })}
           id="email"
           label="E-Mail"
           variant="outlined"
           sx={{ width: '100%', marginTop: '34px' }}
         />
-        {errors.email && (
-          <Typography
-            color="error"
-            sx={{ fontSize: '14px', marginBottom: '5px' }}
-          >
-            {t('error.loginRegistration.required')}
-          </Typography>
-        )}
         <Button
           variant="contained"
           color="error"
