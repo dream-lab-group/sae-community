@@ -1,21 +1,33 @@
-import { useState } from "react";
-import HomePage from "../pages/home";
-import SignIn from "../pages/signin";
-import { Directus } from "@directus/sdk";
+import HomePage from '../pages/home';
+import SignIn from '../pages/signin';
+import { Routes, Route } from 'react-router-dom';
+import { Directus } from '@directus/sdk';
+import { ReactElement } from 'react';
 
-const directus = new Directus("http://146.190.227.5");
+const directus = new Directus('http://146.190.227.5');
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = (): ReactElement => {
   const token = directus.auth.token;
 
-  if (token) {
-    return <HomePage />;
-  } else if (!token) {
-    return <SignIn />;
-  } else {
-    return <></>;
+  if (!token) {
+    return (
+      // @ts-expect-error: Error due Directus JS-SDK
+      <Routes>
+        {/* @ts-expect-error: Error due Directus JS-SDK */}
+        <Route path="/" element={<SignIn />} />
+      </Routes>
+    );
   }
-}
+
+  return (
+    <>
+      {/* @ts-expect-error: Error due Directus JS-SDK */}
+      <Routes>
+        {/* @ts-expect-error: Error due Directus JS-SDK */}
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </>
+  );
+};
 
 export default App;

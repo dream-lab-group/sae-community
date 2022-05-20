@@ -31,7 +31,8 @@
   },
   "error": {
     "loginRegistration": {
-      "required": "Darf nicht leer sein"
+      "required": "Darf nicht leer sein",
+      "loginError": "Da scheint was schief gelaufen zu sein, überprüfe nochmals deine Anmeldedaten!"
     }
   },
   "courses": {
