@@ -2,6 +2,8 @@ import HomePage from '../pages/home/homepage';
 import { ReactElement, useState } from 'react';
 import { AppBarHeader } from '../common/components/app-header';
 import { MobileNavbar } from '../common/components/navigation-elements/mobile-navbar';
+import { PageNavigationMobile } from '../common/components/page-navigation/page-navigation-mobile';
+import { Box } from '@mui/material';
 
 const App = (): ReactElement => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,7 +23,16 @@ const App = (): ReactElement => {
         handleOpenMobileMenu={handleOpenMobileMenu}
         handleCloseMobileMenu={handleCloseMobileMenu}
       />
-      {mobileMenuOpen === true ? <MobileNavbar /> : <HomePage />}
+      {mobileMenuOpen === true ? (
+        <>
+          <MobileNavbar />
+        </>
+      ) : (
+        <Box sx={{ overflowX: 'hidden' }}>
+          <PageNavigationMobile />
+          <HomePage />
+        </Box>
+      )}
     </>
   );
 };

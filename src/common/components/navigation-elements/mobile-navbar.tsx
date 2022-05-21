@@ -33,6 +33,7 @@ export const MobileNavbar = (): JSX.Element => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
+            width: '100%',
           }}
         >
           {Globals.mobileMenuElements.map((navElement) => (
@@ -56,6 +57,7 @@ export const MobileNavbar = (): JSX.Element => {
           paddingX: '20px',
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'flex-start',
         }}
       >
         <Box
