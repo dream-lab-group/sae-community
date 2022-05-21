@@ -27,7 +27,8 @@
     "password": "Passwort",
     "repeatPassword": "Passwort erneut eingeben",
     "course": "Fachrichtung",
-    "signup": "Registrieren"
+    "signup": "Registrieren",
+    "signout": "Abmelden"
   },
   "error": {
     "loginRegistration": {
@@ -60,5 +61,14 @@
     "alumni": {
       "label": "Alumni"
     }
+  },
+  "navigation": {
+    "blog": "Blog",
+    "jobboard": "Job Board",
+    "marketplace": "Marktplatz",
+    "uploadproject": "Projektupload",
+    "myprofile": "Mein Profil",
+    "mylikes": "Meine Likes",
+    "mycollections": "Meine Sammlungen"
   }
 }
