@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "env-cmd -f .env.local vite",
-    "build": "env-cmd -f .env.local tsc && vite build",
-    "preview": "env-cmd -f .env.local vite preview"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@directus/sdk": "^9.11.0",
@@ -22,6 +22,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-i18next": "^11.16.9",
+    "react-icons": "^4.3.1",
     "react-router-dom": "6",
     "yup": "^0.32.11"
   },
@@ -29,6 +30,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "prettier": "2.6.2",
     "typescript": "^4.6.3",
     "vite": "^2.9.9"
   }

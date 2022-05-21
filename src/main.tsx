@@ -12,6 +12,13 @@ const directus = new Directus('http://146.190.227.5');
 
 const token = directus.auth.token;
 
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    retina: true; // adds the `mobile` breakpoint
+    ultrahd: true;
+  }
+}
+
 const appTheme = createTheme({
   typography: {
     fontFamily: `'Outfit', sans-serif`,
@@ -19,6 +26,17 @@ const appTheme = createTheme({
     fontWeightRegular: 400,
     fontWeightMedium: 500,
     fontWeightBold: 700,
+  },
+  breakpoints: {
+    values: {
+      xs: 375,
+      sm: 768,
+      md: 1024,
+      lg: 1440,
+      xl: 1920,
+      retina: 2560,
+      ultrahd: 3840,
+    },
   },
 });
 

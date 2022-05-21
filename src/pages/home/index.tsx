@@ -1,5 +1,4 @@
 import { Directus } from '@directus/sdk';
-import { useRouter } from 'next/router';
 
 const directus = new Directus('http://146.190.227.5');
 const HomePage = () => {
