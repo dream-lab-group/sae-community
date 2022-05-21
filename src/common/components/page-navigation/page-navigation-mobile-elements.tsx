@@ -8,17 +8,16 @@ export const PageNavigationMobileElement = ({
   const { t } = useTranslation();
   return (
     <>
-      {/* @ts-expect-error */}
       <ButtonBase
         key={course}
         value={course}
-        fullWidth={true}
         sx={{
           padding: '5px 5px',
           marginRight: '10px',
           '&:last-child': {
             marginRight: '10px',
           },
+          width: '100%',
           borderRadius: '2rem',
           background: `${
             course === 'webdesign'
