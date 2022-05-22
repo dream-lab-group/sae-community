@@ -6,17 +6,45 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material';
+import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
+import { useFormik } from 'formik';
+import { Directus } from '@directus/sdk';
+
+const resetPasswordValidationSchema = yup.object({
+  email: yup
+    .string()
+    .email('Keine gültige E-Mail Adresse')
+    .required('Darf nicht leer sein'),
+});
 
 export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-
   const { t } = useTranslation();
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: resetPasswordValidationSchema,
+    onSubmit: async (values: any) => {
+      const directus = new Directus('http://146.190.227.58');
+
+      const randomToken = Math.random().toString(36).substring(2);
+
+      await directus.auth.password
+        .request(values.email)
+        .then(() => {})
+        .catch(() => {
+          /// something something
+        });
+    },
+  });
+
   return (
-    <form>
+    <form onSubmit={formik.handleSubmit}>
       {smBreakpointDown ? (
         <Box sx={{ width: '242px', position: 'relative', left: -9 }}>
           <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '20px' }}>
@@ -29,15 +57,19 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
           </Typography>
           <TextField
             id="email"
+            name="email"
             label="E-Mail"
             size="small"
             fullWidth
             variant="outlined"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
             sx={{ marginTop: '18px' }}
           />
           <Button
             variant="contained"
-            color="error"
             type="submit"
             sx={{
               width: '100%',
@@ -91,13 +123,17 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
           </Typography>
           <TextField
             id="email"
+            name="email"
             label="E-Mail"
             variant="outlined"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
             sx={{ width: '100%', marginTop: '34px' }}
           />
           <Button
             variant="contained"
-            color="error"
             type="submit"
             sx={{
               width: '100%',
@@ -106,7 +142,7 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
               marginTop: '20px',
             }}
           >
-            password Zürucksetzen
+            {t('loginRegistration.resetPassword')}
           </Button>
           <Box
             sx={{
