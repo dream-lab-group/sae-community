@@ -26,4 +26,17 @@ export class Globals {
     'contentcreation',
     'alumni',
   ];
+
+  public static readonly mobileMenuElements = [
+    'blog',
+    'jobboard',
+    'marketplace',
+    'uploadproject',
+  ];
+
+  public static readonly mobileMenuProfileElements = [
+    'myprofile',
+    'mylikes',
+    'mycollections',
+  ];
 }

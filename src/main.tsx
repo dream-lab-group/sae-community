@@ -5,6 +5,19 @@ import App from './app/app';
 import './styles/globals.css';
 import './common/i18n/config';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { Directus } from '@directus/sdk';
+import SignIn from './pages/signin';
+
+const directus = new Directus('http://146.190.227.5');
+
+const token = directus.auth.token;
+
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    retina: true; // adds the `mobile` breakpoint
+    ultrahd: true;
+  }
+}
 
 const appTheme = createTheme({
   typography: {
@@ -13,6 +26,17 @@ const appTheme = createTheme({
     fontWeightRegular: 400,
     fontWeightMedium: 500,
     fontWeightBold: 700,
+  },
+  breakpoints: {
+    values: {
+      xs: 375,
+      sm: 768,
+      md: 1024,
+      lg: 1440,
+      xl: 1920,
+      retina: 2560,
+      ultrahd: 3840,
+    },
   },
 });
 
@@ -23,7 +47,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ThemeProvider theme={appTheme}>
       <BrowserRouter>
         {/* @ts-expect-error: Error due Directus JS-SDK */}
-        <App />
+        {!token ? <SignIn /> : <App />}
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
