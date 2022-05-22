@@ -15,7 +15,6 @@ const token = directus.auth.token;
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
     retina: true; // adds the `mobile` breakpoint
-    ultrahd: true;
   }
 }
 
@@ -35,7 +34,6 @@ const appTheme = createTheme({
       lg: 1200,
       xl: 1536,
       retina: 2560,
-      ultrahd: 3840,
     },
   },
 });

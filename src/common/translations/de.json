@@ -14,7 +14,7 @@
     "createAccount": "Erstelle ein Benutzerkonto",
     "termsOfUse": "Wenn du ein Konto erstellst, erklären du dich mit unseren Nutzungsbedingungen, Datenschutzrichtlinien und unseren Standardeinstellungen für Benachrichtigungen einverstanden.",
     "login": "Hier anmelden",
-    "existingUser": "Sie haben bereits ein Konto?",
+    "existingUser": "Du hast bereits ein Konto?",
     "welcomeBack": "Willkommen zurück!",
     "forgotPassword": "Passwort vergessen?",
     "noAccount": "Noch kein Konto?",
@@ -28,7 +28,9 @@
     "repeatPassword": "Passwort erneut eingeben",
     "course": "Fachrichtung",
     "signup": "Registrieren",
-    "signout": "Abmelden"
+    "signout": "Abmelden",
+    "loginNoW": "Anmelden",
+    "resetPassword": "Password zurücksetzen"
   },
   "error": {
     "loginRegistration": {

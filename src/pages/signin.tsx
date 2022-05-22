@@ -11,8 +11,9 @@ export type SessionContextProps = {
 
 const SignIn = () => {
   const theme = useTheme();
-  const linerGradient = useMediaQuery(theme.breakpoints.down('md'));
-  const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
+  const retinaBreakpointUp = useMediaQuery(theme.breakpoints.up('retina'));
 
   const { t } = useTranslation();
   const [sessionContext, setSessionContext] = useState('signin');
@@ -27,7 +28,7 @@ const SignIn = () => {
         position: 'relative',
       }}
     >
-      <Grid item xs={12} sm={12} md={7}>
+      <Grid item xs={12} sm={12} md={12} lg={7}>
         <Box
           sx={{
             height: ' 100%',
@@ -45,22 +46,46 @@ const SignIn = () => {
             <ResetPassword setSessionContext={setSessionContext} />
           )}
         </Box>
-        <Typography
-          sx={{
-            fontSize: '14px',
-            position: 'absolute',
-            bottom: '35px',
-            left: '37px',
-          }}
-        >
-          © dream lab 2022
-        </Typography>
+        {smBreakpointDown ? (
+          <Typography
+            sx={{
+              fontSize: '14px',
+              position: 'absolute',
+              bottom: '10px',
+              left: '10px',
+            }}
+          >
+            © dream lab 2022
+          </Typography>
+        ) : lgBreakpointDown ? (
+          <Typography
+            sx={{
+              fontSize: '18px',
+              position: 'absolute',
+              bottom: '35px',
+              left: '37px',
+            }}
+          >
+            © dream lab 2022
+          </Typography>
+        ) : (
+          <Typography
+            sx={{
+              fontSize: '18px',
+              position: 'absolute',
+              bottom: '35px',
+              left: '37px',
+            }}
+          >
+            © dream lab 2022
+          </Typography>
+        )}
       </Grid>
-      {linerGradient ? (
+      {lgBreakpointDown ? (
         <Grid
           item
           sx={{
-            height: '100vh',
+            height: '100%',
             background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
             width: '19px',
             position: 'absolute',
@@ -77,43 +102,70 @@ const SignIn = () => {
           }}
         />
       )}
-      {mdBreakpointUp ? (
-        <Grid item xs sm sx={{ background: '#192D3E', height: '100vh' }}>
+      {lgBreakpointDown ? (
+        <></>
+      ) : (
+        <Grid item xs sx={{ background: '#192D3E', height: '100vh' }}>
           <Box
             sx={{
               display: 'flex',
               height: '100%',
               width: '100%',
+              alignItems: 'center',
               justifyContent: 'center',
-              alignItems: ' center',
             }}
           >
             <Box sx={{ display: 'inherit', flexDirection: 'column' }}>
-              <Typography
-                color="white"
-                sx={{
-                  fontWeight: 600,
-                  fontSize: '40px',
-                  letterSpacing: '0.04em',
-                }}
-              >
-                {t('general.platformForStudents')}
-              </Typography>
-              <Typography
-                color="white"
-                sx={{
-                  fontWeight: 600,
-                  fontSize: '40px',
-                  letterSpacing: '0.04em',
-                }}
-              >
-                {t('general.fromStudents')}
-              </Typography>
+              {retinaBreakpointUp ? (
+                <>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '55px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.platformForStudents')}
+                  </Typography>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '55px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.fromStudents')}
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '40px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.platformForStudents')}
+                  </Typography>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '40px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.fromStudents')}
+                  </Typography>
+                </>
+              )}
             </Box>
           </Box>
         </Grid>
-      ) : (
-        <></>
       )}
     </Grid>
   );
