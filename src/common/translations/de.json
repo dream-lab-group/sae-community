@@ -14,7 +14,7 @@
     "createAccount": "Erstelle ein Benutzerkonto",
     "termsOfUse": "Wenn du ein Konto erstellst, erklären du dich mit unseren Nutzungsbedingungen, Datenschutzrichtlinien und unseren Standardeinstellungen für Benachrichtigungen einverstanden.",
     "login": "Hier anmelden",
-    "existingUser": "Sie haben bereits ein Konto?",
+    "existingUser": "Du hast bereits ein Konto?",
     "welcomeBack": "Willkommen zurück!",
     "forgotPassword": "Passwort vergessen?",
     "noAccount": "Noch kein Konto?",
@@ -28,12 +28,16 @@
     "repeatPassword": "Passwort erneut eingeben",
     "course": "Fachrichtung",
     "signup": "Registrieren",
-    "signout": "Abmelden"
+    "signout": "Abmelden",
+    "loginNoW": "Anmelden",
+    "resetPassword": "Password zurücksetzen",
+    "waitUntilAccountActivated": "Bitte warte ein Moment bis ein Moderator deinen Konto freischaltet."
   },
   "error": {
     "loginRegistration": {
       "required": "Darf nicht leer sein",
-      "loginError": "Da scheint was schief gelaufen zu sein, überprüfe nochmals deine Anmeldedaten!"
+      "loginError": "Da scheint was schief gelaufen zu sein, überprüfe nochmals deine Anmeldedaten!",
+      "signupError": "Da scheint was schief gelaufen zu sein, versuche es nochmals oder kontaktiere uns!"
     }
   },
   "courses": {

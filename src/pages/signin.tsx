@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResetPassword } from '../common/components/session/reset-password';
@@ -10,6 +10,11 @@ export type SessionContextProps = {
 };
 
 const SignIn = () => {
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
+  const retinaBreakpointUp = useMediaQuery(theme.breakpoints.up('retina'));
+
   const { t } = useTranslation();
   const [sessionContext, setSessionContext] = useState('signin');
 
@@ -20,15 +25,10 @@ const SignIn = () => {
         width: 'auto',
         height: '100vh',
         alignItems: 'center',
+        position: 'relative',
       }}
     >
-      <Grid
-        item
-        xs={12}
-        sm={7}
-        md={7}
-        sx={{ height: '100vh', position: 'relative' }}
-      >
+      <Grid item xs={12} sm={12} md={12} lg={7}>
         <Box
           sx={{
             height: ' 100%',
@@ -46,59 +46,127 @@ const SignIn = () => {
             <ResetPassword setSessionContext={setSessionContext} />
           )}
         </Box>
-        <Typography
-          sx={{
-            fontSize: '14px',
-            position: 'absolute',
-            bottom: '35px',
-            left: '37px',
-          }}
-        >
-          © dream lab 2022
-        </Typography>
+        {smBreakpointDown ? (
+          <Typography
+            sx={{
+              fontSize: '14px',
+              position: 'absolute',
+              bottom: '10px',
+              left: '10px',
+            }}
+          >
+            © dream lab 2022
+          </Typography>
+        ) : lgBreakpointDown ? (
+          <Typography
+            sx={{
+              fontSize: '18px',
+              position: 'absolute',
+              bottom: '35px',
+              left: '37px',
+            }}
+          >
+            © dream lab 2022
+          </Typography>
+        ) : (
+          <Typography
+            sx={{
+              fontSize: '18px',
+              position: 'absolute',
+              bottom: '35px',
+              left: '37px',
+            }}
+          >
+            © dream lab 2022
+          </Typography>
+        )}
       </Grid>
-      <Grid
-        item
-        sx={{
-          height: '100vh',
-          background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
-          width: '19px',
-        }}
-      />
-      <Grid item xs sx={{ background: '#192D3E', height: '100vh' }}>
-        <Box
+      {lgBreakpointDown ? (
+        <Grid
+          item
           sx={{
-            display: 'flex',
             height: '100%',
-            width: '100%',
-            justifyContent: 'center',
-            alignItems: ' center',
+            background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
+            width: '19px',
+            position: 'absolute',
+            right: 0,
           }}
-        >
-          <Box sx={{ display: 'inherit', flexDirection: 'column' }}>
-            <Typography
-              color="white"
-              sx={{
-                fontWeight: 600,
-                fontSize: '40px',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {t('general.platformForStudents')}
-            </Typography>
-            <Typography
-              color="white"
-              sx={{
-                fontWeight: 600,
-                fontSize: '40px',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {t('general.fromStudents')}
-            </Typography>
+        />
+      ) : (
+        <Grid
+          item
+          sx={{
+            height: '100vh',
+            background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
+            width: '19px',
+          }}
+        />
+      )}
+      {lgBreakpointDown ? (
+        <></>
+      ) : (
+        <Grid item xs sx={{ background: '#192D3E', height: '100vh' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              height: '100%',
+              width: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Box sx={{ display: 'inherit', flexDirection: 'column' }}>
+              {retinaBreakpointUp ? (
+                <>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '55px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.platformForStudents')}
+                  </Typography>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '55px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.fromStudents')}
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '40px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.platformForStudents')}
+                  </Typography>
+                  <Typography
+                    color="white"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '40px',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {t('general.fromStudents')}
+                  </Typography>
+                </>
+              )}
+            </Box>
           </Box>
-        </Box>
-      </Grid>
+        </Grid>
+      )}
     </Grid>
   );
 };
