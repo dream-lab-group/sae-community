@@ -5,6 +5,8 @@ import {
   Snackbar,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
@@ -30,6 +32,9 @@ type MyToken = {
 };
 
 export const LogIn = ({ setSessionContext }: SessionContextProps) => {
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const { t } = useTranslation();
 
@@ -64,9 +69,17 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   });
 
   return (
-    <>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <form onSubmit={formik.handleSubmit}>
-        <Box sx={{ width: '470px' }}>
+        <Box>
           <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
             {t('loginRegistration.welcomeBack')}
           </Typography>
@@ -173,6 +186,6 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
           </Alert>
         </Snackbar>
       </form>
-    </>
+    </Box>
   );
 };

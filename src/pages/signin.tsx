@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResetPassword } from '../common/components/session/reset-password';
@@ -10,6 +10,10 @@ export type SessionContextProps = {
 };
 
 const SignIn = () => {
+  const theme = useTheme();
+  const linerGradient = useMediaQuery(theme.breakpoints.down('md'));
+  const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
+
   const { t } = useTranslation();
   const [sessionContext, setSessionContext] = useState('signin');
 
@@ -20,15 +24,10 @@ const SignIn = () => {
         width: 'auto',
         height: '100vh',
         alignItems: 'center',
+        position: 'relative',
       }}
     >
-      <Grid
-        item
-        xs={12}
-        sm={7}
-        md={7}
-        sx={{ height: '100vh', position: 'relative' }}
-      >
+      <Grid item xs={12} sm={12} md={7}>
         <Box
           sx={{
             height: ' 100%',
@@ -57,48 +56,65 @@ const SignIn = () => {
           © dream lab 2022
         </Typography>
       </Grid>
-      <Grid
-        item
-        sx={{
-          height: '100vh',
-          background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
-          width: '19px',
-        }}
-      />
-      <Grid item xs sx={{ background: '#192D3E', height: '100vh' }}>
-        <Box
+      {linerGradient ? (
+        <Grid
+          item
           sx={{
-            display: 'flex',
-            height: '100%',
-            width: '100%',
-            justifyContent: 'center',
-            alignItems: ' center',
+            height: '100vh',
+            background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
+            width: '19px',
+            position: 'absolute',
+            right: 0,
           }}
-        >
-          <Box sx={{ display: 'inherit', flexDirection: 'column' }}>
-            <Typography
-              color="white"
-              sx={{
-                fontWeight: 600,
-                fontSize: '40px',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {t('general.platformForStudents')}
-            </Typography>
-            <Typography
-              color="white"
-              sx={{
-                fontWeight: 600,
-                fontSize: '40px',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {t('general.fromStudents')}
-            </Typography>
+        />
+      ) : (
+        <Grid
+          item
+          sx={{
+            height: '100vh',
+            background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
+            width: '19px',
+          }}
+        />
+      )}
+      {mdBreakpointUp ? (
+        <Grid item xs sm sx={{ background: '#192D3E', height: '100vh' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              height: '100%',
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: ' center',
+            }}
+          >
+            <Box sx={{ display: 'inherit', flexDirection: 'column' }}>
+              <Typography
+                color="white"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: '40px',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {t('general.platformForStudents')}
+              </Typography>
+              <Typography
+                color="white"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: '40px',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {t('general.fromStudents')}
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-      </Grid>
+        </Grid>
+      ) : (
+        <></>
+      )}
     </Grid>
   );
 };
