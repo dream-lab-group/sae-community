@@ -143,7 +143,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
                 }}
               >
                 <Typography sx={{ fontSize: '12px', whiteSpace: 'nowrap' }}>
-                  Noch kein Konto?
+                  {t('loginRegistration.noAccount')}
                 </Typography>
                 <Button
                   variant="text"
@@ -269,7 +269,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
                 </Button>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography sx={{ fontSize: '14px' }}>
-                    Noch kein Konto?
+                    {t('loginRegistration.register')}
                   </Typography>
                   <Button
                     variant="text"
