@@ -30,12 +30,14 @@
     "signup": "Registrieren",
     "signout": "Abmelden",
     "loginNoW": "Anmelden",
-    "resetPassword": "Password zurücksetzen"
+    "resetPassword": "Password zurücksetzen",
+    "waitUntilAccountActivated": "Bitte warte ein Moment bis ein Moderator deinen Konto freischaltet."
   },
   "error": {
     "loginRegistration": {
       "required": "Darf nicht leer sein",
-      "loginError": "Da scheint was schief gelaufen zu sein, überprüfe nochmals deine Anmeldedaten!"
+      "loginError": "Da scheint was schief gelaufen zu sein, überprüfe nochmals deine Anmeldedaten!",
+      "signupError": "Da scheint was schief gelaufen zu sein, versuche es nochmals oder kontaktiere uns!"
     }
   },
   "courses": {

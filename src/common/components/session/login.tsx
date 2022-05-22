@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { loginUser } from '../../data/signup-signin/request';
 import { useState } from 'react';
 import { Directus } from '@directus/sdk';
 
@@ -293,15 +292,33 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
           </>
         )}
 
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={5000}
-          onClose={handleClose}
-        >
-          <Alert severity="error" variant="filled" onClose={handleClose}>
-            {t('error.loginRegistration.loginError')}
-          </Alert>
-        </Snackbar>
+        {smBreakpointDown ? (
+          <Snackbar
+            open={openSnackbar}
+            autoHideDuration={5000}
+            onClose={handleClose}
+            sx={{ padding: '2em' }}
+          >
+            <Alert
+              severity="error"
+              variant="filled"
+              onClose={handleClose}
+              sx={{ fontSize: '10px' }}
+            >
+              {t('error.loginRegistration.loginError')}
+            </Alert>
+          </Snackbar>
+        ) : (
+          <Snackbar
+            open={openSnackbar}
+            autoHideDuration={5000}
+            onClose={handleClose}
+          >
+            <Alert severity="error" variant="filled" onClose={handleClose}>
+              {t('error.loginRegistration.loginError')}
+            </Alert>
+          </Snackbar>
+        )}
       </form>
     </Box>
   );

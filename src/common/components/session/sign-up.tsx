@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Checkbox,
@@ -7,6 +8,7 @@ import {
   MenuItem,
   Modal,
   Select,
+  Snackbar,
   TextField,
   Typography,
   useMediaQuery,
@@ -55,6 +57,16 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const handleCloseSnackbar = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
   const [open, setOpen] = useState(false);
   const [createdUser, setCreatedUser] = useState('');
   const { t } = useTranslation();
@@ -87,7 +99,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
         // @ts-ignore: Unreachable code error
         setCreatedUser(response.createNewUserStatus!.user.first_name);
       } else {
-        // something something
+        setOpenSnackbar(true);
       }
     },
   });
@@ -455,24 +467,77 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           </Box>
         )}
       </form>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h4" component="h2">
-            {`Hey ${createdUser}!`}
-          </Typography>
-          <Typography
-            id="modal-modal-description"
-            sx={{ mt: 2, fontSize: '20px' }}
+      {smBreakpointDown ? (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={modalStyle}>
+            <Typography
+              id="modal-modal-title"
+              variant="h4"
+              component="h2"
+              sx={{ fontSize: '20px' }}
+            >
+              {`Hey ${createdUser}!`}
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              sx={{ fontSize: '14px', marginTop: '10px' }}
+            >
+              {t('loginRegistration.waitUntilAccountActivated')}
+            </Typography>
+          </Box>
+        </Modal>
+      ) : (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={modalStyle}>
+            <Typography id="modal-modal-title" variant="h4" component="h2">
+              {`Hey ${createdUser}!`}
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              sx={{ mt: 2, fontSize: '20px' }}
+            >
+              {t('loginRegistration.waitUntilAccountActivated')}
+            </Typography>
+          </Box>
+        </Modal>
+      )}
+      {smBreakpointDown ? (
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={5000}
+          onClose={handleCloseSnackbar}
+          sx={{ padding: '2em' }}
+        >
+          <Alert
+            severity="error"
+            variant="filled"
+            onClose={handleClose}
+            sx={{ fontSize: '10px' }}
           >
-            Bitte warte ein Moment bis ein Moderator deinen Konto freischaltet.
-          </Typography>
-        </Box>
-      </Modal>
+            {t('error.loginRegistration.signupError')}
+          </Alert>
+        </Snackbar>
+      ) : (
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={5000}
+          onClose={handleCloseSnackbar}
+        >
+          <Alert severity="error" variant="filled" onClose={handleClose}>
+            {t('error.loginRegistration.signupError')}
+          </Alert>
+        </Snackbar>
+      )}
     </>
   );
 };
