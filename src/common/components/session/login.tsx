@@ -268,7 +268,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
                 </Button>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography sx={{ fontSize: '14px' }}>
-                    {t('loginRegistration.register')}
+                    {t('loginRegistration.noAccount')}
                   </Typography>
                   <Button
                     variant="text"

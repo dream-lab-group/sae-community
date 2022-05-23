@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import App from './app/app';
+import App from './app/App';
 import './styles/globals.css';
 import './common/i18n/config';
 import { createTheme, ThemeProvider } from '@mui/material';
