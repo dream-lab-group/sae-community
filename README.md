@@ -1,11 +1,11 @@
 <div align="center" id="top"> 
-  <img src="./public/dreamlab-logo.png" alt="Sae Community" width="350" />
+  <img src="./public/dreamlab-logo.png" alt="Sae Community" width="300" />
 </div>
 &#xa0;
 <h2 align="center">Sae Community</h2>
 
-<hr>
 &#xa0;
+
 <div align="center">
 <a href="https://reactjs.org/"><img height="23" src="https://img.shields.io/badge/REACT-18.0.0-9cf?style=for-the-badge&logo=React"/></a>
 <a href="https://www.typescriptlang.org/"><img height="23" src="https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue?style=for-the-badge&logo=TypeScript"/></a>
@@ -14,7 +14,8 @@
 <a href="https://opensource.org/licenses/MIT"><img height="23"src="https://img.shields.io/badge/License-GNU_v3.0-red?style=for-the-badge&logo"/></a>
 </div>
 &#xa0;
-<hr>
+
+<br>
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
