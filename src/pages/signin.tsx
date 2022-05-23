@@ -46,62 +46,27 @@ const SignIn = () => {
             <ResetPassword setSessionContext={setSessionContext} />
           )}
         </Box>
-        {smBreakpointDown ? (
-          <Typography
-            sx={{
-              fontSize: '14px',
-              position: 'absolute',
-              bottom: '10px',
-              left: '10px',
-            }}
-          >
-            © dream lab 2022
-          </Typography>
-        ) : lgBreakpointDown ? (
-          <Typography
-            sx={{
-              fontSize: '18px',
-              position: 'absolute',
-              bottom: '35px',
-              left: '37px',
-            }}
-          >
-            © dream lab 2022
-          </Typography>
-        ) : (
-          <Typography
-            sx={{
-              fontSize: '18px',
-              position: 'absolute',
-              bottom: '35px',
-              left: '37px',
-            }}
-          >
-            © dream lab 2022
-          </Typography>
-        )}
-      </Grid>
-      {lgBreakpointDown ? (
-        <Grid
-          item
+        <Typography
           sx={{
-            height: '100%',
-            background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
-            width: '19px',
+            fontSize: `${smBreakpointDown ? '14px' : '18px'}`,
             position: 'absolute',
-            right: 0,
+            bottom: `${smBreakpointDown ? '10px' : '35px'}`,
+            left: `${smBreakpointDown ? '10px' : '37px'}`,
           }}
-        />
-      ) : (
-        <Grid
-          item
-          sx={{
-            height: '100vh',
-            background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
-            width: '19px',
-          }}
-        />
-      )}
+        >
+          © dream lab 2022
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        sx={{
+          height: '100%',
+          background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
+          width: '19px',
+          position: `${lgBreakpointDown ? 'absolute' : ''}`,
+          right: 0,
+        }}
+      />
       {lgBreakpointDown ? (
         <></>
       ) : (
@@ -116,53 +81,26 @@ const SignIn = () => {
             }}
           >
             <Box sx={{ display: 'inherit', flexDirection: 'column' }}>
-              {retinaBreakpointUp ? (
-                <>
-                  <Typography
-                    color="white"
-                    sx={{
-                      fontWeight: 600,
-                      fontSize: '55px',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {t('general.platformForStudents')}
-                  </Typography>
-                  <Typography
-                    color="white"
-                    sx={{
-                      fontWeight: 600,
-                      fontSize: '55px',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {t('general.fromStudents')}
-                  </Typography>
-                </>
-              ) : (
-                <>
-                  <Typography
-                    color="white"
-                    sx={{
-                      fontWeight: 600,
-                      fontSize: '40px',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {t('general.platformForStudents')}
-                  </Typography>
-                  <Typography
-                    color="white"
-                    sx={{
-                      fontWeight: 600,
-                      fontSize: '40px',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {t('general.fromStudents')}
-                  </Typography>
-                </>
-              )}
+              <Typography
+                color="white"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: `${retinaBreakpointUp ? '55px' : '40px'}`,
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {t('general.platformForStudents')}
+              </Typography>
+              <Typography
+                color="white"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: `${retinaBreakpointUp ? '55px' : '40px'}`,
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {t('general.fromStudents')}
+              </Typography>
             </Box>
           </Box>
         </Grid>

@@ -30,7 +30,7 @@
     "signup": "Registrieren",
     "signout": "Abmelden",
     "loginNoW": "Anmelden",
-    "resetPassword": "Password zurücksetzen",
+    "resetPassword": "Passwort zurücksetzen",
     "waitUntilAccountActivated": "Bitte warte ein Moment bis ein Moderator deinen Konto freischaltet."
   },
   "error": {
