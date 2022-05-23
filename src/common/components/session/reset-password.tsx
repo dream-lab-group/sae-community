@@ -10,7 +10,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
 import { useFormik } from 'formik';
-import { Directus } from '@directus/sdk';
+import { handleResetPassword } from '../../data/signup-signin/hooks';
 
 const resetPasswordValidationSchema = yup.object({
   email: yup
@@ -30,16 +30,9 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
     },
     validationSchema: resetPasswordValidationSchema,
     onSubmit: async (values: any) => {
-      const directus = new Directus('http://146.190.227.58');
-
-      const randomToken = Math.random().toString(36).substring(2);
-
-      await directus.auth.password
-        .request(values.email)
-        .then(() => {})
-        .catch(() => {
-          /// something something
-        });
+      const response = await handleResetPassword({
+        email: values.email,
+      });
     },
   });
 

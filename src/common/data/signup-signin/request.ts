@@ -1,7 +1,12 @@
 import { Directus, ITransport } from '@directus/sdk';
 import axios from 'axios';
 import { useState } from 'react';
-import { UserLogin, UserRegistration } from '../../types/types';
+import { string } from 'yup';
+import {
+  PasswordResetProps,
+  UserLogin,
+  UserRegistration,
+} from '../../types/types';
 import { apiClient } from '../apiClient';
 
 type MyToken = {
@@ -17,6 +22,27 @@ export const loginUser = async ({ email, password }: UserLogin) => {
       window.location.reload();
     })
     .catch((error) => {});
+};
+
+export const resetPasswordRequest = async ({ email }: PasswordResetProps) => {
+  try {
+    const { status, data }: { status: number; data: any } =
+      await apiClient.post('auth/password/request', {
+        email,
+      });
+    if (status === 204) {
+      return {
+        status: status,
+      };
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        name: error.name,
+        message: error.message,
+      };
+    }
+  }
 };
 
 export const createNewUser = async ({
