@@ -38,16 +38,32 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      {smBreakpointDown ? (
-        <Box sx={{ width: '242px', position: 'relative', left: -9 }}>
-          <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '20px' }}>
-            Passwort vergessen?
-          </Typography>
-          <Typography
-            sx={{ fontSize: '12px', lineHeight: '14px', marginTop: '10px' }}
-          >
-            {t('loginRegistration.passwordResetInstruction')}
-          </Typography>
+      <Box
+        sx={{
+          width: `${smBreakpointDown ? '242px' : '470px'}`,
+          position: `${smBreakpointDown && 'relative'}`,
+          left: `${smBreakpointDown && -9}`,
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: 700,
+            fontSize: `${smBreakpointDown ? '20px' : '35px'}`,
+          }}
+        >
+          {t('loginRegistration.forgotPassword')}
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: `${smBreakpointDown ? '12px' : '20'}`,
+            lineHeight: `${smBreakpointDown ? '14px' : '25px'}`,
+            marginTop: `${smBreakpointDown ? '10px' : '7px'}`,
+          }}
+        >
+          {t('loginRegistration.passwordResetInstruction')}
+        </Typography>
+        {smBreakpointDown ? (
           <TextField
             id="email"
             name="email"
@@ -61,25 +77,38 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
             helperText={formik.touched.email && formik.errors.email}
             sx={{ marginTop: '18px' }}
           />
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{
-              width: '100%',
-              height: '40px',
-              background: '#8519F6',
-              fontSize: '12px',
-              marginTop: '17px',
-            }}
-          >
-            {t('loginRegistration.resetPassword')}
-          </Button>
+        ) : (
+          <TextField
+            id="email"
+            name="email"
+            label="E-Mail"
+            variant="outlined"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+            sx={{ width: '100%', marginTop: '20px' }}
+          />
+        )}
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{
+            width: '100%',
+            height: `${smBreakpointDown ? '40px' : '56px'}`,
+            background: '#8519F6',
+            marginTop: `${smBreakpointDown ? '18px' : '20px'}`,
+          }}
+        >
+          {t('loginRegistration.resetPassword')}
+        </Button>
+        {smBreakpointDown ? (
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
               flexDirection: 'column',
+              justifyContent: 'center',
               width: '100%',
               marginTop: '17px',
             }}
@@ -103,40 +132,7 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
               {t('loginRegistration.login')}
             </Button>
           </Box>
-        </Box>
-      ) : (
-        <Box sx={{ width: '470px' }}>
-          <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '35px' }}>
-            Passwort vergessen?
-          </Typography>
-          <Typography
-            sx={{ fontSize: '20px', lineHeight: '25px', marginTop: '7px' }}
-          >
-            {t('loginRegistration.passwordResetInstruction')}
-          </Typography>
-          <TextField
-            id="email"
-            name="email"
-            label="E-Mail"
-            variant="outlined"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            sx={{ width: '100%', marginTop: '34px' }}
-          />
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{
-              width: '100%',
-              height: '56px',
-              background: '#8519F6',
-              marginTop: '20px',
-            }}
-          >
-            {t('loginRegistration.resetPassword')}
-          </Button>
+        ) : (
           <Box
             sx={{
               display: 'flex',
@@ -165,8 +161,8 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
               {t('loginRegistration.login')}
             </Button>
           </Box>
-        </Box>
-      )}
+        )}
+      </Box>
     </form>
   );
 };
