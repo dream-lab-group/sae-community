@@ -11,7 +11,7 @@
 <a href="https://www.typescriptlang.org/"><img height="23" src="https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue?style=for-the-badge&logo=TypeScript"/></a>
 <a href="https://directus.io/"><img height="23" src="https://img.shields.io/badge/Directus-9.11.0-blueviolet?style=for-the-badge&logo=Directus"/></a>
 <a href="https://prettier.io/"><img height="23" src="https://img.shields.io/badge/Code%20Style-Prettier-orange?style=for-the-badge&logo=Prettier"/></a>
-<a href="https://opensource.org/licenses/MIT"><img height="23"src="https://img.shields.io/badge/License-GNU_v3.0-red?style=for-the-badge&logo"/></a>
+<a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img height="23"src="https://img.shields.io/badge/License-GLP_v3.0-red?style=for-the-badge&logo"/></a>
 </div>
 &#xa0;
 
