@@ -1,7 +1,7 @@
 import { Directus } from '@directus/sdk';
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppBarHeader } from '../common/components/app-header';
 import { MobileNavbar } from '../common/components/navigation-elements/mobile-navbar';
 import { PageNavigationMobile } from '../common/components/page-navigation/page-navigation-mobile';
@@ -49,14 +49,26 @@ const Home: NextPage = () => {
     setMobileMenuOpen(false);
   };
 
+  // force app to rehydrate after login to match the original HTML
+  // hasMounted, to false. While it's false, doesn't bother rendering the "real" content.
+  const [hasMounted, setHasMounted] = useState(false);
+
+  // Inside the useEffect immediately trigger a re-render, setting hasMounted to true. While  true, the "real" content gets rendered.
+  // useEffect only triggers after the component has mounted
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+
   return (
-      // @ts-expect-error: Todo
+    // @ts-expect-error: Todo
     <ThemeProvider theme={appTheme}>
       {!token ? (
         <SignIn />
       ) : (
         <>
-          {' '}
           <AppBarHeader
             mobileMenuOpen={mobileMenuOpen}
             handleOpenMobileMenu={handleOpenMobileMenu}
