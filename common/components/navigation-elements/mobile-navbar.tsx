@@ -7,7 +7,8 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { Globals } from '../../../utils';
+import { Globals } from '../../utils/utils';
+
 import { CustomMobileNavButton } from './costum-mobile-button';
 
 export const MobileNavbar = (): JSX.Element => {

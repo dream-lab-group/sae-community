@@ -1,9 +1,9 @@
 import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResetPassword } from '../common/components/session/reset-password';
-import { LogIn } from '../common/components/session/login';
-import { SignUp } from '../common/components/session/sign-up';
+import { LogIn } from '../../common/components/session/login';
+import { ResetPassword } from '../../common/components/session/reset-password';
+import { SignUp } from '../../common/components/session/sign-up';
 
 export type SessionContextProps = {
   setSessionContext: React.Dispatch<SetStateAction<string>>;

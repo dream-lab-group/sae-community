@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import { Globals } from '../../../utils';
+import { Globals } from '../../utils/utils';
+
 import { PageNavigationMobileElement } from './page-navigation-mobile-elements';
 
 export const PageNavigationMobile = () => {

@@ -1,13 +1,13 @@
 import { Directus } from '@directus/sdk';
 import { Box, Chip, Grid, Typography } from '@mui/material';
-import image1 from '../../common/assets/cshong-lGcRWUuD4us-unsplash.jpeg';
-import image2 from '../../common/assets/howen-1ZapU2hXhzY-unsplash.jpeg';
-import image3 from '../../common/assets/jake-weirick-Oznq9aTQeNs-unsplash.jpeg';
-import image4 from '../../common/assets/lennon-cheng-fWziKxOh1I0-unsplash.jpeg';
-import image5 from '../../common/assets/siobhan-flannery-FWAb2GFcj1w-unsplash.jpeg';
-import image6 from '../../common/assets/tezos-O5fxEDu0S5I-unsplash.jpeg';
-import image7 from '../../common/assets/tezos-y8wjQZ9XP4A-unsplash.jpeg';
-import image8 from '../../common/assets/pawan-thapa-1Yn4H3RgtJs-unsplash.jpeg';
+import image1 from '../../public/assets/cshong-lGcRWUuD4us-unsplash.jpeg';
+import image2 from '../../publicassets/howen-1ZapU2hXhzY-unsplash.jpeg';
+import image3 from '../../public/assets/jake-weirick-Oznq9aTQeNs-unsplash.jpeg';
+import image4 from '../../public/assets/lennon-cheng-fWziKxOh1I0-unsplash.jpeg';
+import image5 from '../../public/assets/siobhan-flannery-FWAb2GFcj1w-unsplash.jpeg';
+import image6 from '../../public/assets/tezos-O5fxEDu0S5I-unsplash.jpeg';
+import image7 from '../../public/assets/tezos-y8wjQZ9XP4A-unsplash.jpeg';
+import image8 from '../../public/assets/pawan-thapa-1Yn4H3RgtJs-unsplash.jpeg';
 
 const directus = new Directus('http://146.190.227.5');
 const HomePage = () => {
@@ -34,7 +34,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image1}
+                // src={image1}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
@@ -92,7 +92,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image7}
+                // src={image7}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
@@ -143,7 +143,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image2}
+                // src={image2}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
@@ -194,7 +194,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image3}
+                // src={image3}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
@@ -242,7 +242,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image4}
+                // src={image4}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
@@ -293,7 +293,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image5}
+                // src={image5}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
@@ -341,7 +341,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image6}
+                // src={image6}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
@@ -392,7 +392,7 @@ const HomePage = () => {
             >
               <Box
                 component="img"
-                src={image8}
+                // src={image8}
                 sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </Box>
