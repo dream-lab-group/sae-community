@@ -1,12 +1,5 @@
-import {
-  Box,
-  FormControl,
-  InputAdornment,
-  OutlinedInput,
-  Typography,
-} from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { HiOutlineSearch } from 'react-icons/hi';
 import { Globals } from '../../utils/utils';
 
 import { CustomMobileNavButton } from './costum-mobile-button';
@@ -17,7 +10,6 @@ export const MobileNavbar = (): JSX.Element => {
     <Box sx={{ width: '100%' }}>
       <Box
         sx={{
-          paddingX: '20px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
@@ -29,6 +21,7 @@ export const MobileNavbar = (): JSX.Element => {
             paddingY: '1rem',
             width: '100%',
             cursor: 'pointer',
+            paddingX: '20px',
           }}
         >
           <Typography sx={{ fontWeight: 500, color: '#746D69' }}>
@@ -52,7 +45,6 @@ export const MobileNavbar = (): JSX.Element => {
       />
       <Box
         sx={{
-          paddingX: '20px',
           marginBottom: '10px',
           display: 'flex',
           alignItems: 'center',
@@ -64,6 +56,7 @@ export const MobileNavbar = (): JSX.Element => {
             paddingY: '1rem',
             width: '100%',
             cursor: 'pointer',
+            paddingX: '20px',
           }}
         >
           <Typography sx={{ fontWeight: 500, color: '#746D69' }}>

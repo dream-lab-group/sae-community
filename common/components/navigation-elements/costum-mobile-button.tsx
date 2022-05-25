@@ -16,6 +16,7 @@ export const CustomMobileNavButton = ({
           background: '#fff',
           paddingY: '1rem',
           width: '100%',
+          paddingX: '20px',
           display: 'flex',
           justifyContent: 'flex-start',
         }}
