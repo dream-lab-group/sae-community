@@ -3,6 +3,7 @@ import { Box, createTheme, ThemeProvider } from '@mui/material';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { AppBarHeader } from '../common/components/app-header';
+import { MobileFooter } from '../common/components/footer/mobile-footer';
 import { MobileNavbar } from '../common/components/navigation-elements/mobile-navbar';
 import { PageNavigationMobile } from '../common/components/page-navigation/page-navigation-mobile';
 import HomePage from './home';
@@ -82,6 +83,7 @@ const Home: NextPage = () => {
             <Box sx={{ overflowX: 'hidden' }}>
               <PageNavigationMobile />
               <HomePage />
+              <MobileFooter />
             </Box>
           )}
         </>

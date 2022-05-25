@@ -15,44 +15,6 @@ export const MobileNavbar = (): JSX.Element => {
   const { t } = useTranslation();
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ paddingX: '20px', paddingTop: '20px' }}>
-        <FormControl
-          sx={{ width: '100%', marginTop: '5px', marginBottom: '10px' }}
-        >
-          <OutlinedInput
-            id="search"
-            name="search"
-            size="small"
-            startAdornment={
-              <InputAdornment position="start">
-                <HiOutlineSearch />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-          }}
-        >
-          {Globals.mobileMenuElements.map((navElement) => (
-            <CustomMobileNavButton
-              key={navElement}
-              value={navElement}
-              navElement={navElement}
-            />
-          ))}
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          borderBottom: '1px solid #E8E9EB',
-          width: '100%',
-          marginY: '10px',
-        }}
-      />
       <Box
         sx={{
           paddingX: '20px',

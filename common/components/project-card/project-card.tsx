@@ -6,7 +6,7 @@ import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
 
 export const ProjectCard = () => {
   return (
-    <Card sx={{ borderRadius: '10px', boxShadow: 'none' }}>
+    <Card sx={{ borderRadius: '10px', boxShadow: 'none', margin: '30px 0' }}>
       <Box sx={{ position: 'relative', height: '265px', width: '340px' }}>
         <Image
           src={image1}

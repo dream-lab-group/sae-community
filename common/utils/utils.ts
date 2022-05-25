@@ -17,12 +17,12 @@ export class Globals {
   public static readonly noneValue = 'none';
 
   public static readonly allCourses = [
-    'webdesign',
+    'film',
     'gameart',
     'gamesprogramming',
-    'film',
-    'visualeffects',
+    'webdesign',
     'audio',
+    'visualeffects',
     'contentcreation',
     'alumni',
   ];
