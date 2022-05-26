@@ -33,7 +33,6 @@ export const PageNavigation = () => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const [sortFilter, setSortFilter] = useState<string[]>([]);
 
@@ -56,16 +55,9 @@ export const PageNavigation = () => {
         }}
         className="container-skew"
       >
-        <Box
-          sx={{
-            width: '100%',
-            maxWidth: '2290px',
-            display: ' flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+        <Grid container width="100%" maxWidth="2290px" direction="column">
           <Grid
+            item
             container
             spacing={{ xs: 2, sm: 2, md: 2, lg: 3 }}
             columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
@@ -145,20 +137,20 @@ export const PageNavigation = () => {
               </Grid>
             )}
           </Grid>
-          <Box
-            sx={{
-              display: 'flex',
-              overflowX: 'scroll',
-              width: '100%',
-              justifyContent: 'center',
-              marginTop: `${lgBreakpointUp && '20px'}`,
-            }}
+          <Grid
+            xs={12}
+            container
+            wrap="nowrap"
+            overflow="scroll"
+            width="100%"
+            marginTop={`${lgBreakpointUp && '10px'}`}
+            justifyContent={`${lgBreakpointUp && 'center'}`}
           >
             {Globals.pageNavigationElements.map((element) => (
               <PageNavigationElement key={element} element={element} />
             ))}
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );
