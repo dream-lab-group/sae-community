@@ -74,5 +74,14 @@
     "myprofile": "Mein Profil",
     "mylikes": "Meine Likes",
     "mycollections": "Meine Sammlungen"
+  },
+  "pageNavigation": {
+    "film": "Film",
+    "gameArts": "Game Arts",
+    "gamesProgramming": "Games Programming",
+    "web": "Web & Mobile",
+    "audio": "Audio",
+    "animation": "Animation",
+    "crossMedia": "Cross Media"
   }
 }

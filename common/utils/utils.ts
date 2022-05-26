@@ -39,4 +39,14 @@ export class Globals {
     'mylikes',
     'mycollections',
   ];
+
+  public static readonly pageNavigationElements = [
+    'film',
+    'gameArts',
+    'gamesProgramming',
+    'web',
+    'audio',
+    'animation',
+    'crossMedia',
+  ];
 }
