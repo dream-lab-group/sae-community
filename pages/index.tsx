@@ -8,6 +8,7 @@ import { MobileNavbar } from '../common/components/navigation-elements/mobile-na
 import { PageNavigationMobile } from '../common/components/page-navigation/page-navigation-mobile';
 import HomePage from './home';
 import SignIn from './signin';
+import { motion } from 'framer-motion';
 
 const directus = new Directus('http://146.190.227.5');
 
@@ -77,7 +78,7 @@ const Home: NextPage = () => {
           />
           {mobileMenuOpen === true ? (
             <>
-              <MobileNavbar />
+              <MobileNavbar mobileMenuOpen={mobileMenuOpen} />
             </>
           ) : (
             <Box sx={{ overflowX: 'hidden' }}>

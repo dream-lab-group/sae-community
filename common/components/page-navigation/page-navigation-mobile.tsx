@@ -43,7 +43,7 @@ export const PageNavigationMobile = () => {
         <Grid
           item
           container
-          spacing={2}
+          spacing={1}
           alignItems="center"
           marginBottom="16px"
         >

@@ -18,7 +18,7 @@ export const PageNavigationMobileElement = ({
           },
           width: '100%',
           borderRadius: '2rem',
-          background: '#ACADA8',
+          background: '#75818b',
         }}
       >
         <Typography

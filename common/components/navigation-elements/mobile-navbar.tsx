@@ -1,13 +1,16 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Globals } from '../../utils/utils';
-
+import { motion } from 'framer-motion';
 import { CustomMobileNavButton } from './costum-mobile-button';
+import { AppBarHeaderProps } from '../header/types';
 
-export const MobileNavbar = (): JSX.Element => {
+export const MobileNavbar = ({
+  mobileMenuOpen,
+}: AppBarHeaderProps): JSX.Element => {
   const { t } = useTranslation();
   return (
-    <Box sx={{ width: '100%' }}>
+    <>
       <Box
         sx={{
           display: 'flex',
@@ -64,6 +67,6 @@ export const MobileNavbar = (): JSX.Element => {
           </Typography>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };

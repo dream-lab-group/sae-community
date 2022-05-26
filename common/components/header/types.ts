@@ -3,8 +3,8 @@ import { boolean } from 'yup';
 
 export type AppBarHeaderProps = {
   mobileMenuOpen: boolean;
-  handleOpenMobileMenu: () => void;
-  handleCloseMobileMenu: () => void;
+  handleOpenMobileMenu?: () => void;
+  handleCloseMobileMenu?: () => void;
 };
 
 export type CustomMobileNavButtonProps = {
