@@ -24,7 +24,7 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
         position: 'fixed',
         zIndex: 2000,
         background: '#fff',
-        height: `${smBreakpointDown && '100%'}`,
+        height: `${mdBreakpointDown && '100%'}`,
         width: `${mdBreakpointDown ? '100%' : '30%'}`,
         right: `${mdBreakpointUp && 0}`,
         boxShadow:

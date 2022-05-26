@@ -49,19 +49,20 @@ const appTheme = createTheme({
 const Home: NextPage = () => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleOpenMenu = () => {
     setMenuOpen(true);
-    if (smBreakpointDown) {
+    if (mdBreakpointDown) {
       document.documentElement.style.overflow = 'hidden';
     }
   };
 
   const handleCloseMenu = () => {
     setMenuOpen(false);
-    if (smBreakpointDown) {
+    if (mdBreakpointDown) {
       document.documentElement.style.overflow = 'scroll';
     }
   };

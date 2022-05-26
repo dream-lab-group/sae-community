@@ -5,6 +5,8 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { Globals } from '../../utils/utils';
 
@@ -26,7 +28,12 @@ const names = [
 ];
 
 export const PageNavigation = () => {
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const [sortFilter, setSortFilter] = useState<string[]>([]);
+
   return (
     <>
       <Grid
@@ -44,11 +51,11 @@ export const PageNavigation = () => {
         <Grid
           item
           container
-          spacing={1}
+          spacing={2}
           alignItems="center"
           marginBottom="16px"
         >
-          <Grid item xs={7}>
+          <Grid item xs={8}>
             <FormControl fullWidth>
               <OutlinedInput
                 size="small"
@@ -62,8 +69,8 @@ export const PageNavigation = () => {
               />
             </FormControl>
           </Grid>
-          <Grid item xs={5} alignItems="center" justifyContent="center">
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <Grid item xs={4} alignItems="center" justifyContent="center">
+            <FormControl fullWidth>
               <Select
                 placeholder="Sortieren"
                 size="small"
