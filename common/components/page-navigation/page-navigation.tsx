@@ -7,6 +7,7 @@ import {
   OutlinedInput,
   Select,
   useMediaQuery,
+  Box,
   useTheme,
 } from '@mui/material';
 import { Globals } from '../../utils/utils';
@@ -14,7 +15,6 @@ import { Globals } from '../../utils/utils';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { useState } from 'react';
 import { PageNavigationElement } from './page-navigation-elements';
-import { Box } from '@mui/system';
 
 const names = [
   'Oliver Hansen',

@@ -1,12 +1,11 @@
 import {
   Chip,
   Grid,
-  ImageListItem,
+  Box,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { Box } from '@mui/system';
 import Image from 'next/image';
 import image1 from '../../../public/assets/howen-1ZapU2hXhzY-unsplash.jpeg';
 import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
