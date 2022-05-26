@@ -38,3 +38,6 @@ yarn-error.log*
 
 # prisma schema
 prisma
+
+# buildexport
+_static

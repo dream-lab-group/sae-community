@@ -16,8 +16,8 @@ const HomePage = () => {
       paddingX={`${
         smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
       }`}
-      spacing={{ xs: 4, sm: 4, md: 5, lg: 5 }}
-      columns={{ xs: 12, sm: 12, md: 3, lg: 3 }}
+      spacing={{ sm: 4, md: 5, lg: 5 }}
+      columns={{ sm: 12, md: 3, lg: 3 }}
     >
       <ProjectCard />
 

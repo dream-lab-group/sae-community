@@ -21,12 +21,10 @@ const SignIn = () => {
   return (
     <Grid
       container
-      sx={{
-        width: 'auto',
-        height: '100vh',
-        alignItems: 'center',
-        position: 'relative',
-      }}
+      width="auto"
+      height="100vh"
+      alignItems="center"
+      position="relative"
     >
       <Grid item xs={12} sm={12} md={12} lg={7}>
         <Box
@@ -59,18 +57,19 @@ const SignIn = () => {
       </Grid>
       <Grid
         item
+        height="100vh"
+        width="19px"
+        // @ts-expect-error: error during build
+        position={`${lgBreakpointDown ? 'absolute' : ''}`}
+        right="0"
         sx={{
-          height: '100%',
-          background: `linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)`,
-          width: '19px',
-          position: `${lgBreakpointDown ? 'absolute' : ''}`,
-          right: 0,
+          background: 'linear-gradient(180deg, #CF2CF6 -2.46%, #7514F5 59.27%)',
         }}
       />
       {lgBreakpointDown ? (
         <></>
       ) : (
-        <Grid item xs sx={{ background: '#192D3E', height: '100vh' }}>
+        <Grid item xs height="100vh" sx={{ background: '#192D3E' }}>
           <Box
             sx={{
               display: 'flex',
