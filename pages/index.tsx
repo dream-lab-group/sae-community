@@ -1,14 +1,20 @@
 import { Directus } from '@directus/sdk';
-import { Box, createTheme, ThemeProvider } from '@mui/material';
+import {
+  Box,
+  createTheme,
+  ThemeProvider,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { AppBarHeader } from '../common/components/app-header';
 import { MobileFooter } from '../common/components/footer/mobile-footer';
-import { MobileNavbar } from '../common/components/navigation-elements/mobile-navbar';
 import { PageNavigationMobile } from '../common/components/page-navigation/page-navigation-mobile';
 import HomePage from './home';
 import SignIn from './signin';
 import { motion } from 'framer-motion';
+import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
 
 const directus = new Directus('http://146.190.227.5');
 
@@ -32,7 +38,7 @@ const appTheme = createTheme({
     values: {
       xs: 0,
       sm: 600,
-      md: 900,
+      md: 768,
       lg: 1200,
       xl: 1536,
       retina: 2560,
@@ -41,14 +47,16 @@ const appTheme = createTheme({
 });
 
 const Home: NextPage = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const theme = useTheme();
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleOpenMobileMenu = () => {
-    setMobileMenuOpen(true);
+  const handleOpenMenu = () => {
+    setMenuOpen(true);
   };
 
-  const handleCloseMobileMenu = () => {
-    setMobileMenuOpen(false);
+  const handleCloseMenu = () => {
+    setMenuOpen(false);
   };
 
   // force app to rehydrate after login to match the original HTML
@@ -72,16 +80,21 @@ const Home: NextPage = () => {
       ) : (
         <>
           <AppBarHeader
-            mobileMenuOpen={mobileMenuOpen}
-            handleOpenMobileMenu={handleOpenMobileMenu}
-            handleCloseMobileMenu={handleCloseMobileMenu}
+            menuOpen={menuOpen}
+            handleOpenMenu={handleOpenMenu}
+            handleCloseMenu={handleCloseMenu}
           />
-          {mobileMenuOpen === true ? (
+          {menuOpen ? (
             <>
-              <MobileNavbar mobileMenuOpen={mobileMenuOpen} />
+              <CustomNavbar menuOpen={menuOpen} />
             </>
           ) : (
-            <Box sx={{ overflowX: 'hidden', marginTop: '57px' }}>
+            <Box
+              sx={{
+                overflowX: 'hidden',
+                marginTop: `${mdBreakpointDown ? '57px' : '90px'}`,
+              }}
+            >
               <PageNavigationMobile />
               <HomePage />
               <MobileFooter />

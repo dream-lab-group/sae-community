@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
-import { MobileMenu } from './header/mobile-menu';
+import { CustomMenu } from './header/custom-menu';
 import { AppBarHeaderProps } from './header/types';
 
 export const AppBarHeader = ({
-  mobileMenuOpen,
-  handleOpenMobileMenu,
-  handleCloseMobileMenu,
+  menuOpen,
+  handleOpenMenu,
+  handleCloseMenu,
 }: AppBarHeaderProps): JSX.Element => {
   return (
     <Box
@@ -19,10 +19,10 @@ export const AppBarHeader = ({
         background: '#fff',
       }}
     >
-      <MobileMenu
-        mobileMenuOpen={mobileMenuOpen}
-        handleOpenMobileMenu={handleOpenMobileMenu}
-        handleCloseMobileMenu={handleCloseMobileMenu}
+      <CustomMenu
+        menuOpen={menuOpen}
+        handleOpenMenu={handleOpenMenu}
+        handleCloseMenu={handleCloseMenu}
       />
     </Box>
   );

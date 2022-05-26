@@ -1,14 +1,20 @@
-import { Box, Typography } from '@mui/material';
+import {
+  Box,
+  ButtonBase,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Globals } from '../../utils/utils';
-import { motion } from 'framer-motion';
-import { CustomMobileNavButton } from './costum-mobile-button';
 import { AppBarHeaderProps } from '../header/types';
+import { CustomNavButton } from './costum-button';
 
-export const MobileNavbar = ({
-  mobileMenuOpen,
-}: AppBarHeaderProps): JSX.Element => {
+export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
+  const theme = useTheme();
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const { t } = useTranslation();
+
   return (
     <>
       <Box
@@ -16,24 +22,32 @@ export const MobileNavbar = ({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          marginTop: '80px',
+          marginTop: `${mdBreakpointDown ? '80px' : '103px'}`,
         }}
       >
-        <Box
+        <ButtonBase
           sx={{
             background: '#fff',
             paddingY: '1rem',
             width: '100%',
             cursor: 'pointer',
             paddingX: '20px',
+            display: 'flex',
+            justifyContent: 'flex-start',
           }}
         >
-          <Typography sx={{ fontWeight: 500, color: '#746D69' }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              color: '#746D69',
+              fontSize: `${mdBreakpointDown ? '16px' : '20px'}`,
+            }}
+          >
             Avatar
           </Typography>
-        </Box>
+        </ButtonBase>
         {Globals.mobileMenuProfileElements.map((navElement) => (
-          <CustomMobileNavButton
+          <CustomNavButton
             key={navElement}
             value={navElement}
             navElement={navElement}
@@ -63,7 +77,13 @@ export const MobileNavbar = ({
             paddingX: '20px',
           }}
         >
-          <Typography sx={{ fontWeight: 500, color: '#746D69' }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              color: '#F02D3A',
+              fontSize: `${mdBreakpointDown ? '16px' : '20px'}`,
+            }}
+          >
             {t('loginRegistration.signout')}
           </Typography>
         </Box>

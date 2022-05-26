@@ -1,18 +1,18 @@
-import { ButtonBase, Typography } from '@mui/material';
+import { ButtonBase, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { CustomMobileNavButtonProps } from '../header/types';
+import { CustomNavButtonProps } from '../header/types';
 
-export const CustomMobileNavButton = ({
-  navElement,
-}: CustomMobileNavButtonProps) => {
+export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
+  const theme = useTheme();
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const { t } = useTranslation();
+
   return (
     <>
       <ButtonBase
         sx={{
           border: 'none',
           cursor: 'pointer',
-          fontSize: '2rem',
           background: '#fff',
           paddingY: '1rem',
           width: '100%',
@@ -21,7 +21,13 @@ export const CustomMobileNavButton = ({
           justifyContent: 'flex-start',
         }}
       >
-        <Typography sx={{ fontWeight: 500, color: '#746D69' }}>
+        <Typography
+          sx={{
+            fontWeight: 500,
+            color: '#746D69',
+            fontSize: `${mdBreakpointDown ? '16px' : '20px'}`,
+          }}
+        >
           {/* @ts-expect-error: translation only during runtime */}
           {t(`navigation.${navElement}`)}
         </Typography>
