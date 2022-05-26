@@ -55,7 +55,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values: any) => {
-      const directus = new Directus<MyToken>('http://146.190.227.58');
+      const directus = new Directus<MyToken>('https://www.whatthebre.com/');
 
       await directus.auth
         .login(values)

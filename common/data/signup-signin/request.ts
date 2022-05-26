@@ -14,7 +14,7 @@ type MyToken = {
 };
 
 export const loginUser = async ({ email, password }: UserLogin) => {
-  const directus = new Directus<MyToken>('http://146.190.227.58');
+  const directus = new Directus<MyToken>('https://www.whatthebre.com/');
 
   await directus.auth
     .login({ email, password })
