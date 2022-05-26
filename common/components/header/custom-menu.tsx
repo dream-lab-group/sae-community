@@ -32,11 +32,9 @@ export const CustomMenu = ({
       }}
     >
       <Grid
-        sx={{
-          paddingX: `${
-            smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
-          }`,
-        }}
+        paddingX={`${
+          smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
+        }`}
         container
         spacing={0}
         alignItems="center"

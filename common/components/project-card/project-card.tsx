@@ -26,7 +26,6 @@ export const ProjectCard = () => {
       borderRadius="10px"
       width="100%"
       height="100%"
-      xs={12}
       sm={12}
       md={6}
       lg={4}
