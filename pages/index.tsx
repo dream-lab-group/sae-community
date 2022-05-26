@@ -81,7 +81,7 @@ const Home: NextPage = () => {
               <MobileNavbar mobileMenuOpen={mobileMenuOpen} />
             </>
           ) : (
-            <Box sx={{ overflowX: 'hidden' }}>
+            <Box sx={{ overflowX: 'hidden', marginTop: '57px' }}>
               <PageNavigationMobile />
               <HomePage />
               <MobileFooter />

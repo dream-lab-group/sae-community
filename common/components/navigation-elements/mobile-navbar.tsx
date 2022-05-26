@@ -16,6 +16,7 @@ export const MobileNavbar = ({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
+          marginTop: '80px',
         }}
       >
         <Box
