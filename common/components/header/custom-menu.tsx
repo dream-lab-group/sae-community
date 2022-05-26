@@ -16,21 +16,27 @@ export const CustomMenu = ({
   handleCloseMenu,
 }: AppBarHeaderProps): JSX.Element => {
   const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (
     <Box
       sx={{
-        borderBottom: '1px solid #E8E9EB',
-        height: `${mdBreakpointDown ? '70px' : '90px'}`,
+        height: `${
+          smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
+        }`,
         display: 'flex',
         justifyContent: 'center',
         boxShadow: 3,
       }}
     >
       <Grid
-        sx={{ paddingX: `${mdBreakpointDown ? '20px' : '120px'}` }}
+        sx={{
+          paddingX: `${
+            smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
+          }`,
+        }}
         container
         spacing={0}
         alignItems="center"
@@ -40,12 +46,16 @@ export const CustomMenu = ({
           <Grid item container alignItems="center">
             <Grid
               item
-              sx={{ marginRight: `${mdBreakpointDown ? '5px' : '10px'}` }}
+              sx={{ marginRight: `${smBreakpointDown ? '5px' : '10px'}` }}
             >
               <Box
                 sx={{
-                  height: `${mdBreakpointDown ? '40px' : '60px'}`,
-                  width: `${mdBreakpointDown ? '40px' : '60px'}`,
+                  height: `${
+                    smBreakpointDown ? '40px' : lgBreakpointUp ? '55px' : '50px'
+                  }`,
+                  width: `${
+                    smBreakpointDown ? '40px' : lgBreakpointUp ? '55px' : '50px'
+                  }`,
                   background: '#000',
                   borderRadius: '50%',
                 }}
@@ -54,18 +64,22 @@ export const CustomMenu = ({
             <Grid item>
               <Typography
                 sx={{
-                  fontSize: `${mdBreakpointDown ? '14px' : '20px'}`,
+                  fontSize: `${
+                    smBreakpointDown ? '14px' : lgBreakpointUp ? '20px' : '18px'
+                  }`,
                   fontWeight: '700',
                   color: '#8519F6',
-                  lineHeight: `${mdBreakpointUp && 1}`,
+                  lineHeight: 1,
                 }}
               >
                 SAI
               </Typography>
               <Typography
                 sx={{
-                  fontSize: `${mdBreakpointDown ? '14px' : '20px'}`,
-                  lineHeight: `${mdBreakpointUp && 1}`,
+                  fontSize: `${
+                    smBreakpointDown ? '14px' : lgBreakpointUp ? '20px' : '18px'
+                  }`,
+                  lineHeight: 1,
                 }}
               >
                 Community
@@ -81,21 +95,30 @@ export const CustomMenu = ({
           alignItems="center"
         >
           <IconButton>
-            <FaRegBell color="#000" size={mdBreakpointDown ? 25 : 32} />
+            <FaRegBell
+              color="#000"
+              size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
+            />
           </IconButton>
           {menuOpen === false ? (
             <IconButton
               onClick={handleOpenMenu}
               sx={{ marginLeft: `${mdBreakpointDown ? '10px' : '15px'}` }}
             >
-              <FaRegUser color="#000" size={mdBreakpointDown ? 25 : 32} />
+              <FaRegUser
+                color="#000"
+                size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
+              />
             </IconButton>
           ) : (
             <IconButton
               onClick={handleCloseMenu}
               sx={{ marginLeft: `${mdBreakpointDown ? '10px' : '15px'}` }}
             >
-              <FaRegUser color="#000" size={mdBreakpointDown ? 25 : 32} />
+              <FaRegUser
+                color="#000"
+                size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
+              />
             </IconButton>
           )}
           <IconButton
@@ -104,7 +127,10 @@ export const CustomMenu = ({
               marginLeft: `${mdBreakpointDown ? '10px' : '15px'}`,
             }}
           >
-            <MdAdd color="#8519F6" size={mdBreakpointDown ? 25 : 32} />
+            <MdAdd
+              color="#8519F6"
+              size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
+            />
           </IconButton>
         </Grid>
       </Grid>

@@ -33,7 +33,7 @@ type MyToken = {
 export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const smBreakpoinUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const { t } = useTranslation();
@@ -175,9 +175,9 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
               variant="contained"
               type="submit"
               sx={{
-                width: `${smBreakpoinUp && '470px'}`,
+                width: `${smBreakpointUp && '470px'}`,
                 height: `${smBreakpointDown ? '40px' : '56px'}`,
-                marginTop: `${smBreakpoinUp && '20px'}`,
+                marginTop: `${smBreakpointUp && '20px'}`,
                 fontSize: `${smBreakpointDown && '12px'}`,
                 background: '#8519F6',
               }}
@@ -186,7 +186,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
             </Button>
             <Box
               sx={{
-                width: `${smBreakpoinUp && '100%'}`,
+                width: `${smBreakpointUp && '100%'}`,
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: `${smBreakpointDown && 'column'}`,
@@ -238,7 +238,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
                   </Button>
                 </>
               )}
-              {smBreakpoinUp && (
+              {smBreakpointUp && (
                 <>
                   <Button
                     variant="text"

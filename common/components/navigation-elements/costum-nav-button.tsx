@@ -4,7 +4,8 @@ import { CustomNavButtonProps } from '../header/types';
 
 export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
   const theme = useTheme();
-  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation();
 
   return (
@@ -25,7 +26,9 @@ export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
           sx={{
             fontWeight: 500,
             color: '#746D69',
-            fontSize: `${mdBreakpointDown ? '16px' : '20px'}`,
+            fontSize: `${
+              smBreakpointDown ? '14px' : lgBreakpointUp ? '20px' : '18px'
+            }`,
           }}
         >
           {/* @ts-expect-error: translation only during runtime */}

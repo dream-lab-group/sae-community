@@ -48,15 +48,22 @@ const appTheme = createTheme({
 
 const Home: NextPage = () => {
   const theme = useTheme();
-  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleOpenMenu = () => {
     setMenuOpen(true);
+    if (smBreakpointDown) {
+      document.documentElement.style.overflow = 'hidden';
+    }
   };
 
   const handleCloseMenu = () => {
     setMenuOpen(false);
+    if (smBreakpointDown) {
+      document.documentElement.style.overflow = 'scroll';
+    }
   };
 
   // force app to rehydrate after login to match the original HTML
@@ -78,29 +85,26 @@ const Home: NextPage = () => {
       {!token ? (
         <SignIn />
       ) : (
-        <>
+        <Box sx={{ width: '100%' }}>
           <AppBarHeader
             menuOpen={menuOpen}
             handleOpenMenu={handleOpenMenu}
             handleCloseMenu={handleCloseMenu}
           />
-          {menuOpen ? (
-            <>
-              <CustomNavbar menuOpen={menuOpen} />
-            </>
-          ) : (
-            <Box
-              sx={{
-                overflowX: 'hidden',
-                marginTop: `${mdBreakpointDown ? '57px' : '90px'}`,
-              }}
-            >
-              <PageNavigationMobile />
-              <HomePage />
-              <MobileFooter />
-            </Box>
-          )}
-        </>
+          {menuOpen && <CustomNavbar menuOpen={menuOpen} />}
+          <Box
+            sx={{
+              overflowX: 'hidden',
+              marginTop: `${
+                smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
+              }`,
+            }}
+          >
+            <PageNavigationMobile />
+            <HomePage />
+            <MobileFooter />
+          </Box>
+        </Box>
       )}
     </ThemeProvider>
   );
