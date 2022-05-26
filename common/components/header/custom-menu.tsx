@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { MdAdd } from 'react-icons/md';
 import { AppBarHeaderProps } from './types';
-import { FaRegBell, FaRegUser } from 'react-icons/fa';
+import { FaRegBell, FaRegUser, FaUser } from 'react-icons/fa';
 
 export const CustomMenu = ({
   menuOpen,
@@ -94,43 +94,42 @@ export const CustomMenu = ({
           justifyContent="flex-end"
           alignItems="center"
         >
-          <IconButton>
+          <IconButton sx={{ color: '#000' }}>
             <FaRegBell
-              color="#000"
-              size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
+              size={smBreakpointDown ? 22 : lgBreakpointUp ? 28 : 26}
             />
           </IconButton>
           {menuOpen === false ? (
             <IconButton
               onClick={handleOpenMenu}
-              sx={{ marginLeft: `${mdBreakpointDown ? '10px' : '15px'}` }}
+              sx={{
+                marginLeft: `${mdBreakpointDown ? '10px' : '15px'}`,
+                color: '#000',
+              }}
             >
               <FaRegUser
-                color="#000"
-                size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
+                size={smBreakpointDown ? 22 : lgBreakpointUp ? 28 : 26}
               />
             </IconButton>
           ) : (
             <IconButton
               onClick={handleCloseMenu}
-              sx={{ marginLeft: `${mdBreakpointDown ? '10px' : '15px'}` }}
+              sx={{
+                marginLeft: `${mdBreakpointDown ? '10px' : '15px'}`,
+                color: '#8519F6',
+              }}
             >
-              <FaRegUser
-                color="#000"
-                size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
-              />
+              <FaUser size={smBreakpointDown ? 22 : lgBreakpointUp ? 28 : 26} />
             </IconButton>
           )}
           <IconButton
             sx={{
               border: '2px solid #8519F6',
               marginLeft: `${mdBreakpointDown ? '10px' : '15px'}`,
+              color: '#8519F6',
             }}
           >
-            <MdAdd
-              color="#8519F6"
-              size={smBreakpointDown ? 25 : lgBreakpointUp ? 28 : 26}
-            />
+            <MdAdd size={smBreakpointDown ? 22 : lgBreakpointUp ? 28 : 26} />
           </IconButton>
         </Grid>
       </Grid>

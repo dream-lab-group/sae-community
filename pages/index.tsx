@@ -10,11 +10,11 @@ import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { AppBarHeader } from '../common/components/app-header';
 import { MobileFooter } from '../common/components/footer/mobile-footer';
-import { PageNavigationMobile } from '../common/components/page-navigation/page-navigation-mobile';
 import HomePage from './home';
 import SignIn from './signin';
 import { motion } from 'framer-motion';
 import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
+import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 
 const directus = new Directus('http://146.190.227.5');
 
@@ -100,7 +100,7 @@ const Home: NextPage = () => {
               }`,
             }}
           >
-            <PageNavigationMobile />
+            <PageNavigation />
             <HomePage />
             <MobileFooter />
           </Box>

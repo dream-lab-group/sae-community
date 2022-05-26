@@ -2,7 +2,7 @@ import { ButtonBase, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { PageNavigationElementProps } from './types';
 
-export const PageNavigationMobileElement = ({
+export const PageNavigationElement = ({
   course,
 }: PageNavigationElementProps) => {
   const { t } = useTranslation();

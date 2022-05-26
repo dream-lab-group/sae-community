@@ -7,9 +7,10 @@ import {
   Select,
 } from '@mui/material';
 import { Globals } from '../../utils/utils';
-import { PageNavigationMobileElement } from './page-navigation-mobile-elements';
+
 import { HiOutlineSearch } from 'react-icons/hi';
 import { useState } from 'react';
+import { PageNavigationElement } from './page-navigation-elements';
 
 const names = [
   'Oliver Hansen',
@@ -24,7 +25,7 @@ const names = [
   'Kelly Snyder',
 ];
 
-export const PageNavigationMobile = () => {
+export const PageNavigation = () => {
   const [sortFilter, setSortFilter] = useState<string[]>([]);
   return (
     <>
@@ -90,7 +91,7 @@ export const PageNavigationMobile = () => {
         </Grid>
         <Grid item sx={{ display: 'flex', overflowX: 'scroll', width: '100%' }}>
           {Globals.allCourses.map((course) => (
-            <PageNavigationMobileElement key={course} course={course} />
+            <PageNavigationElement key={course} course={course} />
           ))}
         </Grid>
       </Grid>
