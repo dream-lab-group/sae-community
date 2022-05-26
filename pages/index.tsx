@@ -99,6 +99,9 @@ const Home: NextPage = () => {
               marginTop: `${
                 smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
               }`,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
           >
             <PageNavigation />

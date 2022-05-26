@@ -1,17 +1,23 @@
-import { Directus } from '@directus/sdk';
-import { Box, Card, Chip, Typography } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectCard } from '../../common/components/project-card/project-card';
 
 const HomePage = () => {
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+
   return (
-    <Box
-      sx={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '10px 0',
-      }}
+    <Grid
+      container
+      width="100%"
+      maxWidth="2290px"
+      paddingY="40px"
+      paddingX={`${
+        smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
+      }`}
+      spacing={{ xs: 4, sm: 4, md: 5, lg: 5 }}
+      columns={{ xs: 12, sm: 12, md: 3, lg: 3 }}
     >
       <ProjectCard />
 
@@ -42,7 +48,7 @@ const HomePage = () => {
       <ProjectCard />
       <ProjectCard />
       <ProjectCard />
-    </Box>
+    </Grid>
   );
 };
 
