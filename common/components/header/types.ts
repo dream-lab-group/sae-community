@@ -2,12 +2,12 @@ import React from 'react';
 import { boolean } from 'yup';
 
 export type AppBarHeaderProps = {
-  mobileMenuOpen: boolean;
-  handleOpenMobileMenu: () => void;
-  handleCloseMobileMenu: () => void;
+  menuOpen: boolean;
+  handleOpenMenu?: () => void;
+  handleCloseMenu?: () => void;
 };
 
-export type CustomMobileNavButtonProps = {
+export type CustomNavButtonProps = {
   key: string;
   value: string;
   navElement: string;

@@ -1,13 +1,20 @@
 import { Directus } from '@directus/sdk';
-import { Box, createTheme, ThemeProvider } from '@mui/material';
+import {
+  Box,
+  createTheme,
+  ThemeProvider,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { AppBarHeader } from '../common/components/app-header';
 import { MobileFooter } from '../common/components/footer/mobile-footer';
-import { MobileNavbar } from '../common/components/navigation-elements/mobile-navbar';
-import { PageNavigationMobile } from '../common/components/page-navigation/page-navigation-mobile';
 import HomePage from './home';
 import SignIn from './signin';
+import { motion } from 'framer-motion';
+import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
+import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 
 const directus = new Directus('http://146.190.227.5');
 
@@ -31,7 +38,7 @@ const appTheme = createTheme({
     values: {
       xs: 0,
       sm: 600,
-      md: 900,
+      md: 768,
       lg: 1200,
       xl: 1536,
       retina: 2560,
@@ -40,14 +47,24 @@ const appTheme = createTheme({
 });
 
 const Home: NextPage = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleOpenMobileMenu = () => {
-    setMobileMenuOpen(true);
+  const handleOpenMenu = () => {
+    setMenuOpen(true);
+    if (mdBreakpointDown) {
+      document.documentElement.style.overflow = 'hidden';
+    }
   };
 
-  const handleCloseMobileMenu = () => {
-    setMobileMenuOpen(false);
+  const handleCloseMenu = () => {
+    setMenuOpen(false);
+    if (mdBreakpointDown) {
+      document.documentElement.style.overflow = 'scroll';
+    }
   };
 
   // force app to rehydrate after login to match the original HTML
@@ -69,24 +86,29 @@ const Home: NextPage = () => {
       {!token ? (
         <SignIn />
       ) : (
-        <>
+        <Box sx={{ width: '100%' }}>
           <AppBarHeader
-            mobileMenuOpen={mobileMenuOpen}
-            handleOpenMobileMenu={handleOpenMobileMenu}
-            handleCloseMobileMenu={handleCloseMobileMenu}
+            menuOpen={menuOpen}
+            handleOpenMenu={handleOpenMenu}
+            handleCloseMenu={handleCloseMenu}
           />
-          {mobileMenuOpen === true ? (
-            <>
-              <MobileNavbar />
-            </>
-          ) : (
-            <Box sx={{ overflowX: 'hidden' }}>
-              <PageNavigationMobile />
-              <HomePage />
-              <MobileFooter />
-            </Box>
-          )}
-        </>
+          {menuOpen && <CustomNavbar menuOpen={menuOpen} />}
+          <Box
+            sx={{
+              overflowX: 'hidden',
+              marginTop: `${
+                smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
+              }`,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <PageNavigation />
+            <HomePage />
+            <MobileFooter />
+          </Box>
+        </Box>
       )}
     </ThemeProvider>
   );

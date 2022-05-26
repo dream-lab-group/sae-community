@@ -1,13 +1,59 @@
-import { Card, Chip, Typography } from '@mui/material';
+import {
+  Chip,
+  Grid,
+  ImageListItem,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import Image from 'next/image';
 import image1 from '../../../public/assets/howen-1ZapU2hXhzY-unsplash.jpeg';
 import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
 
 export const ProjectCard = () => {
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+
   return (
-    <Card sx={{ borderRadius: '10px', boxShadow: 'none', margin: '30px 0' }}>
-      <Box sx={{ position: 'relative', height: '265px', width: '340px' }}>
+    <Grid
+      item
+      container
+      boxShadow="none"
+      borderRadius="10px"
+      width="100%"
+      height="100%"
+      xs={12}
+      sm={12}
+      md={6}
+      lg={4}
+      xl={3}
+      justifyContent="center"
+    >
+      <Grid
+        item
+        position="relative"
+        height={`${
+          smBreakpointDown
+            ? '265px'
+            : mdBreakpointDown
+            ? '300px'
+            : mdBreakpointUp
+            ? '300px'
+            : lgBreakpointUp
+            ? '540px'
+            : ''
+        }`}
+        maxHeight="540px"
+        width="100%"
+        justifyContent="center"
+        alignItems="center"
+        alignContent="center"
+        maxWidth="450px"
+      >
         <Image
           src={image1}
           layout="fill"
@@ -51,24 +97,31 @@ export const ProjectCard = () => {
         >
           <HiOutlineBookmark size={30} />
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '5px 0',
-          marginTop: '5px',
-        }}
+      </Grid>
+      <Grid
+        item
+        container
+        margin=" 5px 0 0 0"
+        padding="5px 0"
+        alignItems="center"
+        maxWidth="450px"
       >
-        <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-          Studentname
-        </Typography>
-        <Chip
-          label="Webdevelopment"
-          sx={{ background: '#364156', color: '#fff', fontSize: '16px' }}
-        />
-      </Box>
-    </Card>
+        <Grid item xs={8}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+            Studentname
+          </Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Chip
+            label="Webdevelopment"
+            sx={{
+              background: '#364156',
+              color: '#fff',
+              fontSize: '16px',
+            }}
+          />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };

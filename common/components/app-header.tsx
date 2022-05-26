@@ -1,18 +1,29 @@
-import { MobileMenu } from './header/mobile-menu';
+import { Box } from '@mui/material';
+import { CustomMenu } from './header/custom-menu';
 import { AppBarHeaderProps } from './header/types';
 
 export const AppBarHeader = ({
-  mobileMenuOpen,
-  handleOpenMobileMenu,
-  handleCloseMobileMenu,
+  menuOpen,
+  handleOpenMenu,
+  handleCloseMenu,
 }: AppBarHeaderProps): JSX.Element => {
   return (
-    <>
-      <MobileMenu
-        mobileMenuOpen={mobileMenuOpen}
-        handleOpenMobileMenu={handleOpenMobileMenu}
-        handleCloseMobileMenu={handleCloseMobileMenu}
+    <Box
+      sx={{
+        position: 'fixed',
+        top: 0,
+        left: 'auto',
+        right: 0,
+        width: '100%',
+        zIndex: 2000,
+        background: '#fff',
+      }}
+    >
+      <CustomMenu
+        menuOpen={menuOpen}
+        handleOpenMenu={handleOpenMenu}
+        handleCloseMenu={handleCloseMenu}
       />
-    </>
+    </Box>
   );
 };
