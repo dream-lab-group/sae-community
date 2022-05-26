@@ -20,6 +20,7 @@ export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
           paddingX: '20px',
           display: 'flex',
           justifyContent: 'flex-start',
+          whiteSpace: 'nowrap',
         }}
       >
         <Typography
@@ -27,7 +28,7 @@ export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
             fontWeight: 500,
             color: '#746D69',
             fontSize: `${
-              smBreakpointDown ? '14px' : lgBreakpointUp ? '20px' : '18px'
+              smBreakpointDown ? '14px' : lgBreakpointUp ? '18px' : '16px'
             }`,
           }}
         >

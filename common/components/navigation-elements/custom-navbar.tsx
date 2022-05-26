@@ -25,7 +25,7 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
         zIndex: 2000,
         background: '#fff',
         height: `${mdBreakpointDown && '100%'}`,
-        width: `${mdBreakpointDown ? '100%' : '30%'}`,
+        width: `${mdBreakpointDown ? '100%' : '25%'}`,
         right: `${mdBreakpointUp && 0}`,
         boxShadow:
           'rgba(0, 0, 0, 0.15) 0px 15px 25px -10px, rgba(0, 0, 0, 0.05) 0px 5px 10px',
@@ -54,7 +54,7 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
               fontWeight: 500,
               color: '#746D69',
               fontSize: `${
-                smBreakpointDown ? '14px' : lgBreakpointUp ? '20px' : '18px'
+                smBreakpointDown ? '14px' : lgBreakpointUp ? '18px' : '16px'
               }`,
             }}
           >
@@ -98,7 +98,7 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
               fontWeight: 500,
               color: '#F02D3A',
               fontSize: `${
-                smBreakpointDown ? '14px' : lgBreakpointUp ? '20px' : '18px'
+                smBreakpointDown ? '14px' : lgBreakpointUp ? '18px' : '16px'
               }`,
             }}
           >
