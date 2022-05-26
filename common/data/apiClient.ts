@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 export const apiClient = axios.create({
-  baseURL: 'http://146.190.227.58/',
+  baseURL: 'https://www.whatthebre.com/',
   headers: {
     'Content-type': 'application/json',
   },
 });
 
-export const baseApi = 'http://146.190.227.58/';
+export const baseApi = 'https://www.whatthebre.com/';
