@@ -63,105 +63,62 @@ export const ResetPassword = ({ setSessionContext }: SessionContextProps) => {
         >
           {t('loginRegistration.passwordResetInstruction')}
         </Typography>
-        {smBreakpointDown ? (
-          <TextField
-            id="email"
-            name="email"
-            label="E-Mail"
-            size="small"
-            fullWidth
-            variant="outlined"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            sx={{ marginTop: '18px' }}
-          />
-        ) : (
-          <TextField
-            id="email"
-            name="email"
-            label="E-Mail"
-            variant="outlined"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            sx={{ width: '100%', marginTop: '20px' }}
-          />
-        )}
+        <TextField
+          id="email"
+          name="email"
+          label="E-Mail"
+          size={smBreakpointDown ? 'small' : 'medium'}
+          fullWidth
+          variant="outlined"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+          sx={{ marginTop: '18px' }}
+        />
         <Button
+          className="primary-button"
           variant="contained"
           type="submit"
           sx={{
             width: '100%',
             height: `${smBreakpointDown ? '40px' : '56px'}`,
-            background: '#8519F6',
             marginTop: `${smBreakpointDown ? '18px' : '20px'}`,
           }}
         >
           {t('loginRegistration.resetPassword')}
         </Button>
-        {smBreakpointDown ? (
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              width: '100%',
-              marginTop: '17px',
-            }}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: `${smBreakpointDown && 'column'}`,
+            justifyContent: 'center',
+            width: '100%',
+            marginTop: `${smBreakpointDown ? '17px' : '20px'}`,
+          }}
+        >
+          <Typography
+            sx={{ fontSize: `${smBreakpointDown ? '12px' : '14px'}` }}
           >
-            <Typography sx={{ fontSize: '12px' }}>
-              {t('loginRegistration.rememberedPassword')}
-            </Typography>
-            <Button
-              variant="text"
-              sx={{
-                padding: 0,
-                fontFamily: `'Outift', sans-serif`,
-                fontSize: '12px',
-                marginLeft: '5px',
-                fontWeight: 700,
-                color: '#000',
-                textTransform: 'none',
-              }}
-              onClick={() => setSessionContext('signin')}
-            >
-              {t('loginRegistration.login')}
-            </Button>
-          </Box>
-        ) : (
-          <Box
+            {t('loginRegistration.rememberedPassword')}
+          </Typography>
+          <Button
+            variant="text"
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%',
-              marginTop: '20px',
+              padding: 0,
+              fontFamily: `'Outift', sans-serif`,
+              fontSize: `${smBreakpointDown ? '12px' : '14px'}`,
+              marginLeft: '5px',
+              fontWeight: 700,
+              color: '#000',
+              textTransform: 'none',
             }}
+            onClick={() => setSessionContext('signin')}
           >
-            <Typography sx={{ fontSize: '14px' }}>
-              {t('loginRegistration.rememberedPassword')}
-            </Typography>
-            <Button
-              variant="text"
-              sx={{
-                padding: 0,
-                fontFamily: `'Outift', sans-serif`,
-                fontSize: '14px',
-                marginLeft: '5px',
-                fontWeight: 700,
-                color: '#000',
-                textTransform: 'none',
-              }}
-              onClick={() => setSessionContext('signin')}
-            >
-              {t('loginRegistration.login')}
-            </Button>
-          </Box>
-        )}
+            {t('loginRegistration.login')}
+          </Button>
+        </Box>
       </Box>
     </form>
   );

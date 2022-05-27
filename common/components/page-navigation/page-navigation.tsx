@@ -120,10 +120,10 @@ export const PageNavigation = () => {
             ) : (
               <Grid item xs={0} sm={0} md={2} lg={2}>
                 <Button
+                  className="primary-button"
                   fullWidth
                   variant="contained"
                   sx={{
-                    background: '#8519F6',
                     height: `${lgBreakpointUp ? '56px' : '40px'}`,
                   }}
                 >

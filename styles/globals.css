@@ -43,4 +43,12 @@ h6 {
 .project-image-border-radius {
   border-radius: 10px;
 }
+
+.primary-button {
+  background: #8519f6 !important;
+}
+
+.primary-button:hover {
+  background: #5504aa !important;
+}
 /*# sourceMappingURL=globals.css.map */
