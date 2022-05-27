@@ -25,7 +25,7 @@ export const CustomMenu = ({
 
   const handleOnClickHome = (e: any) => {
     e.preventDefault();
-    router.push('/');
+    router.push('/home');
   };
 
   const handleOnClickProjectUpload = (e: any) => {

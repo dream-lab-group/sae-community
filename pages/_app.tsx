@@ -1,10 +1,21 @@
 import '../styles/globals.css';
 import '../common/i18n/config';
 import type { AppProps } from 'next/app';
+import { ReactElement, ReactNode } from 'react';
+import { NextPage } from 'next';
 
-function MyApp({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   // @ts-expect-error: Todo
-  return <Component {...pageProps} />;
+  return getLayout(<Component {...pageProps} />);
 }
 
 export default MyApp;

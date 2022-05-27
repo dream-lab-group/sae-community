@@ -15,6 +15,11 @@ import SignIn from './signin';
 import Head from 'next/head';
 import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
+import Link from 'next/link';
+import ProjectUpload from './project-upload';
+import MyLikes from './likes';
+import MyProfile from './profile';
+import MyCollections from './collections';
 
 export const directus = new Directus('https://www.whatthebre.com/');
 
@@ -82,44 +87,7 @@ const Home: NextPage = () => {
 
   return (
     // @ts-expect-error: Todo
-    <ThemeProvider theme={appTheme}>
-      <Head>
-        <title>SAI Community</title>
-        <meta name="author" content="Hadrian Chio" />
-        <meta
-          name="description"
-          content="SAI Community is a project platform designed for an interdisciplinary bachelor project at SAE Institute Zurich where students can share and react to each others projects."
-        />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      {!token ? (
-        <SignIn />
-      ) : (
-        <Box sx={{ width: '100%' }}>
-          <AppBarHeader
-            menuOpen={menuOpen}
-            handleOpenMenu={handleOpenMenu}
-            handleCloseMenu={handleCloseMenu}
-          />
-          {menuOpen && <CustomNavbar menuOpen={menuOpen} />}
-          <Box
-            sx={{
-              overflowX: 'hidden',
-              marginTop: `${
-                smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
-              }`,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <PageNavigation />
-            <HomePage />
-            <MobileFooter />
-          </Box>
-        </Box>
-      )}
-    </ThemeProvider>
+    <ThemeProvider theme={appTheme}>{!token && <SignIn />}</ThemeProvider>
   );
 };
 
