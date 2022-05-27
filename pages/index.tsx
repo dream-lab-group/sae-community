@@ -12,7 +12,7 @@ import { AppBarHeader } from '../common/components/app-header';
 import { MobileFooter } from '../common/components/footer/mobile-footer';
 import HomePage from './home';
 import SignIn from './signin';
-import { motion } from 'framer-motion';
+import Head from 'next/head';
 import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 
@@ -83,6 +83,15 @@ const Home: NextPage = () => {
   return (
     // @ts-expect-error: Todo
     <ThemeProvider theme={appTheme}>
+      <Head>
+        <title>SAI Community</title>
+        <meta name="author" content="Hadrian Chio" />
+        <meta
+          name="description"
+          content="SAI Community is a project platform designed for an interdisciplinary bachelor project at SAE Institute Zurich where students can share and react to each others projects."
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       {!token ? (
         <SignIn />
       ) : (

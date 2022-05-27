@@ -1,4 +1,13 @@
-import { ButtonBase, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Alert,
+  ButtonBase,
+  Snackbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CustomNavButtonProps } from '../header/types';
 
@@ -7,6 +16,18 @@ export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation();
+
+  const router = useRouter();
+
+  const hanldeOnClickMenuElement = () => {
+    if (navElement === 'profile') {
+      router.push('/profile');
+    } else if (navElement === 'likes') {
+      router.push('/likes');
+    } else if (navElement === 'collections') {
+      router.push('/collections');
+    }
+  };
 
   return (
     <>
@@ -22,6 +43,7 @@ export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
           justifyContent: 'flex-start',
           whiteSpace: 'nowrap',
         }}
+        onClick={hanldeOnClickMenuElement}
       >
         <Typography
           sx={{

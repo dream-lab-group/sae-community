@@ -13,11 +13,11 @@ import { CustomNavButton } from './costum-nav-button';
 
 export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
-  const { t } = useTranslation();
 
   return (
     <Box

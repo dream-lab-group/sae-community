@@ -35,9 +35,9 @@ export class Globals {
   ];
 
   public static readonly mobileMenuProfileElements = [
-    'myprofile',
-    'mylikes',
-    'mycollections',
+    'profile',
+    'likes',
+    'collections',
   ];
 
   public static readonly pageNavigationElements = [
