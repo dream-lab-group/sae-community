@@ -16,7 +16,7 @@ import { motion } from 'framer-motion';
 import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 
-const directus = new Directus('https://www.whatthebre.com/');
+export const directus = new Directus('https://www.whatthebre.com/');
 
 const token = directus.auth.token;
 

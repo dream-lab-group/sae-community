@@ -1,6 +1,6 @@
 import { PasswordResetProps, UserRegistration } from '../../types/types';
 
-import { createNewUser, loginUser, resetPasswordRequest } from './request';
+import { createNewUser, resetPasswordRequest } from './request';
 
 export const handleCreateNewUser = async (data: UserRegistration) => {
   const createNewUserStatus = await createNewUser(data);

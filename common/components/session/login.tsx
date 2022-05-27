@@ -13,8 +13,7 @@ import { SessionContextProps } from '../../../pages/signin';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { Directus } from '@directus/sdk';
-import { MyToken } from '../../types/types';
+import { directus } from '../../../pages';
 
 const loginValidationSchema = yup.object({
   email: yup
@@ -52,8 +51,6 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values: any) => {
-      const directus = new Directus<MyToken>('https://www.whatthebre.com/');
-
       await directus.auth
         .login(values)
         .then(() => {

@@ -1,28 +1,7 @@
-import { Directus, ITransport } from '@directus/sdk';
 import axios from 'axios';
-import { useState } from 'react';
-import { string } from 'yup';
-import {
-  PasswordResetProps,
-  UserLogin,
-  UserRegistration,
-} from '../../types/types';
+import { directus } from '../../../pages';
+import { PasswordResetProps, UserRegistration } from '../../types/types';
 import { apiClient } from '../apiClient';
-
-type MyToken = {
-  token: string;
-};
-
-export const loginUser = async ({ email, password }: UserLogin) => {
-  const directus = new Directus<MyToken>('https://www.whatthebre.com/');
-
-  await directus.auth
-    .login({ email, password })
-    .then((response) => {
-      window.location.reload();
-    })
-    .catch((error) => {});
-};
 
 export const resetPasswordRequest = async ({ email }: PasswordResetProps) => {
   try {

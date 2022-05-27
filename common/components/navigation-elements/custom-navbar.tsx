@@ -1,4 +1,3 @@
-import { Directus } from '@directus/sdk';
 import {
   Box,
   ButtonBase,
@@ -7,6 +6,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { directus } from '../../../pages';
 import { Globals } from '../../utils/utils';
 import { AppBarHeaderProps } from '../header/types';
 import { CustomNavButton } from './costum-nav-button';
@@ -96,8 +96,9 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
             justifyContent: 'flex-start',
           }}
           onClick={async () => {
-            const directus = new Directus('https://www.whatthebre.com/');
-            await directus.auth.logout();
+            await directus.auth.logout().then(() => {
+              window.location.reload();
+            });
           }}
         >
           <Typography
