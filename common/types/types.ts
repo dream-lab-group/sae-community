@@ -48,3 +48,7 @@ export type UserLogin = {
 export type PasswordResetProps = {
   email: string;
 };
+
+export type MyToken = {
+  token: string;
+};

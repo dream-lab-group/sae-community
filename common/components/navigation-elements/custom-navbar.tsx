@@ -1,3 +1,4 @@
+import { Directus } from '@directus/sdk';
 import {
   Box,
   ButtonBase,
@@ -6,6 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { MyToken } from '../../types/types';
 import { Globals } from '../../utils/utils';
 import { AppBarHeaderProps } from '../header/types';
 import { CustomNavButton } from './costum-nav-button';
@@ -84,18 +86,21 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
           alignItems: 'center',
         }}
       >
-        <Box
+        <ButtonBase
           sx={{
             background: '#fff',
-            paddingY: '1rem',
             width: '100%',
             cursor: 'pointer',
+            paddingY: '1rem',
             paddingX: '20px',
+            display: 'flex',
+            justifyContent: 'flex-start',
           }}
+          onClick={async () => {}}
         >
           <Typography
             sx={{
-              fontWeight: 500,
+              fontWeight: 600,
               color: '#F02D3A',
               fontSize: `${
                 smBreakpointDown ? '14px' : lgBreakpointUp ? '18px' : '16px'
@@ -104,7 +109,7 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
           >
             {t('loginRegistration.signout')}
           </Typography>
-        </Box>
+        </ButtonBase>
       </Box>
     </Box>
   );

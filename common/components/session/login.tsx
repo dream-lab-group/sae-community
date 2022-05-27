@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { Directus } from '@directus/sdk';
+import { MyToken } from '../../types/types';
 
 const loginValidationSchema = yup.object({
   email: yup
@@ -25,10 +26,6 @@ const loginValidationSchema = yup.object({
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Darf nicht leer sein'),
 });
-
-type MyToken = {
-  token: string;
-};
 
 export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   const theme = useTheme();
