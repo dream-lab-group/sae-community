@@ -57,6 +57,7 @@ const modalStyle = {
 export const SignUp = ({ setSessionContext }: SessionContextProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const handleCloseSnackbar = (
@@ -130,15 +131,27 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           >
             {t('general.saeCommunityPlatform')}
           </Typography>
-          {smBreakpointDown ? (
-            <>
+          <Box
+            sx={{
+              display: `${smBreakpointUp && 'flex'}`,
+              marginTop: `${smBreakpointDown ? '21px' : '37px'}`,
+              flexDirection: `${smBreakpointUp && 'column'}`,
+            }}
+          >
+            <Box
+              sx={{
+                display: `${smBreakpointUp && 'flex'}`,
+                width: `${smBreakpointUp && '100%'}`,
+                justifyContent: `${smBreakpointUp && 'space-between'}`,
+              }}
+            >
               <TextField
                 id="first_name"
-                size="small"
+                size={smBreakpointDown ? 'small' : 'medium'}
                 name="first_name"
-                fullWidth
                 label={t('loginRegistration.firstname')}
                 variant="outlined"
+                sx={{ width: `${smBreakpointDown ? '100%' : '225px'}` }}
                 value={formik.values.first_name}
                 onChange={formik.handleChange}
                 error={
@@ -152,10 +165,13 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
                 id="last_name"
                 name="last_name"
                 fullWidth
-                size="small"
+                size={smBreakpointDown ? 'small' : 'medium'}
                 label={t('loginRegistration.lastname')}
                 variant="outlined"
-                sx={{ marginTop: ' 15px' }}
+                sx={{
+                  marginTop: `${smBreakpointDown && '15px'}`,
+                  width: `${smBreakpointDown ? '100%' : '225px'}`,
+                }}
                 value={formik.values.last_name}
                 onChange={formik.handleChange}
                 error={
@@ -163,324 +179,165 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
                 }
                 helperText={formik.touched.last_name && formik.errors.last_name}
               />
-              <TextField
-                id="email"
-                name="email"
-                fullWidth
-                size="small"
-                label={t('loginRegistration.email')}
-                type="email"
-                variant="outlined"
-                sx={{ marginTop: ' 15px' }}
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-              />
-              <TextField
-                id="password"
-                name="password"
-                fullWidth
-                size="small"
-                label={t('loginRegistration.password')}
-                type="password"
-                variant="outlined"
-                sx={{ marginTop: '15px' }}
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
-                helperText={formik.touched.password && formik.errors.password}
-              />
-              <TextField
-                id="repeatpassword"
-                name="repeatpassword"
-                fullWidth
-                size="small"
-                label={t('loginRegistration.repeatPassword')}
-                type="password"
-                variant="outlined"
-                sx={{ marginTop: '15px' }}
-                value={formik.values.repeatpassword}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.repeatpassword &&
-                  Boolean(formik.errors.repeatpassword)
-                }
-                helperText={
-                  formik.touched.repeatpassword && formik.errors.repeatpassword
-                }
-              />
-              <FormControl fullWidth size="small" sx={{ marginTop: '15px' }}>
-                <InputLabel id="course">Fachrichtung</InputLabel>
-                <Select
-                  labelId="course"
-                  id="course"
-                  name="course"
-                  label="Fachrictung"
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                  value={formik.values.course}
-                  onChange={formik.handleChange}
-                  error={formik.touched.course && Boolean(formik.errors.course)}
-                >
-                  {Globals.allCourses.map((course) => (
-                    <MenuItem key={course} value={course}>
-                      {/* @ts-expect-error Translation keys only exist during runtime */}
-                      {t(`courses.${course}.label`)}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <Box sx={{ display: 'flex', marginTop: '13px' }}>
-                <Checkbox
-                  checked={formik.values.termsOfUse}
-                  onChange={formik.handleChange}
-                  name="termsOfUse"
-                  required
-                  size="small"
-                  aria-label="termsOfUse"
-                  inputProps={{ 'aria-label': 'controlled' }}
-                  sx={{
-                    padding: 0,
-                    marginRight: '4px',
-                    alignSelf: 'flex-start',
-                  }}
-                />
-                <Typography sx={{ fontSize: '10px', lineHeight: '15px' }}>
-                  {t('loginRegistration.termsOfUse')}
-                </Typography>
-              </Box>
-              <Box
+            </Box>
+            <TextField
+              id="email"
+              name="email"
+              fullWidth
+              size={smBreakpointDown ? 'small' : 'medium'}
+              label={t('loginRegistration.email')}
+              type="email"
+              variant="outlined"
+              sx={{ marginTop: `${smBreakpointDown ? '15px' : '20px'}` }}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+            <TextField
+              id="password"
+              name="password"
+              fullWidth
+              size={smBreakpointDown ? 'small' : 'medium'}
+              label={t('loginRegistration.password')}
+              type="password"
+              variant="outlined"
+              sx={{ marginTop: `${smBreakpointDown ? '15px' : '20px'}` }}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <TextField
+              id="repeatpassword"
+              name="repeatpassword"
+              fullWidth
+              size={smBreakpointDown ? 'small' : 'medium'}
+              label={t('loginRegistration.repeatPassword')}
+              type="password"
+              variant="outlined"
+              sx={{ marginTop: `${smBreakpointDown ? '15px' : '20px'}` }}
+              value={formik.values.repeatpassword}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.repeatpassword &&
+                Boolean(formik.errors.repeatpassword)
+              }
+              helperText={
+                formik.touched.repeatpassword && formik.errors.repeatpassword
+              }
+            />
+            <FormControl
+              fullWidth
+              size={smBreakpointDown ? 'small' : 'medium'}
+              sx={{ marginTop: `${smBreakpointDown ? '15px' : '20px'}` }}
+            >
+              <InputLabel id="course">
+                {t('loginRegistration.course')}
+              </InputLabel>
+              <Select
+                labelId="course"
+                id="course"
+                name="course"
+                label="Fachrictung"
                 sx={{
-                  diplay: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  width: '100%',
+                  display: `${smBreakpointDown && 'flex'}`,
+                  alignItems: `${smBreakpointDown && 'center'}`,
+                }}
+                value={formik.values.course}
+                onChange={formik.handleChange}
+                error={formik.touched.course && Boolean(formik.errors.course)}
+              >
+                {Globals.allCourses.map((course) => (
+                  <MenuItem key={course} value={course}>
+                    {/* @ts-expect-error Translation keys only exist during runtime */}
+                    {t(`courses.${course}.label`)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Box
+              sx={{
+                display: 'flex',
+                marginTop: `${smBreakpointDown ? '13px' : '16px'}`,
+              }}
+            >
+              <Checkbox
+                checked={formik.values.termsOfUse}
+                onChange={formik.handleChange}
+                name="termsOfUse"
+                required
+                size={smBreakpointDown ? 'small' : 'medium'}
+                aria-label="termsOfUse"
+                inputProps={{ 'aria-label': 'controlled' }}
+                sx={{
+                  padding: 0,
+                  marginRight: '4px',
+                  alignSelf: 'flex-start',
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: `${smBreakpointDown ? '10px' : '12px'}`,
+                  lineHeight: '15px',
                 }}
               >
-                <Button
-                  variant="contained"
-                  type="submit"
-                  size="small"
-                  sx={{
-                    width: '100%',
-                    height: '40px',
-                    marginTop: '15px',
-                    background: '#8519F6',
-                  }}
-                >
-                  {t('loginRegistration.signup')}
-                </Button>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '12px' }}>
-                    {t('loginRegistration.existingUser')}
-                  </Typography>
-                  <Button
-                    variant="text"
-                    sx={{
-                      padding: 0,
-                      fontFamily: `'Outfit', sans-serif`,
-                      fontSize: '12px',
-                      marginLeft: '5px',
-                      fontWeight: 700,
-                      color: '#000',
-                      textTransform: 'none',
-                    }}
-                    onClick={() => setSessionContext('signin')}
-                  >
-                    Hier anmelden
-                  </Button>
-                </Box>
-              </Box>
-            </>
-          ) : (
-            <>
+                {t('loginRegistration.termsOfUse')}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                diplay: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: '100%',
+              }}
+            >
+              <Button
+                className="primary-button"
+                variant="contained"
+                type="submit"
+                size={smBreakpointDown ? 'small' : 'medium'}
+                sx={{
+                  width: `${smBreakpointDown ? '100%' : '470px'}`,
+                  height: `${smBreakpointDown ? '40px' : '56px'}`,
+                  marginTop: `${smBreakpointDown ? '15px' : '34px'}`,
+                }}
+              >
+                {t('loginRegistration.signup')}
+              </Button>
               <Box
                 sx={{
                   display: 'flex',
-                  marginTop: '37px',
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: `${smBreakpointDown ? '12px' : '21px'}`,
                 }}
               >
-                <Box sx={{ width: '100%', justifyContent: 'space-between' }}>
-                  <TextField
-                    id="first_name"
-                    name="first_name"
-                    label={t('loginRegistration.firstname')}
-                    variant="outlined"
-                    sx={{ width: '225px' }}
-                    value={formik.values.first_name}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.first_name &&
-                      Boolean(formik.errors.first_name)
-                    }
-                    helperText={
-                      formik.touched.first_name && formik.errors.first_name
-                    }
-                  />
-                </Box>
-                <Box sx={{ width: '225px' }}>
-                  <TextField
-                    id="last_name"
-                    name="last_name"
-                    label={t('loginRegistration.lastname')}
-                    variant="outlined"
-                    sx={{ width: '225px' }}
-                    value={formik.values.last_name}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.last_name &&
-                      Boolean(formik.errors.last_name)
-                    }
-                    helperText={
-                      formik.touched.last_name && formik.errors.last_name
-                    }
-                  />
-                </Box>
-              </Box>
-              <TextField
-                id="email"
-                name="email"
-                label={t('loginRegistration.email')}
-                type="email"
-                variant="outlined"
-                fullWidth
-                sx={{ marginTop: ' 20px' }}
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-              />
-              <TextField
-                id="password"
-                name="password"
-                label={t('loginRegistration.password')}
-                type="password"
-                variant="outlined"
-                fullWidth
-                sx={{ marginTop: '20px' }}
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
-                helperText={formik.touched.password && formik.errors.password}
-              />
-              <TextField
-                id="repeatpassword"
-                name="repeatpassword"
-                label={t('loginRegistration.repeatPassword')}
-                type="password"
-                variant="outlined"
-                fullWidth
-                sx={{ marginTop: '20px' }}
-                value={formik.values.repeatpassword}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.repeatpassword &&
-                  Boolean(formik.errors.repeatpassword)
-                }
-                helperText={
-                  formik.touched.repeatpassword && formik.errors.repeatpassword
-                }
-              />
-              <FormControl fullWidth sx={{ marginTop: '20px' }}>
-                <InputLabel id="course">Fachrichtung</InputLabel>
-                <Select
-                  labelId="course"
-                  id="course"
-                  name="course"
-                  label="Fachrictung"
-                  value={formik.values.course}
-                  onChange={formik.handleChange}
-                  error={formik.touched.course && Boolean(formik.errors.course)}
+                <Typography
+                  sx={{ fontSize: `${smBreakpointDown ? '12px' : '14px'}` }}
                 >
-                  {Globals.allCourses.map((course) => (
-                    <MenuItem key={course} value={course}>
-                      {/* @ts-expect-error Translation keys only exist during runtime */}
-                      {t(`courses.${course}.label`)}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <Box sx={{ display: 'flex', marginTop: '16px' }}>
-                <Checkbox
-                  checked={formik.values.termsOfUse}
-                  onChange={formik.handleChange}
-                  name="termsOfUse"
-                  required
-                  aria-label="termsOfUse"
-                  inputProps={{ 'aria-label': 'controlled' }}
+                  {t('loginRegistration.existingUser')}
+                </Typography>
+                <Button
+                  variant="text"
                   sx={{
                     padding: 0,
-                    marginRight: '4px',
-                    alignSelf: 'flex-start',
+                    fontFamily: `'Outfit', sans-serif`,
+                    fontSize: `${smBreakpointDown ? '12px' : '14px'}`,
+                    marginLeft: '5px',
+                    fontWeight: 700,
+                    color: '#000',
+                    textTransform: 'none',
                   }}
-                />
-                <Typography sx={{ fontSize: '12px', lineHeight: '15px' }}>
-                  {t('loginRegistration.termsOfUse')}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  diplay: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  width: '100%',
-                }}
-              >
-                <Button
-                  variant="contained"
-                  type="submit"
-                  sx={{
-                    width: '470px',
-                    height: '56px',
-                    marginTop: '34px',
-                    background: '#8519F6',
-                  }}
+                  onClick={() => setSessionContext('signin')}
                 >
-                  {t('loginRegistration.signup')}
+                  Hier anmelden
                 </Button>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '21px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>
-                    {t('loginRegistration.existingUser')}
-                  </Typography>
-                  <Button
-                    variant="text"
-                    sx={{
-                      padding: 0,
-                      fontFamily: `'Outfit', sans-serif`,
-                      fontSize: '14px',
-                      marginLeft: '5px',
-                      fontWeight: 700,
-                      color: '#000',
-                      textTransform: 'none',
-                    }}
-                    onClick={() => setSessionContext('signin')}
-                  >
-                    Hier anmelden
-                  </Button>
-                </Box>
               </Box>
-            </>
-          )}
+            </Box>
+          </Box>
         </Box>
       </form>
       <Modal
