@@ -59,8 +59,8 @@ export const PageNavigation = () => {
           <Grid
             item
             container
-            spacing={{ sm: 2, md: 2, lg: 3 }}
-            columns={{ sm: 12, md: 12, lg: 12 }}
+            spacing={{ xs: 2, sm: 2, md: 2, lg: 3 }}
+            columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
             alignItems="center"
             marginBottom="16px"
             width="100%"
@@ -80,9 +80,14 @@ export const PageNavigation = () => {
                 />
               </FormControl>
             </Grid>
-            {mdBreakpointDown ? <></> : <Grid item sm={0} md={1} lg={3} />}
+            {mdBreakpointDown ? (
+              <></>
+            ) : (
+              <Grid item xs={0} sm={0} md={1} lg={3} />
+            )}
             <Grid
               item
+              xs={4}
               sm={4}
               md={3}
               lg={2}

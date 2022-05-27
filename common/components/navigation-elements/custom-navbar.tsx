@@ -7,7 +7,6 @@ import {
   useTheme,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { MyToken } from '../../types/types';
 import { Globals } from '../../utils/utils';
 import { AppBarHeaderProps } from '../header/types';
 import { CustomNavButton } from './costum-nav-button';
@@ -96,7 +95,10 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
             display: 'flex',
             justifyContent: 'flex-start',
           }}
-          onClick={async () => {}}
+          onClick={async () => {
+            const directus = new Directus('https://www.whatthebre.com/');
+            await directus.auth.logout();
+          }}
         >
           <Typography
             sx={{
