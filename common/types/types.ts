@@ -52,3 +52,7 @@ export type PasswordResetProps = {
 export type MyToken = {
   token: string;
 };
+
+export type RefreshToken = {
+  refresh_token: string;
+};
