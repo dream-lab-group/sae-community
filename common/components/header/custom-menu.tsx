@@ -9,6 +9,7 @@ import {
 import { MdAdd } from 'react-icons/md';
 import { AppBarHeaderProps } from './types';
 import { FaRegBell, FaRegUser, FaUser } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 export const CustomMenu = ({
   menuOpen,
@@ -19,6 +20,18 @@ export const CustomMenu = ({
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+
+  const router = useRouter();
+
+  const handleOnClickHome = (e: any) => {
+    e.preventDefault();
+    router.push('/home');
+  };
+
+  const handleOnClickProjectUpload = (e: any) => {
+    e.preventDefault();
+    router.push('/project-upload');
+  };
 
   return (
     <Box
@@ -59,7 +72,18 @@ export const CustomMenu = ({
                 }}
               />
             </Grid>
-            <Grid item>
+            <Grid
+              item
+              component="button"
+              border="none"
+              sx={{
+                background: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                cursor: 'pointer',
+              }}
+              onClick={handleOnClickHome}
+            >
               <Typography
                 sx={{
                   fontSize: `${
@@ -126,6 +150,7 @@ export const CustomMenu = ({
               marginLeft: `${mdBreakpointDown ? '10px' : '15px'}`,
               color: '#8519F6',
             }}
+            onClick={handleOnClickProjectUpload}
           >
             <MdAdd size={smBreakpointDown ? 22 : lgBreakpointUp ? 28 : 26} />
           </IconButton>

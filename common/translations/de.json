@@ -71,9 +71,9 @@
     "jobboard": "Job Board",
     "marketplace": "Marktplatz",
     "uploadproject": "Projektupload",
-    "myprofile": "Mein Profil",
-    "mylikes": "Meine Likes",
-    "mycollections": "Meine Merkliste"
+    "profile": "Mein Profil",
+    "likes": "Meine Likes",
+    "collections": "Meine Merkliste"
   },
   "pageNavigation": {
     "film": "Film",

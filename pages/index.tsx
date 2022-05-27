@@ -12,9 +12,14 @@ import { AppBarHeader } from '../common/components/app-header';
 import { MobileFooter } from '../common/components/footer/mobile-footer';
 import HomePage from './home';
 import SignIn from './signin';
-import { motion } from 'framer-motion';
+import Head from 'next/head';
 import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
+import Link from 'next/link';
+import ProjectUpload from './project-upload';
+import MyLikes from './likes';
+import MyProfile from './profile';
+import MyCollections from './collections';
 
 export const directus = new Directus('https://www.whatthebre.com/');
 
@@ -82,35 +87,7 @@ const Home: NextPage = () => {
 
   return (
     // @ts-expect-error: Todo
-    <ThemeProvider theme={appTheme}>
-      {!token ? (
-        <SignIn />
-      ) : (
-        <Box sx={{ width: '100%' }}>
-          <AppBarHeader
-            menuOpen={menuOpen}
-            handleOpenMenu={handleOpenMenu}
-            handleCloseMenu={handleCloseMenu}
-          />
-          {menuOpen && <CustomNavbar menuOpen={menuOpen} />}
-          <Box
-            sx={{
-              overflowX: 'hidden',
-              marginTop: `${
-                smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
-              }`,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <PageNavigation />
-            <HomePage />
-            <MobileFooter />
-          </Box>
-        </Box>
-      )}
-    </ThemeProvider>
+    <ThemeProvider theme={appTheme}>{!token && <SignIn />}</ThemeProvider>
   );
 };
 

@@ -5,6 +5,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { directus } from '../../../pages';
 import { Globals } from '../../utils/utils';
@@ -13,11 +14,13 @@ import { CustomNavButton } from './costum-nav-button';
 
 export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
-  const { t } = useTranslation();
+
+  const router = useRouter();
 
   return (
     <Box
@@ -97,7 +100,7 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
           }}
           onClick={async () => {
             await directus.auth.logout().then(() => {
-              window.location.reload();
+              router.push('/');
             });
           }}
         >

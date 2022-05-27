@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { directus } from '../../../pages';
+import { useRouter } from 'next/router';
 
 const loginValidationSchema = yup.object({
   email: yup
@@ -27,6 +28,7 @@ const loginValidationSchema = yup.object({
 });
 
 export const LogIn = ({ setSessionContext }: SessionContextProps) => {
+  const router = useRouter();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
@@ -54,7 +56,8 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
       await directus.auth
         .login(values)
         .then(() => {
-          window.location.reload();
+          router.push('/home');
+          // window.location.reload();
         })
         .catch(() => {
           setOpenSnackbar(true);
