@@ -6,12 +6,9 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 import { ProjectCard } from '../common/components/project-card/project-card';
-import SignIn from './signin';
 
 export const directus = new Directus('https://www.whatthebre.com/');
 
@@ -77,6 +74,7 @@ const Home = () => {
         columns={{ sm: 12, md: 3, lg: 3 }}
       >
         <ProjectCard />
+        {/* <ProjectCard />
         <ProjectCard />
         <ProjectCard />
         <ProjectCard />
@@ -102,8 +100,7 @@ const Home = () => {
         <ProjectCard />
         <ProjectCard />
         <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        <ProjectCard /> */}
       </Grid>
     </ThemeProvider>
   );

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { directus } from '../../../pages';
 import { PasswordResetProps, UserRegistration } from '../../types/types';
 import { apiClient } from '../apiClient';
 

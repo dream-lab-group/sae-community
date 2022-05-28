@@ -10,6 +10,11 @@ import Image from 'next/image';
 import image1 from '../../../public/assets/howen-1ZapU2hXhzY-unsplash.jpeg';
 import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
 
+type ProjectCardProps = {
+  creatorId: string;
+  course: string;
+};
+
 export const ProjectCard = () => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
