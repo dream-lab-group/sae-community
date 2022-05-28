@@ -1,29 +1,12 @@
 import { Directus } from '@directus/sdk';
-import {
-  Box,
-  createTheme,
-  ThemeProvider,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { AppBarHeader } from '../common/components/app-header';
-import { MobileFooter } from '../common/components/footer/mobile-footer';
-import HomePage from './home';
 import SignIn from './signin';
-import Head from 'next/head';
-import { CustomNavbar } from '../common/components/navigation-elements/custom-navbar';
-import { PageNavigation } from '../common/components/page-navigation/page-navigation';
-import Link from 'next/link';
-import ProjectUpload from './project-upload';
-import MyLikes from './likes';
-import MyProfile from './profile';
-import MyCollections from './collections';
 
 export const directus = new Directus('https://www.whatthebre.com/');
 
-const token = directus.auth.token;
+export const token = directus.auth.token;
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -52,26 +35,6 @@ const appTheme = createTheme({
 });
 
 const Home: NextPage = () => {
-  const theme = useTheme();
-  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleOpenMenu = () => {
-    setMenuOpen(true);
-    if (mdBreakpointDown) {
-      document.documentElement.style.overflow = 'hidden';
-    }
-  };
-
-  const handleCloseMenu = () => {
-    setMenuOpen(false);
-    if (mdBreakpointDown) {
-      document.documentElement.style.overflow = 'scroll';
-    }
-  };
-
   // force app to rehydrate after login to match the original HTML
   // hasMounted, to false. While it's false, doesn't bother rendering the "real" content.
   const [hasMounted, setHasMounted] = useState(false);
