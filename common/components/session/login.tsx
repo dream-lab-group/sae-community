@@ -12,8 +12,8 @@ import { useTranslation } from 'react-i18next';
 import { SessionContextProps } from '../../../pages/signin';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { useState } from 'react';
-import { directus } from '../../../pages';
+import { useEffect, useState } from 'react';
+import { directus, token } from '../../../pages';
 import { useRouter } from 'next/router';
 
 const loginValidationSchema = yup.object({
@@ -36,6 +36,13 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const { t } = useTranslation();
 
+  useEffect(() => {
+    //redirect to home if aleady logged in
+    if (token) {
+      router.push('/home');
+    }
+  }, []);
+
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string,
@@ -56,8 +63,11 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
       await directus.auth
         .login(values)
         .then(() => {
-          router.push('/home');
-          // window.location.reload();
+          // get return url from query parameters or default to '/'
+          const returnUrl = router.query.returnUrl || '/home';
+          // @ts-expect-error: todo
+          router.push(returnUrl);
+          window.location.reload();
         })
         .catch(() => {
           setOpenSnackbar(true);

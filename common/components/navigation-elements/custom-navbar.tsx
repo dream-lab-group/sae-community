@@ -100,7 +100,8 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
           }}
           onClick={async () => {
             await directus.auth.logout().then(() => {
-              router.push('/');
+              router.push('/signin');
+              window.location.reload();
             });
           }}
         >

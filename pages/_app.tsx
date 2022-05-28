@@ -3,6 +3,7 @@ import '../common/i18n/config';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
+import { RouteGuard } from '../common/context/auth-check';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -14,8 +15,13 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  // @ts-expect-error: Todo
-  return getLayout(<Component {...pageProps} />);
+  return getLayout(
+    // @ts-expect-error: Todo
+    <RouteGuard>
+      {/* @ts-expect-error: Todo */}
+      <Component {...pageProps} />
+    </RouteGuard>,
+  );
 }
 
 export default MyApp;
