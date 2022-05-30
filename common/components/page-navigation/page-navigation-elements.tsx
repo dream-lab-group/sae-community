@@ -36,16 +36,16 @@ export const PageNavigationElement = ({
           '&:last-child': {
             marginRight: '0px',
           },
+          maxWidth: '180px',
           width: '100%',
           borderRadius: '2rem',
           background: '#75818b',
-          maxWidth: '180px',
         }}
       >
         <Typography
           noWrap
           sx={{
-            padding: `${lgBreakpointUp ? '8px 20px' : '5px 15px'}`,
+            padding: `${lgBreakpointUp ? '10px 20px' : '8px 20px'}`,
             fontSize: `${lgBreakpointUp ? '16px' : '14px'}`,
             color: '#fff',
             fontWeight: '300',
