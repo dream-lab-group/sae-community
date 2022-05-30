@@ -14,6 +14,23 @@ export const PageNavigationElement = ({
       <ButtonBase
         key={element}
         value={element}
+        className={
+          element === 'film'
+            ? 'film-button'
+            : element === 'gameArts'
+            ? 'gamearts-button'
+            : element === 'gamesProgramming'
+            ? 'gamesprogramming-button'
+            : element === 'web'
+            ? 'web-button'
+            : element === 'audio'
+            ? 'audio-button'
+            : element === 'animation'
+            ? 'animation-button'
+            : element === 'crossMedia'
+            ? 'cross-media-button'
+            : ''
+        }
         sx={{
           marginRight: `${lgBreakpointUp ? '15px' : '10px'}`,
           '&:last-child': {

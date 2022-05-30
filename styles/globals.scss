@@ -38,18 +38,6 @@ h6 {
   font-family: 'Outfit', sans-serif;
 }
 
-.project-image-border-radius {
-  border-radius: 10px;
-}
-
-.primary-button {
-  background: #8519f6 !important;
-}
-
-.primary-button:hover {
-  background: #5504aa !important;
-}
-
 .main-container {
   min-height: 100vh;
   width: 100%;
@@ -64,4 +52,44 @@ h6 {
   width: 100%;
   position: relative;
   height: unset;
+}
+
+.project-image-border-radius {
+  border-radius: 10px;
+}
+
+.primary-button {
+  background: #8519f6 !important;
+}
+
+.primary-button:hover {
+  background: #5504aa !important;
+}
+
+.film-button:hover {
+  background: #e0be36 !important;
+}
+
+.gamearts-button:hover {
+  background: #ef6351 !important;
+}
+
+.gamesprogramming-button:hover {
+  background: #f87060 !important;
+}
+
+.web-button:hover {
+  background: #593f62 !important;
+}
+
+.audio-button:hover {
+  background: #1f7a8c !important;
+}
+
+.animation-button:hover {
+  background: #647aa3 !important;
+}
+
+.cross-media-button:hover {
+  background: #17bebb !important;
 }
