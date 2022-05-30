@@ -42,10 +42,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <Box sx={{ width: '100%' }}>
         <AppBarHeader
           menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
           handleOpenMenu={handleOpenMenu}
           handleCloseMenu={handleCloseMenu}
         />
-        {menuOpen && <CustomNavbar menuOpen={menuOpen} />}
+        {menuOpen && (
+          <CustomNavbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        )}
         <Box
           sx={{
             overflowX: 'hidden',

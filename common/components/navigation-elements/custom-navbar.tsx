@@ -12,7 +12,7 @@ import { Globals } from '../../utils/utils';
 import { AppBarHeaderProps } from '../header/types';
 import { CustomNavButton } from './costum-nav-button';
 
-export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
+export const CustomNavbar = ({ menuOpen, setMenuOpen }: AppBarHeaderProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -68,6 +68,8 @@ export const CustomNavbar = ({ menuOpen }: AppBarHeaderProps) => {
         {menuOpen &&
           Globals.mobileMenuProfileElements.map((navElement) => (
             <CustomNavButton
+              menuOpen={menuOpen}
+              setMenuOpen={setMenuOpen}
               key={navElement}
               value={navElement}
               navElement={navElement}
