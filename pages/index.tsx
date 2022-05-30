@@ -11,6 +11,7 @@ import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 import { ProjectCard } from '../common/components/project-card/project-card';
 import { apiClient } from '../common/data/apiClient';
+import { useProjects } from '../common/data/projects/hooks';
 import { ProjectProperties } from '../common/types/types';
 
 export const directus = new Directus('https://www.whatthebre.com/');
@@ -44,17 +45,7 @@ const appTheme = createTheme({
 });
 
 const Home = () => {
-  const [data, setData] = useState<ProjectProperties[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await apiClient.get('items/projects');
-      if (response.status === 200) {
-        setData(response.data.data);
-      }
-    };
-    fetchData();
-  }, [setData]);
+  const getAllProjects = useProjects();
 
   // force app to rehydrate after login to match the original HTML
   // hasMounted, to false. While it's false, doesn't bother rendering the "real" content.
@@ -88,7 +79,7 @@ const Home = () => {
         spacing={{ sm: 4, md: 5, lg: 5 }}
         columns={{ sm: 12, md: 3, lg: 3 }}
       >
-        {data.map(({ id, user_created, course }) => {
+        {getAllProjects.map(({ id, user_created, course }) => {
           return (
             <ProjectCard
               key={id}
