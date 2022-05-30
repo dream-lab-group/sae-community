@@ -11,11 +11,12 @@ import image1 from '../../../public/assets/howen-1ZapU2hXhzY-unsplash.jpeg';
 import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
 
 type ProjectCardProps = {
-  creatorId: string;
+  id: string;
+  userCreated: string;
   course: string;
 };
 
-export const ProjectCard = () => {
+export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
@@ -111,12 +112,12 @@ export const ProjectCard = () => {
       >
         <Grid item xs={8}>
           <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-            Studentname
+            {userCreated}
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <Chip
-            label="Webdevelopment"
+            label={course}
             sx={{
               background: '#364156',
               color: '#fff',

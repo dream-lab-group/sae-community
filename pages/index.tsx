@@ -6,9 +6,12 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { useEffect, useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 import { ProjectCard } from '../common/components/project-card/project-card';
+import { apiClient } from '../common/data/apiClient';
+import { ProjectProperties } from '../common/types/types';
 
 export const directus = new Directus('https://www.whatthebre.com/');
 
@@ -41,6 +44,19 @@ const appTheme = createTheme({
 });
 
 const Home = () => {
+  const [data, setData] = useState<ProjectProperties[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await apiClient.get('items/projects');
+      if (response.status === 200) {
+        setData(response.data.data);
+      }
+    };
+    fetchData();
+  }, [setData]);
+
+  console.log(data);
   // force app to rehydrate after login to match the original HTML
   // hasMounted, to false. While it's false, doesn't bother rendering the "real" content.
   // const [hasMounted, setHasMounted] = useState(false);
@@ -73,10 +89,18 @@ const Home = () => {
         spacing={{ sm: 4, md: 5, lg: 5 }}
         columns={{ sm: 12, md: 3, lg: 3 }}
       >
-        <ProjectCard />
+        {data.map(({ id, user_created, course }) => {
+          return (
+            <ProjectCard
+              key={id}
+              id={id}
+              userCreated={user_created}
+              course={course}
+            />
+          );
+        })}
+
         {/* <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
         <ProjectCard />
         <ProjectCard />
         <ProjectCard />
