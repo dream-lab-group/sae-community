@@ -39,7 +39,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   useEffect(() => {
     //redirect to home if aleady logged in
     if (token) {
-      router.push('/home');
+      router.push('/');
     }
   }, []);
 
@@ -64,7 +64,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
         .login(values)
         .then(() => {
           // get return url from query parameters or default to '/'
-          const returnUrl = router.query.returnUrl || '/home';
+          const returnUrl = router.query.returnUrl || '/';
           // @ts-expect-error: todo
           router.push(returnUrl);
           window.location.reload();

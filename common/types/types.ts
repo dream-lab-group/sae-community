@@ -49,10 +49,9 @@ export type PasswordResetProps = {
   email: string;
 };
 
-export type MyToken = {
-  token: string;
-};
-
-export type RefreshToken = {
-  refresh_token: string;
-};
+export interface ProjectProperties {
+  id: string;
+  description?: string;
+  user_created: string;
+  course: string;
+}
