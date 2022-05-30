@@ -37,7 +37,7 @@ export const PageNavigation = () => {
   const [sortFilter, setSortFilter] = useState<string[]>([]);
 
   return (
-    <Box sx={{ width: '100vw' }}>
+    <>
       <Box
         sx={{
           height: `${
@@ -151,6 +151,6 @@ export const PageNavigation = () => {
           </Grid>
         </Grid>
       </Box>
-    </Box>
+    </>
   );
 };

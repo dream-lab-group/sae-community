@@ -49,3 +49,17 @@ h6 {
 .primary-button:hover {
   background: #5504aa !important;
 }
+
+.main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-container {
+  object-fit: cover;
+  width: 100%;
+  position: relative;
+  height: unset;
+}

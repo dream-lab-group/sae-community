@@ -83,5 +83,31 @@
     "audio": "Audio",
     "animation": "Animation",
     "crossMedia": "Cross Media"
+  },
+  "projects": {
+    "webdesign": {
+      "label": "Web & Mobile"
+    },
+    "gameart": {
+      "label": "Game Arts"
+    },
+    "gamesprogramming": {
+      "label": "Games Programming"
+    },
+    "film": {
+      "label": "Film"
+    },
+    "visualeffects": {
+      "label": "Animation"
+    },
+    "audio": {
+      "label": "Audio"
+    },
+    "contentcreation": {
+      "label": "Cross Media"
+    },
+    "alumni": {
+      "label": "Alumni"
+    }
   }
 }

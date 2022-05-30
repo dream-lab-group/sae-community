@@ -56,7 +56,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             alignItems: 'center',
           }}
         >
-          <main>{children}</main>
+          <main className="main-container">{children}</main>
         </Box>
         <MobileFooter />
       </Box>

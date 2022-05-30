@@ -56,7 +56,6 @@ const Home = () => {
     fetchData();
   }, [setData]);
 
-  console.log(data);
   // force app to rehydrate after login to match the original HTML
   // hasMounted, to false. While it's false, doesn't bother rendering the "real" content.
   // const [hasMounted, setHasMounted] = useState(false);
@@ -99,32 +98,6 @@ const Home = () => {
             />
           );
         })}
-
-        {/* <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard /> */}
       </Grid>
     </ThemeProvider>
   );

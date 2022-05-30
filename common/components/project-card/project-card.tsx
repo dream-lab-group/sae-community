@@ -7,8 +7,11 @@ import {
   useTheme,
 } from '@mui/material';
 import Image from 'next/image';
-import image1 from '../../../public/assets/howen-1ZapU2hXhzY-unsplash.jpeg';
 import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
+import { useEffect, useState } from 'react';
+import { apiClient } from '../../data/apiClient';
+import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 type ProjectCardProps = {
   id: string;
@@ -23,6 +26,33 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
   const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
+  const { t } = useTranslation();
+  const [image, setImage] = useState('');
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const imageResponse = await apiClient.get(
+        `items/projects_files?filter={"projects_id": {"_eq": "${id}"}}`,
+      );
+      if (imageResponse.status === 200) {
+        setImage(imageResponse.data.data[0].directus_files_id);
+      }
+    };
+    const fetchUser = async () => {
+      const userResponse = await apiClient.get(
+        `users?filter={ "id": { "_eq": "${userCreated}" }}`,
+      );
+      if (userResponse.status === 200) {
+        setUser(
+          `${userResponse.data.data[0].first_name} ${userResponse.data.data[0].last_name}`,
+        );
+      }
+    };
+    fetchUser();
+    fetchImage();
+  }, [setImage, setUser]);
+  const imageUrl = `https://www.whatthebre.com/assets/${image}`;
   return (
     <Grid
       item
@@ -59,9 +89,10 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
         maxWidth="450px"
       >
         <Image
-          src={image1}
+          src={imageUrl}
           layout="fill"
-          className="project-image-border-radius"
+          quality={10}
+          className="project-image-border-radius image-container"
         />
         <Box
           component="button"
@@ -112,16 +143,18 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       >
         <Grid item xs={8}>
           <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-            {userCreated}
+            {user}
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <Chip
-            label={course}
+            // @ts-expect-error: todo
+            label={t(`projects.${course}.label`)}
             sx={{
               background: '#364156',
               color: '#fff',
-              fontSize: '16px',
+              fontSize: '14px',
+              width: '100%',
             }}
           />
         </Grid>
