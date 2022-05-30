@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { FaHeart } from 'react-icons/fa';
 
-export const MobileFooter = () => {
+export const Footer = () => {
   return (
     <Box
       sx={{
@@ -12,6 +12,8 @@ export const MobileFooter = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'relative',
+        bottom: 0,
       }}
     >
       <Box sx={{ display: 'flex' }}>

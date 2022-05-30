@@ -60,6 +60,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       borderRadius="10px"
       width="100%"
       height="100%"
+      maxHeight="400px"
       sm={12}
       md={6}
       lg={4}

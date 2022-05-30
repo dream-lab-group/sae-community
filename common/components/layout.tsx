@@ -2,9 +2,10 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { AppBarHeader } from './app-header';
-import { MobileFooter } from './footer/mobile-footer';
+
 import { CustomNavbar } from './navigation-elements/custom-navbar';
 import Head from 'next/head';
+import { Footer } from './footer/footer';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
@@ -58,7 +59,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         >
           <main className="main-container">{children}</main>
         </Box>
-        <MobileFooter />
+        <Footer />
       </Box>
     </>
   );

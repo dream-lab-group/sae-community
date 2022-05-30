@@ -53,6 +53,7 @@ h6 {
 }
 
 .main-container {
+  min-height: 100vh;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,6 +65,7 @@ h6 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
 
 .image-container {
