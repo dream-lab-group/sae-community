@@ -10,7 +10,6 @@ import Image from 'next/image';
 import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
 import { apiClient } from '../../data/apiClient';
-import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 type ProjectCardProps = {
