@@ -88,8 +88,8 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         paddingX={`${
           smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
         }`}
-        spacing={{ sm: 4, md: 5, lg: 5 }}
-        columns={{ sm: 12, md: 3, lg: 3 }}
+        spacing={{ sm: 4, md: 5, lg: 5, xl: 5 }}
+        columns={{ sm: 12, md: 3, lg: 3, xl: 3 }}
       >
         {/* @ts-expect-error: todo */}
         {props.data.map(({ id, user_created, course }) => {

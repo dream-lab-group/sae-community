@@ -28,6 +28,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
   const { t } = useTranslation();
   const [image, setImage] = useState('');
   const [user, setUser] = useState('');
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -36,6 +37,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       );
       if (imageResponse.status === 200) {
         setImage(imageResponse.data.data[0].directus_files_id);
+        setLoading(false);
       }
     };
     const fetchUser = async () => {
@@ -52,6 +54,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
     fetchImage();
   }, [setImage, setUser]);
   const imageUrl = `https://www.whatthebre.com/assets/${image}`;
+
   return (
     <Grid
       item
@@ -60,6 +63,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       borderRadius="10px"
       width="100%"
       height="100%"
+      marginBottom={`${smBreakpointDown && '20px'}`}
       maxHeight="400px"
       sm={12}
       md={6}
@@ -72,7 +76,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
         position="relative"
         height={`${
           smBreakpointDown
-            ? '265px'
+            ? '280px'
             : mdBreakpointDown
             ? '300px'
             : mdBreakpointUp
@@ -136,7 +140,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       <Grid
         item
         container
-        margin=" 5px 0 0 0"
+        margin="10px 0 0 0"
         padding="5px 0"
         alignItems="center"
         maxWidth="450px"

@@ -7,11 +7,13 @@ import {
   useTheme,
 } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CustomNavButtonProps } from '../header/types';
+import { AppBarHeaderProps } from '../header/types';
 
-export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
+export const CustomNavButton = ({
+  navElement,
+  setMenuOpen,
+}: AppBarHeaderProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
@@ -21,10 +23,13 @@ export const CustomNavButton = ({ navElement }: CustomNavButtonProps) => {
 
   const hanldeOnClickMenuElement = () => {
     if (navElement === 'profile') {
+      setMenuOpen(false);
       router.push('/profile');
     } else if (navElement === 'likes') {
+      setMenuOpen(false);
       router.push('/likes');
     } else if (navElement === 'collections') {
+      setMenuOpen(false);
       router.push('/collections');
     }
   };

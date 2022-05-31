@@ -142,7 +142,7 @@ export const PageNavigation = () => {
             wrap="nowrap"
             overflow="scroll"
             width="100%"
-            marginTop={`${lgBreakpointUp && '10px'}`}
+            marginTop={`${smBreakpointDown ? '5px' : '10px'}`}
             justifyContent={`${lgBreakpointUp && 'center'}`}
           >
             {Globals.pageNavigationElements.map((element) => (

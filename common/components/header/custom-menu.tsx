@@ -15,6 +15,7 @@ export const CustomMenu = ({
   menuOpen,
   handleOpenMenu,
   handleCloseMenu,
+  setMenuOpen,
 }: AppBarHeaderProps): JSX.Element => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -25,11 +26,13 @@ export const CustomMenu = ({
 
   const handleOnClickHome = (e: any) => {
     e.preventDefault();
+    setMenuOpen(false);
     router.push('/');
   };
 
   const handleOnClickProjectUpload = (e: any) => {
     e.preventDefault();
+    setMenuOpen(false);
     router.push('/project-upload');
   };
 

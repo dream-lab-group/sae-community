@@ -6,6 +6,7 @@ export const AppBarHeader = ({
   menuOpen,
   handleOpenMenu,
   handleCloseMenu,
+  setMenuOpen,
 }: AppBarHeaderProps): JSX.Element => {
   return (
     <Box
@@ -21,6 +22,7 @@ export const AppBarHeader = ({
     >
       <CustomMenu
         menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
         handleOpenMenu={handleOpenMenu}
         handleCloseMenu={handleCloseMenu}
       />
