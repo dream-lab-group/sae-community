@@ -42,7 +42,7 @@ const appTheme = createTheme({
       xl: 1536,
       desktop: 1920,
       uhd: 2560,
-      kuhd: 3840,
+      kuhd: 3540,
     },
   },
 });
@@ -91,8 +91,16 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         paddingX={`${
           smBreakpointDown ? '20px' : lgBreakpointUp ? '148px' : '42px'
         }`}
-        spacing={{ sm: 4, md: 5, lg: 3, xl: 2, desktop: 2, uhd: 2, kuhd: 2 }}
-        columns={{ sm: 1, md: 2, lg: 4, xl: 5, desktop: 6, uhd: 7, kuhd: 8 }}
+        spacing={{ sm: 5, md: 5, lg: 3, xl: 2, desktop: 3, uhd: 3, kuhd: 2 }}
+        columns={{
+          sm: 1,
+          md: 2,
+          lg: 3,
+          xl: 4,
+          desktop: 5,
+          uhd: 6,
+          kuhd: 7,
+        }}
       >
         {/* @ts-expect-error: todo */}
         {props.data.map(({ id, user_created, course }) => {

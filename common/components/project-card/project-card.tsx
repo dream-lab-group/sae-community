@@ -69,9 +69,9 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       md={6}
       lg={4}
       xl={3}
-      desktop={1}
-      uhd={1}
-      kuhd={1}
+      desktop={3}
+      uhd={2}
+      kuhd={2}
       justifyContent="center"
     >
       <Grid
