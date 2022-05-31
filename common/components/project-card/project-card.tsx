@@ -56,6 +56,7 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
   const imageUrl = `https://www.whatthebre.com/assets/${image}`;
 
   return (
+    // @ts-expect-error: mui error
     <Grid
       item
       container
@@ -64,15 +65,18 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       width="100%"
       height="100%"
       marginBottom={`${smBreakpointDown && '20px'}`}
-      maxHeight="400px"
       sm={12}
       md={6}
       lg={4}
       xl={3}
+      desktop={1}
+      uhd={1}
+      kuhd={1}
       justifyContent="center"
     >
       <Grid
         item
+        xs={12}
         position="relative"
         height={`${
           smBreakpointDown
@@ -90,7 +94,6 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
         justifyContent="center"
         alignItems="center"
         alignContent="center"
-        maxWidth="450px"
       >
         <Image
           src={imageUrl}
@@ -139,11 +142,11 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       </Grid>
       <Grid
         item
+        xs={12}
         container
         margin="10px 0 0 0"
         padding="5px 0"
         alignItems="center"
-        maxWidth="450px"
       >
         <Grid item xs={8}>
           <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>

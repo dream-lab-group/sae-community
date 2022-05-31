@@ -19,7 +19,9 @@ export const token = directus.auth.token;
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
-    retina: true; // enables retina breakpoint
+    desktop: true; // enables desktop breakpoint
+    uhd: true;
+    kuhd: true;
   }
 }
 
@@ -38,7 +40,9 @@ const appTheme = createTheme({
       md: 768,
       lg: 1200,
       xl: 1536,
-      retina: 2560,
+      desktop: 1920,
+      uhd: 2560,
+      kuhd: 3840,
     },
   },
 });
@@ -83,13 +87,12 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
       <Grid
         container
         width="100%"
-        maxWidth="2290px"
         paddingY="40px"
         paddingX={`${
-          smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
+          smBreakpointDown ? '20px' : lgBreakpointUp ? '148px' : '42px'
         }`}
-        spacing={{ sm: 4, md: 5, lg: 5, xl: 5 }}
-        columns={{ sm: 12, md: 3, lg: 3, xl: 3 }}
+        spacing={{ sm: 4, md: 5, lg: 3, xl: 2, desktop: 2, uhd: 2, kuhd: 2 }}
+        columns={{ sm: 1, md: 2, lg: 4, xl: 5, desktop: 6, uhd: 7, kuhd: 8 }}
       >
         {/* @ts-expect-error: todo */}
         {props.data.map(({ id, user_created, course }) => {
