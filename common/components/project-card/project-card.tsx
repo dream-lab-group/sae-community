@@ -61,8 +61,6 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       container
       boxShadow="none"
       borderRadius="10px"
-      width="100%"
-      height="100%"
       marginBottom={`${smBreakpointDown && '20px'}`}
       justifyContent="center"
     >
