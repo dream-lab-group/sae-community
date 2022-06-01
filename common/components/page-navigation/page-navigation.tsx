@@ -44,7 +44,7 @@ export const PageNavigation = () => {
             mdBreakpointDown ? '150px' : lgBreakpointUp ? '220px' : '200px'
           }`,
           paddingX: `${
-            smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
+            smBreakpointDown ? '17px' : lgBreakpointUp ? '120px' : '42px'
           }`,
           background: '#192D3E',
           width: '100%',

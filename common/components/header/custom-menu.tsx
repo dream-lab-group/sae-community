@@ -49,7 +49,7 @@ export const CustomMenu = ({
     >
       <Grid
         paddingX={`${
-          smBreakpointDown ? '20px' : lgBreakpointUp ? '120px' : '42px'
+          smBreakpointDown ? '17px' : lgBreakpointUp ? '120px' : '42px'
         }`}
         container
         spacing={0}
