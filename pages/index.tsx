@@ -86,21 +86,12 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
       <PageNavigation />
       <Grid
         container
-        width="100%"
         paddingY="40px"
         paddingX={`${
-          smBreakpointDown ? '20px' : lgBreakpointUp ? '148px' : '42px'
+          smBreakpointDown ? '17px' : lgBreakpointUp ? '148px' : '42px'
         }`}
-        spacing={{ sm: 5, md: 5, lg: 3, xl: 2, desktop: 3, uhd: 3, kuhd: 2 }}
-        columns={{
-          sm: 1,
-          md: 2,
-          lg: 3,
-          xl: 4,
-          desktop: 5,
-          uhd: 6,
-          kuhd: 7,
-        }}
+        spacing={{ sm: 5, md: 5, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
+        className="grid-container"
       >
         {/* @ts-expect-error: todo */}
         {props.data.map(({ id, user_created, course }) => {

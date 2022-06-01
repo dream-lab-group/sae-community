@@ -56,7 +56,6 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
   const imageUrl = `https://www.whatthebre.com/assets/${image}`;
 
   return (
-    // @ts-expect-error: mui error
     <Grid
       item
       container
@@ -65,13 +64,6 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
       width="100%"
       height="100%"
       marginBottom={`${smBreakpointDown && '20px'}`}
-      sm={12}
-      md={6}
-      lg={4}
-      xl={3}
-      desktop={3}
-      uhd={2}
-      kuhd={2}
       justifyContent="center"
     >
       <Grid
