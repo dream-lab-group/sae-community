@@ -14,7 +14,7 @@ const SignIn = () => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
-  const retinaBreakpointUp = useMediaQuery(theme.breakpoints.up('retina'));
+  const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   const { t } = useTranslation();
   const [sessionContext, setSessionContext] = useState('signin');
@@ -96,7 +96,7 @@ const SignIn = () => {
                   color="white"
                   sx={{
                     fontWeight: 600,
-                    fontSize: `${retinaBreakpointUp ? '55px' : '40px'}`,
+                    fontSize: `${desktopBreakpointUp ? '55px' : '40px'}`,
                     letterSpacing: '0.04em',
                   }}
                 >
@@ -106,7 +106,7 @@ const SignIn = () => {
                   color="white"
                   sx={{
                     fontWeight: 600,
-                    fontSize: `${retinaBreakpointUp ? '55px' : '40px'}`,
+                    fontSize: `${desktopBreakpointUp ? '55px' : '40px'}`,
                     letterSpacing: '0.04em',
                   }}
                 >

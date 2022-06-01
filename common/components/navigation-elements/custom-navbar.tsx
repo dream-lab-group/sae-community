@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { directus } from '../../../pages';
 import { Globals } from '../../utils/utils';
 import { AppBarHeaderProps } from '../header/types';
-import { CustomNavButton } from './costum-nav-button';
+import { CustomNavButton } from './custom-nav-button';
 
 export const CustomNavbar = ({ menuOpen, setMenuOpen }: AppBarHeaderProps) => {
   const theme = useTheme();
