@@ -105,8 +105,9 @@ h6 {
 }
 
 .grid-container {
-  display: -ms-grid;
-  display: grid;
+  display: -ms-grid !important;
+  display: grid !important;
+  width: 100%;
   -ms-grid-columns: (minmax(341px, 450px))[auto-fit] !important;
       grid-template-columns: repeat(auto-fit, minmax(341px, 450px)) !important;
   -webkit-box-pack: center;
