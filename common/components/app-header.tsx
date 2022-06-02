@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { CustomMenu } from './header/custom-menu';
 import { AppBarHeaderProps } from './header/types';
 
@@ -8,6 +8,10 @@ export const AppBarHeader = ({
   handleCloseMenu,
   setMenuOpen,
 }: AppBarHeaderProps): JSX.Element => {
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+
   return (
     <Box
       sx={{
@@ -18,6 +22,9 @@ export const AppBarHeader = ({
         width: '100%',
         zIndex: 2000,
         background: '#fff',
+        height: `${
+          smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
+        }`,
       }}
     >
       <CustomMenu
