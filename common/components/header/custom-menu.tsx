@@ -40,9 +40,8 @@ export const CustomMenu = ({
   return (
     <Box
       sx={{
-        height: `${
-          smBreakpointDown ? '70px' : lgBreakpointUp ? '90px' : '80px'
-        }`,
+        height: '100%',
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
         boxShadow: 3,

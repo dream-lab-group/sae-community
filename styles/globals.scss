@@ -97,7 +97,7 @@ h6 {
 .grid-container {
   display: grid !important;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(341px, 450px)) !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
   justify-content: center;
   flex-flow: nowrap !important;
 }

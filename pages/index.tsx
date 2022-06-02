@@ -7,6 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { GetServerSideProps, NextPage } from 'next';
+import { useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 import { ProjectCard } from '../common/components/project-card/project-card';
@@ -81,6 +82,8 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     // @ts-expect-error: Todo
     <ThemeProvider theme={appTheme}>
@@ -91,7 +94,7 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         paddingX={`${
           smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '100px'
         }`}
-        spacing={{ sm: 5, md: 5, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
+        spacing={{ sm: 5, md: 3, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
         className="grid-container"
       >
         {/* @ts-expect-error: todo */}
@@ -102,6 +105,8 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
               id={id}
               userCreated={user_created}
               course={course}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
             />
           );
         })}

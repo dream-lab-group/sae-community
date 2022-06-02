@@ -5,10 +5,11 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Skeleton,
 } from '@mui/material';
 import Image from 'next/image';
 import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { apiClient } from '../../data/apiClient';
 import { useTranslation } from 'react-i18next';
 
@@ -16,9 +17,17 @@ type ProjectCardProps = {
   id: string;
   userCreated: string;
   course: string;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
+export const ProjectCard = ({
+  id,
+  userCreated,
+  course,
+  isLoading,
+  setIsLoading,
+}: ProjectCardProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
@@ -28,16 +37,16 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
   const { t } = useTranslation();
   const [image, setImage] = useState('');
   const [user, setUser] = useState('');
-  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImage = async () => {
       const imageResponse = await apiClient.get(
         `items/projects_files?filter={"projects_id": {"_eq": "${id}"}}`,
       );
+
       if (imageResponse.status === 200) {
         setImage(imageResponse.data.data[0].directus_files_id);
-        setLoading(false);
+        setIsLoading(false);
       }
     };
     const fetchUser = async () => {
@@ -56,106 +65,121 @@ export const ProjectCard = ({ id, userCreated, course }: ProjectCardProps) => {
   const imageUrl = `https://www.whatthebre.com/assets/${image}`;
 
   return (
-    <Grid
-      item
-      container
-      boxShadow="none"
-      borderRadius="10px"
-      marginBottom={`${smBreakpointDown && '20px'}`}
-      justifyContent="center"
-    >
-      <Grid
-        item
-        xs={12}
-        position="relative"
-        height={`${
-          smBreakpointDown
-            ? '280px'
-            : mdBreakpointDown
-            ? '300px'
-            : mdBreakpointUp
-            ? '300px'
-            : lgBreakpointUp
-            ? '540px'
-            : ''
-        }`}
-        maxHeight="540px"
-        width="100%"
-        justifyContent="center"
-        alignItems="center"
-        alignContent="center"
-      >
-        <Image
-          src={imageUrl}
-          layout="fill"
-          quality={10}
-          className="project-image-border-radius image-container"
+    <>
+      {isLoading ? (
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          sx={{
+            borderRadius: '10px',
+            marginBottom: `${smBreakpointDown && '20px'}`,
+            height: '100%',
+            width: '100%',
+          }}
         />
-        <Box
-          component="button"
-          sx={{
-            position: 'absolute',
-            zIndex: 1000,
-            right: 0,
-            bottom: '68px',
-            background: '#fff',
-            width: '56px',
-            height: '46px',
-            border: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '2rem 0 0 2rem',
-          }}
+      ) : (
+        <Grid
+          item
+          container
+          boxShadow="none"
+          borderRadius="10px"
+          marginBottom={`${smBreakpointDown && '20px'}`}
+          justifyContent="center"
         >
-          <HiOutlineHeart size={30} />
-        </Box>
-        <Box
-          component="button"
-          sx={{
-            position: 'absolute',
-            zIndex: 1000,
-            right: 0,
-            bottom: '10px',
-            background: '#fff',
-            width: '56px',
-            height: '46px',
-            border: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '2rem 0 0 2rem',
-          }}
-        >
-          <HiOutlineBookmark size={30} />
-        </Box>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        container
-        margin="10px 0 0 0"
-        padding="5px 0"
-        alignItems="center"
-      >
-        <Grid item xs={8}>
-          <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-            {user}
-          </Typography>
+          <Grid
+            item
+            xs={12}
+            position="relative"
+            height={`${
+              smBreakpointDown
+                ? '280px'
+                : mdBreakpointDown
+                ? '300px'
+                : mdBreakpointUp
+                ? '300px'
+                : lgBreakpointUp
+                ? '540px'
+                : ''
+            }`}
+            maxHeight="540px"
+            width="100%"
+            justifyContent="center"
+            alignItems="center"
+            alignContent="center"
+          >
+            <Image
+              src={imageUrl}
+              layout="fill"
+              quality={10}
+              className="project-image-border-radius image-container"
+            />
+            <Box
+              component="button"
+              sx={{
+                position: 'absolute',
+                zIndex: 1000,
+                right: 0,
+                bottom: '68px',
+                background: '#fff',
+                width: '56px',
+                height: '46px',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '2rem 0 0 2rem',
+              }}
+            >
+              <HiOutlineHeart size={30} />
+            </Box>
+            <Box
+              component="button"
+              sx={{
+                position: 'absolute',
+                zIndex: 1000,
+                right: 0,
+                bottom: '10px',
+                background: '#fff',
+                width: '56px',
+                height: '46px',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '2rem 0 0 2rem',
+              }}
+            >
+              <HiOutlineBookmark size={30} />
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            container
+            margin="10px 0 0 0"
+            padding="5px 0"
+            alignItems="center"
+          >
+            <Grid item xs={8}>
+              <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+                {user}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Chip
+                // @ts-expect-error: todo
+                label={t(`projects.${course}.label`)}
+                sx={{
+                  background: '#364156',
+                  color: '#fff',
+                  fontSize: '14px',
+                  width: '100%',
+                }}
+              />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <Chip
-            // @ts-expect-error: todo
-            label={t(`projects.${course}.label`)}
-            sx={{
-              background: '#364156',
-              color: '#fff',
-              fontSize: '14px',
-              width: '100%',
-            }}
-          />
-        </Grid>
-      </Grid>
-    </Grid>
+      )}
+    </>
   );
 };
