@@ -54,7 +54,6 @@ export const PageNavigation = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        className="container-skew"
       >
         <Grid container width="100%" direction="column">
           <Grid

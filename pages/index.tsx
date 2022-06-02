@@ -28,7 +28,7 @@ declare module '@mui/material/styles' {
 
 const appTheme = createTheme({
   typography: {
-    fontFamily: `'Outfit', sans-serif`,
+    fontFamily: `'Outfit', sans-serif'`,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
