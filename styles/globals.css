@@ -108,8 +108,8 @@ h6 {
   display: -ms-grid !important;
   display: grid !important;
   width: 100%;
-  -ms-grid-columns: (minmax(341px, 450px))[auto-fit] !important;
-      grid-template-columns: repeat(auto-fit, minmax(341px, 450px)) !important;
+  -ms-grid-columns: (minmax(320px, 1fr))[auto-fit] !important;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;

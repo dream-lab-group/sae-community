@@ -91,7 +91,7 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         paddingX={`${
           smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '100px'
         }`}
-        spacing={{ sm: 5, md: 5, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
+        spacing={{ sm: 5, md: 3, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
         className="grid-container"
       >
         {/* @ts-expect-error: todo */}
