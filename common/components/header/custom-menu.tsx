@@ -21,6 +21,7 @@ export const CustomMenu = ({
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   const router = useRouter();
 
@@ -49,7 +50,7 @@ export const CustomMenu = ({
     >
       <Grid
         paddingX={`${
-          smBreakpointDown ? '17px' : lgBreakpointUp ? '120px' : '42px'
+          smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '55px'
         }`}
         container
         spacing={0}

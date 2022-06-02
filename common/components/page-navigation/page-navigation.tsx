@@ -34,6 +34,7 @@ export const PageNavigation = () => {
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
   const [sortFilter, setSortFilter] = useState<string[]>([]);
 
   return (
@@ -44,7 +45,7 @@ export const PageNavigation = () => {
             mdBreakpointDown ? '150px' : lgBreakpointUp ? '220px' : '200px'
           }`,
           paddingX: `${
-            smBreakpointDown ? '17px' : lgBreakpointUp ? '120px' : '42px'
+            smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '100px'
           }`,
           background: '#192D3E',
           width: '100%',
@@ -55,7 +56,7 @@ export const PageNavigation = () => {
         }}
         className="container-skew"
       >
-        <Grid container width="100%" maxWidth="2290px" direction="column">
+        <Grid container width="100%" direction="column">
           <Grid
             item
             container
