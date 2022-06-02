@@ -79,6 +79,7 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   return (
     // @ts-expect-error: Todo
@@ -88,7 +89,7 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         container
         paddingY="40px"
         paddingX={`${
-          smBreakpointDown ? '17px' : lgBreakpointUp ? '148px' : '42px'
+          smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '100px'
         }`}
         spacing={{ sm: 5, md: 5, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
         className="grid-container"

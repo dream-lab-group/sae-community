@@ -83,6 +83,9 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        maxWidth: `${smBreakpointUp ? '470px' : '240px'}`,
+        position: `${smBreakpointDown && 'relative'}`,
+        left: `${smBreakpointDown && -9}`,
       }}
     >
       <form onSubmit={formik.handleSubmit}>
