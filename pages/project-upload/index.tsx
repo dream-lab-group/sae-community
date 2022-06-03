@@ -17,7 +17,14 @@ import { EmbedUrl } from '../../common/components/project-upload/embed-url';
 import { useState } from 'react';
 import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
 import { BsXCircle } from 'react-icons/bs';
-import { display } from '@mui/system';
+import { useRouter } from 'next/router';
+
+// const router = useRouter();
+
+// const handleCancelProjectUpload = (e: any) => {
+//   e.preventDefault();
+//   router.push('/');
+// };
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -25,9 +32,14 @@ const ProjectUpload = () => {
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   const [internExtern, setInternExtern] = useState('Schulprojekt');
+
+  const router = useRouter();
+
+  const handleCancelProjectUpload = () => {
+    router.push('/');
+  };
 
   return (
     <Box
@@ -103,14 +115,6 @@ const ProjectUpload = () => {
           spacing={2}
           alignItems="center"
           sx={{ direction: `${mdBreakpointDown && 'flex-start'}` }}
-
-          // sx={{
-          //   height: '100%',
-          //   width: '100%',
-          //   display: 'flex',
-          //   justifyContent: 'center',
-          //   flexDirection: `${smBreakpointDown ? 'column' : 'row'}`,
-          // }}
         >
           <Coworkers />
           <Grid
@@ -144,6 +148,7 @@ const ProjectUpload = () => {
               marginTop: `${mdBreakpointDown && '30px'}`,
               height: '56px',
             }}
+            onClick={handleCancelProjectUpload}
           >
             Abbrechen
           </Button>
@@ -162,6 +167,7 @@ const ProjectUpload = () => {
         </Box>
       </Box>
       <Box
+        className="project-button-fixed-cancel"
         component="button"
         sx={{
           border: 'none',
@@ -169,14 +175,15 @@ const ProjectUpload = () => {
           right: 0,
           top: 78,
           color: '#000000cc',
-          background: '#E8E9EB',
           padding: '10px 15px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           borderTopLeftRadius: '5px',
           borderBottomLeftRadius: '5px',
+          cursor: 'pointer',
         }}
+        onClick={handleCancelProjectUpload}
       >
         <BsXCircle size={25} />
       </Box>
