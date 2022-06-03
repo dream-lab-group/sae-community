@@ -1,8 +1,11 @@
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import { RiFolderMusicLine } from 'react-icons/ri';
 
 export const FileUpload = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -53,7 +56,7 @@ export const FileUpload = () => {
               marginBottom: '15px',
             }}
           >
-            Füge dein
+            {t('projectUpload.fileUpload.insert')}
             <span
               style={{
                 color: '#00000099',
@@ -61,9 +64,9 @@ export const FileUpload = () => {
                 marginLeft: '4px',
               }}
             >
-              Bild
+              {t('projectUpload.fileUpload.picture')}
             </span>
-            oder
+            {t('projectUpload.fileUpload.or')}
             <span
               style={{
                 color: '#00000099',
@@ -71,11 +74,13 @@ export const FileUpload = () => {
                 marginLeft: '4px',
               }}
             >
-              Audio
+              {t('projectUpload.fileUpload.audio')}
             </span>
-            hier ein oder
+            {`${t('projectUpload.fileUpload.here')} ${t(
+              'projectUpload.fileUpload.or',
+            )}`}
             <span style={{ marginLeft: '4px', color: '#7514F5' }}>
-              wähle eine Datai aus
+              {t('projectUpload.fileUpload.selectFile')}
             </span>
           </Typography>
         </Box>
@@ -87,10 +92,10 @@ export const FileUpload = () => {
           }}
         >
           <Typography sx={{ fontSize: '12px', color: '#00000066' }}>
-            Zugelassene Datei: JPB, PNG, MP3
+            {t('projectUpload.fileUpload.acceptedFilesWithMusic')}
           </Typography>
           <Typography sx={{ fontSize: '12px', color: '#00000066' }}>
-            Max. grösse: 10MB
+            {t('projectUpload.fileUpload.maxSize10')}
           </Typography>
         </Box>
       </Box>

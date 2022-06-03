@@ -150,7 +150,7 @@ const ProjectUpload = () => {
             }}
             onClick={handleCancelProjectUpload}
           >
-            Abbrechen
+            {t('general.cancel')}
           </Button>
           <Button
             className="project-button-publish"
@@ -162,7 +162,7 @@ const ProjectUpload = () => {
               marginLeft: `${mdBreakpointDown ? '' : '20px'}`,
             }}
           >
-            Projekt veröffentlichen
+            {t('projectUpload.publishProject')}
           </Button>
         </Box>
       </Box>
