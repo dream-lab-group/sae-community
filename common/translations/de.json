@@ -8,7 +8,8 @@
   "general": {
     "saeCommunityPlatform": "SAE Community Plattform",
     "platformForStudents": "Plattform von Studenten",
-    "fromStudents": "für Studenten"
+    "fromStudents": "für Studenten",
+    "cancel": "Abbrechen"
   },
   "loginRegistration": {
     "createAccount": "Erstelle ein Benutzerkonto",
@@ -108,6 +109,23 @@
     },
     "alumni": {
       "label": "Alumni"
+    }
+  },
+  "projectUpload": {
+    "createProject": "Projekt erstellen",
+    "publishProject": "Projekt veröffentlichen",
+    "fileUpload": {
+      "insert": "Füge dein",
+      "thumbnail": "Titelbild",
+      "here": "hier ein",
+      "or": "oder",
+      "selectFile": "wähle eine datei aus",
+      "acceptedFiles": "Zugelassene Datei: JPG, PNG",
+      "acceptedFilesWithMusic": "Zugelassene Datei: JPB, PNG, MP3",
+      "maxSize": "Max. grösse: 5MB",
+      "maxSize10": "Max. grösse: 10MB",
+      "picture": "Bild",
+      "audio": "Audio"
     }
   }
 }

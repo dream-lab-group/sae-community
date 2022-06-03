@@ -1,8 +1,11 @@
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import { RiFolderMusicLine } from 'react-icons/ri';
 
 export const ThumbnailUpload = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -51,7 +54,7 @@ export const ThumbnailUpload = () => {
               marginBottom: '15px',
             }}
           >
-            Füge dein
+            {t('projectUpload.fileUpload.insert')}
             <span
               style={{
                 color: '#00000099',
@@ -59,15 +62,15 @@ export const ThumbnailUpload = () => {
                 marginLeft: '4px',
               }}
             >
-              Titelbild
+              {t('projectUpload.fileUpload.thumbnail')}
             </span>
-            hier ein <br /> oder
+            {t('projectUpload.fileUpload.here')} <br />{' '}
+            {t('projectUpload.fileUpload.or')}
             <span style={{ marginLeft: '4px', color: '#7514F5' }}>
-              wähle eine Datai aus
+              {t('projectUpload.fileUpload.selectFile')}
             </span>
           </Typography>
         </Box>
-
         <Box
           sx={{
             display: 'flex',
@@ -76,10 +79,10 @@ export const ThumbnailUpload = () => {
           }}
         >
           <Typography sx={{ fontSize: '12px', color: '#00000066' }}>
-            Zugelassene Datei: JPB, PNG
+            {t('projectUpload.fileUpload.acceptedFiles')}
           </Typography>
           <Typography sx={{ fontSize: '12px', color: '#00000066' }}>
-            Max. grösse: 5MB
+            {t('projectUpload.fileUpload.maxSize')}
           </Typography>
         </Box>
       </Box>

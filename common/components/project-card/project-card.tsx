@@ -110,7 +110,7 @@ export const ProjectCard = ({
             <Image
               src={imageUrl}
               layout="fill"
-              quality={10}
+              quality={75}
               className="project-image-border-radius image-container"
             />
             <Box

@@ -1,11 +1,4 @@
-import {
-  Alert,
-  ButtonBase,
-  Snackbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { ButtonBase, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { AppBarHeaderProps } from '../header/types';

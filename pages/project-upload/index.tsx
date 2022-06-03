@@ -19,13 +19,6 @@ import { ThumbnailUpload } from '../../common/components/project-upload/thumbnai
 import { BsXCircle } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 
-// const router = useRouter();
-
-// const handleCancelProjectUpload = (e: any) => {
-//   e.preventDefault();
-//   router.push('/');
-// };
-
 const ProjectUpload = () => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -150,7 +143,7 @@ const ProjectUpload = () => {
             }}
             onClick={handleCancelProjectUpload}
           >
-            Abbrechen
+            {t('general.cancel')}
           </Button>
           <Button
             className="project-button-publish"
@@ -162,7 +155,7 @@ const ProjectUpload = () => {
               marginLeft: `${mdBreakpointDown ? '' : '20px'}`,
             }}
           >
-            Projekt veröffentlichen
+            {t('projectUpload.publishProject')}
           </Button>
         </Box>
       </Box>
