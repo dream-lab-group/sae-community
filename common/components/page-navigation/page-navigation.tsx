@@ -45,7 +45,7 @@ export const PageNavigation = () => {
             mdBreakpointDown ? '150px' : lgBreakpointUp ? '220px' : '200px'
           }`,
           paddingX: `${
-            smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '100px'
+            smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '55px'
           }`,
           background: '#192D3E',
           width: '100%',
@@ -54,7 +54,6 @@ export const PageNavigation = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        className="container-skew"
       >
         <Grid container width="100%" direction="column">
           <Grid
