@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   FormControlLabel,
-  FormGroup,
   IconButton,
   Switch,
   TextField,
@@ -16,12 +15,16 @@ import { CgClose } from 'react-icons/cg';
 import { FileUpload } from '../../common/components/project-upload/file-upload';
 import { Coworkers } from '../../common/components/project-upload/coworkers';
 import { EmbedUrl } from '../../common/components/project-upload/embed-url';
+import { useState } from 'react';
+import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
+
+  const [internExtern, setInternExtern] = useState('Schulprojekt');
 
   return (
     <Box
@@ -75,6 +78,7 @@ const ProjectUpload = () => {
           fullWidth
           sx={{ marginTop: '20px', fontSize: '8px' }}
         />
+        <ThumbnailUpload />
         <FileUpload />
         <EmbedUrl />
         <TextField
@@ -86,7 +90,7 @@ const ProjectUpload = () => {
           variant="outlined"
           minRows={7}
           fullWidth
-          sx={{ marginTop: '20px', fontSize: '8px' }}
+          sx={{ marginTop: '10px', fontSize: '8px' }}
         />
         <Coworkers />
         <Box
@@ -101,7 +105,7 @@ const ProjectUpload = () => {
           <FormControlLabel
             sx={{ alignSelf: 'flex-end' }}
             control={<Switch />}
-            label="Intern"
+            label={internExtern}
           />
         </Box>
         <Button

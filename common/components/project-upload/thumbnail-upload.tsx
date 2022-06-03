@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { BsImage } from 'react-icons/bs';
 import { RiFolderMusicLine } from 'react-icons/ri';
 
-export const FileUpload = () => {
+export const ThumbnailUpload = () => {
   return (
     <Box
       sx={{
@@ -27,20 +27,18 @@ export const FileUpload = () => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             width: '130px',
             marginBottom: '37px',
           }}
         >
           <BsImage color="#7514F5" size={45} />
-          <RiFolderMusicLine color="#7514F5" size={52} />
         </Box>
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            width: '100%',
           }}
         >
           <Typography
@@ -61,24 +59,15 @@ export const FileUpload = () => {
                 marginLeft: '4px',
               }}
             >
-              Bild
+              Titelbild
             </span>
-            oder
-            <span
-              style={{
-                color: '#00000099',
-                marginRight: '4px',
-                marginLeft: '4px',
-              }}
-            >
-              Audio
-            </span>
-            hier ein oder
+            hier ein <br /> oder
             <span style={{ marginLeft: '4px', color: '#7514F5' }}>
               wähle eine Datai aus
             </span>
           </Typography>
         </Box>
+
         <Box
           sx={{
             display: 'flex',
@@ -87,10 +76,10 @@ export const FileUpload = () => {
           }}
         >
           <Typography sx={{ fontSize: '12px', color: '#00000066' }}>
-            Zugelassene Datei: JPB, PNG, MP3
+            Zugelassene Datei: JPB, PNG
           </Typography>
           <Typography sx={{ fontSize: '12px', color: '#00000066' }}>
-            Max. grösse: 10MB
+            Max. grösse: 5MB
           </Typography>
         </Box>
       </Box>

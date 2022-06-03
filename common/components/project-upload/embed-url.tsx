@@ -25,7 +25,7 @@ export const EmbedUrl = () => {
         height: '57px',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: '20px',
+        marginTop: '30px',
         flexDirection: 'column',
       }}
     >
