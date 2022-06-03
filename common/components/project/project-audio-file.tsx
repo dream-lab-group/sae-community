@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import Image from 'next/image';
 import audioImage from '../../../public/assets/audio-file.png';
 
@@ -6,7 +6,7 @@ export const ProjectAudioFile = () => {
   return (
     <Box
       sx={{
-        marginTop: '20px',
+        marginTop: '30px',
         width: '100%',
         height: '50px',
         position: 'relative',

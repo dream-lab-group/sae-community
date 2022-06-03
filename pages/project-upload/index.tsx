@@ -19,13 +19,6 @@ import { ThumbnailUpload } from '../../common/components/project-upload/thumbnai
 import { BsXCircle } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 
-// const router = useRouter();
-
-// const handleCancelProjectUpload = (e: any) => {
-//   e.preventDefault();
-//   router.push('/');
-// };
-
 const ProjectUpload = () => {
   const { t } = useTranslation();
   const theme = useTheme();

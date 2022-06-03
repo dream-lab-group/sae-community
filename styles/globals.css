@@ -154,4 +154,14 @@ h6 {
   background: #8519f6 !important;
   color: #fff !important;
 }
+
+.bookmark-button:hover {
+  background: #5504aa !important;
+  color: #fff !important;
+}
+
+.project-button-group:hover {
+  color: #fff !important;
+  background: #5504aa !important;
+}
 /*# sourceMappingURL=globals.css.map */
