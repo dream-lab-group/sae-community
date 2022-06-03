@@ -1,14 +1,16 @@
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, Grid, TextField } from '@mui/material';
 
 export const Coworkers = () => {
   return (
-    <Autocomplete
-      multiple
-      size="small"
-      options={students}
-      sx={{ width: '100%', marginTop: '20px' }}
-      renderInput={(params) => <TextField {...params} label="Coworker" />}
-    />
+    <Grid item sm={12} md={6} width="100%">
+      <Autocomplete
+        multiple
+        size="small"
+        options={students}
+        sx={{ width: '100%', marginTop: '20px' }}
+        renderInput={(params) => <TextField {...params} label="Coworker" />}
+      />
+    </Grid>
   );
 };
 

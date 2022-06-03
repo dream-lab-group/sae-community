@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   FormControlLabel,
-  IconButton,
+  Grid,
   Switch,
   TextField,
   Typography,
@@ -11,17 +11,20 @@ import {
 } from '@mui/material';
 import Layout from '../../common/components/layout';
 import { useTranslation } from 'react-i18next';
-import { CgClose } from 'react-icons/cg';
 import { FileUpload } from '../../common/components/project-upload/file-upload';
 import { Coworkers } from '../../common/components/project-upload/coworkers';
 import { EmbedUrl } from '../../common/components/project-upload/embed-url';
 import { useState } from 'react';
 import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
+import { BsXCircle } from 'react-icons/bs';
+import { display } from '@mui/system';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   const [internExtern, setInternExtern] = useState('Schulprojekt');
@@ -30,10 +33,10 @@ const ProjectUpload = () => {
     <Box
       sx={{
         width: '100%',
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        position: 'relative',
       }}
     >
       <Box
@@ -41,23 +44,21 @@ const ProjectUpload = () => {
           height: '60px',
           background: '#192D3E',
           width: '100%',
-          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%);',
+          clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
           display: 'flex',
           justifyContent: 'flex-end',
         }}
-      >
-        <IconButton sx={{ color: '#fff' }}>
-          <CgClose size={22} />
-        </IconButton>
-      </Box>
+      />
       <Box
         sx={{
-          paddingY: '20px',
+          paddingTop: '25px',
+          paddingBottom: '50px',
+          paddingX: '20px',
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          maxWidth: '341px',
+          maxWidth: `${smBreakpointDown ? '381px' : '774px'}`,
         }}
       >
         <Typography
@@ -76,7 +77,12 @@ const ProjectUpload = () => {
           label="Projektname"
           variant="outlined"
           fullWidth
-          sx={{ marginTop: '20px', fontSize: '8px' }}
+          sx={{
+            marginTop: '20px',
+            fontSize: '8px',
+            maxWidth: '465px',
+            alignSelf: 'flex-start',
+          }}
         />
         <ThumbnailUpload />
         <FileUpload />
@@ -92,36 +98,87 @@ const ProjectUpload = () => {
           fullWidth
           sx={{ marginTop: '10px', fontSize: '8px' }}
         />
-        <Coworkers />
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          sx={{ direction: `${mdBreakpointDown && 'flex-start'}` }}
+
+          // sx={{
+          //   height: '100%',
+          //   width: '100%',
+          //   display: 'flex',
+          //   justifyContent: 'center',
+          //   flexDirection: `${smBreakpointDown ? 'column' : 'row'}`,
+          // }}
+        >
+          <Coworkers />
+          <Grid
+            item
+            xs={6}
+            alignItems="center"
+            sx={{
+              marginTop: `${smBreakpointUp ? '20px' : '5px'}`,
+              alignSelf: `${mdBreakpointDown && 'flex-start'}`,
+            }}
+          >
+            <FormControlLabel control={<Switch />} label="Kommentarfunktion" />
+            <FormControlLabel control={<Switch />} label={internExtern} />
+          </Grid>
+        </Grid>
         <Box
           sx={{
             width: '100%',
             display: 'flex',
-            marginTop: '20px',
-            justifyContent: 'space-between',
+            flexDirection: `${mdBreakpointDown ? 'column' : 'row'}`,
+            alignItems: 'center',
+            justifyContent: `${smBreakpointUp && 'flex-end'}`,
+            marginTop: `${mdBreakpointDown ? '0px' : '30px'}`,
           }}
         >
-          <FormControlLabel control={<Switch />} label="Kommentarfunktion" />
-          <FormControlLabel
-            sx={{ alignSelf: 'flex-end' }}
-            control={<Switch />}
-            label={internExtern}
-          />
+          <Button
+            className="project-button-cancel"
+            variant="contained"
+            sx={{
+              width: `${mdBreakpointDown ? '100%' : '250px'}`,
+              marginTop: `${mdBreakpointDown && '30px'}`,
+              height: '56px',
+            }}
+          >
+            Abbrechen
+          </Button>
+          <Button
+            className="project-button-publish"
+            variant="contained"
+            sx={{
+              width: `${mdBreakpointDown ? '100%' : '350px'}`,
+              marginTop: `${mdBreakpointDown && '20px'}`,
+              height: '56px',
+              marginLeft: `${mdBreakpointDown ? '' : '20px'}`,
+            }}
+          >
+            Projekt veröffentlichen
+          </Button>
         </Box>
-        <Button
-          className="project-button-cancel"
-          variant="contained"
-          sx={{ width: '100%', marginTop: '30px', height: '56px' }}
-        >
-          Abbrechen
-        </Button>
-        <Button
-          className="project-button-publish"
-          variant="contained"
-          sx={{ width: '100%', marginTop: '20px', height: '56px' }}
-        >
-          Projekt veröffentlichen
-        </Button>
+      </Box>
+      <Box
+        component="button"
+        sx={{
+          border: 'none',
+          position: 'fixed',
+          right: 0,
+          top: 78,
+          color: '#000000cc',
+          background: '#E8E9EB',
+          padding: '10px 15px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderTopLeftRadius: '5px',
+          borderBottomLeftRadius: '5px',
+        }}
+      >
+        <BsXCircle size={25} />
       </Box>
     </Box>
   );
