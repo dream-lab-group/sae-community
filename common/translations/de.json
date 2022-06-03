@@ -123,7 +123,7 @@
       "acceptedFiles": "Zugelassene Datei: JPG, PNG",
       "acceptedFilesWithMusic": "Zugelassene Datei: JPB, PNG, MP3",
       "maxSize": "Max. grösse: 5MB",
-      "maxSize10": "Max. grösse: 5MB",
+      "maxSize10": "Max. grösse: 10MB",
       "picture": "Bild",
       "audio": "Audio"
     }
