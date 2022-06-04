@@ -49,4 +49,33 @@ export class Globals {
     'animation',
     'crossMedia',
   ];
+
+  public static readonly userContactInformation = [
+    'E-Mail',
+    'Webseite',
+    'LinkedIn',
+    'Instagram',
+    'Youtube',
+    'Vimeo',
+  ];
+
+  public static readonly userSkills = [
+    'Photoshop',
+    'Illustrator',
+    'InDesign',
+    'HTML',
+    'CSS',
+    'TypeScript',
+    'React',
+    'Lightroom',
+  ];
+
+  public static readonly userInterests = [
+    'Fotografie',
+    'Nachhaltigkeit',
+    'Gutes Essen',
+    'Ethical Programming',
+    'Webdevelopment',
+    'Neue Technologien',
+  ];
 }
