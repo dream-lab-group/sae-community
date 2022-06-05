@@ -14,9 +14,9 @@ import { UserInterest } from '../../common/components/profile/user-interest';
 import { UserSkills } from '../../common/components/profile/user-skills';
 import { Globals } from '../../common/utils/utils';
 import { FiMail } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 const MyProfile = () => {
-  const router = useRouter();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const breakpointBetweenMdLg = useMediaQuery(
@@ -24,6 +24,8 @@ const MyProfile = () => {
   );
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -81,7 +83,7 @@ const MyProfile = () => {
               width: '100%',
             }}
           >
-            Programm Skills
+            {t('profile.programSkills')}
           </Typography>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
             {Globals.userSkills.map((userSkillsElement) => (
@@ -99,7 +101,7 @@ const MyProfile = () => {
               width: '100%',
             }}
           >
-            Interessen
+            {t('profile.interests')}
           </Typography>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
             {Globals.userInterests.map((userInterestElement) => (
@@ -149,7 +151,7 @@ const MyProfile = () => {
               background: '#fff',
             }}
           >
-            <Typography>Jetzt kontaktieren</Typography>
+            <Typography> {t('profile.contactNow')}</Typography>
           </Box>
         </ButtonBase>
       ) : (

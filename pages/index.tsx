@@ -91,7 +91,7 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         container
         paddingY="40px"
         paddingX={`${
-          smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '40px'
+          smBreakpointDown ? '0px' : desktopBreakpointUp ? '60px' : '40px'
         }`}
         spacing={{ sm: 5, md: 3, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
         className="grid-container"

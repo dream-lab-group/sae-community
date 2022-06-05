@@ -1,8 +1,11 @@
-import { Box, Chip, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { Globals } from '../../utils/utils';
 import { UserContactInformation } from './user-contact-information';
 
 export const UserDescription = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -15,7 +18,7 @@ export const UserDescription = () => {
       <Typography
         sx={{ fontWeight: 700, fontSize: '18px', marginBottom: '20px' }}
       >
-        Über mich
+        {t('profile.aboutMe')}
       </Typography>
       <Typography
         sx={{

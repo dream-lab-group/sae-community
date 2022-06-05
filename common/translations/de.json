@@ -127,5 +127,13 @@
       "picture": "Bild",
       "audio": "Audio"
     }
+  },
+  "profile": {
+    "programSkills": "Programm Skills",
+    "interests": "Interessen",
+    "contactNow": "Jetzt kontaktieren",
+    "aboutMe": "Über mich",
+    "lastProjects": "Letzte Projekte",
+    "viewAll": "Alle ansehen"
   }
 }

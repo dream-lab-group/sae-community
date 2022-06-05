@@ -2,8 +2,10 @@ import { ButtonBase, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import Image from 'next/image';
 import imageOne from '../../../public/assets/project-file-1.webp';
+import imageTwo from '../../../public/assets/project-file-2.webp';
 import { BiChevronRight } from 'react-icons/bi';
 import { FiMail } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 export const LastProjects = () => {
   const theme = useTheme();
@@ -11,6 +13,8 @@ export const LastProjects = () => {
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -27,7 +31,7 @@ export const LastProjects = () => {
             }}
           >
             <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
-              Letzte Projekte
+              {t('profile.lastProjects')}
             </Typography>
             <Box
               sx={{
@@ -78,7 +82,7 @@ export const LastProjects = () => {
                   >
                     <Image
                       className="project-image-border-radius image-container"
-                      src={imageOne}
+                      src={imageTwo}
                       layout="fill"
                     />
                   </Box>
@@ -102,7 +106,7 @@ export const LastProjects = () => {
                   marginTop: '20px',
                 }}
               >
-                <Typography>Alle Ansehen</Typography>
+                <Typography> {t('profile.viewAll')}</Typography>
                 <BiChevronRight size={30} />
               </ButtonBase>
             </Box>
@@ -157,7 +161,7 @@ export const LastProjects = () => {
                 }}
               >
                 <Typography sx={{ fontSize: '18px' }}>
-                  Jetzt kontaktieren
+                  {t('profile.contactNow')}
                 </Typography>
               </Box>
             </ButtonBase>
@@ -209,7 +213,7 @@ export const LastProjects = () => {
                 >
                   <Image
                     className="project-image-border-radius image-container"
-                    src={imageOne}
+                    src={imageTwo}
                     layout="fill"
                   />
                 </Box>
@@ -232,7 +236,7 @@ export const LastProjects = () => {
                   marginTop: '20px',
                 }}
               >
-                <Typography>Alle Ansehen</Typography>
+                <Typography> {t('profile.viewAll')}</Typography>
                 <BiChevronRight size={30} />
               </ButtonBase>
             </Box>
