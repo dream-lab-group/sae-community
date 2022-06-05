@@ -174,4 +174,14 @@ h6 {
   background: #5504aa !important;
   color: #fff !important;
 }
+
+.user-contact-element-button {
+  background: #e8e9eb !important;
+  color: #000 !important;
+}
+
+.user-contact-element-button:hover {
+  background: #ef6351 !important;
+  color: #fff !important;
+}
 /*# sourceMappingURL=globals.css.map */

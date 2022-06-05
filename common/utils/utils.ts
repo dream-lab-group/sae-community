@@ -53,9 +53,9 @@ export class Globals {
   public static readonly userContactInformation = [
     'E-Mail',
     'Webseite',
-    'LinkedIn',
-    'Instagram',
     'Youtube',
+    'Instagram',
+    'LinkedIn',
     'Vimeo',
   ];
 

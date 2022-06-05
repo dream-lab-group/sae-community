@@ -79,7 +79,6 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
 
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   const [isLoading, setIsLoading] = useState(true);

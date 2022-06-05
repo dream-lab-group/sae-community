@@ -1,4 +1,10 @@
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  ButtonBase,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { useRouter } from 'next/router';
 import Layout from '../../common/components/layout';
 import { LastProjects } from '../../common/components/profile/last-projects';
@@ -7,12 +13,15 @@ import { UserInformation } from '../../common/components/profile/user-informatio
 import { UserInterest } from '../../common/components/profile/user-interest';
 import { UserSkills } from '../../common/components/profile/user-skills';
 import { Globals } from '../../common/utils/utils';
+import { FiMail } from 'react-icons/fi';
 
 const MyProfile = () => {
   const router = useRouter();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const breakpointBetweenMdLg = useMediaQuery(
+    theme.breakpoints.between('md', 'lg'),
+  );
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -24,6 +33,7 @@ const MyProfile = () => {
         flexDirection: 'column',
         alignItems: 'center',
         marginBottom: '60px',
+        position: 'relative',
       }}
     >
       <Box
@@ -39,52 +49,112 @@ const MyProfile = () => {
         sx={{
           width: '100%',
           display: 'flex',
-          paddingX: '20px',
-          flexDirection: 'column',
-          alignItems: 'center',
-          maxWidth: `${smBreakpointDown ? '381px' : '774px'}`,
+          flexDirection: `${lgBreakpointDown && 'column'}`,
+          alignItems: `${lgBreakpointDown && 'center'}`,
+          maxWidth: `${
+            smBreakpointDown ? '381px' : lgBreakpointDown ? '774px' : '1150px'
+          }`,
+          paddingX: `${
+            smBreakpointDown ? '20px' : lgBreakpointDown ? '60px' : '40px'
+          }`,
+          justifyContent: `${lgBreakpointUp && 'space-between'}`,
         }}
       >
-        <UserInformation />
-        <UserDescription />
-        <Typography
+        <Box
           sx={{
-            fontWeight: 700,
-            fontSize: '18px',
-            marginTop: '30px',
             width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            maxWidth: `${
+              smBreakpointDown ? '381px' : lgBreakpointDown ? '774px' : '600px'
+            }`,
           }}
         >
-          Programm Skills
-        </Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
-          {Globals.userSkills.map((userSkillsElement) => (
-            <UserSkills
-              key={userSkillsElement}
-              userSkillsElement={userSkillsElement}
-            />
-          ))}
-        </Box>
-        <Typography
-          sx={{
-            fontWeight: 700,
-            fontSize: '18px',
-            marginTop: '30px',
-            width: '100%',
-          }}
-        >
-          Interessen
-        </Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
-          {Globals.userInterests.map((userInterestElement) => (
-            <UserInterest
-              key={userInterestElement}
-              userInterestElement={userInterestElement}
-            />
-          ))}
+          <UserInformation />
+          <UserDescription />
+          <Typography
+            sx={{
+              fontWeight: 700,
+              fontSize: '18px',
+              marginTop: '30px',
+              width: '100%',
+            }}
+          >
+            Programm Skills
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
+            {Globals.userSkills.map((userSkillsElement) => (
+              <UserSkills
+                key={userSkillsElement}
+                userSkillsElement={userSkillsElement}
+              />
+            ))}
+          </Box>
+          <Typography
+            sx={{
+              fontWeight: 700,
+              fontSize: '18px',
+              marginTop: '30px',
+              width: '100%',
+            }}
+          >
+            Interessen
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
+            {Globals.userInterests.map((userInterestElement) => (
+              <UserInterest
+                key={userInterestElement}
+                userInterestElement={userInterestElement}
+              />
+            ))}
+          </Box>
         </Box>
         <LastProjects />
       </Box>
+      {breakpointBetweenMdLg ? (
+        <ButtonBase
+          sx={{
+            position: 'fixed',
+            right: 0,
+            top: 160,
+            height: '50px',
+            width: '220px',
+            display: 'flex',
+            justifyContent: 'space-around',
+            boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+            borderTopLeftRadius: '10px',
+            borderBottomLeftRadius: '10px',
+            background: '#D0A3BF',
+          }}
+        >
+          <Box
+            sx={{
+              height: '100%',
+              display: 'flex',
+              width: '25%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <FiMail size={25} />
+          </Box>
+          <Box
+            sx={{
+              height: '100%',
+              display: 'flex',
+              width: '75%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#fff',
+            }}
+          >
+            <Typography>Jetzt kontaktieren</Typography>
+          </Box>
+        </ButtonBase>
+      ) : (
+        <></>
+      )}
     </Box>
   );
 };
