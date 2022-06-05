@@ -85,6 +85,7 @@ export const ProjectCard = ({
           borderRadius="10px"
           marginBottom={`${smBreakpointDown && '20px'}`}
           justifyContent="center"
+          sx={{ paddingX: `${smBreakpointDown && '20px'}` }}
         >
           <Grid
             item

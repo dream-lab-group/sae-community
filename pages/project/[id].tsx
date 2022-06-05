@@ -15,6 +15,7 @@ import { ProjectPictures } from '../../common/components/project/project-picture
 import { BiMessageDetail } from 'react-icons/bi';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FiMail } from 'react-icons/fi';
+import Head from 'next/head';
 
 const Project = () => {
   const router = useRouter();
@@ -29,184 +30,161 @@ const Project = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        position: 'relative',
-      }}
-    >
+    <>
+      <Head>
+        <title>SAI Community</title>
+        <meta name="author" content="Hadrian Chio" />
+        <meta
+          name="description"
+          content="SAI Community is a project platform designed for an interdisciplinary bachelor project at SAE Institute Zurich where students can share and react to each others projects."
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Box
         sx={{
-          height: '60px',
-          background: '#192D3E',
-          width: '100%',
-          clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
-          display: 'flex',
-        }}
-      />
-      <Box
-        sx={{
-          paddingTop: '25px',
-          paddingBottom: '50px',
-          paddingX: '20px',
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          maxWidth: `${smBreakpointDown ? '381px' : '774px'}`,
+          position: 'relative',
         }}
       >
         <Box
           sx={{
+            height: '60px',
+            background: '#192D3E',
+            width: '100%',
+            clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
+            display: 'flex',
+          }}
+        />
+        <Box
+          sx={{
+            paddingTop: '25px',
+            paddingBottom: '50px',
+            paddingX: '20px',
             width: '100%',
             display: 'flex',
-            flexDirection: `${lgBreakpointDown ? 'column' : 'row'}`,
-            alignItems: `${lgBreakpointUp && 'center'}`,
+            flexDirection: 'column',
+            alignItems: 'center',
+            maxWidth: `${smBreakpointDown ? '381px' : '774px'}`,
           }}
         >
-          <ProjectInformation />
-          <ProjectButtonGroup />
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: `${lgBreakpointDown ? 'column' : 'row'}`,
+              alignItems: `${lgBreakpointUp && 'center'}`,
+            }}
+          >
+            <ProjectInformation />
+            <ProjectButtonGroup />
+          </Box>
+          <ProjectPictures />
+          <ProjectEmbedded />
+          <ProjectAudioFile />
+          <Box sx={{ width: '100%', marginTop: `${smBreakpointUp && '40px'}` }}>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: `${smBreakpointDown ? '15px' : '20px'}`,
+              }}
+            >
+              Projektitel
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: 300,
+                fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
+                marginTop: '10px',
+              }}
+            >
+              Text: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+              diam nonumy eirmod tempor invidunt ut labore et dolore magna
+              aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+              duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+              takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+              sit amet, consetetur sadipscing
+              <br />
+              <br />
+              elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+              magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+              justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+              takimata sanctus est Lorem ipsum dolor sit amet.
+              <br />
+              <br />
+              {/* todo make it dynamically no divs inside typography */}
+              <Box sx={{ listStyle: 'inside' }}>
+                <li>
+                  List: Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                  sed diam nonumy eirmod tempor invidunt ut labore et
+                </li>
+                <li>
+                  dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                  accusam et justo duo dolores et ea rebum. Stet clita
+                </li>
+                <li>
+                  kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+                  sit amet. Lorem ipsum dolor sit amet, consetetur.
+                </li>
+              </Box>
+            </Typography>
+            <Typography
+              component="button"
+              sx={{
+                fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
+                color: '#CF2CF6',
+                marginTop: '15px',
+                cursor: 'pointer',
+                border: 'none',
+                background: 'none',
+              }}
+            >
+              Link
+            </Typography>
+          </Box>
         </Box>
-        <ProjectPictures />
-        <ProjectEmbedded />
-        <ProjectAudioFile />
-        <Box sx={{ width: '100%', marginTop: `${smBreakpointUp && '40px'}` }}>
-          <Typography
-            sx={{
-              fontWeight: 700,
-              fontSize: `${smBreakpointDown ? '15px' : '20px'}`,
-            }}
-          >
-            Projektitel
-          </Typography>
-          <Typography
-            sx={{
-              fontWeight: 300,
-              fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
-              marginTop: '10px',
-            }}
-          >
-            Text: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing
-            <br />
-            <br />
-            elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-            justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-            takimata sanctus est Lorem ipsum dolor sit amet.
-            <br />
-            <br />
-            {/* todo make it dynamically no divs inside typography */}
-            <Box sx={{ listStyle: 'inside' }}>
-              <li>
-                List: Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                sed diam nonumy eirmod tempor invidunt ut labore et
-              </li>
-              <li>
-                dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                accusam et justo duo dolores et ea rebum. Stet clita
-              </li>
-              <li>
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                sit amet. Lorem ipsum dolor sit amet, consetetur.
-              </li>
-            </Box>
-          </Typography>
-          <Typography
+        {smBreakpointDown ? (
+          <Box
+            className="project-button-fixed-cancel"
             component="button"
             sx={{
-              fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
-              color: '#CF2CF6',
-              marginTop: '15px',
+              border: 'none',
+              position: 'fixed',
+              right: 0,
+              top: 100,
+              color: '#000000cc',
+              padding: '10px 15px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderTopLeftRadius: '5px',
+              borderBottomLeftRadius: '5px',
               cursor: 'pointer',
-              border: 'none',
-              background: 'none',
             }}
+            onClick={handleBackToHome}
           >
-            Link
-          </Typography>
-        </Box>
-      </Box>
-      {smBreakpointDown ? (
-        <Box
-          className="project-button-fixed-cancel"
-          component="button"
-          sx={{
-            border: 'none',
-            position: 'fixed',
-            right: 0,
-            top: 100,
-            color: '#000000cc',
-            padding: '10px 15px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTopLeftRadius: '5px',
-            borderBottomLeftRadius: '5px',
-            cursor: 'pointer',
-          }}
-          onClick={handleBackToHome}
-        >
-          <BsXCircle size={25} />
-        </Box>
-      ) : lgBreakpointDown ? (
-        <Box
-          className="project-button-fixed-cancel"
-          component="button"
-          sx={{
-            border: 'none',
-            position: 'fixed',
-            right: 0,
-            top: 80,
-            color: '#000000cc',
-            padding: '15px 30px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTopLeftRadius: '5px',
-            borderBottomLeftRadius: '5px',
-            cursor: 'pointer',
-          }}
-          onClick={handleBackToHome}
-        >
-          <BsXCircle size={30} fontWeight={40} />
-          <Typography
-            sx={{ fontWeight: 700, fontSize: '12px', marginTop: '5px' }}
-          >
-            Abbrechen
-          </Typography>
-        </Box>
-      ) : (
-        <Box
-          sx={{
-            position: 'fixed',
-            right: 0,
-            top: 150,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
-        >
-          <ButtonBase
+            <BsXCircle size={25} />
+          </Box>
+        ) : lgBreakpointDown ? (
+          <Box
             className="project-button-fixed-cancel"
+            component="button"
             sx={{
-              height: '80px',
               border: 'none',
-              padding: '10px 30px',
+              position: 'fixed',
+              right: 0,
+              top: 80,
+              color: '#000000cc',
+              padding: '15px 30px',
               display: 'flex',
               flexDirection: 'column',
+              justifyContent: 'center',
               alignItems: 'center',
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
-              marginBottom: '50px',
+              borderTopLeftRadius: '5px',
+              borderBottomLeftRadius: '5px',
+              cursor: 'pointer',
             }}
             onClick={handleBackToHome}
           >
@@ -216,60 +194,94 @@ const Project = () => {
             >
               Abbrechen
             </Typography>
-          </ButtonBase>
-          <ButtonBase
-            className="project-button-group"
+          </Box>
+        ) : (
+          <Box
             sx={{
-              height: '80px',
-              border: 'none',
-              padding: '10px 30px',
+              position: 'fixed',
+              right: 0,
+              top: 150,
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
-              background: '#e8e9eb',
-              marginBottom: '20px',
+              justifyContent: 'space-between',
             }}
           >
-            <BiMessageDetail size={30} />
-          </ButtonBase>
-          <ButtonBase
-            className="project-button-group"
-            sx={{
-              height: '80px',
-              border: 'none',
-              padding: '10px 30px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
-              background: '#e8e9eb',
-              marginBottom: '20px',
-            }}
-          >
-            <IoInformationCircleOutline size={35} />
-          </ButtonBase>
-          <ButtonBase
-            className="project-button-group"
-            sx={{
-              height: '80px',
-              border: 'none',
-              padding: '10px 30px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
-              background: '#e8e9eb',
-            }}
-          >
-            <FiMail size={30} />
-          </ButtonBase>
-        </Box>
-      )}
-    </Box>
+            <ButtonBase
+              className="project-button-fixed-cancel"
+              sx={{
+                height: '80px',
+                border: 'none',
+                padding: '10px 30px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                borderTopLeftRadius: '10px',
+                borderBottomLeftRadius: '10px',
+                marginBottom: '50px',
+              }}
+              onClick={handleBackToHome}
+            >
+              <BsXCircle size={30} fontWeight={40} />
+              <Typography
+                sx={{ fontWeight: 700, fontSize: '12px', marginTop: '5px' }}
+              >
+                Abbrechen
+              </Typography>
+            </ButtonBase>
+            <ButtonBase
+              className="project-button-group"
+              sx={{
+                height: '80px',
+                border: 'none',
+                padding: '10px 30px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                borderTopLeftRadius: '10px',
+                borderBottomLeftRadius: '10px',
+                background: '#e8e9eb',
+                marginBottom: '20px',
+              }}
+            >
+              <BiMessageDetail size={30} />
+            </ButtonBase>
+            <ButtonBase
+              className="project-button-group"
+              sx={{
+                height: '80px',
+                border: 'none',
+                padding: '10px 30px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                borderTopLeftRadius: '10px',
+                borderBottomLeftRadius: '10px',
+                background: '#e8e9eb',
+                marginBottom: '20px',
+              }}
+            >
+              <IoInformationCircleOutline size={35} />
+            </ButtonBase>
+            <ButtonBase
+              className="project-button-group"
+              sx={{
+                height: '80px',
+                border: 'none',
+                padding: '10px 30px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                borderTopLeftRadius: '10px',
+                borderBottomLeftRadius: '10px',
+                background: '#e8e9eb',
+              }}
+            >
+              <FiMail size={30} />
+            </ButtonBase>
+          </Box>
+        )}
+      </Box>
+    </>
   );
 };
 

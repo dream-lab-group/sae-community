@@ -1,6 +1,6 @@
 import Layout from '../../common/components/layout';
 
-const MyProfile = () => {
+const MyMessages = () => {
   return (
     <>
       <h1>THIS IS MY PROFILE</h1>
@@ -8,9 +8,9 @@ const MyProfile = () => {
   );
 };
 
-MyProfile.getLayout = function getLayout(page: typeof MyProfile) {
+MyMessages.getLayout = function getLayout(page: typeof MyMessages) {
   // @ts-expect-error: Todo
   return <Layout>{page}</Layout>;
 };
 
-export default MyProfile;
+export default MyMessages;

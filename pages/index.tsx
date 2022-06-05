@@ -26,7 +26,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const appTheme = createTheme({
+export const appTheme = createTheme({
   typography: {
     fontFamily: `'Outfit', sans-serif`,
     fontWeightLight: 300,
@@ -79,7 +79,6 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
 
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   const [isLoading, setIsLoading] = useState(true);
@@ -92,7 +91,7 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         container
         paddingY="40px"
         paddingX={`${
-          smBreakpointDown ? '17px' : desktopBreakpointUp ? '60px' : '40px'
+          smBreakpointDown ? '0px' : desktopBreakpointUp ? '60px' : '40px'
         }`}
         spacing={{ sm: 5, md: 3, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
         className="grid-container"

@@ -35,7 +35,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', sans-serif !important;
 }
 
 .main-container {
@@ -148,4 +148,24 @@ h6 {
 .project-button-group:hover {
   color: #fff !important;
   background: #5504aa !important;
+}
+
+.user-default-button {
+  background: #8519f6 !important;
+  color: #fff !important;
+}
+
+.user-default-button:hover {
+  background: #5504aa !important;
+  color: #fff !important;
+}
+
+.user-contact-element-button {
+  background: #e8e9eb !important;
+  color: #000 !important;
+}
+
+.user-contact-element-button:hover {
+  background: #ef6351 !important;
+  color: #fff !important;
 }
