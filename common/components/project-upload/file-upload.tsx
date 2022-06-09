@@ -1,16 +1,23 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import { RiFolderMusicLine } from 'react-icons/ri';
 
 export const FileUpload = () => {
+  const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+
   const { t } = useTranslation();
+
+  const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  const [files, setFiles] = useState<File[]>();
 
   return (
     <Box
       sx={{
         width: '100%',
-        height: '260px',
+        height: `${smBreakpointDown ? '260px' : '450px'}`,
         border: '3px dashed #00000033',
         borderRadius: '10px',
         marginTop: '30px',
