@@ -165,7 +165,6 @@ export const LastProjects = () => {
                 </Typography>
               </Box>
             </ButtonBase>
-
             <Box
               sx={{
                 width: '100%',

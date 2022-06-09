@@ -149,7 +149,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
                 id="first_name"
                 size={smBreakpointDown ? 'small' : 'medium'}
                 name="first_name"
-                label={t('loginRegistration.firstname')}
+                label={t('general.firstname')}
                 variant="outlined"
                 sx={{ width: `${smBreakpointDown ? '100%' : '225px'}` }}
                 value={formik.values.first_name}
@@ -166,7 +166,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
                 name="last_name"
                 fullWidth
                 size={smBreakpointDown ? 'small' : 'medium'}
-                label={t('loginRegistration.lastname')}
+                label={t('general.lastname')}
                 variant="outlined"
                 sx={{
                   marginTop: `${smBreakpointDown && '15px'}`,
@@ -185,7 +185,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
               name="email"
               fullWidth
               size={smBreakpointDown ? 'small' : 'medium'}
-              label={t('loginRegistration.email')}
+              label={t('general.email')}
               type="email"
               variant="outlined"
               sx={{ marginTop: `${smBreakpointDown ? '15px' : '20px'}` }}

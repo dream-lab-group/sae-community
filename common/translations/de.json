@@ -9,7 +9,10 @@
     "saeCommunityPlatform": "SAE Community Plattform",
     "platformForStudents": "Plattform von Studenten",
     "fromStudents": "für Studenten",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "email": "E-Mail"
   },
   "loginRegistration": {
     "createAccount": "Erstelle ein Benutzerkonto",
@@ -22,9 +25,6 @@
     "register": "Hier registrieren",
     "rememberedPassword": "Hast du dich an dein Passwort erinnert?",
     "passwordResetInstruction": "Gib deine E-Mail ein, die du bei der Anmeldung verwendet hast, und wir schicken dir eine E-Mail mit der Möglichkeit, dein Passwort zurückzusetzen.",
-    "firstname": "Vorname",
-    "lastname": "Nachname",
-    "email": "E-Mail",
     "password": "Passwort",
     "repeatPassword": "Passwort erneut eingeben",
     "course": "Fachrichtung",
