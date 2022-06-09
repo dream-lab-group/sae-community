@@ -1,5 +1,5 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import { RiFolderMusicLine } from 'react-icons/ri';
@@ -10,8 +10,9 @@ export const FileUpload = () => {
 
   const { t } = useTranslation();
 
-  const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
-  const [files, setFiles] = useState<File[]>();
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: { 'image/*': [] },
+  });
 
   return (
     <Box
@@ -21,7 +22,9 @@ export const FileUpload = () => {
         border: '3px dashed #00000033',
         borderRadius: '10px',
         marginTop: '30px',
+        cursor: 'pointer',
       }}
+      {...getRootProps()}
     >
       <Box
         sx={{
@@ -106,6 +109,7 @@ export const FileUpload = () => {
           </Typography>
         </Box>
       </Box>
+      <input {...getInputProps()} />
     </Box>
   );
 };
