@@ -15,16 +15,6 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps, ...appProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  if ([`/project-upload`].includes(appProps.router.pathname)) {
-    return (
-      // @ts-expect-error: Todo
-      <RouteGuard>
-        {/* @ts-expect-error: Todo */}
-        <Component {...pageProps} />
-      </RouteGuard>
-    );
-  }
-
   return getLayout(
     // @ts-expect-error: Todo
     <RouteGuard>

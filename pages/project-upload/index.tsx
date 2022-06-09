@@ -9,15 +9,16 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import Layout from '../../common/components/layout';
 import { useTranslation } from 'react-i18next';
 import { FileUpload } from '../../common/components/project-upload/file-upload';
 import { Coworkers } from '../../common/components/project-upload/coworkers';
 import { EmbedUrl } from '../../common/components/project-upload/embed-url';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
 import { BsXCircle } from 'react-icons/bs';
 import { useRouter } from 'next/router';
+import { directus } from '..';
+import { apiClient } from '../../common/data/apiClient';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -27,12 +28,26 @@ const ProjectUpload = () => {
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
 
   const [internExtern, setInternExtern] = useState('Schulprojekt');
+  const [currentUser, setCurrentUser] = useState();
 
   const router = useRouter();
 
   const handleCancelProjectUpload = () => {
     router.push('/');
   };
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const userId = await directus.users.me.read();
+      const userResponse = await apiClient.get(`users/${userId.id}`);
+      if (userResponse.status === 200) {
+        setCurrentUser(userResponse.data.data);
+      }
+    };
+    getCurrentUser();
+  }, [setCurrentUser]);
+
+  console.log(currentUser);
 
   return (
     <Box
@@ -182,11 +197,6 @@ const ProjectUpload = () => {
       </Box>
     </Box>
   );
-};
-
-ProjectUpload.getLayout = function getLayout(page: typeof ProjectUpload) {
-  // @ts-expect-error: Todo
-  return <Layout>{page}</Layout>;
 };
 
 export default ProjectUpload;
