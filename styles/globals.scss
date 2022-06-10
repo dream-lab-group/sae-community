@@ -102,6 +102,15 @@ h6 {
   flex-flow: nowrap !important;
 }
 
+.grid-container-upload {
+  display: grid !important;
+  width: 100%;
+  gap: 10px !important;
+  grid-template-columns: repeat(auto-fit, 110px) !important;
+  justify-content: center;
+  flex-flow: nowrap !important;
+}
+
 .project-button-publish {
   background: #8519f6 !important;
 }

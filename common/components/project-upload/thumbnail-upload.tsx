@@ -17,7 +17,6 @@ export const ThumbnailUpload = () => {
     imageList: ImageListType,
     addUpdateIndex: number[] | undefined,
   ) => {
-    console.log(imageList, addUpdateIndex);
     setSelectedCoverImage(imageList as never[]);
   };
 
