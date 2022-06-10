@@ -129,6 +129,24 @@
     },
     "commentFunction": "Kommentarfunktion"
   },
+  "fileUpload": {
+    "insert": "Füge dein",
+    "thumbnail": "Titelbild",
+    "profilepicture": "Profilbild",
+    "here": "hier ein",
+    "or": "oder",
+    "selectFile": "wähle eine Datei aus",
+    "acceptedFiles": "Zugelassene Datei: JPG, PNG",
+    "acceptedFilesWithMusic": "Zugelassene Datei: JPB, PNG, MP3",
+    "maxSize": "Max. grösse: 5MB",
+    "maxSize10": "Max. grösse: 10MB",
+    "maxSize1": "Max. grösse: 1MB",
+    "picture": "Bild",
+    "audio": "Audio"
+  },
+  "profileUpload": {
+    "publishProfile": "Profil veröffentlichen"
+  },
   "profile": {
     "programSkills": "Programm Skills",
     "interests": "Interessen",
