@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
-import { BsXCircle } from 'react-icons/bs';
 import ReactImageUploading, { ImageListType } from 'react-images-uploading';
+import { IoCloseSharp } from 'react-icons/io5';
 
 export const ThumbnailUpload = () => {
   const theme = useTheme();
@@ -165,7 +165,7 @@ export const ThumbnailUpload = () => {
                   }}
                   onClick={onImageRemoveAll}
                 >
-                  <BsXCircle size={25} />
+                  <IoCloseSharp size={25} />
                 </Box>
               </Box>
             )}

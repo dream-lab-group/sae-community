@@ -1,12 +1,18 @@
 import { Icon, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-export const EmbedUrl = () => {
-  const [embedUrlsList, setEmbedUrlsList] = useState([{}]);
+type embedUrlProps = {
+  embedUrlsList: {}[];
+  setEmbedUrlsList: React.Dispatch<React.SetStateAction<any>>;
+};
 
+export const EmbedUrl = ({
+  embedUrlsList,
+  setEmbedUrlsList,
+}: embedUrlProps) => {
   const addEmbedUrlField = () => {
     setEmbedUrlsList([...embedUrlsList, { embedUrl: '' }]);
   };
@@ -58,6 +64,7 @@ export const EmbedUrl = () => {
             borderRadius: '5px',
           }}
           onClick={addEmbedUrlField}
+          type="button"
         >
           <AddIcon fontSize="large" sx={{ color: '#fff' }} />
         </Box>

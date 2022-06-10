@@ -13,20 +13,20 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { FileUpload } from '../../common/components/project-upload/file-upload';
 import { Coworkers } from '../../common/components/project-upload/coworkers';
 import { EmbedUrl } from '../../common/components/project-upload/embed-url';
 import { useEffect, useState } from 'react';
 import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
-import { BsXCircle } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
 import { useFormik } from 'formik';
 import { Globals } from '../../common/utils/utils';
 import * as yup from 'yup';
-import Head from 'next/head';
+import { IoCloseSharp } from 'react-icons/io5';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -38,6 +38,7 @@ const ProjectUpload = () => {
 
   const [internExtern, setInternExtern] = useState('Schulprojekt');
   const [currentUser, setCurrentUser] = useState<any>();
+  const [embedUrlsList, setEmbedUrlsList] = useState([{}]);
 
   const router = useRouter();
 
@@ -158,7 +159,10 @@ const ProjectUpload = () => {
               />
               <ThumbnailUpload />
               <FileUpload />
-              <EmbedUrl />
+              <EmbedUrl
+                embedUrlsList={embedUrlsList}
+                setEmbedUrlsList={setEmbedUrlsList}
+              />
               <TextField
                 multiline
                 size="small"
@@ -283,7 +287,7 @@ const ProjectUpload = () => {
               }}
               onClick={handleCancelProjectUpload}
             >
-              <BsXCircle size={25} />
+              <IoCloseSharp size={28} />
             </Box>
           </Box>
         </form>
