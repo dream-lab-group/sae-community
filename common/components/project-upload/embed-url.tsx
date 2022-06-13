@@ -1,28 +1,13 @@
-import { Icon, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import React from 'react';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
 type embedUrlProps = {
-  embedUrlsList: {}[];
-  setEmbedUrlsList: React.Dispatch<React.SetStateAction<any>>;
+  removeEmbedUrl: (index: number) => void;
 };
 
-export const EmbedUrl = ({
-  embedUrlsList,
-  setEmbedUrlsList,
-}: embedUrlProps) => {
-  const addEmbedUrlField = () => {
-    setEmbedUrlsList([...embedUrlsList, { embedUrl: '' }]);
-  };
-
-  const removeEmbedUrlField = (index: any) => {
-    const list = [...embedUrlsList];
-    embedUrlsList.splice(index, 1);
-    setEmbedUrlsList(list);
-  };
-
+export const EmbedUrl = ({ removeEmbedUrl }: embedUrlProps) => {
   return (
     <Box
       sx={{
@@ -31,7 +16,7 @@ export const EmbedUrl = ({
         height: '57px',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: '30px',
+        marginTop: '10px',
         flexDirection: 'column',
       }}
     >
@@ -56,17 +41,19 @@ export const EmbedUrl = ({
         </Box>
         <Box
           component="button"
-          className="project-add-button"
           sx={{
             height: '40px',
             width: '40px',
             border: 'none',
             borderRadius: '5px',
+            background: '#ef6351',
+            color: '#fff',
           }}
-          onClick={addEmbedUrlField}
           type="button"
+          // @ts-expect-error: error only during runtime
+          onClick={removeEmbedUrl}
         >
-          <AddIcon fontSize="large" sx={{ color: '#fff' }} />
+          <FaMinus size={20} />
         </Box>
       </Box>
     </Box>

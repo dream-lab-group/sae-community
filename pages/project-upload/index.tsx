@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonBase,
   FormControl,
   FormControlLabel,
   Grid,
@@ -38,9 +39,11 @@ const ProjectUpload = () => {
 
   const [internExtern, setInternExtern] = useState('Schulprojekt');
   const [currentUser, setCurrentUser] = useState<any>();
-  const [embedUrlsList, setEmbedUrlsList] = useState([{}]);
+  const [embedUrls, setEmbedUrls] = useState([]);
 
   const router = useRouter();
+
+  console.log(embedUrls);
 
   const handleCancelProjectUpload = () => {
     router.push('/');
@@ -84,6 +87,18 @@ const ProjectUpload = () => {
       }
     },
   });
+
+  const addEmbedUrl = () => {
+    const newEmbedUrl = [...embedUrls, { embedUrl: '' }];
+    // @ts-expect-error: todo
+    setEmbedUrls(newEmbedUrl);
+  };
+
+  const removeEmbedUrl = (index: number) => {
+    const rows = [...embedUrls];
+    rows.splice(index, 1);
+    setEmbedUrls(rows);
+  };
 
   if (currentUser) {
     return (
@@ -159,10 +174,27 @@ const ProjectUpload = () => {
               />
               <ThumbnailUpload />
               <FileUpload />
-              <EmbedUrl
-                embedUrlsList={embedUrlsList}
-                setEmbedUrlsList={setEmbedUrlsList}
-              />
+              <ButtonBase
+                className="project-add-button"
+                sx={{
+                  marginTop: '20px',
+                  marginBottom: '10px',
+                  padding: '10px 15px',
+                  color: '#fff',
+                  borderRadius: '5px',
+                  alignSelf: 'flex-end',
+                }}
+                onClick={addEmbedUrl}
+              >
+                <Typography>Embeded URL hinzufügen</Typography>
+              </ButtonBase>
+              <>
+                {embedUrls.map((embedUrl, index) => {
+                  return (
+                    <EmbedUrl key={index} removeEmbedUrl={removeEmbedUrl} />
+                  );
+                })}
+              </>
               <TextField
                 multiline
                 size="small"
