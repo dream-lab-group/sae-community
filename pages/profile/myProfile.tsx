@@ -11,7 +11,7 @@ import {
     
     import { UserProfileMyData } from '../../common/components/profile/user-profile-my-data';
     import { FileUpload } from '../../common/components/profile/file-upload';
-    import { UserProfileBottomPart } from '../../common/components/profile/user-profile-bottom-part';
+    import { UserProfileUrls } from '../../common/components/profile/user-profile-urls';
     import { SkillsInterests } from '../../common/components/profile/user-profile-skills-interests';
     import { SessionContextProps } from '../profile';
 
@@ -67,7 +67,7 @@ import {
                 fullWidth
                 sx={{ fontSize: '8px' }}
               />
-              <UserProfileBottomPart />
+              <UserProfileUrls />
               <SkillsInterests />
               {/* Buttons */}
               <Box

@@ -1,12 +1,9 @@
-import { Box, Grid, TextField, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { Globals } from '../../utils/utils';
-import { UserContactInformation } from './user-contact-information';
+import { Grid, TextField } from '@mui/material';
 
 export const UserProfileMyData = () => {
   return (
     <Grid container spacing={2} sx={{ marginTop: '20px' }}>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <TextField
           required
           size="small"
@@ -17,7 +14,7 @@ export const UserProfileMyData = () => {
           sx={{ marginTop: '10px', fontSize: '8px', color: '#00000066' }}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <TextField
           required
           size="small"
@@ -28,7 +25,7 @@ export const UserProfileMyData = () => {
           sx={{ marginTop: '10px', fontSize: '8px' }}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <TextField
           required
           size="small"
@@ -39,7 +36,7 @@ export const UserProfileMyData = () => {
           sx={{ marginTop: '10px', fontSize: '8px' }}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <TextField
           required
           size="small"

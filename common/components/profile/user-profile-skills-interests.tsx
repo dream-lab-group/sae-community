@@ -1,4 +1,8 @@
-import { Autocomplete, Grid, TextField } from '@mui/material';
+import {
+  Autocomplete,
+  Grid,
+  TextField,
+} from '@mui/material';
 
 export const SkillsInterests = () => {
   return (
@@ -8,7 +12,7 @@ export const SkillsInterests = () => {
           multiple
           size="small"
           options={skills}
-          sx={{ width: '100%', marginTop: '20px' }}
+          sx={{marginTop: '20px' }}
           renderInput={(params) => (
             <TextField {...params} label="Programm Skills" />
           )}
@@ -19,10 +23,8 @@ export const SkillsInterests = () => {
           multiple
           size="small"
           options={interests}
-          sx={{ width: '100%', marginTop: '20px' }}
-          renderInput={(params) => (
-            <TextField {...params} label="Interessen" />
-          )}
+          sx={{ width: '100%' }}
+          renderInput={(params) => <TextField {...params} label="Interessen" />}
         />
       </Grid>
     </Grid>
@@ -30,4 +32,8 @@ export const SkillsInterests = () => {
 };
 
 const skills = [{ label: 'HTML' }, { label: 'CSS' }, { label: 'React' }];
-const interests = [{ label: 'Programming' }, { label: 'Drawing' }, { label: 'Gaming' }];
+const interests = [
+  { label: 'Programming' },
+  { label: 'Drawing' },
+  { label: 'Gaming' },
+];

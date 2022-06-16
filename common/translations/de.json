@@ -147,6 +147,11 @@
   "profileUpload": {
     "publishProfile": "Profil veröffentlichen"
   },
+  "profileSettings": {
+      "savePassword": "Speichern",
+      "notifications": "Benachrichtungungen aktualisieren",
+      "deleteProfile": "Profil löschen"
+  },
   "profile": {
     "programSkills": "Programm Skills",
     "interests": "Interessen",
