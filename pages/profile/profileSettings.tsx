@@ -1,8 +1,5 @@
 import {
   Box,
-  Button,
-  TextField,
-  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -18,11 +15,7 @@ export const ProfileSettings = ({ setSessionContext }: SessionContextProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
-  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
-  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
-
+  
   const router = useRouter();
 
   const handleCancelProfileSaving = () => {

@@ -1,27 +1,27 @@
-import {
-  Box,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Box, Skeleton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Layout from '../../common/components/layout';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { FaRegUser } from 'react-icons/fa';
 import { RiSettings3Line } from 'react-icons/ri';
 
-import { EditMyProfile } from './myProfile';
 import { ProfileSettings } from './profileSettings';
+import { GetServerSideProps, NextPage } from 'next';
+import { directus } from '..';
+import { apiClient } from '../../common/data/apiClient';
+import { UserInformation } from '../../common/types/types';
+import { EditMyProfile } from './myProfile';
 
 export type SessionContextProps = {
   setSessionContext?: React.Dispatch<SetStateAction<string>>;
 };
 
-const ProfileOverview = () => {
+const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [sessionContext, setSessionContext] = useState(false);
 
@@ -35,8 +35,37 @@ const ProfileOverview = () => {
     router.push('/public-profile/123');
   };
 
+  const [currentUser, setCurrentUser] = useState<any>('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const userId = await directus.users.me.read();
+      const userResponse = await apiClient.get(`users/${userId.id}`);
+      if (userResponse.status === 200) {
+        setCurrentUser(userResponse.data.data);
+        setIsLoading(false);
+      }
+    };
+    getCurrentUser();
+  }, [setCurrentUser]);
+
+  console.log(currentUser);
+
   return (
     <>
+    {isLoading ? (
+        <Skeleton
+        variant="rectangular"
+        animation="wave"
+        sx={{
+          borderRadius: '10px',
+          marginBottom: `${smBreakpointDown && '20px'}`,
+          height: '100%',
+          width: '100%',
+        }}
+      />
+    ) : (
       <Box
         sx={{
           width: '100%',
@@ -56,9 +85,20 @@ const ProfileOverview = () => {
             display: 'flex',
           }}
         />
-        {sessionContext === false ? <EditMyProfile /> : <ProfileSettings />}
+        {sessionContext === false ? (
+          <EditMyProfile userData={currentUser} />
+        ) : (
+          <ProfileSettings />
+        )}
         {/* Fixed Buttons */}
-        <Box sx={{ zIndex:5, position: 'fixed', right: 0, top: `${lgBreakpointDown ? '150px' : '208px'}`, }}>
+        <Box
+          sx={{
+            zIndex: 5,
+            position: 'fixed',
+            right: 0,
+            top: `${lgBreakpointDown ? '150px' : '208px'}`,
+          }}
+        >
           <Box
             component="button"
             sx={{
@@ -131,10 +171,13 @@ const ProfileOverview = () => {
           </Box>
         </Box>
       </Box>
+    )}
+
     </>
   );
 };
 
+// @ts-expect-error:  todo
 ProfileOverview.getLayout = function getLayout(page: typeof ProfileOverview) {
   // @ts-expect-error: Todo
   return <Layout>{page}</Layout>;

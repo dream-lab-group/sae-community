@@ -148,16 +148,24 @@
     "publishProfile": "Profil veröffentlichen"
   },
   "profileSettings": {
-      "savePassword": "Speichern",
-      "notifications": "Benachrichtungungen aktualisieren",
-      "deleteProfile": "Profil löschen"
+    "savePassword": "Speichern",
+    "notifications": "Benachrichtungungen aktualisieren",
+    "deleteProfile": "Profil löschen"
   },
   "profile": {
+    "myProfile": "Mein Profil",
     "programSkills": "Programm Skills",
     "interests": "Interessen",
     "contactNow": "Jetzt kontaktieren",
     "aboutMe": "Über mich",
     "lastProjects": "Letzte Projekte",
-    "viewAll": "Alle ansehen"
+    "viewAll": "Alle ansehen",
+    "roles": {
+      "e8b9e5f2-788e-46f1-8a93-5d61ecf53c15": "Alumni"
+    }
+  },
+  "404": {
+    "description": "Oops, etwas scheint falsch gelaufen zu sein!",
+    "back": "Zurück zur Homepage"
   }
 }

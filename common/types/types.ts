@@ -86,3 +86,12 @@ export interface ProjectDto {
   external_project: boolean;
   project_files: [] | null;
 }
+
+export interface UserInformation{
+      id: string;
+      first_name: string;
+      last_name: string;
+      email: string;
+      description: string;
+      course: string;
+}
