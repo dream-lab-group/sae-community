@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { ChangeEvent } from 'react';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaMinus } from 'react-icons/fa';
 
 type embedUrlProps = {
   name: string;
@@ -9,7 +9,11 @@ type embedUrlProps = {
   removeEmbedUrl: (index: number) => void;
 };
 
-export const EmbedUrl = ({ name, removeEmbedUrl }: embedUrlProps) => {
+export const EmbedUrl = ({
+  name,
+  formikProps,
+  removeEmbedUrl,
+}: embedUrlProps) => {
   return (
     <Box
       sx={{
@@ -38,6 +42,13 @@ export const EmbedUrl = ({ name, removeEmbedUrl }: embedUrlProps) => {
             label="Embed URL"
             variant="outlined"
             type="text"
+            value={formikProps.values.embedUrl}
+            onChange={(value) =>
+              formikProps.setFieldValue(
+                'embedUrls',
+                value !== null ? value : formikProps.initialValues.embedUrls,
+              )
+            }
             sx={{ fontSize: '8px' }}
           />
         </Box>
