@@ -5,13 +5,16 @@ import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import ReactImageUploading, { ImageListType } from 'react-images-uploading';
 import { IoCloseSharp } from 'react-icons/io5';
+import { ProjectUploadProps } from '../../types/types';
+import { useField } from 'formik';
 
-export const ThumbnailUpload = () => {
+export const ThumbnailUpload = ({ label, ...props }: ProjectUploadProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation();
   const [selectedCoverImage, setSelectedCoverImage] = useState([]);
   const acceptedFileTypes = ['jpg', 'jpeg', 'png'];
+  const [field, meta] = useField(props);
 
   const coverImageChangeHandler = (
     imageList: ImageListType,

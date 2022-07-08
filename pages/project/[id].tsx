@@ -15,7 +15,7 @@ import { ProjectPictures } from '../../common/components/project/project-picture
 import { BiMessageDetail } from 'react-icons/bi';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FiMail } from 'react-icons/fi';
-import Head from 'next/head';
+import { CommunityHead } from '../../common/components/community-head';
 
 const Project = () => {
   const router = useRouter();
@@ -31,15 +31,7 @@ const Project = () => {
 
   return (
     <>
-      <Head>
-        <title>SAI Community</title>
-        <meta name="author" content="Hadrian Chio" />
-        <meta
-          name="description"
-          content="SAI Community is a project platform designed for an interdisciplinary bachelor project at SAE Institute Zurich where students can share and react to each others projects."
-        />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <CommunityHead />
       <Box
         sx={{
           width: '100%',

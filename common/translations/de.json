@@ -126,7 +126,8 @@
       "maxSize10": "Max. grösse: 10MB",
       "picture": "Bild",
       "audio": "Audio"
-    }
+    },
+    "commentFunction": "Kommentarfunktion"
   },
   "profile": {
     "programSkills": "Programm Skills",

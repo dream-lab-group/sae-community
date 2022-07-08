@@ -1,13 +1,15 @@
 import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
 type embedUrlProps = {
+  name: string;
+  formikProps: any;
   removeEmbedUrl: (index: number) => void;
 };
 
-export const EmbedUrl = ({ removeEmbedUrl }: embedUrlProps) => {
+export const EmbedUrl = ({ name, removeEmbedUrl }: embedUrlProps) => {
   return (
     <Box
       sx={{
@@ -32,10 +34,10 @@ export const EmbedUrl = ({ removeEmbedUrl }: embedUrlProps) => {
           <TextField
             fullWidth
             size="small"
-            id="embedUrl"
-            name="embedUrld"
+            name={name}
             label="Embed URL"
             variant="outlined"
+            type="text"
             sx={{ fontSize: '8px' }}
           />
         </Box>

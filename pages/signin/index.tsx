@@ -1,7 +1,7 @@
 import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import Head from 'next/head';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { CommunityHead } from '../../common/components/community-head';
 import { LogIn } from '../../common/components/session/login';
 import { ResetPassword } from '../../common/components/session/reset-password';
 import { SignUp } from '../../common/components/session/sign-up';
@@ -21,15 +21,7 @@ const SignIn = () => {
 
   return (
     <>
-      <Head>
-        <title>SAI Community</title>
-        <meta name="author" content="Hadrian Chio" />
-        <meta
-          name="description"
-          content="SAI Community is a project platform designed for an interdisciplinary bachelor project at SAE Institute Zurich where students can share and react to each others projects."
-        />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <CommunityHead />
       <Grid
         container
         width="auto"

@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { AppBarHeader } from './app-header';
 
 import { CustomNavbar } from './navigation-elements/custom-navbar';
-import Head from 'next/head';
 import { Footer } from './footer/footer';
+import { CommunityHead } from './community-head';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
@@ -30,15 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <Head>
-        <title>SAI Community</title>
-        <meta name="author" content="Hadrian Chio" />
-        <meta
-          name="description"
-          content="SAI Community is a project platform designed for an interdisciplinary bachelor project at SAE Institute Zurich where students can share and react to each others projects."
-        />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <CommunityHead />
       <Box sx={{ width: '100%' }}>
         <AppBarHeader
           menuOpen={menuOpen}
