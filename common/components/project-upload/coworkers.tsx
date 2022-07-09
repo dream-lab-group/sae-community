@@ -1,20 +1,41 @@
 import { Autocomplete, Grid, TextField } from '@mui/material';
+import { ProjectUploadProps } from '../../types/types';
 
-export const Coworkers = () => {
+export const Coworkers = ({
+  label,
+  formikProps,
+  ...props
+}: ProjectUploadProps) => {
   return (
     <Grid item sm={12} md={6} width="100%">
       <Autocomplete
         multiple
         size="small"
-        options={students}
+        options={collaborators}
         sx={{ width: '100%', marginTop: '20px' }}
-        renderInput={(params) => <TextField {...params} label="Coworker" />}
+        onChange={(e, value) => {
+          formikProps.setFieldValue(
+            'collaborators',
+            value !== null ? value : formikProps.initialValues.collaborators,
+          );
+        }}
+        renderInput={(params) => (
+          <>
+            <TextField
+              {...props}
+              {...params}
+              label={label}
+              name={props.name}
+              value={formikProps.values.collaborators}
+            />
+          </>
+        )}
       />
     </Grid>
   );
 };
 
-const students = [
+const collaborators = [
   { label: 'Hadrian Chio', firstname: 'Hadrian', lastname: 'Chio' },
   { label: 'Sarah Candolfi', firstname: 'Sarah', lastname: 'Candolfi' },
   { label: 'Claudio Mühle', firstname: 'Claudio', lastname: 'Mühle' },

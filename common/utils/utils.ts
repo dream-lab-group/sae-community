@@ -27,6 +27,16 @@ export class Globals {
     'alumni',
   ];
 
+  public static readonly uploadCourses = [
+    'film',
+    'gameart',
+    'gamesprogramming',
+    'webdesign',
+    'audio',
+    'visualeffects',
+    'contentcreation',
+  ];
+
   public static readonly mobileMenuElements = [
     'blog',
     'jobboard',

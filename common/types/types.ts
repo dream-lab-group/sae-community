@@ -55,3 +55,11 @@ export interface ProjectProperties {
   user_created: string;
   course: string;
 }
+
+export type ProjectUploadProps = {
+  id: string;
+  label: string;
+  name: string;
+  type?: string;
+  formikProps?: any;
+};

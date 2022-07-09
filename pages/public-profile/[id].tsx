@@ -5,7 +5,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useRouter } from 'next/router';
 import Layout from '../../common/components/layout';
 import { LastProjects } from '../../common/components/profile/last-projects';
 import { UserDescription } from '../../common/components/profile/user-description';
