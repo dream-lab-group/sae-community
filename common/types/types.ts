@@ -94,4 +94,7 @@ export interface UserInformation{
       email: string;
       description: string;
       course: string;
+      urls: string;
+      programs: string;
+      interests: string;
 }

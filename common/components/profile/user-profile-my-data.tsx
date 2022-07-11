@@ -2,8 +2,8 @@ import { Grid, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { FileUpload } from './file-upload';
-import { SkillsInterests } from './user-profile-skills-interests';
-import { UserProfileUrls } from './user-profile-urls';
+/* import { SkillsInterests } from './user-profile-skills-interests';
+import { UserProfileUrls } from './user-profile-urls'; */
 
 type UserProfileMyDataProps = {
   id?: string | null;
@@ -12,6 +12,7 @@ type UserProfileMyDataProps = {
   email: string;
   description: string;
   course: string;
+  urls: string;
 };
 
 export const UserProfileMyData = ({
@@ -21,6 +22,7 @@ export const UserProfileMyData = ({
   email,
   description,
   course,
+  urls
 }: UserProfileMyDataProps) => {
   const { t } = useTranslation();
 
@@ -73,8 +75,7 @@ export const UserProfileMyData = ({
               size="small"
               id="profession"
               label="Fachrichtung"
-              //   @ts-expect-error: Translation is okay
-              defaultValue={t(`profile.roles.${course}`)}
+              defaultValue={course}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -98,8 +99,8 @@ export const UserProfileMyData = ({
           fullWidth
           sx={{ fontSize: '8px' }}
         />
-        <UserProfileUrls />
-        <SkillsInterests />
+{/*         <UserProfileUrls UserProfileMyDataProps={urls} />
+        <SkillsInterests /> */}
       </>
     );
   } else {

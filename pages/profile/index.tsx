@@ -1,4 +1,10 @@
-import { Box, Skeleton, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  Skeleton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import Layout from '../../common/components/layout';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
@@ -7,12 +13,13 @@ import { FaRegUser } from 'react-icons/fa';
 import { RiSettings3Line } from 'react-icons/ri';
 
 import { ProfileSettings } from './profileSettings';
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
 import { UserInformation } from '../../common/types/types';
 import { EditMyProfile } from './myProfile';
-
+/* import { UserProfileUrls } from '../../common/components/profile/user-profile-urls';
+ */
 export type SessionContextProps = {
   setSessionContext?: React.Dispatch<SetStateAction<string>>;
 };
@@ -45,134 +52,135 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
       if (userResponse.status === 200) {
         setCurrentUser(userResponse.data.data);
         setIsLoading(false);
+        console.log(userResponse.data.data)
       }
     };
     getCurrentUser();
   }, [setCurrentUser]);
 
-  console.log(currentUser);
-
   return (
     <>
-    {isLoading ? (
+      {isLoading ? (
         <Skeleton
-        variant="rectangular"
-        animation="wave"
-        sx={{
-          borderRadius: '10px',
-          marginBottom: `${smBreakpointDown && '20px'}`,
-          height: '100%',
-          width: '100%',
-        }}
-      />
-    ) : (
-      <Box
-        sx={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          position: 'relative',
-        }}
-      >
-        {/* Polygon */}
-        <Box
+          variant="rectangular"
+          animation="wave"
           sx={{
-            height: '60px',
-            background: '#192D3E',
+            borderRadius: '10px',
+            marginBottom: `${smBreakpointDown && '20px'}`,
+            height: '100%',
             width: '100%',
-            clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
-            display: 'flex',
           }}
         />
-        {sessionContext === false ? (
-          <EditMyProfile userData={currentUser} />
-        ) : (
-          <ProfileSettings />
-        )}
-        {/* Fixed Buttons */}
+      ) : (
         <Box
           sx={{
-            zIndex: 5,
-            position: 'fixed',
-            right: 0,
-            top: `${lgBreakpointDown ? '150px' : '208px'}`,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            position: 'relative',
           }}
         >
+          {/* Polygon */}
           <Box
-            component="button"
             sx={{
-              border: 'none',
-              background: sessionContext ? '#e8e9eb' : '#bdbdbd',
-              padding: `${lgBreakpointDown ? '0px' : '10px'}`,
-              width: `${lgBreakpointDown ? '80px' : '147px'}`,
-              height: `${lgBreakpointDown ? '50px' : '97px'}`,
-              borderTopLeftRadius: '5px',
-              borderBottomLeftRadius: '5px',
-              marginBottom: '20px',
+              height: '60px',
+              background: '#192D3E',
+              width: '100%',
+              clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
               display: 'flex',
-              justifyContent: 'center',
-              alignItems: `${lgBreakpointDown ? 'center' : 'flex-start'}`,
-              flexDirection: 'column',
-              cursor: 'pointer',
             }}
-            onClick={toggleFunc}
+          />
+          {sessionContext === false ? (
+            <>
+            <EditMyProfile userData={currentUser} />
+            {/* <UserProfileUrls userData={currentUser} /> */}
+            </>
+          ) : (
+            <ProfileSettings />
+          )}
+          {/* Fixed Buttons */}
+          <Box
+            sx={{
+              zIndex: 5,
+              position: 'fixed',
+              right: 0,
+              top: `${lgBreakpointDown ? '150px' : '208px'}`,
+            }}
           >
-            <FaRegUser
-              style={{
-                margin: '10px',
-                fontSize: `${lgBreakpointDown ? '22px' : '36px'}`,
-              }}
-            />
-            <Typography
+            <Box
+              component="button"
               sx={{
-                fontSize: '14px',
-                display: `${lgBreakpointDown ? 'none' : 'block'}`,
+                border: 'none',
+                background: sessionContext ? '#e8e9eb' : '#bdbdbd',
+                padding: `${lgBreakpointDown ? '0px' : '10px'}`,
+                width: `${lgBreakpointDown ? '80px' : '147px'}`,
+                height: `${lgBreakpointDown ? '50px' : '97px'}`,
+                borderTopLeftRadius: '5px',
+                borderBottomLeftRadius: '5px',
+                marginBottom: '20px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: `${lgBreakpointDown ? 'center' : 'flex-start'}`,
+                flexDirection: 'column',
+                cursor: 'pointer',
               }}
+              onClick={toggleFunc}
             >
-              Mein Profil
-            </Typography>
-          </Box>
+              <FaRegUser
+                style={{
+                  margin: '10px',
+                  fontSize: `${lgBreakpointDown ? '22px' : '36px'}`,
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: '14px',
+                  display: `${lgBreakpointDown ? 'none' : 'block'}`,
+                }}
+              >
+                Mein Profil
+              </Typography>
+            </Box>
 
-          <Box
-            component="button"
-            sx={{
-              border: 'none',
-              background: !sessionContext ? '#e8e9eb' : '#bdbdbd',
-              padding: `${lgBreakpointDown ? '0px' : '10px'}`,
-              width: `${lgBreakpointDown ? '80px' : '147px'}`,
-              height: `${lgBreakpointDown ? '50px' : '97px'}`,
-              borderTopLeftRadius: '5px',
-              borderBottomLeftRadius: '5px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: `${lgBreakpointDown ? 'center' : 'flex-start'}`,
-              flexDirection: 'column',
-              cursor: 'pointer',
-            }}
-            onClick={toggleFunc}
-            /*                     onClick={handleCancelProfileSaving}
-             */
-          >
-            <RiSettings3Line
-              style={{
-                margin: '10px',
-                fontSize: `${lgBreakpointDown ? '24px' : '36px'}`,
-              }}
-            />
-            <Typography
+            <Box
+              component="button"
               sx={{
-                fontSize: '14px',
-                display: `${lgBreakpointDown ? 'none' : 'block'}`,
+                border: 'none',
+                background: !sessionContext ? '#e8e9eb' : '#bdbdbd',
+                padding: `${lgBreakpointDown ? '0px' : '10px'}`,
+                width: `${lgBreakpointDown ? '80px' : '147px'}`,
+                height: `${lgBreakpointDown ? '50px' : '97px'}`,
+                borderTopLeftRadius: '5px',
+                borderBottomLeftRadius: '5px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: `${lgBreakpointDown ? 'center' : 'flex-start'}`,
+                flexDirection: 'column',
+                cursor: 'pointer',
               }}
+              onClick={toggleFunc}
+              /*                     onClick={handleCancelProfileSaving}
+               */
             >
-              Profil Einstellungen
-            </Typography>
+              <RiSettings3Line
+                style={{
+                  margin: '10px',
+                  fontSize: `${lgBreakpointDown ? '24px' : '36px'}`,
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: '14px',
+                  display: `${lgBreakpointDown ? 'none' : 'block'}`,
+                }}
+              >
+                Profil Einstellungen
+              </Typography>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    )}
-
+      )}
     </>
   );
 };

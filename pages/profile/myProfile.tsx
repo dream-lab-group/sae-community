@@ -9,12 +9,14 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { UserProfileMyData } from '../../common/components/profile/user-profile-my-data';
 import { UserInformation } from '../../common/types/types';
+import { UserProfileUrls } from '../../common/components/profile/user-profile-urls';
+import { SkillsInterests } from '../../common/components/profile/user-profile-skills-interests';
 
 type EditMyProfileProps = {
-      userData:  UserInformation
-}
+  userData: UserInformation;
+};
 
-export const EditMyProfile = ({userData}: EditMyProfileProps) => {
+export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -27,20 +29,6 @@ export const EditMyProfile = ({userData}: EditMyProfileProps) => {
     router.push('/public-profile/123');
   };
 
-  /*   const [currentUser, setCurrentUser] = useState<any>('');
-   */
-  /*   useEffect(() => {
-    const getCurrentUser = async () => {
-      const userId = await directus.users.me.read();
-      const userResponse = await apiClient.get(`users/${userId.id}`);
-      if (userResponse.status === 200) {
-        setCurrentUser(userResponse.data.data);
-      }
-    };
-    getCurrentUser();
-  }, [setCurrentUser]);
-
-  console.log(currentUser); */
   return (
     <>
       {/* Content */}
@@ -66,14 +54,39 @@ export const EditMyProfile = ({userData}: EditMyProfileProps) => {
           >
             {t('profile.myProfile')}
           </Typography>
-              <UserProfileMyData
-                key={userData.id}
-                first_name={userData.first_name}
-                last_name={userData.last_name}
-                email={userData.email}
-                description={userData.description}
-                course={userData.course}
-              />
+          <UserProfileMyData
+            key={userData.id}
+            first_name={userData.first_name}
+            last_name={userData.last_name}
+            email={userData.email}
+            description={userData.description}
+            course={userData.course}
+            urls={userData.urls}
+            programs={userData.programs}
+            interests={userData.interests}
+          />
+          <UserProfileUrls
+            key={userData.id}
+            first_name={userData.first_name}
+            last_name={userData.last_name}
+            email={userData.email}
+            description={userData.description}
+            course={userData.course}
+            urls={userData.urls}
+            programs={userData.programs}
+            interests={userData.interests}
+          />
+            <SkillsInterests
+            key={userData.id}
+            first_name={userData.first_name}
+            last_name={userData.last_name}
+            email={userData.email}
+            description={userData.description}
+            course={userData.course}
+            urls={userData.urls}
+            programs={userData.programs}
+            interests={userData.interests}
+          />
           <Box
             sx={{
               width: '100%',
@@ -114,12 +127,3 @@ export const EditMyProfile = ({userData}: EditMyProfileProps) => {
     </>
   );
 };
-
-
-/* // @ts-expect-error: Todo
-EditMyProfile.getLayout = function getLayout(page: typeof EditMyProfile) {
-  // @ts-expect-error: Todo
-  return <Layout>{page}</Layout>;
-}; */
-/* export default EditMyProfile;
- */

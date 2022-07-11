@@ -6,9 +6,33 @@ import {
   useTheme,
 } from '@mui/material';
 
-export const SkillsInterests = () => {
-      const theme = useTheme();
-      const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+type UserSkillsProps = {
+  id?: string | null;
+  first_name: string;
+  last_name: string;
+  email: string;
+  description: string;
+  course: string;
+  urls: string;
+  programs: string;
+  interests: string;
+};
+
+export const SkillsInterests = ({
+  id,
+  first_name,
+  last_name,
+  email,
+  description,
+  course,
+  urls,
+  programs,
+  interests,
+}: UserSkillsProps) => {
+  const theme = useTheme();
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const programsData = Object.values(programs);
+  const interestsData = Object.values(interests);
 
   return (
     <Grid container spacing={2}>
@@ -16,8 +40,8 @@ export const SkillsInterests = () => {
         <Autocomplete
           multiple
           size="small"
-          options={skills}
-          sx={{marginTop: '20px' }}
+          options={programsData}
+          sx={{ marginTop: '20px' }}
           renderInput={(params) => (
             <TextField {...params} label="Programm Skills" />
           )}
@@ -27,18 +51,14 @@ export const SkillsInterests = () => {
         <Autocomplete
           multiple
           size="small"
-          options={interests}
-          sx={{ width: '100%', marginTop: `${mdBreakpointDown ? "0px" : "20px"}` }}
+          options={interestsData}
+          sx={{
+            width: '100%',
+            marginTop: `${mdBreakpointDown ? '0px' : '20px'}`,
+          }}
           renderInput={(params) => <TextField {...params} label="Interessen" />}
         />
       </Grid>
     </Grid>
   );
 };
-
-const skills = [{ label: 'HTML' }, { label: 'CSS' }, { label: 'React' }];
-const interests = [
-  { label: 'Programming' },
-  { label: 'Drawing' },
-  { label: 'Gaming' },
-];
