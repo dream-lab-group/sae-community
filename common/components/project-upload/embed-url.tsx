@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { ChangeEvent } from 'react';
 import { FaMinus } from 'react-icons/fa';
@@ -9,11 +9,7 @@ type embedUrlProps = {
   removeEmbedUrl: (index: number) => void;
 };
 
-export const EmbedUrl = ({
-  name,
-  formikProps,
-  removeEmbedUrl,
-}: embedUrlProps) => {
+export const EmbedUrl = () => {
   return (
     <Box
       sx={{
@@ -32,39 +28,37 @@ export const EmbedUrl = ({
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          position: 'relative',
+          height: '50px',
         }}
       >
-        <Box sx={{ width: '85%' }}>
-          <TextField
-            fullWidth
-            size="small"
-            name={name}
-            label="Embed URL"
-            variant="outlined"
-            type="text"
-            value={formikProps.values.embedUrl}
-            onChange={(value) =>
-              formikProps.setFieldValue(
-                'embedUrls',
-                value !== null ? value : formikProps.initialValues.embedUrls,
-              )
-            }
-            sx={{ fontSize: '8px' }}
-          />
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+            border: '1px solid black',
+            borderRadius: '5px',
+            display: 'flex',
+            alignItems: 'center',
+            paddingX: '15px',
+          }}
+        >
+          <Typography>What</Typography>
         </Box>
         <Box
           component="button"
           sx={{
-            height: '40px',
-            width: '40px',
+            height: '100%',
+            width: '60px',
             border: 'none',
-            borderRadius: '5px',
+            borderRadius: '0 5px 5px 0',
             background: '#ef6351',
             color: '#fff',
+            position: 'absolute',
+            right: 0,
+            cursor: 'pointer',
           }}
           type="button"
-          // @ts-expect-error: error only during runtime
-          onClick={removeEmbedUrl}
         >
           <FaMinus size={20} />
         </Box>

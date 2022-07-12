@@ -38,7 +38,6 @@ const ProjectUpload = () => {
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [currentUser, setCurrentUser] = useState<any>();
-  const [embedUrls, setEmbedUrls] = useState([]);
 
   const router = useRouter();
 
@@ -65,18 +64,6 @@ const ProjectUpload = () => {
     description: yup.string().required('Bitte beschreibe das Projekt'),
     course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
-
-  const addEmbedUrl = () => {
-    const newEmbedUrl = [...embedUrls, { embedUrl: '' }];
-    // @ts-expect-error: todo
-    setEmbedUrls(newEmbedUrl);
-  };
-
-  const removeEmbedUrl = (index: number) => {
-    const rows = [...embedUrls];
-    rows.splice(index, 1);
-    setEmbedUrls(rows);
-  };
 
   if (currentUser) {
     return (
@@ -173,32 +160,45 @@ const ProjectUpload = () => {
                     type="text"
                   />
                   <FileUpload />
-                  <ButtonBase
-                    className="project-add-button"
+                  <Box
                     sx={{
+                      width: '100%',
+                      height: '56px',
                       marginTop: '20px',
                       marginBottom: '10px',
-                      padding: '10px 15px',
-                      color: '#fff',
-                      borderRadius: '5px',
-                      alignSelf: 'flex-end',
+                      display: 'flex',
+                      justifyContent: 'space-between',
                     }}
-                    onClick={addEmbedUrl}
                   >
-                    <Typography>Embeded URL hinzufügen</Typography>
-                  </ButtonBase>
-                  <>
-                    {embedUrls.map((embedUrl, index) => {
-                      return (
-                        <EmbedUrl
-                          key={index}
-                          removeEmbedUrl={removeEmbedUrl}
-                          name="embedUrl"
-                          formikProps={props}
-                        />
-                      );
-                    })}
-                  </>
+                    <TextField
+                      id="videoUrl"
+                      name="videoUrl"
+                      label="Video Url"
+                      sx={{ width: '75%' }}
+                      variant="outlined"
+                      onChange={(value) => {
+                        props.setFieldValue(
+                          'embedUrls',
+                          value !== null
+                            ? value
+                            : props.initialValues.embedUrls,
+                        );
+                      }}
+                    />
+                    <ButtonBase
+                      className="project-add-button"
+                      sx={{
+                        height: '100%',
+                        padding: '10px 15px',
+                        color: '#fff',
+                        borderRadius: '5px',
+                        alignSelf: 'flex-end',
+                      }}
+                    >
+                      <Typography>URL hinzufügen</Typography>
+                    </ButtonBase>
+                  </Box>
+                  <EmbedUrl />
                   <TextField
                     multiline
                     size="small"
