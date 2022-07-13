@@ -1,15 +1,30 @@
-import { TextField, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { ChangeEvent } from 'react';
+import { FieldArrayRenderProps } from 'formik';
+import React, { useState } from 'react';
 import { FaMinus } from 'react-icons/fa';
 
 type embedUrlProps = {
-  name: string;
-  formikProps: any;
-  removeEmbedUrl: (index: number) => void;
+  index: number;
+  url: string;
+  urlArray: never[];
+  formikProps: FieldArrayRenderProps;
 };
 
-export const EmbedUrl = () => {
+export const EmbedUrl = ({
+  index,
+  url,
+  urlArray,
+  formikProps,
+}: embedUrlProps) => {
+  const [urlList, setUrlList] = useState(urlArray);
+
+  const removeUrl = () => {
+    const rows = [...urlArray];
+    rows.splice(index, index);
+    setUrlList(rows);
+  };
+
   return (
     <Box
       sx={{
@@ -36,14 +51,14 @@ export const EmbedUrl = () => {
           sx={{
             width: '100%',
             height: '100%',
-            border: '1px solid black',
+            border: '1px solid #bdbdbd',
             borderRadius: '5px',
             display: 'flex',
             alignItems: 'center',
             paddingX: '15px',
           }}
         >
-          <Typography>What</Typography>
+          <Typography>{url}</Typography>
         </Box>
         <Box
           component="button"
@@ -59,6 +74,7 @@ export const EmbedUrl = () => {
             cursor: 'pointer',
           }}
           type="button"
+          onClick={removeUrl}
         >
           <FaMinus size={20} />
         </Box>

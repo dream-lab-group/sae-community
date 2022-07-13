@@ -18,8 +18,7 @@ import { CommunityHead } from '../../common/components/community-head';
 import { useTranslation } from 'react-i18next';
 import { FileUpload } from '../../common/components/project-upload/file-upload';
 import { Coworkers } from '../../common/components/project-upload/coworkers';
-import { EmbedUrl } from '../../common/components/project-upload/embed-url';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
 import { useRouter } from 'next/router';
 import { directus } from '..';
@@ -28,6 +27,7 @@ import { Formik } from 'formik';
 import { Globals } from '../../common/utils/utils';
 import * as yup from 'yup';
 import { IoCloseSharp } from 'react-icons/io5';
+import AddEmbedUrl from '../../common/components/project-upload/add-embed-url';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -75,7 +75,6 @@ const ProjectUpload = () => {
             course: '',
             description: '',
             collaborators: { label: '', firstname: '', lastname: '' },
-            embedUrls: { embedUrl: '' },
             commentFunction: false,
             internExtern: false,
           }}
@@ -160,45 +159,7 @@ const ProjectUpload = () => {
                     type="text"
                   />
                   <FileUpload />
-                  <Box
-                    sx={{
-                      width: '100%',
-                      height: '56px',
-                      marginTop: '20px',
-                      marginBottom: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <TextField
-                      id="videoUrl"
-                      name="videoUrl"
-                      label="Video Url"
-                      sx={{ width: '75%' }}
-                      variant="outlined"
-                      onChange={(value) => {
-                        props.setFieldValue(
-                          'embedUrls',
-                          value !== null
-                            ? value
-                            : props.initialValues.embedUrls,
-                        );
-                      }}
-                    />
-                    <ButtonBase
-                      className="project-add-button"
-                      sx={{
-                        height: '100%',
-                        padding: '10px 15px',
-                        color: '#fff',
-                        borderRadius: '5px',
-                        alignSelf: 'flex-end',
-                      }}
-                    >
-                      <Typography>URL hinzufügen</Typography>
-                    </ButtonBase>
-                  </Box>
-                  <EmbedUrl />
+                  <AddEmbedUrl />
                   <TextField
                     multiline
                     size="small"
