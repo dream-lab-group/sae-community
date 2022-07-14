@@ -23,11 +23,11 @@ import { ThumbnailUpload } from '../../common/components/project-upload/thumbnai
 import { useRouter } from 'next/router';
 import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
-import { Formik } from 'formik';
+import { FieldArray, Formik, FormikProvider } from 'formik';
 import { Globals } from '../../common/utils/utils';
 import * as yup from 'yup';
 import { IoCloseSharp } from 'react-icons/io5';
-import AddEmbedUrl from '../../common/components/project-upload/add-embed-url';
+import { EmbedUrl } from '../../common/components/project-upload/embed-url';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -65,6 +65,7 @@ const ProjectUpload = () => {
     course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
+  const [newUrl, setNewUrl] = useState('');
   if (currentUser) {
     return (
       <>
@@ -75,6 +76,7 @@ const ProjectUpload = () => {
             course: '',
             description: '',
             collaborators: { label: '', firstname: '', lastname: '' },
+            embedUrls: [],
             commentFunction: false,
             internExtern: false,
           }}
@@ -159,7 +161,74 @@ const ProjectUpload = () => {
                     type="text"
                   />
                   <FileUpload />
-                  <AddEmbedUrl />
+                  <>
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '56px',
+                        marginTop: '20px',
+                        marginBottom: '10px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      {/* @ts-expect-error: todo */}
+                      <FormikProvider value={props}>
+                        <TextField
+                          id="videoUrl"
+                          name="videoUrl"
+                          label="Video Url"
+                          sx={{ width: '75%' }}
+                          variant="outlined"
+                          value={newUrl}
+                          onChange={(event) => {
+                            setNewUrl(event.target.value);
+                          }}
+                        />
+                        <ButtonBase
+                          className="project-add-button"
+                          sx={{
+                            height: '100%',
+                            padding: '10px 15px',
+                            color: '#fff',
+                            borderRadius: '5px',
+                            alignSelf: 'flex-end',
+                          }}
+                          onClick={() => {
+                            const newEmbedUrls = [
+                              ...props.values.embedUrls,
+                              {
+                                url: newUrl,
+                              },
+                            ];
+                            props.setFieldValue('embedUrls', newEmbedUrls);
+                            setNewUrl('');
+                          }}
+                        >
+                          <Typography>URL hinzufügen</Typography>
+                        </ButtonBase>
+                      </FormikProvider>
+                    </Box>
+                    {/* @ts-expect-error: todo */}
+                    <FieldArray
+                      name="embedUrls"
+                      render={(arrayProps) => (
+                        <>
+                          {props.values.embedUrls.length > 0 &&
+                            // @ts-expect-error: todo
+                            props.values.embedUrls.map(({ url }, index) => (
+                              <EmbedUrl
+                                key={index}
+                                index={index}
+                                url={url}
+                                urlArray={props.values.embedUrls}
+                                formikProps={arrayProps}
+                              />
+                            ))}
+                        </>
+                      )}
+                    />
+                  </>
                   <TextField
                     multiline
                     size="small"
