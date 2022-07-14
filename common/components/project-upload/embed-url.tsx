@@ -1,30 +1,15 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { FieldArrayRenderProps } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import { FaMinus } from 'react-icons/fa';
 
 type embedUrlProps = {
   index: number;
   url: string;
   urlArray: never[];
-  formikProps: FieldArrayRenderProps;
 };
 
-export const EmbedUrl = ({
-  index,
-  url,
-  urlArray,
-  formikProps,
-}: embedUrlProps) => {
-  const [urlList, setUrlList] = useState(urlArray);
-
-  const removeUrl = () => {
-    const rows = [...urlArray];
-    rows.splice(index, index);
-    setUrlList(rows);
-  };
-
+export const EmbedUrl = ({ index, url, urlArray }: embedUrlProps) => {
   return (
     <Box
       sx={{
@@ -74,7 +59,7 @@ export const EmbedUrl = ({
             cursor: 'pointer',
           }}
           type="button"
-          onClick={removeUrl}
+          onClick={() => console.log('test')}
         >
           <FaMinus size={20} />
         </Box>

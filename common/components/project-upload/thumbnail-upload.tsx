@@ -14,7 +14,6 @@ export const ThumbnailUpload = ({ label, ...props }: ProjectUploadProps) => {
   const { t } = useTranslation();
   const [selectedCoverImage, setSelectedCoverImage] = useState([]);
   const acceptedFileTypes = ['jpg', 'jpeg', 'png'];
-  const [field, meta] = useField(props);
 
   const coverImageChangeHandler = (
     imageList: ImageListType,
