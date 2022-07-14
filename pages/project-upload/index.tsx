@@ -23,7 +23,7 @@ import { ThumbnailUpload } from '../../common/components/project-upload/thumbnai
 import { useRouter } from 'next/router';
 import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
-import { FieldArray, Formik, FormikProvider, useFormik } from 'formik';
+import { FormikProvider, useFormik } from 'formik';
 import { Globals } from '../../common/utils/utils';
 import * as yup from 'yup';
 import { IoCloseSharp } from 'react-icons/io5';
@@ -65,15 +65,6 @@ const ProjectUpload = () => {
     course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
-  const [newUrl, setNewUrl] = useState('');
-
-  // const [embedUrls, setEmbedUrls] = useState();
-  // const removeEmbedUrl = (index: number) => {
-  //   const rows = [...embedUrls];
-  //   rows.splice(index, 1);
-  //   setEmbedUrls(rows);
-  // };
-
   const formik = useFormik({
     initialValues: {
       project_name: '',
@@ -89,6 +80,17 @@ const ProjectUpload = () => {
       console.log(values);
     },
   });
+
+  const [newUrl, setNewUrl] = useState('');
+  const [embedUrlList, setEmbedUrlList] = useState(formik.values.embedUrls);
+
+  const removeEmbedUrl = (index: number) => {
+    const rows = [...embedUrlList];
+    rows.splice(index, 1);
+    const newEmbedUrlList = rows;
+    setEmbedUrlList(newEmbedUrlList);
+    formik.setFieldValue('embedUrls', newEmbedUrlList);
+  };
 
   if (currentUser) {
     return (
@@ -200,12 +202,14 @@ const ProjectUpload = () => {
                       }}
                       onClick={() => {
                         const newEmbedUrls = [
-                          ...formik.values.embedUrls,
+                          ...embedUrlList,
                           {
                             url: newUrl,
                           },
                         ];
                         formik.setFieldValue('embedUrls', newEmbedUrls);
+                        // @ts-expect-error: todo
+                        setEmbedUrlList(newEmbedUrls);
                         setNewUrl('');
                       }}
                     >
@@ -213,16 +217,14 @@ const ProjectUpload = () => {
                     </ButtonBase>
                   </FormikProvider>
                 </Box>
-
-                {formik.values.embedUrls.length > 0 &&
-                  formik.values.embedUrls.map(({ url }, index) => (
-                    <EmbedUrl
-                      key={index}
-                      index={index}
-                      url={url}
-                      urlArray={formik.values.embedUrls}
-                    />
-                  ))}
+                {embedUrlList.map(({ url }, index) => (
+                  <EmbedUrl
+                    key={index}
+                    index={index}
+                    url={url}
+                    removeEmbedUrl={removeEmbedUrl}
+                  />
+                ))}
               </>
               <TextField
                 multiline

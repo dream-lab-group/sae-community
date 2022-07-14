@@ -1,15 +1,15 @@
-import { Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { FaMinus } from 'react-icons/fa';
 
 type embedUrlProps = {
-  index: number;
   url: string;
-  urlArray: never[];
+  index: number;
+  removeEmbedUrl: (index: number) => void;
 };
 
-export const EmbedUrl = ({ index, url, urlArray }: embedUrlProps) => {
+export const EmbedUrl = ({ url, index, removeEmbedUrl }: embedUrlProps) => {
   return (
     <Box
       sx={{
@@ -59,7 +59,7 @@ export const EmbedUrl = ({ index, url, urlArray }: embedUrlProps) => {
             cursor: 'pointer',
           }}
           type="button"
-          onClick={() => console.log('test')}
+          onClick={() => removeEmbedUrl(index)}
         >
           <FaMinus size={20} />
         </Box>
