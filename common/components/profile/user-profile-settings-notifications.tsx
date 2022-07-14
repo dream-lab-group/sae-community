@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-export const Notifications = () => {
+export const UserProfileSettingsNotifications = () => {
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
 

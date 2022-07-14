@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-export const DeleteProfile = () => {
+export const UserProfileSettingsDeleteProfile = () => {
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
 

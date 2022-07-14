@@ -1,14 +1,20 @@
 import { Grid, TextField, useMediaQuery, useTheme } from '@mui/material';
+import { FormikValues } from 'formik';
 
 type UserUrlProps = {
-  urls: string;
+  urls: {};
+  formik: FormikValues;
+  formikProps: any;
 };
 
-export const UserProfileUrls = ({ urls }: UserUrlProps) => {
+export const UserProfileUrls = ({
+  urls,
+  formik,
+  formikProps,
+}: UserUrlProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const urlsData = Object.values(urls);
-  console.log(urlsData);
 
   return (
     <Grid
@@ -17,6 +23,8 @@ export const UserProfileUrls = ({ urls }: UserUrlProps) => {
       sx={{ marginTop: `${smBreakpointDown ? '0px' : '10px'}` }}
     >
       {urlsData.map((urlThingy) => {
+        console.log(formikProps.initialValues.urls);
+
         return (
           <>
             <Grid item xs={12} sm={6}>
@@ -25,10 +33,19 @@ export const UserProfileUrls = ({ urls }: UserUrlProps) => {
                 size="small"
                 id="website"
                 name="website"
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 /* @ts-expect-error: todo */
                 label={urlThingy.webseite}
                 /* @ts-expect-error: todo */
-                value={urlThingy.url}
+                defaultValue={urlThingy.url}
+/*                 defaultValue={(value) => {
+                  formik.setFieldValue(
+                    'urls',
+                    value !== null ? value : formikProps.initialValues.urls,
+                  );
+                }}  */
                 fullWidth
                 sx={{ marginTop: '10px', fontSize: '8px' }}
               />

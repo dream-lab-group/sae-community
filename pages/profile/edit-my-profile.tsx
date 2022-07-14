@@ -11,6 +11,8 @@ import { UserProfileMyData } from '../../common/components/profile/user-profile-
 import { UserInformation } from '../../common/types/types';
 import { UserProfileUrls } from '../../common/components/profile/user-profile-urls';
 import { SkillsInterests } from '../../common/components/profile/user-profile-skills-interests';
+import { useFormik } from 'formik';
+import { useState } from 'react';
 
 type EditMyProfileProps = {
   userData: UserInformation;
@@ -29,6 +31,24 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
     router.push('/public-profile/123');
   };
 
+const formik = useFormik({
+      initialValues:{
+            first_name: userData.first_name,
+            last_name: userData.last_name,
+            email: userData.email,
+            description: userData.description,
+            course: userData.course,
+            urls: userData.urls,
+            programs: userData.programs,
+            interests: userData.interests
+      },
+      onSubmit: async(values: any) => {
+            console.log(values)
+      }
+})
+
+/* const [selectedPrograms, setSelectedPrograms] = useState(formik.values.programs)
+ */
   return (
     <>
       {/* Content */}
@@ -44,7 +64,7 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
           maxWidth: `${smBreakpointDown ? '381px' : '774px'}`,
         }}
       >
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <Typography
             sx={{
               fontSize: '20px',
@@ -55,18 +75,24 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
             {t('profile.myProfile')}
           </Typography>
           <UserProfileMyData
-            first_name={userData.first_name}
-            last_name={userData.last_name}
-            email={userData.email}
-            description={userData.description}
-            course={userData.course}
+            first_name={formik.values.first_name}
+            last_name={formik.values.last_name}
+            email={formik.values.email}
+            description={formik.values.description}
+            course={formik.values.course}
+            formik={formik}
+            formikProps={formik}
           />
           <UserProfileUrls
-            urls={userData.urls}
+            urls={formik.values.urls}
+            formik={formik}
+            formikProps={formik}
           />
             <SkillsInterests
-            programs={userData.programs}
-            interests={userData.interests}
+            programs={formik.values.programs}
+            interests={formik.values.interests}
+            formik={formik}
+            formikProps={formik}
           />
           <Box
             sx={{
@@ -99,6 +125,7 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
                 height: '56px',
                 marginLeft: `${mdBreakpointDown ? '' : '20px'}`,
               }}
+              type="submit"
             >
               {t('profileUpload.publishProfile')}
             </Button>

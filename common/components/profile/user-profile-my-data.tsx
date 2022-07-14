@@ -1,5 +1,6 @@
 import { Grid, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { FormikValues } from 'formik';
 
 import { FileUpload } from './file-upload';
 
@@ -9,6 +10,8 @@ type UserProfileMyDataProps = {
   email: string;
   description: string;
   course: string;
+  formik: FormikValues;
+  formikProps: any;
 };
 
 export const UserProfileMyData = ({
@@ -17,6 +20,8 @@ export const UserProfileMyData = ({
   email,
   description,
   course,
+  formik,
+  formikProps,
 }: UserProfileMyDataProps) => {
   const { t } = useTranslation();
 
@@ -29,7 +34,8 @@ export const UserProfileMyData = ({
               required
               size="small"
               label="Vorname"
-              defaultValue={first_name}
+              defaultValue={formik.values.first_name}
+              onChange={formik.handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -42,7 +48,7 @@ export const UserProfileMyData = ({
               required
               size="small"
               label="Nachname"
-              defaultValue={last_name}
+              defaultValue={formik.values.last_name}
               InputLabelProps={{
                 shrink: true,
               }}

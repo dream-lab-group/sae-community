@@ -6,9 +6,9 @@ import {
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
-import { ChangePassword } from '../../common/components/profile/user-profile-settings-password';
-import { Notifications } from '../../common/components/profile/user-profile-settings-notifications';
-import { DeleteProfile } from '../../common/components/profile/user-profile-settings-delete-profile';
+import { UserProfileSettingsPassword } from '../../common/components/profile/user-profile-settings-password';
+import { UserProfileSettingsNotifications } from '../../common/components/profile/user-profile-settings-notifications';
+import { UserProfileSettingsDeleteProfile } from '../../common/components/profile/user-profile-settings-delete-profile';
 import { SessionContextProps } from '.';
 
 export const ProfileSettings = ({ setSessionContext }: SessionContextProps) => {
@@ -37,7 +37,7 @@ export const ProfileSettings = ({ setSessionContext }: SessionContextProps) => {
           maxWidth: `${smBreakpointDown ? '381px' : '774px'}`,
         }}
       >
-        <ChangePassword />
+        <UserProfileSettingsPassword />
         <hr
           style={{
             width: '100%',
@@ -45,7 +45,7 @@ export const ProfileSettings = ({ setSessionContext }: SessionContextProps) => {
             border: '1px solid rgba(0, 0, 0, 0.1)',
           }}
         />
-        <Notifications />
+        <UserProfileSettingsNotifications />
         <hr
           style={{
             width: '100%',
@@ -53,7 +53,7 @@ export const ProfileSettings = ({ setSessionContext }: SessionContextProps) => {
             border: '1px solid rgba(0, 0, 0, 0.1)',
           }}
         />
-        <DeleteProfile />
+        <UserProfileSettingsDeleteProfile />
         <hr
           style={{
             width: '100%',

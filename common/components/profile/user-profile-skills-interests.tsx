@@ -5,15 +5,20 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { FormikValues } from 'formik';
 
 type UserSkillsProps = {
-  programs: string;
-  interests: string;
+  programs: {};
+  interests: {};
+  formik: FormikValues;
+  formikProps: any;
 };
 
 export const SkillsInterests = ({
   programs,
   interests,
+  formik,
+  formikProps,
 }: UserSkillsProps) => {
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
@@ -28,9 +33,15 @@ export const SkillsInterests = ({
           size="small"
           options={programsData}
           sx={{ marginTop: '20px' }}
-          value={programsData}
+          onChange={(e, value) => {
+            formik.setFieldValue(
+              'programs',
+              value !== null ? value : formikProps.initialValues.programs,
+            );
+          }}
+          defaultValue={programsData}
           renderInput={(params) => (
-            <TextField {...params} label="Programm Skills" />
+            <TextField {...params} label="Skills" />
           )}
         />
       </Grid>
@@ -39,12 +50,17 @@ export const SkillsInterests = ({
           multiple
           size="small"
           options={interestsData}
-          sx={{
-            width: '100%',
-            marginTop: `${mdBreakpointDown ? '0px' : '20px'}`,
+          sx={{ marginTop: '20px' }}
+          onChange={(e, value) => {
+            formik.setFieldValue(
+              'interests',
+              value !== null ? value : formikProps.initialValues.interests,
+            );
           }}
-          value={interestsData}
-          renderInput={(params) => <TextField {...params} label="Interessen" />}
+          defaultValue={interestsData}
+          renderInput={(params) => (
+            <TextField {...params} label="Interessen" />
+          )}
         />
       </Grid>
     </Grid>

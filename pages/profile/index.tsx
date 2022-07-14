@@ -12,12 +12,12 @@ import { SetStateAction, useEffect, useState } from 'react';
 import { FaRegUser } from 'react-icons/fa';
 import { RiSettings3Line } from 'react-icons/ri';
 
-import { ProfileSettings } from './profileSettings';
+import { ProfileSettings } from './profile-settings';
 import { NextPage } from 'next';
 import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
 import { UserInformation } from '../../common/types/types';
-import { EditMyProfile } from './myProfile';
+import { EditMyProfile } from './edit-my-profile';
 /* import { UserProfileUrls } from '../../common/components/profile/user-profile-urls';
  */
 export type SessionContextProps = {
@@ -52,7 +52,6 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
       if (userResponse.status === 200) {
         setCurrentUser(userResponse.data.data);
         setIsLoading(false);
-        console.log(userResponse.data.data)
       }
     };
     getCurrentUser();

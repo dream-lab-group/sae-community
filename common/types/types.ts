@@ -95,6 +95,7 @@ export interface UserInformation{
       description: string;
       course: string;
       urls: string;
-      programs: string;
-      interests: string;
+      programs: {};
+      interests: {};
+      formikProps?: any;
 }
