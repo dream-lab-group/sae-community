@@ -55,35 +55,16 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
             {t('profile.myProfile')}
           </Typography>
           <UserProfileMyData
-            key={userData.id}
             first_name={userData.first_name}
             last_name={userData.last_name}
             email={userData.email}
             description={userData.description}
             course={userData.course}
-            urls={userData.urls}
-            programs={userData.programs}
-            interests={userData.interests}
           />
           <UserProfileUrls
-            key={userData.id}
-            first_name={userData.first_name}
-            last_name={userData.last_name}
-            email={userData.email}
-            description={userData.description}
-            course={userData.course}
             urls={userData.urls}
-            programs={userData.programs}
-            interests={userData.interests}
           />
             <SkillsInterests
-            key={userData.id}
-            first_name={userData.first_name}
-            last_name={userData.last_name}
-            email={userData.email}
-            description={userData.description}
-            course={userData.course}
-            urls={userData.urls}
             programs={userData.programs}
             interests={userData.interests}
           />

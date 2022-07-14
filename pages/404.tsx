@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
@@ -29,7 +29,7 @@ const NotFoundPage: NextPage = () => {
           <Typography
             sx={{
               fontSize: '15rem',
-              fontWeight:"500",
+              fontWeight: '500',
               color: 'white',
               background: `linear-gradient(to bottom, #AD23F6 3.51%, #7E17F6 74.06%)`,
               backgroundClip: 'text',
@@ -48,7 +48,7 @@ const NotFoundPage: NextPage = () => {
               background: `linear-gradient(to bottom, #AD23F6 3.51%, #7E17F6 74.06%)`,
               backgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              cursor: "pointer",
+              cursor: 'pointer',
             }}
           >
             {t('404.back')}

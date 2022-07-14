@@ -7,25 +7,11 @@ import {
 } from '@mui/material';
 
 type UserSkillsProps = {
-  id?: string | null;
-  first_name: string;
-  last_name: string;
-  email: string;
-  description: string;
-  course: string;
-  urls: string;
   programs: string;
   interests: string;
 };
 
 export const SkillsInterests = ({
-  id,
-  first_name,
-  last_name,
-  email,
-  description,
-  course,
-  urls,
   programs,
   interests,
 }: UserSkillsProps) => {
@@ -42,6 +28,7 @@ export const SkillsInterests = ({
           size="small"
           options={programsData}
           sx={{ marginTop: '20px' }}
+          value={programsData}
           renderInput={(params) => (
             <TextField {...params} label="Programm Skills" />
           )}
@@ -56,6 +43,7 @@ export const SkillsInterests = ({
             width: '100%',
             marginTop: `${mdBreakpointDown ? '0px' : '20px'}`,
           }}
+          value={interestsData}
           renderInput={(params) => <TextField {...params} label="Interessen" />}
         />
       </Grid>
