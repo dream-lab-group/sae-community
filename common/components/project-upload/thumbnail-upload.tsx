@@ -31,6 +31,11 @@ export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
     formik.setFieldValue('cover_photo', newCoverPhoto);
   };
 
+  const deletecoverImageHandler = (imageList: ImageListType) => {
+    setSelectedCoverImage([]);
+    formik.setFieldValue('cover_photo', { data_url: '', file: File });
+  };
+
   return (
     <>
       {/* @ts-expect-error: todo */}
@@ -41,13 +46,7 @@ export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
         acceptType={acceptedFileTypes}
         dataURLKey="data_url"
       >
-        {({
-          imageList,
-          onImageUpload,
-          dragProps,
-          onImageRemoveAll,
-          errors,
-        }) => (
+        {({ imageList, onImageUpload, dragProps, errors }) => (
           <>
             {imageList.length === 0 ? (
               <Box
@@ -174,7 +173,8 @@ export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
                     borderRadius: '10px',
                     cursor: 'pointer',
                   }}
-                  onClick={onImageRemoveAll}
+                  // @ts-expect-error: todo
+                  onClick={deletecoverImageHandler}
                 >
                   <IoCloseSharp size={25} />
                 </Box>
