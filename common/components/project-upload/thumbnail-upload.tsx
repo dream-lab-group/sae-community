@@ -5,21 +5,35 @@ import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import ReactImageUploading, { ImageListType } from 'react-images-uploading';
 import { IoCloseSharp } from 'react-icons/io5';
-import { ProjectUploadProps } from '../../types/types';
-import { useField } from 'formik';
+import { FormikValues } from 'formik';
 
-export const ThumbnailUpload = ({ label, ...props }: ProjectUploadProps) => {
+type ThumbnailUploadProps = {
+  label: string;
+  id: string;
+  name: string;
+  type: string;
+  formik: FormikValues;
+};
+
+export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation();
   const [selectedCoverImage, setSelectedCoverImage] = useState([]);
   const acceptedFileTypes = ['jpg', 'jpeg', 'png'];
 
-  const coverImageChangeHandler = (
-    imageList: ImageListType,
-    addUpdateIndex: number[] | undefined,
-  ) => {
+  const coverImageChangeHandler = (imageList: ImageListType) => {
+    const newCoverPhoto = [
+      ...selectedCoverImage,
+      { data_url: imageList[0].data_url, file: imageList[0].file },
+    ];
     setSelectedCoverImage(imageList as never[]);
+    formik.setFieldValue('cover_photo', newCoverPhoto);
+  };
+
+  const deletecoverImageHandler = (imageList: ImageListType) => {
+    setSelectedCoverImage([]);
+    formik.setFieldValue('cover_photo', { data_url: '', file: File });
   };
 
   return (
@@ -32,13 +46,7 @@ export const ThumbnailUpload = ({ label, ...props }: ProjectUploadProps) => {
         acceptType={acceptedFileTypes}
         dataURLKey="data_url"
       >
-        {({
-          imageList,
-          onImageUpload,
-          dragProps,
-          onImageRemoveAll,
-          errors,
-        }) => (
+        {({ imageList, onImageUpload, dragProps, errors }) => (
           <>
             {imageList.length === 0 ? (
               <Box
@@ -165,7 +173,8 @@ export const ThumbnailUpload = ({ label, ...props }: ProjectUploadProps) => {
                     borderRadius: '10px',
                     cursor: 'pointer',
                   }}
-                  onClick={onImageRemoveAll}
+                  // @ts-expect-error: todo
+                  onClick={deletecoverImageHandler}
                 >
                   <IoCloseSharp size={25} />
                 </Box>

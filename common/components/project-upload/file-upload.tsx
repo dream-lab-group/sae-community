@@ -8,8 +8,13 @@ import { RiFolderMusicLine } from 'react-icons/ri';
 import { IoCloseSharp } from 'react-icons/io5';
 import { FaMusic, FaFrownOpen } from 'react-icons/fa';
 import { GiHeavyFall } from 'react-icons/gi';
+import { FormikValues } from 'formik';
 
-export const FileUpload = () => {
+type FileUploadProps = {
+  formik: FormikValues;
+};
+
+export const FileUpload = ({ formik }: FileUploadProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -19,8 +24,8 @@ export const FileUpload = () => {
   const onDrop = useCallback(
     (acceptedFiles: any) => {
       const allFiles = [...files, ...acceptedFiles];
-
       setFiles(allFiles);
+      formik.setFieldValue('project_files', acceptedFiles);
     },
     [files],
   );
@@ -38,6 +43,7 @@ export const FileUpload = () => {
     const newFiles = [...files];
     newFiles.splice(index, 1);
     setFiles(newFiles);
+    formik.setFieldValue('project_files', newFiles);
   };
 
   const acceptedFileItems = files.map((file: any, index: number) => (
@@ -55,7 +61,7 @@ export const FileUpload = () => {
           sx={{
             height: '110px',
             width: '110px',
-            border: '1px solid grey',
+            border: '1px solid #bdbdbd',
             borderRadius: '10px',
             display: 'flex',
             flexDirection: 'column',
@@ -67,13 +73,14 @@ export const FileUpload = () => {
           <FaMusic size={25} />
           <Typography
             sx={{
+              marginTop: '10px',
               color: '#000',
               fontSize: '13px',
               width: '100%',
               textAlign: 'center',
             }}
           >
-            Shit happens
+            Music File
           </Typography>
         </Box>
       ) : (
