@@ -68,9 +68,10 @@ const ProjectUpload = () => {
       course: '',
       description: '',
       collaborators: { label: '', firstname: '', lastname: '' },
-      embedUrls: [],
-      commentFunction: false,
-      internExtern: false,
+      embedded_urls: [],
+      comment_function: false,
+      external_project: false,
+      project_files: [],
     },
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
@@ -79,7 +80,7 @@ const ProjectUpload = () => {
   });
 
   const [newUrl, setNewUrl] = useState('');
-  const [embedUrlList, setEmbedUrlList] = useState(formik.values.embedUrls);
+  const [embedUrlList, setEmbedUrlList] = useState(formik.values.embedded_urls);
 
   const removeEmbedUrl = (index: number) => {
     const rows = [...embedUrlList];
@@ -164,13 +165,13 @@ const ProjectUpload = () => {
                 type="text"
                 formik={formik}
               />
-              <FileUpload />
+              <FileUpload formik={formik} />
               <>
                 <Box
                   sx={{
                     width: '100%',
                     height: '56px',
-                    marginTop: '20px',
+                    marginTop: '30px',
                     marginBottom: '10px',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -205,7 +206,7 @@ const ProjectUpload = () => {
                             url: newUrl,
                           },
                         ];
-                        formik.setFieldValue('embedUrls', newEmbedUrls);
+                        formik.setFieldValue('embedded_urls', newEmbedUrls);
                         // @ts-expect-error: todo
                         setEmbedUrlList(newEmbedUrls);
                         setNewUrl('');
@@ -271,8 +272,8 @@ const ProjectUpload = () => {
                     control={
                       <Switch
                         type="checkbox"
-                        name="commentFunction"
-                        checked={formik.values.commentFunction}
+                        name="comment_function"
+                        checked={formik.values.comment_function}
                         onChange={formik.handleChange}
                         inputProps={{ 'aria-label': 'controlled' }}
                       />
@@ -283,8 +284,8 @@ const ProjectUpload = () => {
                     control={
                       <Switch
                         type="checkbox"
-                        name="internExtern"
-                        checked={formik.values.internExtern}
+                        name="external_project"
+                        checked={formik.values.external_project}
                         onChange={formik.handleChange}
                         inputProps={{ 'aria-label': 'controlled' }}
                       />
