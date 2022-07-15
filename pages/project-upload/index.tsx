@@ -1,13 +1,8 @@
 import {
   Box,
-  Button,
   ButtonBase,
-  FormControl,
   FormControlLabel,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
   Switch,
   TextField,
   Typography,
@@ -24,7 +19,6 @@ import { useRouter } from 'next/router';
 import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
 import { FormikProvider, useFormik } from 'formik';
-import { Globals } from '../../common/utils/utils';
 import * as yup from 'yup';
 import { IoCloseSharp } from 'react-icons/io5';
 import { EmbedUrl } from '../../common/components/project-upload/embed-url';
@@ -70,6 +64,7 @@ const ProjectUpload = () => {
   const formik = useFormik({
     initialValues: {
       project_name: '',
+      cover_photo: { data_url: '', file: File },
       course: '',
       description: '',
       collaborators: { label: '', firstname: '', lastname: '' },
@@ -167,6 +162,7 @@ const ProjectUpload = () => {
                 id="thumbnailUpload"
                 name="thumbnailUpload"
                 type="text"
+                formik={formik}
               />
               <FileUpload />
               <>
