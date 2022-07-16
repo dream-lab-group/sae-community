@@ -24,6 +24,7 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { EmbedUrl } from '../../common/components/project-upload/embed-url';
 import { AlumniCourseSelection } from '../../common/components/project-upload/alumni-course-selection';
 import { ProjectUploadButtons } from '../../common/components/project-upload/project-upload-buttons';
+import { handlePostNewProject } from '../../common/data/project-upload/hooks';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -57,8 +58,16 @@ const ProjectUpload = () => {
       .string()
       .required('Ein Projektname muss unbedingt eingegeben werden')
       .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
-    cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
+    // TODO
+    // cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
     description: yup.string().required('Bitte beschreibe das Projekt'),
+    // TODO
+    // embedded_urls: yup
+    //   .string()
+    //   .matches(
+    //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    //     'Enter correct url!',
+    //   ),
     course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
@@ -77,6 +86,17 @@ const ProjectUpload = () => {
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
       console.log(values);
+      const response = await handlePostNewProject({
+        project_name: values.project_name,
+        cover_photo: values.cover_photo,
+        course: values.course,
+        description: values.description,
+        collaborators: values.collaborators,
+        embedded_urls: values.embedded_urls,
+        comment_function: values.comment_function,
+        external_project: values.external_project,
+        project_files: values.project_files,
+      });
     },
   });
 

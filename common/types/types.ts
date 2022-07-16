@@ -63,3 +63,16 @@ export type ProjectUploadProps = {
   type?: string;
   formikProps?: any;
 };
+
+export interface ProjectDto {
+  id?: string | null;
+  project_name: string;
+  cover_photo: {};
+  course?: string | null;
+  description: string;
+  collaborators: {} | null;
+  embedded_urls: [] | null;
+  comment_function: boolean;
+  external_project: boolean;
+  project_files: [] | null;
+}
