@@ -16,8 +16,29 @@ import { BiMessageDetail } from 'react-icons/bi';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FiMail } from 'react-icons/fi';
 import { CommunityHead } from '../../common/components/community-head';
+import { ProjectDto } from '../../common/types/types';
+import { GetServerSideProps, NextPage } from 'next';
+import { apiClient } from '../../common/data/apiClient';
 
-const Project = () => {
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const response = await apiClient.get(
+      'items/projects/6d3efdea-20ec-4283-987d-a2d0a16cf860',
+    );
+    const data: ProjectDto = await response.data.data;
+
+    return {
+      props: { data },
+    };
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};
+
+const Project: NextPage<{ data: ProjectDto }> = (props) => {
+  console.log(props);
   const router = useRouter();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));

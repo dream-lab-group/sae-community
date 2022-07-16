@@ -73,20 +73,21 @@ const ProjectUpload = () => {
 
   const formik = useFormik({
     initialValues: {
+      user_created: null,
       project_name: '',
-      cover_photo: { data_url: '', file: File },
+      cover_photo: null,
       course: '',
       description: '',
-      collaborators: { label: '', firstname: '', lastname: '' },
+      collaborators: null,
       embedded_urls: [],
       comment_function: false,
       external_project: false,
-      project_files: [],
+      project_files: null,
     },
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
-      console.log(values);
       const response = await handlePostNewProject({
+        user_created: values.user_created,
         project_name: values.project_name,
         cover_photo: values.cover_photo,
         course: values.course,
@@ -97,6 +98,7 @@ const ProjectUpload = () => {
         external_project: values.external_project,
         project_files: values.project_files,
       });
+      console.log(response);
     },
   });
 
@@ -112,6 +114,7 @@ const ProjectUpload = () => {
   };
 
   if (currentUser) {
+    formik.values.user_created = currentUser.id;
     return (
       <>
         <CommunityHead />

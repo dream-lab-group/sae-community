@@ -4,6 +4,7 @@ import { apiClient } from '../apiClient';
 
 export const postNewProject = async ({
   project_name,
+  user_created,
   cover_photo,
   course,
   description,
@@ -14,8 +15,10 @@ export const postNewProject = async ({
   project_files,
 }: ProjectDto) => {
   try {
+    console.log(user_created);
     const { status, data }: { status: number; data: any } =
       await apiClient.post('items/projects', {
+        user_created,
         project_name,
         cover_photo,
         course,
@@ -29,6 +32,7 @@ export const postNewProject = async ({
     if (status === 200) {
       return {
         status: status,
+        data: data,
       };
     }
   } catch (error) {
