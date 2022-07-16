@@ -81,7 +81,6 @@ const formik = useFormik({
             description={formik.values.description}
             course={formik.values.course}
             formik={formik}
-            formikProps={formik}
           />
           <UserProfileUrls
             urls={formik.values.urls}

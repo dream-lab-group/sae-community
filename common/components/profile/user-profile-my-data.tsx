@@ -11,7 +11,6 @@ type UserProfileMyDataProps = {
   description: string;
   course: string;
   formik: FormikValues;
-  formikProps: any;
 };
 
 export const UserProfileMyData = ({
@@ -21,7 +20,6 @@ export const UserProfileMyData = ({
   description,
   course,
   formik,
-  formikProps,
 }: UserProfileMyDataProps) => {
   const { t } = useTranslation();
 
@@ -34,6 +32,8 @@ export const UserProfileMyData = ({
               required
               size="small"
               label="Vorname"
+              type="text"
+              name="first_name"
               defaultValue={formik.values.first_name}
               onChange={formik.handleChange}
               InputLabelProps={{
