@@ -54,13 +54,13 @@ const ProjectUpload = () => {
   }, [setCurrentUser]);
 
   const courseValidationSchema = yup.object({
-    project_name: yup
-      .string()
-      .required('Ein Projektname muss unbedingt eingegeben werden')
-      .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
+    // project_name: yup
+    //   .string()
+    //   .required('Ein Projektname muss unbedingt eingegeben werden')
+    //   .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     // TODO
     // cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
-    description: yup.string().required('Bitte beschreibe das Projekt'),
+    // description: yup.string().required('Bitte beschreibe das Projekt'),
     // TODO
     // embedded_urls: yup
     //   .string()
@@ -68,7 +68,7 @@ const ProjectUpload = () => {
     //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
     //     'Enter correct url!',
     //   ),
-    course: yup.string().required('Bitte ein Fachrichtung auswählen'),
+    // course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
   const formik = useFormik({
@@ -88,20 +88,24 @@ const ProjectUpload = () => {
     onSubmit: async (values: any) => {
       const directus = new Directus('https://www.whatthebre.com/');
 
-      const projects = directus.items('projects');
+      // const projects = directus.items('projects');
 
-      await projects.createOne({
-        user_created: values.user_created,
-        project_name: values.project_name,
-        cover_photo: values.cover_photo,
-        course: values.course,
-        description: values.description,
-        collaborators: values.collaborators,
-        embedded_urls: values.embedded_urls,
-        comment_function: values.comment_function,
-        external_project: values.external_project,
-        project_files: values.project_files,
-      });
+      // await projects.createOne({
+      //   user_created: values.user_created,
+      //   project_name: values.project_name,
+      //   cover_photo: values.cover_photo,
+      //   course: values.course,
+      //   description: values.description,
+      //   collaborators: values.collaborators,
+      //   embedded_urls: values.embedded_urls,
+      //   comment_function: values.comment_function,
+      //   external_project: values.external_project,
+      //   project_files: values.project_files,
+      // });
+
+      console.log(values);
+
+      await directus.files.createOne(values.cover_photo[0]);
     },
   });
 
@@ -118,6 +122,7 @@ const ProjectUpload = () => {
 
   if (currentUser) {
     formik.values.user_created = currentUser.id;
+
     return (
       <>
         <CommunityHead />

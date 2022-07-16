@@ -300,7 +300,6 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
                     {t('projectUpload.fileUpload.maxSize10')}
                   </Typography>
                 </Box>
-
                 <input multiple {...getInputProps()} />
               </Box>
               <Box
