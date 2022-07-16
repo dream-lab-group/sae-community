@@ -24,7 +24,7 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { EmbedUrl } from '../../common/components/project-upload/embed-url';
 import { AlumniCourseSelection } from '../../common/components/project-upload/alumni-course-selection';
 import { ProjectUploadButtons } from '../../common/components/project-upload/project-upload-buttons';
-import { handlePostNewProject } from '../../common/data/project-upload/hooks';
+import { Directus } from '@directus/sdk';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -86,7 +86,11 @@ const ProjectUpload = () => {
     },
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
-      const response = await handlePostNewProject({
+      const directus = new Directus('https://www.whatthebre.com/');
+
+      const projects = directus.items('projects');
+
+      await projects.createOne({
         user_created: values.user_created,
         project_name: values.project_name,
         cover_photo: values.cover_photo,
@@ -98,7 +102,6 @@ const ProjectUpload = () => {
         external_project: values.external_project,
         project_files: values.project_files,
       });
-      console.log(response);
     },
   });
 
