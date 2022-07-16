@@ -55,8 +55,9 @@ const ProjectUpload = () => {
   const courseValidationSchema = yup.object({
     project_name: yup
       .string()
-      .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein')
-      .required('Ein Projektname muss unbedingt eingegeben werden'),
+      .required('Ein Projektname muss unbedingt eingegeben werden')
+      .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
+    cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
     description: yup.string().required('Bitte beschreibe das Projekt'),
     course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
@@ -138,9 +139,9 @@ const ProjectUpload = () => {
                 {t('projectUpload.createProject')}
               </Typography>
               <TextField
-                size="small"
                 id="project_name"
                 name="project_name"
+                size="small"
                 label="Projektname"
                 variant="outlined"
                 fullWidth
@@ -151,6 +152,9 @@ const ProjectUpload = () => {
                   formik.touched.project_name &&
                   Boolean(formik.errors.project_name)
                 }
+                helperText={
+                  formik.touched.project_name && formik.errors.project_name
+                }
                 sx={{
                   marginTop: '20px',
                   fontSize: '8px',
@@ -160,8 +164,8 @@ const ProjectUpload = () => {
               />
               <ThumbnailUpload
                 label="ThumbnailUpload"
-                id="thumbnailUpload"
-                name="thumbnailUpload"
+                id="cover_photo"
+                name="cover_photo"
                 type="text"
                 formik={formik}
               />
@@ -239,6 +243,9 @@ const ProjectUpload = () => {
                 error={
                   formik.touched.description &&
                   Boolean(formik.errors.description)
+                }
+                helperText={
+                  formik.touched.description && formik.errors.description
                 }
                 sx={{ marginTop: '10px', fontSize: '8px' }}
               />
