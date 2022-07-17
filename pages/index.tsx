@@ -101,7 +101,6 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
           return (
             <ProjectCard
               key={id}
-              id={id}
               coverPhotoId={cover_photo}
               userCreated={user_created}
               course={course}

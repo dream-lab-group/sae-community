@@ -38,7 +38,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Project: NextPage<{ data: ProjectDto }> = (props) => {
-  console.log(props);
   const router = useRouter();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));

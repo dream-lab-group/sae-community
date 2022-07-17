@@ -14,7 +14,6 @@ import { apiClient } from '../../data/apiClient';
 import { useTranslation } from 'react-i18next';
 
 type ProjectCardProps = {
-  id: string;
   coverPhotoId: string;
   userCreated: string;
   course: string;
@@ -23,7 +22,6 @@ type ProjectCardProps = {
 };
 
 export const ProjectCard = ({
-  id,
   coverPhotoId,
   userCreated,
   course,
@@ -37,7 +35,6 @@ export const ProjectCard = ({
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
   const { t } = useTranslation();
-  const [image, setImage] = useState('');
   const [user, setUser] = useState('');
 
   useEffect(() => {

@@ -57,13 +57,13 @@ const ProjectUpload = () => {
   }, [setCurrentUser]);
 
   const courseValidationSchema = yup.object({
-    // project_name: yup
-    //   .string()
-    //   .required('Ein Projektname muss unbedingt eingegeben werden')
-    //   .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
+    project_name: yup
+      .string()
+      .required('Ein Projektname muss unbedingt eingegeben werden')
+      .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     // TODO
     // cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
-    // description: yup.string().required('Bitte beschreibe das Projekt'),
+    description: yup.string().required('Bitte beschreibe das Projekt'),
     // TODO
     // embedded_urls: yup
     //   .string()
@@ -71,7 +71,7 @@ const ProjectUpload = () => {
     //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
     //     'Enter correct url!',
     //   ),
-    // course: yup.string().required('Bitte ein Fachrichtung auswählen'),
+    course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
   const formik = useFormik({
@@ -116,21 +116,20 @@ const ProjectUpload = () => {
         );
         if (result.status === 200) {
           setProjectId(result.data.data[0].id);
+          values.project_files.forEach(async (projectFile: any) => {
+            const formData = new FormData();
+            formData.append('name', projectFile.name);
+            formData.append('file', projectFile);
+            const fileId = await directus.files.createOne(formData);
+            if (fileId) {
+              const projectsFiles = directus.items('projects_files');
+              await projectsFiles.createOne({
+                projects_id: projectId,
+                directus_files_id: fileId,
+              });
+            }
+          });
         }
-        values.project_files.forEach(async (projectFile: any) => {
-          const formData = new FormData();
-          formData.append('name', projectFile.name);
-          formData.append('file', projectFile);
-          const fileId = await directus.files.createOne(formData);
-          if (fileId) {
-            const projectsFiles = directus.items('projects_files');
-            const projectsFileResult = await projectsFiles.createOne(
-              { projects_id: projectId },
-              // @ts-expect-error: todo
-              { directus_files_id: fileId },
-            );
-          }
-        });
       }
     },
   });
