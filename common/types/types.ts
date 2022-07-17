@@ -51,6 +51,7 @@ export type PasswordResetProps = {
 
 export interface ProjectProperties {
   id: string;
+  cover_photo: string;
   description?: string;
   user_created: string;
   course: string;
@@ -63,3 +64,17 @@ export type ProjectUploadProps = {
   type?: string;
   formikProps?: any;
 };
+
+export interface ProjectDto {
+  id?: string | null;
+  user_created: string;
+  project_name: string;
+  cover_photo: {};
+  course?: string | null;
+  description: string;
+  collaborators?: {} | null;
+  embedded_urls?: [] | null;
+  comment_function: boolean;
+  external_project: boolean;
+  project_files: [] | null;
+}

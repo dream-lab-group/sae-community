@@ -32,7 +32,9 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': [],
+      'image/jpeg': [],
+      'image/jpg': [],
+      'image/png': [],
       'audio/*': [],
     },
     maxFiles: 6,
@@ -300,7 +302,6 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
                     {t('projectUpload.fileUpload.maxSize10')}
                   </Typography>
                 </Box>
-
                 <input multiple {...getInputProps()} />
               </Box>
               <Box
