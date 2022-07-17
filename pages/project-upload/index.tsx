@@ -37,6 +37,7 @@ const ProjectUpload = () => {
   const [currentUser, setCurrentUser] = useState<any>();
   const [thumbnailFile, setThumbnailFile] = useState<any>([]);
   const [thumbnailId, setThumbnailId] = useState();
+  const [projectId, setProjectId] = useState<any>();
 
   const router = useRouter();
 
@@ -56,13 +57,13 @@ const ProjectUpload = () => {
   }, [setCurrentUser]);
 
   const courseValidationSchema = yup.object({
-    project_name: yup
-      .string()
-      .required('Ein Projektname muss unbedingt eingegeben werden')
-      .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
+    // project_name: yup
+    //   .string()
+    //   .required('Ein Projektname muss unbedingt eingegeben werden')
+    //   .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     // TODO
     // cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
-    description: yup.string().required('Bitte beschreibe das Projekt'),
+    // description: yup.string().required('Bitte beschreibe das Projekt'),
     // TODO
     // embedded_urls: yup
     //   .string()
@@ -70,7 +71,7 @@ const ProjectUpload = () => {
     //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
     //     'Enter correct url!',
     //   ),
-    course: yup.string().required('Bitte ein Fachrichtung auswählen'),
+    // course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
   const formik = useFormik({
@@ -89,15 +90,13 @@ const ProjectUpload = () => {
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
       const directus = new Directus('https://www.whatthebre.com/');
-
       const formData = new FormData();
-      formData.append('name', thumbnailFile[0].path);
+      formData.append('name', thumbnailFile[0].name);
       formData.append('file', thumbnailFile[0]);
       const fileId = await directus.files.createOne(formData);
       if (fileId) {
         setThumbnailId(fileId.id);
       }
-
       const projects = directus.items('projects');
       await projects.createOne({
         user_created: values.user_created,
@@ -109,8 +108,30 @@ const ProjectUpload = () => {
         embedded_urls: values.embedded_urls,
         comment_function: values.comment_function,
         external_project: values.external_project,
-        project_files: values.project_files,
       });
+
+      if (values.project_files !== null) {
+        const result = await apiClient.get(
+          `https://www.whatthebre.com/items/projects?filter={ "cover_photo": { "_eq": "${thumbnailId}" }}`,
+        );
+        if (result.status === 200) {
+          setProjectId(result.data.data[0].id);
+        }
+        values.project_files.forEach(async (projectFile: any) => {
+          const formData = new FormData();
+          formData.append('name', projectFile.name);
+          formData.append('file', projectFile);
+          const fileId = await directus.files.createOne(formData);
+          if (fileId) {
+            const projectsFiles = directus.items('projects_files');
+            const projectsFileResult = await projectsFiles.createOne(
+              { projects_id: projectId },
+              // @ts-expect-error: todo
+              { directus_files_id: fileId },
+            );
+          }
+        });
+      }
     },
   });
 

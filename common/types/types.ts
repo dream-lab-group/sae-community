@@ -51,6 +51,7 @@ export type PasswordResetProps = {
 
 export interface ProjectProperties {
   id: string;
+  cover_photo: string;
   description?: string;
   user_created: string;
   course: string;

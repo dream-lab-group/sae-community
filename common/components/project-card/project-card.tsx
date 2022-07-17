@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 type ProjectCardProps = {
   id: string;
+  coverPhotoId: string;
   userCreated: string;
   course: string;
   isLoading: boolean;
@@ -23,6 +24,7 @@ type ProjectCardProps = {
 
 export const ProjectCard = ({
   id,
+  coverPhotoId,
   userCreated,
   course,
   isLoading,
@@ -39,16 +41,6 @@ export const ProjectCard = ({
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    const fetchImage = async () => {
-      const imageResponse = await apiClient.get(
-        `items/projects_files?filter={"projects_id": {"_eq": "${id}"}}`,
-      );
-
-      if (imageResponse.status === 200) {
-        setImage(imageResponse.data.data[0].directus_files_id);
-        setIsLoading(false);
-      }
-    };
     const fetchUser = async () => {
       const userResponse = await apiClient.get(
         `users?filter={ "id": { "_eq": "${userCreated}" }}`,
@@ -57,12 +49,12 @@ export const ProjectCard = ({
         setUser(
           `${userResponse.data.data[0].first_name} ${userResponse.data.data[0].last_name}`,
         );
+        setIsLoading(false);
       }
     };
     fetchUser();
-    fetchImage();
-  }, [setImage, setUser]);
-  const imageUrl = `https://www.whatthebre.com/assets/${image}`;
+  }, [setUser]);
+  const imageUrl = `https://www.whatthebre.com/assets/${coverPhotoId}?quality=50`;
 
   return (
     <>

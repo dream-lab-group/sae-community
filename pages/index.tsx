@@ -97,11 +97,12 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
         className="grid-container"
       >
         {/* @ts-expect-error: todo */}
-        {props.data.map(({ id, user_created, course }) => {
+        {props.data.map(({ id, user_created, course, cover_photo }) => {
           return (
             <ProjectCard
               key={id}
               id={id}
+              coverPhotoId={cover_photo}
               userCreated={user_created}
               course={course}
               isLoading={isLoading}
