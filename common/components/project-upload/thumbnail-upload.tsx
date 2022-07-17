@@ -11,42 +11,47 @@ type ThumbnailUploadProps = {
   label: string;
   id: string;
   name: string;
-  type: string;
   formik: FormikValues;
+  thumbnailFile: any;
+  setThumbnailFile: React.Dispatch<any>;
 };
 
-export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
+export const ThumbnailUpload = ({
+  formik,
+  thumbnailFile,
+  setThumbnailFile,
+}: ThumbnailUploadProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { t } = useTranslation();
-  const [files, setFiles] = useState<any>([]);
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      const allFiles = [...files, ...acceptedFiles];
-      setFiles(allFiles);
+      const allFiles = [...thumbnailFile, ...acceptedFiles];
+      setThumbnailFile(allFiles);
       formik.setFieldValue('cover_photo', acceptedFiles);
     },
-    [files],
+    [thumbnailFile],
   );
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': [],
+      'image/jpeg': [],
+      'image/png': [],
     },
     maxFiles: 1,
     onDrop,
   });
 
   const deleteFile = (file: any, index: number) => {
-    const newFiles = [...files];
-    newFiles.splice(index, 1);
-    setFiles(newFiles);
-    formik.setFieldValue('cover_photo', newFiles);
+    const newFile = [...thumbnailFile];
+    newFile.splice(index, 1);
+    setThumbnailFile(newFile);
+    formik.setFieldValue('cover_photo', newFile);
   };
 
-  const acceptedFileItems = files.map((file: any, index: number) => (
+  const acceptedFileItem = thumbnailFile.map((file: any, index: number) => (
     <Box
       key={file.name}
       sx={{
@@ -79,7 +84,7 @@ export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
           zIndex: 20000,
         }}
         type="button"
-        onClick={() => deleteFile(file, index)}
+        onClick={() => deleteFile(thumbnailFile, index)}
       >
         <IoCloseSharp size={25} />
       </Box>
@@ -88,7 +93,7 @@ export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
 
   return (
     <>
-      {acceptedFileItems.length === 0 ? (
+      {acceptedFileItem.length === 0 ? (
         <Box
           sx={{
             width: '100%',
@@ -191,7 +196,7 @@ export const ThumbnailUpload = ({ formik }: ThumbnailUploadProps) => {
               display: 'flex',
             }}
           >
-            {acceptedFileItems}
+            {acceptedFileItem}
           </Box>
         </Box>
       )}

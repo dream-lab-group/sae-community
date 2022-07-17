@@ -35,6 +35,8 @@ const ProjectUpload = () => {
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [currentUser, setCurrentUser] = useState<any>();
+  const [thumbnailFile, setThumbnailFile] = useState<any>([]);
+  const [thumbnailId, setThumbnailId] = useState();
 
   const router = useRouter();
 
@@ -54,13 +56,13 @@ const ProjectUpload = () => {
   }, [setCurrentUser]);
 
   const courseValidationSchema = yup.object({
-    // project_name: yup
-    //   .string()
-    //   .required('Ein Projektname muss unbedingt eingegeben werden')
-    //   .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
+    project_name: yup
+      .string()
+      .required('Ein Projektname muss unbedingt eingegeben werden')
+      .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     // TODO
     // cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
-    // description: yup.string().required('Bitte beschreibe das Projekt'),
+    description: yup.string().required('Bitte beschreibe das Projekt'),
     // TODO
     // embedded_urls: yup
     //   .string()
@@ -68,7 +70,7 @@ const ProjectUpload = () => {
     //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
     //     'Enter correct url!',
     //   ),
-    // course: yup.string().required('Bitte ein Fachrichtung auswählen'),
+    course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
   const formik = useFormik({
@@ -88,24 +90,27 @@ const ProjectUpload = () => {
     onSubmit: async (values: any) => {
       const directus = new Directus('https://www.whatthebre.com/');
 
-      // const projects = directus.items('projects');
+      const formData = new FormData();
+      formData.append('name', thumbnailFile[0].path);
+      formData.append('file', thumbnailFile[0]);
+      const fileId = await directus.files.createOne(formData);
+      if (fileId) {
+        setThumbnailId(fileId.id);
+      }
 
-      // await projects.createOne({
-      //   user_created: values.user_created,
-      //   project_name: values.project_name,
-      //   cover_photo: values.cover_photo,
-      //   course: values.course,
-      //   description: values.description,
-      //   collaborators: values.collaborators,
-      //   embedded_urls: values.embedded_urls,
-      //   comment_function: values.comment_function,
-      //   external_project: values.external_project,
-      //   project_files: values.project_files,
-      // });
-
-      console.log(values);
-
-      await directus.files.createOne(values.cover_photo[0]);
+      const projects = directus.items('projects');
+      await projects.createOne({
+        user_created: values.user_created,
+        project_name: values.project_name,
+        cover_photo: thumbnailId,
+        course: values.course,
+        description: values.description,
+        collaborators: values.collaborators,
+        embedded_urls: values.embedded_urls,
+        comment_function: values.comment_function,
+        external_project: values.external_project,
+        project_files: values.project_files,
+      });
     },
   });
 
@@ -197,8 +202,9 @@ const ProjectUpload = () => {
                 label="ThumbnailUpload"
                 id="cover_photo"
                 name="cover_photo"
-                type="text"
                 formik={formik}
+                thumbnailFile={thumbnailFile}
+                setThumbnailFile={setThumbnailFile}
               />
               <FileUpload formik={formik} />
               <>
