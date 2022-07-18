@@ -23,8 +23,8 @@ export const UserProfileUrls = ({
       sx={{ marginTop: `${smBreakpointDown ? '0px' : '10px'}` }}
     >
       {urlsData.map((urlThingy) => {
-        console.log(formikProps.initialValues.urls);
-
+        /*         console.log(formikProps.initialValues.urls);
+         */
         return (
           <>
             <Grid item xs={12} sm={6}>
@@ -40,7 +40,7 @@ export const UserProfileUrls = ({
                 label={urlThingy.webseite}
                 /* @ts-expect-error: todo */
                 defaultValue={urlThingy.url}
-/*                 defaultValue={(value) => {
+                /*                 defaultValue={(value) => {
                   formik.setFieldValue(
                     'urls',
                     value !== null ? value : formikProps.initialValues.urls,

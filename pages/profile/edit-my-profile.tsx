@@ -7,12 +7,12 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { UserProfileMyData } from '../../common/components/profile/user-profile-my-data';
+import { UserProfileMyData } from '../../common/components/profile/user-profile/user-profile-my-data';
 import { UserInformation } from '../../common/types/types';
-import { UserProfileUrls } from '../../common/components/profile/user-profile-urls';
-import { SkillsInterests } from '../../common/components/profile/user-profile-skills-interests';
+import { UserProfileUrls } from '../../common/components/profile/user-profile/user-profile-urls';
+import { SkillsInterests } from '../../common/components/profile/user-profile/user-profile-skills-interests';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import * as yup from 'yup';
 
 type EditMyProfileProps = {
   userData: UserInformation;
@@ -31,24 +31,55 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
     router.push('/public-profile/123');
   };
 
-const formik = useFormik({
-      initialValues:{
-            first_name: userData.first_name,
-            last_name: userData.last_name,
-            email: userData.email,
-            description: userData.description,
-            course: userData.course,
-            urls: userData.urls,
-            programs: userData.programs,
-            interests: userData.interests
-      },
-      onSubmit: async(values: any) => {
-            console.log(values)
-      }
-})
+  const myProfilValidationSchema = yup.object({
+    first_name: yup
+      .string()
+      .required('Ein Vorname muss unbedingt eingegeben werden.')
+      .min(2, 'Der Vorname muss mindestens 2 Zeichen lang sein.'),
+    last_name: yup
+      .string()
+      .required('Ein Nachname muss unbedingt eingegeben werden.')
+      .min(2, 'Der Nachname muss mindestens 2 Zeichen lang sein.'),
+    avatar: yup.string(),
+    email: yup
+      .string()
+      .min(3, 'Deine E-Mail-Adresse muss mindestens 3 Zeichen lang sein.')
+      .email('Deine E-Mail-Adresse muss gültig sein'),
+    description: yup
+      .string()
+      .min(2, 'Deine Beschreibung muss mindestens 2 Zeichen lang sein.'),
+    course: yup.string().required('Bitte eine Fachrichtung auswählen'),
+    urls: yup
+      .string()
+      .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        'Enter correct url!',
+      ),
+      programs: yup
+      .object(),
+      interests: yup
+      .object(),
+  });
 
-/* const [selectedPrograms, setSelectedPrograms] = useState(formik.values.programs)
- */
+  const formik = useFormik({
+    initialValues: {
+      first_name: userData.first_name,
+      last_name: userData.last_name,
+      avatar: userData.avatar,
+      email: userData.email,
+      description: userData.description,
+      course: userData.course,
+      urls: userData.urls,
+      programs: userData.programs,
+      interests: userData.interests,
+    },
+    validationSchema: myProfilValidationSchema,
+    onSubmit: async (values: any) => {
+      console.log(values);
+    },
+  });
+
+  console.log(formik.values);
   return (
     <>
       {/* Content */}
@@ -74,20 +105,13 @@ const formik = useFormik({
           >
             {t('profile.myProfile')}
           </Typography>
-          <UserProfileMyData
-            first_name={formik.values.first_name}
-            last_name={formik.values.last_name}
-            email={formik.values.email}
-            description={formik.values.description}
-            course={formik.values.course}
-            formik={formik}
-          />
+          <UserProfileMyData formik={formik} />
           <UserProfileUrls
             urls={formik.values.urls}
             formik={formik}
             formikProps={formik}
           />
-            <SkillsInterests
+          <SkillsInterests
             programs={formik.values.programs}
             interests={formik.values.interests}
             formik={formik}

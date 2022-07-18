@@ -2,28 +2,18 @@ import { Grid, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { FormikValues } from 'formik';
 
-import { FileUpload } from './file-upload';
+import { UserProfileAvatarUpload } from './user-profile-avatar-upload';
+import { useState } from 'react';
 
 type UserProfileMyDataProps = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  description: string;
-  course: string;
   formik: FormikValues;
 };
 
-export const UserProfileMyData = ({
-  first_name,
-  last_name,
-  email,
-  description,
-  course,
-  formik,
-}: UserProfileMyDataProps) => {
+export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
   const { t } = useTranslation();
+  const [avatarFile, setAvatarFile] = useState<string[]>([]);
 
-  if (first_name) {
+  if (formik) {
     return (
       <>
         <Grid container spacing={2} sx={{ marginTop: '20px' }}>
@@ -32,8 +22,8 @@ export const UserProfileMyData = ({
               required
               size="small"
               label="Vorname"
-              type="text"
               name="first_name"
+              type="text"
               defaultValue={formik.values.first_name}
               onChange={formik.handleChange}
               InputLabelProps={{
@@ -48,7 +38,10 @@ export const UserProfileMyData = ({
               required
               size="small"
               label="Nachname"
+              name="last_name"
+              type="text"
               defaultValue={formik.values.last_name}
+              onChange={formik.handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -61,7 +54,10 @@ export const UserProfileMyData = ({
               required
               size="small"
               label="E-Mail"
-              defaultValue={email}
+              name="email"
+              type="text"
+              defaultValue={formik.values.email}
+              onChange={formik.handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -75,7 +71,10 @@ export const UserProfileMyData = ({
               size="small"
               id="profession"
               label="Fachrichtung"
-              defaultValue={course}
+              name="course"
+              type="text"
+              defaultValue={formik.values.course}
+              onChange={formik.handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -84,13 +83,19 @@ export const UserProfileMyData = ({
             />
           </Grid>
         </Grid>
-        <FileUpload />
+        <UserProfileAvatarUpload
+          formik={formik}
+          avatarFile={avatarFile}
+          setAvatarFile={setAvatarFile}
+        />
         <TextField
           multiline
           size="small"
           id="description"
           label="Beschreibung"
-          defaultValue={description}
+          name="description"
+          defaultValue={formik.values.description}
+          onChange={formik.handleChange}
           InputLabelProps={{
             shrink: true,
           }}

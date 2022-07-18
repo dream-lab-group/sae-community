@@ -6,9 +6,9 @@ import {
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
-import { UserProfileSettingsPassword } from '../../common/components/profile/user-profile-settings-password';
-import { UserProfileSettingsNotifications } from '../../common/components/profile/user-profile-settings-notifications';
-import { UserProfileSettingsDeleteProfile } from '../../common/components/profile/user-profile-settings-delete-profile';
+import { UserProfileSettingsPassword } from '../../common/components/profile/user-profile/user-profile-settings-password';
+import { UserProfileSettingsNotifications } from '../../common/components/profile/user-profile/user-profile-settings-notifications';
+import { UserProfileSettingsDeleteProfile } from '../../common/components/profile/user-profile/user-profile-settings-delete-profile';
 import { SessionContextProps } from '.';
 
 export const ProfileSettings = ({ setSessionContext }: SessionContextProps) => {

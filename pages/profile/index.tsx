@@ -18,8 +18,7 @@ import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
 import { UserInformation } from '../../common/types/types';
 import { EditMyProfile } from './edit-my-profile';
-/* import { UserProfileUrls } from '../../common/components/profile/user-profile-urls';
- */
+
 export type SessionContextProps = {
   setSessionContext?: React.Dispatch<SetStateAction<string>>;
 };
