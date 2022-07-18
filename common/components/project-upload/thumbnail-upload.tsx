@@ -24,14 +24,17 @@ export const ThumbnailUpload = ({
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [displayThumbnail, setDisplayThumbnail] = useState<string>();
+
   const { t } = useTranslation();
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      setThumbnailFile(null);
       const allFiles = [...thumbnailFile, ...acceptedFiles];
       setThumbnailFile(allFiles);
       formik.setFieldValue('cover_photo', acceptedFiles);
+      setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
+      URL.revokeObjectURL(acceptedFiles[0]);
     },
     [thumbnailFile],
   );
@@ -63,11 +66,13 @@ export const ThumbnailUpload = ({
         position: 'relative',
       }}
     >
-      <Image
-        className="project-image-border-radius image-container"
-        src={URL.createObjectURL(file)}
-        layout="fill"
-      />
+      {displayThumbnail && (
+        <Image
+          className="project-image-border-radius image-container"
+          src={displayThumbnail}
+          layout="fill"
+        />
+      )}
       <Box
         className="project-button-fixed-cancel"
         component="button"
