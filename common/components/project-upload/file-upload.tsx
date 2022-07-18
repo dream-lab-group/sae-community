@@ -35,6 +35,7 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
       'image/jpeg': [],
       'image/jpg': [],
       'image/png': [],
+      'image/webp': [],
       'audio/*': [],
     },
     maxFiles: 6,

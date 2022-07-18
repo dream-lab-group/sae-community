@@ -1,16 +1,15 @@
 import { Autocomplete, Grid, TextField } from '@mui/material';
-import { ProjectUploadProps } from '../../types/types';
+import { CommonAutocompleteProps } from '../../../types/types';
 
-export const Coworkers = ({
+export const Collaborators = ({
   label,
   formikProps,
   ...props
-}: ProjectUploadProps) => {
+}: CommonAutocompleteProps) => {
   return (
     <Grid item sm={12} md={6} width="100%">
       <Autocomplete
         multiple
-        size="small"
         options={collaborators}
         sx={{ width: '100%', marginTop: '20px' }}
         onChange={(e, value) => {

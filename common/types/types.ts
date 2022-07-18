@@ -1,3 +1,5 @@
+import { FormikValues } from 'formik';
+
 type data = {
   data: any;
 };
@@ -61,7 +63,13 @@ export type ProjectUploadProps = {
   id: string;
   label: string;
   name: string;
-  type?: string;
+  formikProps: FormikValues;
+};
+
+export type CommonAutocompleteProps = {
+  id: string;
+  label: string;
+  name: string;
   formikProps?: any;
 };
 

@@ -7,7 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Globals } from '../../utils/utils';
+import { Globals } from '../../../utils/utils';
 
 type AlumniCourseSelectionProps = {
   formik: any;
@@ -23,7 +23,6 @@ export const AlumniCourseSelection = ({
   return (
     <FormControl
       fullWidth
-      size="small"
       sx={{
         marginTop: `${smBreakpointDown ? '15px' : '20px'}`,
       }}

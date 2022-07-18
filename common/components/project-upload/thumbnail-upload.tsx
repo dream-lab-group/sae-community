@@ -24,6 +24,8 @@ export const ThumbnailUpload = ({
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [displayThumbnail, setDisplayThumbnail] = useState<string>();
+
   const { t } = useTranslation();
 
   const onDrop = useCallback(
@@ -31,6 +33,8 @@ export const ThumbnailUpload = ({
       const allFiles = [...thumbnailFile, ...acceptedFiles];
       setThumbnailFile(allFiles);
       formik.setFieldValue('cover_photo', acceptedFiles);
+      setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
+      URL.revokeObjectURL(acceptedFiles[0]);
     },
     [thumbnailFile],
   );
@@ -38,17 +42,18 @@ export const ThumbnailUpload = ({
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/jpeg': [],
+      'image/jpg': [],
       'image/png': [],
+      'image/webp': [],
     },
     maxFiles: 1,
     onDrop,
+    noDragEventsBubbling: true,
   });
 
   const deleteFile = (file: any, index: number) => {
-    const newFile = [...thumbnailFile];
-    newFile.splice(index, 1);
-    setThumbnailFile(newFile);
-    formik.setFieldValue('cover_photo', newFile);
+    setThumbnailFile([]);
+    formik.setFieldValue('cover_photo', thumbnailFile);
   };
 
   const acceptedFileItem = thumbnailFile.map((file: any, index: number) => (
@@ -61,11 +66,13 @@ export const ThumbnailUpload = ({
         position: 'relative',
       }}
     >
-      <Image
-        className="project-image-border-radius image-container"
-        src={URL.createObjectURL(file)}
-        layout="fill"
-      />
+      {displayThumbnail && (
+        <Image
+          className="project-image-border-radius image-container"
+          src={displayThumbnail}
+          layout="fill"
+        />
+      )}
       <Box
         className="project-button-fixed-cancel"
         component="button"
