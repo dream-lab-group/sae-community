@@ -28,6 +28,7 @@ export const ThumbnailUpload = ({
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
+      setThumbnailFile(null);
       const allFiles = [...thumbnailFile, ...acceptedFiles];
       setThumbnailFile(allFiles);
       formik.setFieldValue('cover_photo', acceptedFiles);
@@ -38,17 +39,18 @@ export const ThumbnailUpload = ({
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/jpeg': [],
+      'image/jpg': [],
       'image/png': [],
+      'image/webp': [],
     },
     maxFiles: 1,
     onDrop,
+    noDragEventsBubbling: true,
   });
 
   const deleteFile = (file: any, index: number) => {
-    const newFile = [...thumbnailFile];
-    newFile.splice(index, 1);
-    setThumbnailFile(newFile);
-    formik.setFieldValue('cover_photo', newFile);
+    setThumbnailFile([]);
+    formik.setFieldValue('cover_photo', thumbnailFile);
   };
 
   const acceptedFileItem = thumbnailFile.map((file: any, index: number) => (

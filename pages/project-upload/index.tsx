@@ -12,7 +12,6 @@ import {
 import { CommunityHead } from '../../common/components/community-head';
 import { useTranslation } from 'react-i18next';
 import { FileUpload } from '../../common/components/project-upload/file-upload';
-import { Coworkers } from '../../common/components/project-upload/coworkers';
 import React, { useEffect, useState } from 'react';
 import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
 import { useRouter } from 'next/router';
@@ -21,10 +20,12 @@ import { apiClient } from '../../common/data/apiClient';
 import { FormikProvider, useFormik } from 'formik';
 import * as yup from 'yup';
 import { IoCloseSharp } from 'react-icons/io5';
-import { EmbedUrl } from '../../common/components/project-upload/embed-url';
-import { AlumniCourseSelection } from '../../common/components/project-upload/alumni-course-selection';
-import { ProjectUploadButtons } from '../../common/components/project-upload/project-upload-buttons';
 import { Directus } from '@directus/sdk';
+import { EmbedUrl } from '../../common/components/project-upload/modules/embed-url';
+import { AlumniCourseSelection } from '../../common/components/project-upload/modules/alumni-course-selection';
+import { Collaborators } from '../../common/components/project-upload/modules/collaborators';
+import { ProjectUploadButtons } from '../../common/components/project-upload/modules/project-upload-buttons';
+import { ProgramsUsed } from '../../common/components/project-upload/modules/programs-used';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -36,8 +37,6 @@ const ProjectUpload = () => {
 
   const [currentUser, setCurrentUser] = useState<any>();
   const [thumbnailFile, setThumbnailFile] = useState<any>([]);
-  const [thumbnailId, setThumbnailId] = useState();
-  const [projectId, setProjectId] = useState<any>();
 
   const router = useRouter();
 
@@ -63,15 +62,15 @@ const ProjectUpload = () => {
       .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     // TODO
     // cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
-    description: yup.string().required('Bitte beschreibe das Projekt'),
-    // TODO
+    // description: yup.string().required('Bitte beschreibe das Projekt'),
+    // TODOx
     // embedded_urls: yup
     //   .string()
     //   .matches(
     //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
     //     'Enter correct url!',
     //   ),
-    course: yup.string().required('Bitte ein Fachrichtung auswählen'),
+    // course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
   const formik = useFormik({
@@ -79,6 +78,7 @@ const ProjectUpload = () => {
       user_created: null,
       project_name: '',
       cover_photo: null,
+      programs: [],
       course: '',
       description: '',
       collaborators: null,
@@ -95,40 +95,40 @@ const ProjectUpload = () => {
       formData.append('file', thumbnailFile[0]);
       const fileId = await directus.files.createOne(formData);
       if (fileId) {
-        setThumbnailId(fileId.id);
-      }
-      const projects = directus.items('projects');
-      await projects.createOne({
-        user_created: values.user_created,
-        project_name: values.project_name,
-        cover_photo: thumbnailId,
-        course: values.course,
-        description: values.description,
-        collaborators: values.collaborators,
-        embedded_urls: values.embedded_urls,
-        comment_function: values.comment_function,
-        external_project: values.external_project,
-      });
-
-      if (values.project_files !== null) {
-        const result = await apiClient.get(
-          `https://www.whatthebre.com/items/projects?filter={ "cover_photo": { "_eq": "${thumbnailId}" }}`,
-        );
-        if (result.status === 200) {
-          setProjectId(result.data.data[0].id);
-          values.project_files.forEach(async (projectFile: any) => {
-            const formData = new FormData();
-            formData.append('name', projectFile.name);
-            formData.append('file', projectFile);
-            const fileId = await directus.files.createOne(formData);
-            if (fileId) {
-              const projectsFiles = directus.items('projects_files');
-              await projectsFiles.createOne({
-                projects_id: projectId,
-                directus_files_id: fileId,
+        const projects = directus.items('projects');
+        const projectUploadResponse = await projects.createOne({
+          user_created: values.user_created,
+          project_name: values.project_name,
+          cover_photo: fileId.id,
+          programs: values.programs,
+          course: values.course,
+          description: values.description,
+          collaborators: values.collaborators,
+          embedded_urls: values.embedded_urls,
+          comment_function: values.comment_function,
+          external_project: values.external_project,
+        });
+        if (projectUploadResponse) {
+          if (values.project_files !== null) {
+            const result = await apiClient.get(
+              `https://www.whatthebre.com/items/projects?filter={ "cover_photo": { "_eq": "${fileId.id}" }}`,
+            );
+            if (result.status === 200) {
+              values.project_files.forEach(async (projectFile: any) => {
+                const formData = new FormData();
+                formData.append('name', projectFile.name);
+                formData.append('file', projectFile);
+                const fileRelationId = await directus.files.createOne(formData);
+                if (fileRelationId) {
+                  const projectsFiles = directus.items('projects_files');
+                  await projectsFiles.createOne({
+                    projects_id: result.data.data[0].id,
+                    directus_files_id: fileRelationId,
+                  });
+                }
               });
             }
-          });
+          }
         }
       }
     },
@@ -227,12 +227,18 @@ const ProjectUpload = () => {
                 setThumbnailFile={setThumbnailFile}
               />
               <FileUpload formik={formik} />
+              <ProgramsUsed
+                label="Benutzte Programme"
+                id="programs"
+                name="programs"
+                formikProps={formik}
+              />
               <>
                 <Box
                   sx={{
                     width: '100%',
                     height: '56px',
-                    marginTop: '30px',
+                    marginTop: '20px',
                     marginBottom: '10px',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -317,7 +323,7 @@ const ProjectUpload = () => {
                 alignItems="center"
                 sx={{ direction: `${mdBreakpointDown && 'flex-start'}` }}
               >
-                <Coworkers
+                <Collaborators
                   label="Coworkers"
                   id="collaborators"
                   name="collaborators"
