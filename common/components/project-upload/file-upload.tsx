@@ -32,13 +32,10 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/jpeg': [],
-      'image/jpg': [],
-      'image/png': [],
-      'image/webp': [],
+      'image/*': [],
       'audio/*': [],
     },
-    maxFiles: 6,
+    maxFiles: 5,
     onDrop,
   });
 
@@ -152,7 +149,7 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
             boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
           }}
         >
-          {files.length >= 6 ? (
+          {files.length >= 5 ? (
             <Box
               sx={{
                 width: '100%',

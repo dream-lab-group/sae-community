@@ -40,10 +40,7 @@ export const ThumbnailUpload = ({
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/jpeg': [],
-      'image/jpg': [],
-      'image/png': [],
-      'image/webp': [],
+      'image/*': [],
     },
     maxFiles: 1,
     onDrop,
@@ -51,7 +48,7 @@ export const ThumbnailUpload = ({
   });
 
   const deleteFile = (file: any, index: number) => {
-    setThumbnailFile([]);
+    setThumbnailFile('');
     formik.setFieldValue('cover_photo', thumbnailFile);
   };
 

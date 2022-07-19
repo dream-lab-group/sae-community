@@ -49,7 +49,7 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
       }
     };
     fetchProject();
-  }, [setProjectData]);
+  }, [setProjectData, projectId]);
 
   const handleBackToHome = () => {
     router.push('/');
