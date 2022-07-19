@@ -37,7 +37,6 @@ const ProjectUpload = () => {
 
   const [currentUser, setCurrentUser] = useState<any>();
   const [thumbnailFile, setThumbnailFile] = useState<any>([]);
-  const [getFileId, setGetFileId] = useState(null);
 
   const router = useRouter();
 
@@ -96,7 +95,6 @@ const ProjectUpload = () => {
       formData.append('file', thumbnailFile[0]);
       const fileId = await directus.files.createOne(formData);
       if (fileId) {
-        setGetFileId(fileId.id);
         const projects = directus.items('projects');
         await projects
           .createOne({
