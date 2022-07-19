@@ -48,7 +48,7 @@ export const ThumbnailUpload = ({
   });
 
   const deleteFile = (file: any, index: number) => {
-    setThumbnailFile('');
+    setThumbnailFile([]);
     formik.setFieldValue('cover_photo', thumbnailFile);
   };
 
