@@ -37,6 +37,7 @@ const ProjectUpload = () => {
 
   const [currentUser, setCurrentUser] = useState<any>();
   const [thumbnailFile, setThumbnailFile] = useState<any>([]);
+  const [getFileId, setGetFileId] = useState(null);
 
   const router = useRouter();
 
@@ -95,6 +96,7 @@ const ProjectUpload = () => {
       formData.append('file', thumbnailFile[0]);
       const fileId = await directus.files.createOne(formData);
       if (fileId) {
+        setGetFileId(fileId.id);
         const projects = directus.items('projects');
         await projects
           .createOne({
@@ -128,11 +130,17 @@ const ProjectUpload = () => {
                       projects_id: result.data.data[0].id,
                       directus_files_id: fileRelationId,
                     });
+                    router.push(`/project/${result.data.data[0].id}`);
                   }
                 });
               }
             } else {
-              console.log('no project files');
+              const result = await apiClient.get(
+                `https://www.whatthebre.com/items/projects?filter={ "cover_photo": { "_eq": "${fileId.id}" }}`,
+              );
+              if (result.status === 200) {
+                router.push(`/project/${fileId.id}`);
+              }
             }
           });
       }

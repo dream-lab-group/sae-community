@@ -34,7 +34,6 @@ export const ThumbnailUpload = ({
       setThumbnailFile(allFiles);
       formik.setFieldValue('cover_photo', acceptedFiles);
       setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
-      URL.revokeObjectURL(acceptedFiles[0]);
     },
     [thumbnailFile],
   );
