@@ -2,13 +2,13 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
-import Image from 'next/image';
 import { BsImage } from 'react-icons/bs';
 import { RiFolderMusicLine } from 'react-icons/ri';
 import { IoCloseSharp } from 'react-icons/io5';
-import { FaMusic, FaFrownOpen } from 'react-icons/fa';
+import { FaFrownOpen } from 'react-icons/fa';
 import { GiHeavyFall } from 'react-icons/gi';
 import { FormikValues } from 'formik';
+import { FileUploadFiles } from './modules/file-upload-files';
 
 type FileUploadProps = {
   formik: FormikValues;
@@ -42,84 +42,9 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
     onDrop,
   });
 
-  const deleteFile = (file: any, index: number) => {
-    const newFiles = [...files];
-    newFiles.splice(index, 1);
-    setFiles(newFiles);
-    formik.setFieldValue('project_files', newFiles);
-  };
-
-  const acceptedFileItems = files.map((file: any, index: number) => (
-    <Box
-      key={file.name}
-      sx={{
-        width: '110px',
-        height: '110px',
-        borderRadius: '10px',
-        position: 'relative',
-      }}
-    >
-      {file.type.includes('audio') ? (
-        <Box
-          sx={{
-            height: '110px',
-            width: '110px',
-            border: '1px solid #bdbdbd',
-            borderRadius: '10px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#8519f6',
-          }}
-        >
-          <FaMusic size={25} />
-          <Typography
-            sx={{
-              marginTop: '10px',
-              color: '#000',
-              fontSize: '13px',
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
-            Music File
-          </Typography>
-        </Box>
-      ) : (
-        <Image
-          className="project-image-border-radius image-container"
-          src={URL.createObjectURL(file)}
-          layout="fill"
-        />
-      )}
-      <Box
-        className="project-button-fixed-cancel"
-        component="button"
-        sx={{
-          border: 'none',
-          position: 'absolute',
-          right: 5,
-          top: 5,
-          color: '#000000cc',
-          padding: '5px 5px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: '10px',
-          cursor: 'pointer',
-        }}
-        type="button"
-        onClick={() => deleteFile(file, index)}
-      >
-        <IoCloseSharp size={18} />
-      </Box>
-    </Box>
-  ));
-
   return (
     <>
-      {acceptedFileItems.length === 0 ? (
+      {files.length === 0 ? (
         <Box
           sx={{
             width: '100%',
@@ -338,7 +263,16 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
               padding: '20px',
             }}
           >
-            {acceptedFileItems}
+            {files.map((acceptedFile: any, index: number) => (
+              <FileUploadFiles
+                key={index}
+                files={files}
+                setFiles={setFiles}
+                acceptedFile={acceptedFile}
+                index={index}
+                formik={formik}
+              />
+            ))}
           </Box>
         </Box>
       )}

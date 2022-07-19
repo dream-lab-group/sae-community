@@ -128,11 +128,17 @@ const ProjectUpload = () => {
                       projects_id: result.data.data[0].id,
                       directus_files_id: fileRelationId,
                     });
+                    router.push(`/project/${result.data.data[0].id}`);
                   }
                 });
               }
             } else {
-              console.log('no project files');
+              const result = await apiClient.get(
+                `https://www.whatthebre.com/items/projects?filter={ "cover_photo": { "_eq": "${fileId.id}" }}`,
+              );
+              if (result.status === 200) {
+                router.push(`/project/${fileId.id}`);
+              }
             }
           });
       }

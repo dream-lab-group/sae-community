@@ -12,8 +12,10 @@ import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
 import React, { useEffect, useState } from 'react';
 import { apiClient } from '../../data/apiClient';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 
 type ProjectCardProps = {
+  projectId: string;
   coverPhotoId: string;
   userCreated: string;
   course: string;
@@ -22,6 +24,7 @@ type ProjectCardProps = {
 };
 
 export const ProjectCard = ({
+  projectId,
   coverPhotoId,
   userCreated,
   course,
@@ -33,9 +36,11 @@ export const ProjectCard = ({
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
-
   const { t } = useTranslation();
+  const router = useRouter();
   const [user, setUser] = useState('');
+
+  const imageUrl = `https://www.whatthebre.com/assets/${coverPhotoId}?quality=50`;
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -51,7 +56,10 @@ export const ProjectCard = ({
     };
     fetchUser();
   }, [setUser]);
-  const imageUrl = `https://www.whatthebre.com/assets/${coverPhotoId}?quality=50`;
+
+  const handleOpenProject = () => {
+    router.push({ pathname: 'project/[pid]', query: { pid: projectId } });
+  };
 
   return (
     <>
@@ -96,6 +104,9 @@ export const ProjectCard = ({
             justifyContent="center"
             alignItems="center"
             alignContent="center"
+            sx={{ cursor: 'pointer', border: 'none' }}
+            component="button"
+            onClick={handleOpenProject}
           >
             <Image
               src={imageUrl}
