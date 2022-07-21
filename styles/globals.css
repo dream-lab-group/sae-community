@@ -182,7 +182,6 @@ h6 {
   margin-left: 20px;
   margin-right: 20px;
   overflow-y: scroll;
-  height: 160px;
 }
 .ProseMirror ul,
 .ProseMirror ol {
@@ -229,4 +228,9 @@ h6 {
 
 .ProseMirror:focus {
   outline: none;
+}
+
+.tiptap-edit {
+  height: 160px !important;
+  overflow-y: scroll !important;
 }/*# sourceMappingURL=globals.css.map */

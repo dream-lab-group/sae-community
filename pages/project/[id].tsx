@@ -117,19 +117,6 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
                 {projectData.project_name}
               </Typography>
               <TipTapViewer content={projectData.description} />
-              <Typography
-                component="button"
-                sx={{
-                  fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
-                  color: '#CF2CF6',
-                  marginTop: '15px',
-                  cursor: 'pointer',
-                  border: 'none',
-                  background: 'none',
-                }}
-              >
-                Link
-              </Typography>
             </Box>
           </Box>
           {smBreakpointDown ? (

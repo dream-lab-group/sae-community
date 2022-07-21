@@ -9,7 +9,7 @@ const TipTapViewer = ({ content }: { content: string }) => {
   });
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', lineHeight: 1.5 }}>
       {/* @ts-expect-error: todo */}
       <EditorContent editor={editor} />
     </Box>

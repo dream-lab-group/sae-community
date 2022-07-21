@@ -195,8 +195,10 @@ const TipTapEditor = ({
       }}
     >
       {edit ? <MenuBar editor={editor} /> : <></>}
-      {/* @ts-expect-error: todo */}
-      <EditorContent editor={editor} />
+      <Box className="tiptap-edit">
+        {/* @ts-expect-error: todo */}
+        <EditorContent editor={editor} />
+      </Box>
     </Box>
   );
 };
