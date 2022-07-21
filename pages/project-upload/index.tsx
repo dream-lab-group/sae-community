@@ -26,6 +26,7 @@ import { AlumniCourseSelection } from '../../common/components/project-upload/mo
 import { Collaborators } from '../../common/components/project-upload/modules/collaborators';
 import { ProjectUploadButtons } from '../../common/components/project-upload/modules/project-upload-buttons';
 import { ProgramsUsed } from '../../common/components/project-upload/modules/programs-used';
+import TipTapEditor from '../../common/components/common/tiptap-editor';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -37,6 +38,7 @@ const ProjectUpload = () => {
 
   const [currentUser, setCurrentUser] = useState<any>();
   const [thumbnailFile, setThumbnailFile] = useState<any>([]);
+  const [textareaContent, setTextareaContent] = useState<any>();
 
   const router = useRouter();
 
@@ -62,7 +64,6 @@ const ProjectUpload = () => {
       .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     // TODO
     // cover_photo: yup.mixed().required('Bitte wähle ein Titelbild aus'),
-    description: yup.string().required('Bitte beschreibe das Projekt'),
     // TODOx
     // embedded_urls: yup
     //   .string()
@@ -80,7 +81,7 @@ const ProjectUpload = () => {
       cover_photo: null,
       programs: [],
       course: '',
-      description: '',
+      description: {},
       collaborators: null,
       embedded_urls: [],
       comment_function: false,
@@ -89,6 +90,7 @@ const ProjectUpload = () => {
     },
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
+      formik.setFieldValue('description', textareaContent);
       const directus = new Directus('https://www.whatthebre.com/');
       const formData = new FormData();
       formData.append('name', thumbnailFile[0].name);
@@ -303,25 +305,9 @@ const ProjectUpload = () => {
                   />
                 ))}
               </>
-              <TextField
-                multiline
-                size="small"
-                id="description"
-                name="description"
-                label="Beschreibung"
-                variant="outlined"
-                minRows={7}
-                fullWidth
-                value={formik.values.description}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.description &&
-                  Boolean(formik.errors.description)
-                }
-                helperText={
-                  formik.touched.description && formik.errors.description
-                }
-                sx={{ marginTop: '10px', fontSize: '8px' }}
+              <TipTapEditor
+                edit={true}
+                setTextareaContent={setTextareaContent}
               />
               {currentUser.course === 'alumni' ? (
                 <AlumniCourseSelection formik={formik} />
