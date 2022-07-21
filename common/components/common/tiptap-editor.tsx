@@ -39,63 +39,85 @@ const MenuBar = ({ editor }: { editor: any }) => {
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleBold().run()}
-        className={editor.isActive('bold') ? 'is-active' : ''}
+        className={editor.isActive('bold') ? 'is-active tiptap-active' : ''}
       >
         <BsTypeBold size={20} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleItalic().run()}
-        className={editor.isActive('italic') ? 'is-active' : ''}
+        className={
+          editor.isActive('italic') ? 'is-is-active tiptap-active' : ''
+        }
       >
         <BsTypeItalic size={20} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().setParagraph().run()}
-        className={editor.isActive('paragraph') ? 'is-active' : ''}
+        className={
+          editor.isActive('paragraph') ? 'is-active tiptap-active' : ''
+        }
       >
         <BsType size={20} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
+        className={
+          editor.isActive('heading', { level: 1 })
+            ? 'is-active tiptap-active'
+            : ''
+        }
       >
         <BsTypeH1 size={20} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+        className={
+          editor.isActive('heading', { level: 2 })
+            ? 'is-active tiptap-active'
+            : ''
+        }
       >
         <BsTypeH2 size={20} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
+        className={
+          editor.isActive('heading', { level: 3 })
+            ? 'is-active tiptap-active'
+            : ''
+        }
       >
         <BsTypeH3 size={20} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={editor.isActive('bulletList') ? 'is-active' : ''}
+        className={
+          editor.isActive('bulletList') ? 'is-active tiptap-active' : ''
+        }
       >
         <BsFillCircleFill size={10} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive('codeBlock') ? 'is-active' : ''}
+        className={
+          editor.isActive('codeBlock') ? 'is-active tiptap-active' : ''
+        }
       >
         <BsCodeSquare size={20} />
       </ButtonBase>
       <ButtonBase
         sx={{ width: '30px', height: '30px' }}
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className={editor.isActive('blockquote') ? 'is-active' : ''}
+        className={
+          editor.isActive('blockquote') ? 'is-active tiptap-active' : ''
+        }
       >
         <BsBlockquoteLeft size={20} />
       </ButtonBase>

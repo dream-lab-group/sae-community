@@ -233,4 +233,11 @@ h6 {
 .tiptap-edit {
   height: 160px !important;
   overflow-y: scroll !important;
+  line-height: 1.5 !important;
+}
+
+.tiptap-active {
+  background: #5504aa !important;
+  color: #fff !important;
+  border-radius: 5px !important;
 }/*# sourceMappingURL=globals.css.map */

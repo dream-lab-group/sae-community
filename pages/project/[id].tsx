@@ -18,7 +18,6 @@ import { FiMail } from 'react-icons/fi';
 import { CommunityHead } from '../../common/components/community-head';
 import { useEffect, useState } from 'react';
 import { apiClient } from '../../common/data/apiClient';
-import TipTapEditor from '../../common/components/common/tiptap-editor';
 import TipTapViewer from '../../common/components/common/tiptap-viewer';
 
 type Props = {
