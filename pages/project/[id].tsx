@@ -18,6 +18,8 @@ import { FiMail } from 'react-icons/fi';
 import { CommunityHead } from '../../common/components/community-head';
 import { useEffect, useState } from 'react';
 import { apiClient } from '../../common/data/apiClient';
+import TipTapViewer from '../../common/components/common/tiptap-viewer';
+import { UsedProgram } from '../../common/components/common/used-programs';
 
 type Props = {
   router: Router;
@@ -103,8 +105,15 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
             <ProjectPictures data={projectData} />
             <ProjectEmbedded />
             <ProjectAudioFile />
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
+              {projectData.programs.map(
+                (program: { name: string; label: string }) => (
+                  <UsedProgram usedProgramElement={program.label} />
+                ),
+              )}
+            </Box>
             <Box
-              sx={{ width: '100%', marginTop: `${smBreakpointUp && '40px'}` }}
+              sx={{ width: '100%', marginTop: `${smBreakpointUp && '20px'}` }}
             >
               <Typography
                 sx={{
@@ -114,28 +123,7 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
               >
                 {projectData.project_name}
               </Typography>
-              <Typography
-                sx={{
-                  fontWeight: 300,
-                  fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
-                  marginTop: '10px',
-                }}
-              >
-                {projectData.description}
-              </Typography>
-              <Typography
-                component="button"
-                sx={{
-                  fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
-                  color: '#CF2CF6',
-                  marginTop: '15px',
-                  cursor: 'pointer',
-                  border: 'none',
-                  background: 'none',
-                }}
-              >
-                Link
-              </Typography>
+              <TipTapViewer content={projectData.description} />
             </Box>
           </Box>
           {smBreakpointDown ? (

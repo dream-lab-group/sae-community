@@ -6,7 +6,7 @@ export const ProjectAudioFile = () => {
   return (
     <Box
       sx={{
-        marginTop: '30px',
+        marginY: '30px',
         width: '100%',
         height: '50px',
         position: 'relative',

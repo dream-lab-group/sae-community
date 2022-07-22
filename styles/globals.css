@@ -13,12 +13,7 @@ a {
 *,
 ::after,
 ::before {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-ul {
-  list-style: none;
+  box-sizing: border-box;
 }
 
 * {
@@ -37,22 +32,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Outfit', sans-serif !important;
+  font-family: "Outfit", sans-serif !important;
 }
 
 .main-container {
   min-height: 100vh;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   position: relative;
 }
 
@@ -105,30 +93,20 @@ h6 {
 }
 
 .grid-container {
-  display: -ms-grid !important;
   display: grid !important;
   width: 100%;
-  -ms-grid-columns: (minmax(320px, 1fr))[auto-fit] !important;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-flow: nowrap !important;
-      flex-flow: nowrap !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  justify-content: center;
+  flex-flow: nowrap !important;
 }
 
 .grid-container-upload {
-  display: -ms-grid !important;
   display: grid !important;
   width: 100%;
   gap: 10px !important;
-  -ms-grid-columns: (110px)[auto-fit] !important;
-      grid-template-columns: repeat(auto-fit, 110px) !important;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-flow: nowrap !important;
-      flex-flow: nowrap !important;
+  grid-template-columns: repeat(auto-fit, 110px) !important;
+  justify-content: center;
+  flex-flow: nowrap !important;
 }
 
 .project-button-publish {
@@ -140,7 +118,7 @@ h6 {
 }
 
 .project-button-cancel {
-  background: #00000066 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
 }
 
 .project-button-cancel:hover {
@@ -198,4 +176,68 @@ h6 {
   background: #ef6351 !important;
   color: #fff !important;
 }
-/*# sourceMappingURL=globals.css.map */
+
+/* TIPTAP WYSIWYG Editor */
+.ProseMirror {
+  margin-left: 20px;
+  margin-right: 20px;
+  overflow-y: scroll;
+}
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 1rem;
+}
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 1.1;
+}
+.ProseMirror code {
+  background-color: rgba(97, 97, 97, 0.1);
+  color: #616161;
+}
+.ProseMirror pre {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: "JetBrainsMono", monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+.ProseMirror pre code {
+  color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem;
+}
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+.ProseMirror blockquote {
+  padding-left: 1rem;
+  border-left: 2px solid rgba(13, 13, 13, 0.1);
+}
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid rgba(13, 13, 13, 0.1);
+  margin: 2rem 0;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+.tiptap-edit {
+  height: 160px !important;
+  overflow-y: scroll !important;
+  line-height: 1.5 !important;
+}
+
+.tiptap-active {
+  background: #5504aa !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+}/*# sourceMappingURL=globals.css.map */
