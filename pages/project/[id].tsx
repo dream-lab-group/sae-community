@@ -19,6 +19,7 @@ import { CommunityHead } from '../../common/components/community-head';
 import { useEffect, useState } from 'react';
 import { apiClient } from '../../common/data/apiClient';
 import TipTapViewer from '../../common/components/common/tiptap-viewer';
+import { UsedProgram } from '../../common/components/common/used-programs';
 
 type Props = {
   router: Router;
@@ -104,8 +105,15 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
             <ProjectPictures data={projectData} />
             <ProjectEmbedded />
             <ProjectAudioFile />
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
+              {projectData.programs.map(
+                (program: { name: string; label: string }) => (
+                  <UsedProgram usedProgramElement={program.label} />
+                ),
+              )}
+            </Box>
             <Box
-              sx={{ width: '100%', marginTop: `${smBreakpointUp && '40px'}` }}
+              sx={{ width: '100%', marginTop: `${smBreakpointUp && '20px'}` }}
             >
               <Typography
                 sx={{
