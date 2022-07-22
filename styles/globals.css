@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 html,
 a {
   color: inherit;
@@ -32,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Outfit', sans-serif !important;
+  font-family: "Outfit", sans-serif !important;
 }
 
 .main-container {
@@ -46,7 +46,7 @@ h6 {
 
 .image-container {
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   width: 100%;
   position: relative;
   height: unset;
@@ -202,7 +202,7 @@ h6 {
 .ProseMirror pre {
   background: #0d0d0d;
   color: #fff;
-  font-family: 'JetBrainsMono', monospace;
+  font-family: "JetBrainsMono", monospace;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
 }
@@ -240,4 +240,4 @@ h6 {
   background: #5504aa !important;
   color: #fff !important;
   border-radius: 5px !important;
-} /*# sourceMappingURL=globals.css.map */
+}/*# sourceMappingURL=globals.css.map */

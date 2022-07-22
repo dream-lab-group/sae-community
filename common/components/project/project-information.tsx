@@ -10,7 +10,7 @@ type ProjectInformationProps = {
 
 export const ProjectInformation = ({ data }: ProjectInformationProps) => {
   const [user, setUser] = useState('');
-  const [avatarId, setAvatarId] = useState();
+  const [avatarId, setAvatarId] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -27,7 +27,7 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
     fetchUser();
   }, [setUser]);
 
-  const avatarUrl = `https://www.whatthebre.com/assets/${avatarId}?quality=50`;
+  const avatarUrl = `https://www.whatthebre.com/assets/${avatarId}`;
 
   return (
     <Box
@@ -49,11 +49,15 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
           position: 'relative',
         }}
       >
-        <Image
-          className="project-image-border-radius image-container"
-          src={avatarUrl}
-          layout="fill"
-        />
+        {avatarId !== null ? (
+          <Image
+            className="project-image-border-radius image-container"
+            src={avatarUrl}
+            layout="fill"
+          />
+        ) : (
+          <></>
+        )}
       </Box>
       <Box sx={{ widht: '100%', marginLeft: '20px' }}>
         <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>

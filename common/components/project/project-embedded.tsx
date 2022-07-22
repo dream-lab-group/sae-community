@@ -11,71 +11,29 @@ export const ProjectEmbedded = () => {
 
   return (
     <>
-      {smBreakpointDown ? (
-        <Box
-          sx={{
-            marginTop: '35px',
-            width: '100%',
-            height: '250px',
-            borderRadius: '10px',
-            position: 'relative',
-          }}
-        >
-          <Image
-            className="project-image-border-radius image-container"
-            src={embeddedImage}
-            layout="fill"
-          />
-        </Box>
-      ) : mdBreakpointDown ? (
-        <Box
-          sx={{
-            marginTop: '35px',
-            width: '100%',
-            height: '350px',
-            borderRadius: '10px',
-            position: 'relative',
-          }}
-        >
-          <Image
-            className="project-image-border-radius image-container"
-            src={embeddedImage}
-            layout="fill"
-          />
-        </Box>
-      ) : lgBreakpointDown ? (
-        <Box
-          sx={{
-            marginTop: '35px',
-            width: '100%',
-            height: '450px',
-            borderRadius: '10px',
-            position: 'relative',
-          }}
-        >
-          <Image
-            className="project-image-border-radius image-container"
-            src={embeddedImage}
-            layout="fill"
-          />
-        </Box>
-      ) : (
-        <Box
-          sx={{
-            marginTop: '35px',
-            width: '100%',
-            height: '450px',
-            borderRadius: '10px',
-            position: 'relative',
-          }}
-        >
-          <Image
-            className="project-image-border-radius image-container"
-            src={embeddedImage}
-            layout="fill"
-          />
-        </Box>
-      )}
+      <Box
+        sx={{
+          marginTop: '35px',
+          width: '100%',
+          height: `${
+            smBreakpointDown
+              ? '250px'
+              : mdBreakpointDown
+              ? '350px'
+                ? lgBreakpointDown
+                : '450px'
+              : '450px'
+          }`,
+          borderRadius: '10px',
+          position: 'relative',
+        }}
+      >
+        <Image
+          className="project-image-border-radius image-container"
+          src={embeddedImage}
+          layout="fill"
+        />
+      </Box>
     </>
   );
 };
