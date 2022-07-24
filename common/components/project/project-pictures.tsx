@@ -1,9 +1,9 @@
 import { useMediaQuery, useTheme } from '@mui/material';
-import { Box } from '@mui/system';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { apiClient } from '../../data/apiClient';
+import { Pictures } from '../common/pictures';
 
 type ProjectPicturesProps = {
   data: any;
@@ -28,8 +28,6 @@ export const ProjectPictures = ({ data }: ProjectPicturesProps) => {
     fetchFiles();
   }, [setFiles]);
 
-  const imageUrl = `https://www.whatthebre.com/assets/${files}?quality=50`;
-
   return (
     <>
       <Carousel
@@ -50,11 +48,7 @@ export const ProjectPictures = ({ data }: ProjectPicturesProps) => {
           position: 'relative',
         }}
       >
-        <Image
-          className="project-image-border-radius image-container"
-          src={imageUrl}
-          layout="fill"
-        />
+        <Pictures filedId={files} />
       </Carousel>
     </>
   );
