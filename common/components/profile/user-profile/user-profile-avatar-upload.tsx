@@ -6,44 +6,58 @@ import Image from 'next/image';
 import { IoCloseSharp } from 'react-icons/io5';
 import { FaFrownOpen } from 'react-icons/fa';
 import { FormikValues } from 'formik';
+import { Directus } from '@directus/sdk';
+import placeholderImage from '../../../../public/assets/placeholder.png';
 
 type UserAvatarProps = {
   formik: FormikValues;
+  avatarFile: any;
+  setAvatarFile: React.Dispatch<any>;
+  userAvatar: any;
 };
 
-export const UserProfileAvatarUpload = ({ formik }: UserAvatarProps) => {
+export const UserProfileAvatarUpload = ({
+  formik,
+  avatarFile,
+  setAvatarFile,
+  userAvatar,
+}: UserAvatarProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [displayAvatar, setDisplayAvatar] = useState<string>();
+
   const { t } = useTranslation();
-  const [avatarFile, setAvatarFile] = useState<any>([]);
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-/*       setAvatarFile(null);
- */      const allFiles = [...avatarFile, ...acceptedFiles];
+      const allFiles = [...avatarFile, ...acceptedFiles];
       setAvatarFile(allFiles);
       formik.setFieldValue('avatar', acceptedFiles);
+      setDisplayAvatar(URL.createObjectURL(acceptedFiles[0]));
     },
     [avatarFile],
   );
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': [],
+      'image/jpg': [],
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': [],
     },
     maxFiles: 1,
     onDrop,
   });
 
   const deleteFile = (file: any, index: number) => {
-    const newAvatarFile = [...avatarFile];
-    newAvatarFile.splice(index, 1);
-    setAvatarFile(newAvatarFile);
-    formik.setFieldValue('avatar', newAvatarFile);
+    setAvatarFile([]);
+    formik.setFieldValue('avatar', userAvatar);
   };
 
-  const acceptedFileItems = avatarFile.map((file: any, index: number) => (
+  const imageUrl = `https://www.whatthebre.com/assets/${userAvatar}`;
+
+  const acceptedFileItem = avatarFile.map((file: any, index: number) => (
     <Box
       key={file.name}
       sx={{
@@ -52,13 +66,20 @@ export const UserProfileAvatarUpload = ({ formik }: UserAvatarProps) => {
         position: 'relative',
       }}
     >
-      <Image
-        className="image-container"
-        style={{ borderRadius: '50%' }}
-        src={URL.createObjectURL(file)}
-        layout="fill"
-        alt="profilepicture"
-      />
+      <>
+        {displayAvatar && (
+          <Image
+            className="image-container"
+            style={{ borderRadius: '50%' }}
+            src={displayAvatar}
+            layout="fill"
+            quality={50}
+            alt="profilepicture"
+            priority
+          />
+        )}
+      </>
+
       <Box
         className="project-button-fixed-cancel"
         component="button"
@@ -85,7 +106,7 @@ export const UserProfileAvatarUpload = ({ formik }: UserAvatarProps) => {
 
   return (
     <>
-      {acceptedFileItems.length === 0 ? (
+      {acceptedFileItem.length === 0 ? (
         <Box
           sx={{
             width: '100%',
@@ -124,15 +145,28 @@ export const UserProfileAvatarUpload = ({ formik }: UserAvatarProps) => {
                   position: 'relative',
                 }}
               >
-                <Image
-                  style={{ borderRadius: '50%' }}
-                  src={
-                    'https://www.whatthebre.com/assets/' + formik.values.avatar
-                  }
-                  layout="fill"
-                  quality={50}
-                  alt="profilepicture"
-                />
+                {userAvatar === null ? (
+                  <Image
+                    src={placeholderImage}
+                    className="image-container"
+                    priority
+                    layout="fill"
+                    quality={50}
+                    alt="profilepicture"
+                  />
+                ) : (
+                  <Image
+                    style={{
+                      borderRadius: '50%',
+                    }}
+                    src={imageUrl}
+                    className="image-container"
+                    priority
+                    layout="fill"
+                    quality={50}
+                    alt="profilepicture"
+                  />
+                )}
               </Box>
               <Typography
                 sx={{
@@ -217,7 +251,7 @@ export const UserProfileAvatarUpload = ({ formik }: UserAvatarProps) => {
                 position: 'relative',
               }}
             >
-              <Box sx={{ marginY: '10px' }}>{acceptedFileItems}</Box>
+              <Box sx={{ marginY: '10px' }}>{acceptedFileItem}</Box>
               <Box
                 sx={{
                   display: 'flex',

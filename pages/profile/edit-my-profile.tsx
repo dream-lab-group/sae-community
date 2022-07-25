@@ -8,22 +8,28 @@ import {
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { UserProfileMyData } from '../../common/components/profile/user-profile/user-profile-my-data';
-import { UserInformation } from '../../common/types/types';
+import { UserAvatar, UserInformation } from '../../common/types/types';
 import { UserProfileUrls } from '../../common/components/profile/user-profile/user-profile-urls';
 import { SkillsInterests } from '../../common/components/profile/user-profile/user-profile-skills-interests';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useState } from 'react';
+import { Directus } from '@directus/sdk';
+import { apiClient } from '../../common/data/apiClient';
 
 type EditMyProfileProps = {
   userData: UserInformation;
+  userAvatar: UserAvatar;
 };
 
-export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
+export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+
+  const [avatarFile, setAvatarFile] = useState<any>([]);
 
   const router = useRouter();
 
@@ -40,7 +46,7 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
       .string()
       .required('Ein Nachname muss unbedingt eingegeben werden.')
       .min(2, 'Der Nachname muss mindestens 2 Zeichen lang sein.'),
-    avatar: yup.string(),
+    avatar: yup.object().nullable(true),
     email: yup
       .string()
       .min(3, 'Deine E-Mail-Adresse muss mindestens 3 Zeichen lang sein.')
@@ -48,17 +54,61 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
     description: yup
       .string()
       .min(2, 'Deine Beschreibung muss mindestens 2 Zeichen lang sein.'),
-    course: yup.string().required('Bitte eine Fachrichtung auswählen'),
-    urls: yup
-      .string()
-      .matches(
-        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        'Enter correct url!',
-      ),
-      programs: yup
-      .object(),
-      interests: yup
-      .object(),
+    //   course: yup.string(),
+    urls: yup.object().shape({
+      website: yup.object().shape({
+        id: yup.number(),
+        webseite: yup.string(),
+        url: yup
+          .string()
+          .matches(
+            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            'Enter correct url!',
+          ),
+      }),
+      youtube: yup.object().shape({
+        id: yup.number(),
+        webseite: yup.string(),
+        url: yup
+          .string()
+          .matches(
+            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            'Enter correct url!',
+          ),
+      }),
+      instagram: yup.object().shape({
+        id: yup.number(),
+        webseite: yup.string(),
+        url: yup
+          .string()
+          .matches(
+            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            'Enter correct url!',
+          ),
+      }),
+      linkedin: yup.object().shape({
+        id: yup.number(),
+        webseite: yup.string(),
+        url: yup
+          .string()
+          .matches(
+            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            'Enter correct url!',
+          ),
+      }),
+    }),
+    programs: yup.array().of(
+      yup.object().shape({
+        label: yup.string(),
+        program: yup.string(),
+      }),
+    ),
+    interests: yup.array().of(
+      yup.object().shape({
+        label: yup.string(),
+        interests: yup.string(),
+      }),
+    ),
   });
 
   const formik = useFormik({
@@ -72,17 +122,37 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
       urls: userData.urls,
       programs: userData.programs,
       interests: userData.interests,
+      user_files: null,
     },
     validationSchema: myProfilValidationSchema,
+    //     onSubmit: (values) => {
+    //       console.log(values);
+    //     },
     onSubmit: async (values: any) => {
-      console.log(values);
+      const directus = new Directus('https://www.whatthebre.com/');
+      const formData = new FormData();
+      formData.append('file', avatarFile[0]);
+      const avatarId = await directus.files.createOne(formData);
+
+      if (avatarId) {
+      //   console.log(avatarId);
+        await directus.users.me.update({
+          first_name: values.first_name,
+          last_name: values.last_name,
+          avatar: avatarId.id,
+          email: values.email,
+          description: values.description,
+          course: values.course,
+          urls: values.urls,
+          programs: values.programs,
+          interests: values.interests,
+        });
+      }
     },
   });
 
-  console.log(formik.values);
   return (
     <>
-      {/* Content */}
       <Box
         sx={{
           paddingTop: '25px',
@@ -105,7 +175,12 @@ export const EditMyProfile = ({ userData }: EditMyProfileProps) => {
           >
             {t('profile.myProfile')}
           </Typography>
-          <UserProfileMyData formik={formik} />
+          <UserProfileMyData
+            formik={formik}
+            avatarFile={avatarFile}
+            setAvatarFile={setAvatarFile}
+            userAvatar={userAvatar}
+          />
           <UserProfileUrls
             urls={formik.values.urls}
             formik={formik}

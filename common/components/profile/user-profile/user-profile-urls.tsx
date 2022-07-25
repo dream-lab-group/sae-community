@@ -14,7 +14,7 @@ export const UserProfileUrls = ({
 }: UserUrlProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const urlsData = Object.values(urls);
+  const urlsData = Object.values(urls || {});
 
   return (
     <Grid
@@ -29,7 +29,6 @@ export const UserProfileUrls = ({
           <>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 size="small"
                 id="website"
                 name="website"
@@ -40,12 +39,15 @@ export const UserProfileUrls = ({
                 label={urlThingy.webseite}
                 /* @ts-expect-error: todo */
                 defaultValue={urlThingy.url}
-                /*                 defaultValue={(value) => {
-                  formik.setFieldValue(
-                    'urls',
-                    value !== null ? value : formikProps.initialValues.urls,
-                  );
-                }}  */
+                //   defaultValue={(value) => {
+                //       formik.setFieldValue(
+                //         'urls',
+                //         value !== null ? value : formikProps.initialValues.urls,
+                //       );
+                //     }}
+                //     error={
+                //       formik.touched.urls && Boolean(formik.errors.urls)
+                //     }
                 fullWidth
                 sx={{ marginTop: '10px', fontSize: '8px' }}
               />

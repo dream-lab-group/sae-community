@@ -6,8 +6,13 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { UserInformation } from '../../../types/types';
 
-export const UserProfileSettingsDeleteProfile = () => {
+type EditProfileSettingsProps = {
+      userData: UserInformation;
+}
+
+export const UserProfileSettingsDeleteProfile = ({userData}: EditProfileSettingsProps) => {
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
 

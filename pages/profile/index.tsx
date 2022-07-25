@@ -56,6 +56,8 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
     getCurrentUser();
   }, [setCurrentUser]);
 
+  const userAvatar = currentUser.avatar;
+
   return (
     <>
       {isLoading ? (
@@ -91,11 +93,10 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
           />
           {sessionContext === false ? (
             <>
-            <EditMyProfile userData={currentUser} />
-            {/* <UserProfileUrls userData={currentUser} /> */}
+            <EditMyProfile userData={currentUser} userAvatar={userAvatar} />
             </>
           ) : (
-            <ProfileSettings />
+            <ProfileSettings userData={currentUser} />
           )}
           {/* Fixed Buttons */}
           <Box

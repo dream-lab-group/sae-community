@@ -22,8 +22,8 @@ export const SkillsInterests = ({
 }: UserSkillsProps) => {
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const programsData = Object.values(programs);
-  const interestsData = Object.values(interests);
+  const programsData = Object.values(programs || {});
+  const interestsData = Object.values(interests || {});
 
   return (
     <Grid container spacing={2}>
@@ -39,10 +39,8 @@ export const SkillsInterests = ({
               value !== null ? value : formikProps.initialValues.programs,
             );
           }}
-          defaultValue={programsData}
-          renderInput={(params) => (
-            <TextField {...params} label="Skills" />
-          )}
+          value={programsData} /* Changed from defaultValue to value bc of an errormessage */
+          renderInput={(params) => <TextField {...params} label="Skills" />}
         />
       </Grid>
       <Grid item sm={12} md={6} width="100%">
@@ -57,10 +55,8 @@ export const SkillsInterests = ({
               value !== null ? value : formikProps.initialValues.interests,
             );
           }}
-          defaultValue={interestsData}
-          renderInput={(params) => (
-            <TextField {...params} label="Interessen" />
-          )}
+          value={interestsData} /* Changed from defaultValue to value bc of an errormessage */
+          renderInput={(params) => <TextField {...params} label="Interessen" />}
         />
       </Grid>
     </Grid>

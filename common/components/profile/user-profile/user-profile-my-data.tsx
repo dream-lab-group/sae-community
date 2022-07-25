@@ -3,15 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { FormikValues } from 'formik';
 
 import { UserProfileAvatarUpload } from './user-profile-avatar-upload';
-import { useState } from 'react';
 
 type UserProfileMyDataProps = {
   formik: FormikValues;
+  avatarFile: any;
+  setAvatarFile: React.Dispatch<any>;
+  userAvatar: any;
 };
 
-export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
+export const UserProfileMyData = ({
+  formik,
+  avatarFile,
+  setAvatarFile,
+  userAvatar,
+}: UserProfileMyDataProps) => {
   const { t } = useTranslation();
-  const [avatarFile, setAvatarFile] = useState<string[]>([]);
 
   if (formik) {
     return (
@@ -19,13 +25,15 @@ export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
         <Grid container spacing={2} sx={{ marginTop: '20px' }}>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
               size="small"
               label="Vorname"
               name="first_name"
               type="text"
               defaultValue={formik.values.first_name}
               onChange={formik.handleChange}
+              error={
+                formik.touched.first_name && Boolean(formik.errors.first_name)
+              }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -35,13 +43,15 @@ export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
               size="small"
               label="Nachname"
               name="last_name"
               type="text"
               defaultValue={formik.values.last_name}
               onChange={formik.handleChange}
+              error={
+                  formik.touched.last_name && Boolean(formik.errors.last_name)
+                }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -51,13 +61,15 @@ export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
               size="small"
               label="E-Mail"
               name="email"
               type="text"
               defaultValue={formik.values.email}
               onChange={formik.handleChange}
+              error={
+                  formik.touched.email && Boolean(formik.errors.email)
+                }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -67,7 +79,6 @@ export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
               size="small"
               id="profession"
               label="Fachrichtung"
@@ -75,6 +86,9 @@ export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
               type="text"
               defaultValue={formik.values.course}
               onChange={formik.handleChange}
+              error={
+                  formik.touched.course && Boolean(formik.errors.course)
+                }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -87,6 +101,7 @@ export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
           formik={formik}
           avatarFile={avatarFile}
           setAvatarFile={setAvatarFile}
+          userAvatar={userAvatar}
         />
         <TextField
           multiline
@@ -96,6 +111,9 @@ export const UserProfileMyData = ({ formik }: UserProfileMyDataProps) => {
           name="description"
           defaultValue={formik.values.description}
           onChange={formik.handleChange}
+          error={
+            formik.touched.description && Boolean(formik.errors.description)
+          }
           InputLabelProps={{
             shrink: true,
           }}

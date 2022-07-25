@@ -91,6 +91,7 @@ export interface UserInformation{
       id: string;
       first_name: string;
       last_name: string;
+      password: string;
       avatar: string;
       email: string;
       description: string;
@@ -99,4 +100,7 @@ export interface UserInformation{
       programs: {};
       interests: {};
       formikProps?: any;
+}
+export interface UserAvatar {
+      userAvatar: string;
 }
