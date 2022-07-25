@@ -20,16 +20,22 @@ export const ProjectPictures = ({
         `items/projects_files/${relationNumber}`,
       );
       if (singleFileIdresponse.status === 200) {
-        const allFiles = [
+        setFiles((files: []) => [
           ...files,
-          ...singleFileIdresponse.data.data.directus_files_id,
-        ];
-        setFiles(allFiles);
+          singleFileIdresponse.data.data.directus_files_id,
+        ]);
       }
     });
   }, []);
 
-  console.log(files);
+  // @ts-expect-error: todo
+  const uniqueFileIds = [...new Set(files)];
 
-  return <Pictures filedId={files} />;
+  return (
+    <>
+      {uniqueFileIds.map((fileId) => (
+        <Pictures filedId={uniqueFileIds} />
+      ))}
+    </>
+  );
 };
