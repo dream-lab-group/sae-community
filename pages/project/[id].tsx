@@ -51,7 +51,7 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
       }
     };
     fetchProject();
-  }, [setProjectData, projectId]);
+  }, [setProjectData]);
 
   const handleBackToHome = () => {
     router.push('/');
@@ -102,13 +102,23 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
               <ProjectInformation data={projectData} />
               <ProjectButtonGroup />
             </Box>
-            <ProjectPictures data={projectData} />
-            <ProjectEmbedded />
-            <ProjectAudioFile />
+            <ProjectPictures
+              thumbnailId={projectData.cover_photo}
+              relationNumbers={projectData.files}
+            />
+            {projectData.embedded_urls.map((videoUrl: any) => {
+              return (
+                <ProjectEmbedded key={videoUrl.url} videoUrl={videoUrl.url} />
+              );
+            })}
+            <ProjectAudioFile relationNumbers={projectData.files} />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
               {projectData.programs.map(
                 (program: { name: string; label: string }) => (
-                  <UsedProgram usedProgramElement={program.label} />
+                  <UsedProgram
+                    key={program.label}
+                    usedProgramElement={program.label}
+                  />
                 ),
               )}
             </Box>
