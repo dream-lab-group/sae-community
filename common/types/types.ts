@@ -99,6 +99,9 @@ export interface UserInformation{
       urls: string;
       programs: {};
       interests: {};
+      liked_notifications: boolean;
+      mentions_notifications: boolean;
+      project_commented_notifications: boolean;
       formikProps?: any;
 }
 export interface UserAvatar {

@@ -7,6 +7,7 @@ import { UserProfileSettingsNotifications } from '../../common/components/profil
 import { UserProfileSettingsDeleteProfile } from '../../common/components/profile/user-profile/user-profile-settings-delete-profile';
 import { UserInformation } from '../../common/types/types';
 import { useFormik } from 'formik';
+import { useState } from 'react';
 
 type EditProfileSettingsProps = {
   userData: UserInformation;
@@ -16,7 +17,7 @@ export const ProfileSettings = ({ userData }: EditProfileSettingsProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-
+  
   const router = useRouter();
 
   const handleCancelProfileSaving = () => {
@@ -57,7 +58,7 @@ export const ProfileSettings = ({ userData }: EditProfileSettingsProps) => {
         }}
       >
         {/* <form onSubmit={formik.handleSubmit}> */}
-          <UserProfileSettingsPassword userData={userData} />
+          <UserProfileSettingsPassword />
           <hr
             style={{
               width: '100%',

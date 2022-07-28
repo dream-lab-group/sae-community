@@ -147,12 +147,24 @@
   "profileUpload": {
     "publishProfile": "Profil veröffentlichen",
     "changeProfilePicture": "Profilbild ändern",
-    "newProfilePicture": "Dein neues Profilbild"
+    "newProfilePicture": "Dein neues Profilbild",
+    "maxProfilePictureUpload": "Leider kannst du nicht mehr als 1 Datei heraufladen"
   },
   "profileSettings": {
+    "password": "Neues Passwort",
+    "newPassword": "Neues Passwort erneut eingeben",
+    "profileSettings": "Profil Einstellungen",
     "savePassword": "Speichern",
-    "notifications": "Benachrichtungungen aktualisieren",
-    "deleteProfile": "Profil löschen"
+    "updatedPassword": "Passwort gespeichert",
+    "notifications": "Benachrichtungen",
+    "updateNotifications": "Benachrichtungungen aktualisieren",
+    "messageMe": "Sende mir eine E-Mail, wenn:",
+    "commentProject": "jemand mein Projekt kommentiert",
+    "mention": "jemand erwähnt mich in seinem Projekt",
+    "likeProject": "jemand liked mein Projekt",
+    "deleteProfile": "Profil löschen",
+    "confirmationDeleteProfile": "Möchtest du dein Konto löschen?",
+    "confirmationDeleteProfileBottom": "Wenn du dein Konto löschst, werden auch alle damit verbundenen Projekte entfernt."
   },
   "profile": {
     "myProfile": "Mein Profil",

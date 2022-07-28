@@ -21,7 +21,7 @@ export const UserProfileAvatarUpload = ({
   avatarFile,
   setAvatarFile,
   userAvatar,
-  setChangedAvatar
+  setChangedAvatar,
 }: UserAvatarProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -53,8 +53,8 @@ export const UserProfileAvatarUpload = ({
   });
 
   const deleteFile = (file: any, index: number) => {
-      setChangedAvatar(false);
-      setAvatarFile([]);
+    setChangedAvatar(false);
+    setAvatarFile([]);
     formik.setFieldValue('avatar', userAvatar);
   };
 
@@ -239,7 +239,7 @@ export const UserProfileAvatarUpload = ({
                   textAlign: 'center',
                 }}
               >
-                Leider kannst du nicht mehr als 1 Datei heraufladen
+                {t('profileUpload.maxProfilePictureUpload')}
               </Typography>
             </Box>
           ) : (

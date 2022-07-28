@@ -1,3 +1,4 @@
+import { Directus } from '@directus/sdk';
 import {
   Box,
   Button,
@@ -9,14 +10,17 @@ import { useTranslation } from 'react-i18next';
 import { UserInformation } from '../../../types/types';
 
 type EditProfileSettingsProps = {
-      userData: UserInformation;
-}
+  userData: UserInformation;
+};
 
-export const UserProfileSettingsDeleteProfile = ({userData}: EditProfileSettingsProps) => {
+export const UserProfileSettingsDeleteProfile = ({
+  userData,
+}: EditProfileSettingsProps) => {
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-
   const { t } = useTranslation();
+
+  console.log(userData.id);
 
   return (
     <Box
@@ -33,13 +37,13 @@ export const UserProfileSettingsDeleteProfile = ({userData}: EditProfileSettings
           alignSelf: 'flex-start',
         }}
       >
-        Profil löschen
+        {t('profileSettings.deleteProfile')}
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Typography sx={{ margin: '16px 0 5px 0' }}>
-          Möchtest du dein Konto löschen? <br />
-          Wenn du dein Konto löschst, werden auch alle damit verbundenen
-          Projekte entfernt.
+          {t('profileSettings.confirmationDeleteProfile')}
+          <br />
+          {t('profileSettings.confirmationDeleteProfileBottom')}
         </Typography>
       </Box>
       <Button
@@ -49,7 +53,6 @@ export const UserProfileSettingsDeleteProfile = ({userData}: EditProfileSettings
           width: `${mdBreakpointDown ? '100%' : '210px'}`,
           marginTop: '20px',
           height: '56px',
-          /* marginLeft: `${mdBreakpointDown ? '' : '20px'}`, */
         }}
       >
         {t('profileSettings.deleteProfile')}

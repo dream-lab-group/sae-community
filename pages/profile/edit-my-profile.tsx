@@ -125,49 +125,49 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       user_files: null,
     },
     validationSchema: myProfilValidationSchema,
-//     onSubmit: (values) => {
-//       if (changedAvatar == true) {
-//         console.log('Profile picture changed');
-//         console.log(values);
-//       } else {
-//         console.log('Profile Picture did not change');
-//         console.log(values);
-//       }
-//     },
-        onSubmit: async (values: any) => {
-          const directus = new Directus('https://www.whatthebre.com/');
+    onSubmit: (values) => {
+      if (changedAvatar == true) {
+        console.log('Profile picture changed');
+        console.log(values);
+      } else {
+        console.log('Profile Picture did not change');
+        console.log(values);
+      }
+    },
+      //   onSubmit: async (values: any) => {
+      //     const directus = new Directus('https://www.whatthebre.com/');
 
-          if (changedAvatar == true) {
-            const formData = new FormData();
-            formData.append('file', avatarFile[0]);
-            const avatarId = await directus.files.createOne(formData);
+      //     if (changedAvatar == true) {
+      //       const formData = new FormData();
+      //       formData.append('file', avatarFile[0]);
+      //       const avatarId = await directus.files.createOne(formData);
 
-            if (avatarId) {
-              await directus.users.me.update({
-                first_name: values.first_name,
-                last_name: values.last_name,
-                avatar: avatarId.id,
-                email: values.email,
-                description: values.description,
-                course: values.course,
-            //     urls: values.urls,
-                programs: values.programs,
-                interests: values.interests,
-              });
-            }
-          } else {
-            await directus.users.me.update({
-              first_name: values.first_name,
-              last_name: values.last_name,
-              email: values.email,
-              description: values.description,
-              course: values.course,
-            //   urls: values.urls,
-              programs: values.programs,
-              interests: values.interests,
-            });
-          }
-        },
+      //       if (avatarId) {
+      //         await directus.users.me.update({
+      //           first_name: values.first_name,
+      //           last_name: values.last_name,
+      //           avatar: avatarId.id,
+      //           email: values.email,
+      //           description: values.description,
+      //           course: values.course,
+      //       //     urls: values.urls,
+      //           programs: values.programs,
+      //           interests: values.interests,
+      //         });
+      //       }
+      //     } else {
+      //       await directus.users.me.update({
+      //         first_name: values.first_name,
+      //         last_name: values.last_name,
+      //         email: values.email,
+      //         description: values.description,
+      //         course: values.course,
+      //       //   urls: values.urls,
+      //         programs: values.programs,
+      //         interests: values.interests,
+      //       });
+      //     }
+      //   },
   });
 
   return (
@@ -237,13 +237,13 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             <Button
               className="project-button-publish"
               variant="contained"
+              type="submit"
               sx={{
                 width: `${mdBreakpointDown ? '100%' : '350px'}`,
                 marginTop: `${mdBreakpointDown && '20px'}`,
                 height: '56px',
                 marginLeft: `${mdBreakpointDown ? '' : '20px'}`,
               }}
-              type="submit"
             >
               {t('profileUpload.publishProfile')}
             </Button>
