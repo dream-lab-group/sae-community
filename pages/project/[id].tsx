@@ -20,7 +20,6 @@ import { useEffect, useState } from 'react';
 import { apiClient } from '../../common/data/apiClient';
 import TipTapViewer from '../../common/components/common/tiptap-viewer';
 import { UsedProgram } from '../../common/components/common/used-programs';
-import Carousel from 'react-material-ui-carousel';
 
 type Props = {
   router: Router;
@@ -34,7 +33,6 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
-  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -108,8 +106,11 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
               thumbnailId={projectData.cover_photo}
               relationNumbers={projectData.files}
             />
-
-            <ProjectEmbedded />
+            {projectData.embedded_urls.map((videoUrl: any) => {
+              return (
+                <ProjectEmbedded key={videoUrl.url} videoUrl={videoUrl.url} />
+              );
+            })}
             <ProjectAudioFile />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
               {projectData.programs.map(

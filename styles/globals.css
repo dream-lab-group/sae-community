@@ -240,4 +240,8 @@ h6 {
   background: #5504aa !important;
   color: #fff !important;
   border-radius: 5px !important;
+}
+
+.iframe-border {
+  border-radius: 10px !important;
 }/*# sourceMappingURL=globals.css.map */
