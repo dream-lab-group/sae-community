@@ -21,6 +21,7 @@ type ProjectCardProps = {
   course: string;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  editProject?: boolean;
 };
 
 export const ProjectCard = ({
@@ -30,6 +31,7 @@ export const ProjectCard = ({
   course,
   isLoading,
   setIsLoading,
+  editProject,
 }: ProjectCardProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -58,7 +60,14 @@ export const ProjectCard = ({
   }, [setUser]);
 
   const handleOpenProject = () => {
-    router.push({ pathname: 'project/[pid]', query: { pid: projectId } });
+    if (editProject) {
+      router.push({
+        pathname: 'edit-project/[pid]',
+        query: { pid: projectId },
+      });
+    } else {
+      router.push({ pathname: 'project/[pid]', query: { pid: projectId } });
+    }
   };
 
   return (

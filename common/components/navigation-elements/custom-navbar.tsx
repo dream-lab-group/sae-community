@@ -12,7 +12,11 @@ import { Globals } from '../../utils/utils';
 import { AppBarHeaderProps } from '../header/types';
 import { CustomNavButton } from './custom-nav-button';
 
-export const CustomNavbar = ({ menuOpen, setMenuOpen }: AppBarHeaderProps) => {
+export const CustomNavbar = ({
+  menuOpen,
+  setMenuOpen,
+  currentUser,
+}: AppBarHeaderProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -50,6 +54,7 @@ export const CustomNavbar = ({ menuOpen, setMenuOpen }: AppBarHeaderProps) => {
               key={navElement}
               value={navElement}
               navElement={navElement}
+              currentUser={currentUser}
             />
           ))}
       </Box>
