@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { FormikValues } from 'formik';
 
 import { UserProfileAvatarUpload } from './user-profile-avatar-upload';
+import React from 'react';
 
 type UserProfileMyDataProps = {
   formik: FormikValues;
   avatarFile: any;
   setAvatarFile: React.Dispatch<any>;
   userAvatar: any;
+  setChangedAvatar: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const UserProfileMyData = ({
@@ -16,6 +18,7 @@ export const UserProfileMyData = ({
   avatarFile,
   setAvatarFile,
   userAvatar,
+  setChangedAvatar,
 }: UserProfileMyDataProps) => {
   const { t } = useTranslation();
 
@@ -34,6 +37,9 @@ export const UserProfileMyData = ({
               error={
                 formik.touched.first_name && Boolean(formik.errors.first_name)
               }
+              helperText={
+                  formik.touched.first_name && formik.errors.first_name 
+                }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -52,6 +58,9 @@ export const UserProfileMyData = ({
               error={
                   formik.touched.last_name && Boolean(formik.errors.last_name)
                 }
+                helperText={
+                  formik.touched.last_name && formik.errors.last_name 
+                }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -69,6 +78,9 @@ export const UserProfileMyData = ({
               onChange={formik.handleChange}
               error={
                   formik.touched.email && Boolean(formik.errors.email)
+                }
+                helperText={
+                  formik.touched.email && formik.errors.email 
                 }
               InputLabelProps={{
                 shrink: true,
@@ -89,6 +101,9 @@ export const UserProfileMyData = ({
               error={
                   formik.touched.course && Boolean(formik.errors.course)
                 }
+                helperText={
+                  formik.touched.course && formik.errors.course 
+                }
               InputLabelProps={{
                 shrink: true,
               }}
@@ -102,6 +117,7 @@ export const UserProfileMyData = ({
           avatarFile={avatarFile}
           setAvatarFile={setAvatarFile}
           userAvatar={userAvatar}
+          setChangedAvatar={setChangedAvatar}
         />
         <TextField
           multiline
@@ -113,6 +129,9 @@ export const UserProfileMyData = ({
           onChange={formik.handleChange}
           error={
             formik.touched.description && Boolean(formik.errors.description)
+          }
+          helperText={
+            formik.touched.description && formik.errors.description 
           }
           InputLabelProps={{
             shrink: true,

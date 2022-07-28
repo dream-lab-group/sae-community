@@ -15,7 +15,6 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useState } from 'react';
 import { Directus } from '@directus/sdk';
-import { apiClient } from '../../common/data/apiClient';
 
 type EditMyProfileProps = {
   userData: UserInformation;
@@ -30,6 +29,7 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
 
   const [avatarFile, setAvatarFile] = useState<any>([]);
+  const [changedAvatar, setChangedAvatar] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -54,56 +54,56 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
     description: yup
       .string()
       .min(2, 'Deine Beschreibung muss mindestens 2 Zeichen lang sein.'),
-    //   course: yup.string(),
-    urls: yup.object().shape({
-      website: yup.object().shape({
-        id: yup.number(),
-        webseite: yup.string(),
-        url: yup
-          .string()
-          .matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-            'Enter correct url!',
-          ),
-      }),
-      youtube: yup.object().shape({
-        id: yup.number(),
-        webseite: yup.string(),
-        url: yup
-          .string()
-          .matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-            'Enter correct url!',
-          ),
-      }),
-      instagram: yup.object().shape({
-        id: yup.number(),
-        webseite: yup.string(),
-        url: yup
-          .string()
-          .matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-            'Enter correct url!',
-          ),
-      }),
-      linkedin: yup.object().shape({
-        id: yup.number(),
-        webseite: yup.string(),
-        url: yup
-          .string()
-          .matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-            'Enter correct url!',
-          ),
-      }),
-    }),
-    programs: yup.array().of(
+    course: yup.string(),
+//     urls: yup.object({
+//       website: yup.object({
+//         webseite: yup.string(),
+//         url: yup
+//           .string()
+//           .matches(
+//             /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+//             'Enter correct url!',
+//           )
+//           .nullable(true),
+//       }),
+//       youtube: yup.object({
+//         webseite: yup.string(),
+//         url: yup
+//           .string()
+//           .matches(
+//             /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+//             'Enter correct url!',
+//           )
+//           .nullable(true),
+//       }),
+//       instagram: yup.object({
+//         webseite: yup.string(),
+//         url: yup
+//           .string()
+//           .matches(
+//             /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+//             'Enter correct url!',
+//           )
+//           .nullable(true),
+//       }),
+//       linkedin: yup.object({
+//         webseite: yup.string(),
+//         url: yup
+//           .string()
+//           .matches(
+//             /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+//             'Enter correct url!',
+//           )
+//           .nullable(true),
+//       }),
+//     }),
+    programs: yup.array(
       yup.object().shape({
         label: yup.string(),
         program: yup.string(),
       }),
     ),
-    interests: yup.array().of(
+    interests: yup.array(
       yup.object().shape({
         label: yup.string(),
         interests: yup.string(),
@@ -125,30 +125,49 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       user_files: null,
     },
     validationSchema: myProfilValidationSchema,
-    //     onSubmit: (values) => {
-    //       console.log(values);
-    //     },
-    onSubmit: async (values: any) => {
-      const directus = new Directus('https://www.whatthebre.com/');
-      const formData = new FormData();
-      formData.append('file', avatarFile[0]);
-      const avatarId = await directus.files.createOne(formData);
+//     onSubmit: (values) => {
+//       if (changedAvatar == true) {
+//         console.log('Profile picture changed');
+//         console.log(values);
+//       } else {
+//         console.log('Profile Picture did not change');
+//         console.log(values);
+//       }
+//     },
+        onSubmit: async (values: any) => {
+          const directus = new Directus('https://www.whatthebre.com/');
 
-      if (avatarId) {
-      //   console.log(avatarId);
-        await directus.users.me.update({
-          first_name: values.first_name,
-          last_name: values.last_name,
-          avatar: avatarId.id,
-          email: values.email,
-          description: values.description,
-          course: values.course,
-          urls: values.urls,
-          programs: values.programs,
-          interests: values.interests,
-        });
-      }
-    },
+          if (changedAvatar == true) {
+            const formData = new FormData();
+            formData.append('file', avatarFile[0]);
+            const avatarId = await directus.files.createOne(formData);
+
+            if (avatarId) {
+              await directus.users.me.update({
+                first_name: values.first_name,
+                last_name: values.last_name,
+                avatar: avatarId.id,
+                email: values.email,
+                description: values.description,
+                course: values.course,
+            //     urls: values.urls,
+                programs: values.programs,
+                interests: values.interests,
+              });
+            }
+          } else {
+            await directus.users.me.update({
+              first_name: values.first_name,
+              last_name: values.last_name,
+              email: values.email,
+              description: values.description,
+              course: values.course,
+            //   urls: values.urls,
+              programs: values.programs,
+              interests: values.interests,
+            });
+          }
+        },
   });
 
   return (
@@ -179,6 +198,7 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             formik={formik}
             avatarFile={avatarFile}
             setAvatarFile={setAvatarFile}
+            setChangedAvatar={setChangedAvatar}
             userAvatar={userAvatar}
           />
           <UserProfileUrls

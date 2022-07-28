@@ -7,11 +7,7 @@ type UserUrlProps = {
   formikProps: any;
 };
 
-export const UserProfileUrls = ({
-  urls,
-  formik,
-  formikProps,
-}: UserUrlProps) => {
+export const UserProfileUrls = ({ urls }: UserUrlProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const urlsData = Object.values(urls || {});
@@ -23,8 +19,8 @@ export const UserProfileUrls = ({
       sx={{ marginTop: `${smBreakpointDown ? '0px' : '10px'}` }}
     >
       {urlsData.map((urlThingy) => {
-        /*         console.log(formikProps.initialValues.urls);
-         */
+        //     console.log(formikProps.initialValues.urls);
+
         return (
           <>
             <Grid item xs={12} sm={6}>
@@ -47,6 +43,12 @@ export const UserProfileUrls = ({
                 //     }}
                 //     error={
                 //       formik.touched.urls && Boolean(formik.errors.urls)
+                //     }
+                //     error={
+                //       formik.touched.urls && Boolean(formik.errors.urls)
+                //     }
+                //     helperText={
+                //       formik.touched.urls && formik.errors.urls
                 //     }
                 fullWidth
                 sx={{ marginTop: '10px', fontSize: '8px' }}

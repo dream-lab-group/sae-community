@@ -2,8 +2,6 @@ import {
   Autocomplete,
   Grid,
   TextField,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material';
 import { FormikValues } from 'formik';
 
@@ -20,8 +18,6 @@ export const SkillsInterests = ({
   formik,
   formikProps,
 }: UserSkillsProps) => {
-  const theme = useTheme();
-  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const programsData = Object.values(programs || {});
   const interestsData = Object.values(interests || {});
 

@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { IoCloseSharp } from 'react-icons/io5';
 import { FaFrownOpen } from 'react-icons/fa';
 import { FormikValues } from 'formik';
-import { Directus } from '@directus/sdk';
 import placeholderImage from '../../../../public/assets/placeholder.png';
 
 type UserAvatarProps = {
@@ -14,6 +13,7 @@ type UserAvatarProps = {
   avatarFile: any;
   setAvatarFile: React.Dispatch<any>;
   userAvatar: any;
+  setChangedAvatar: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const UserProfileAvatarUpload = ({
@@ -21,6 +21,7 @@ export const UserProfileAvatarUpload = ({
   avatarFile,
   setAvatarFile,
   userAvatar,
+  setChangedAvatar
 }: UserAvatarProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,6 +35,7 @@ export const UserProfileAvatarUpload = ({
       const allFiles = [...avatarFile, ...acceptedFiles];
       setAvatarFile(allFiles);
       formik.setFieldValue('avatar', acceptedFiles);
+      setChangedAvatar(true);
       setDisplayAvatar(URL.createObjectURL(acceptedFiles[0]));
     },
     [avatarFile],
@@ -51,7 +53,8 @@ export const UserProfileAvatarUpload = ({
   });
 
   const deleteFile = (file: any, index: number) => {
-    setAvatarFile([]);
+      setChangedAvatar(false);
+      setAvatarFile([]);
     formik.setFieldValue('avatar', userAvatar);
   };
 
