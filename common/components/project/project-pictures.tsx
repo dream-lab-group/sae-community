@@ -16,7 +16,6 @@ export const ProjectPictures = ({
 }: ProjectPicturesProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
   const [files, setFiles] = useState<any>([thumbnailId]);

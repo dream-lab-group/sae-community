@@ -111,7 +111,7 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
                 <ProjectEmbedded key={videoUrl.url} videoUrl={videoUrl.url} />
               );
             })}
-            <ProjectAudioFile />
+            <ProjectAudioFile relationNumbers={projectData.files} />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
               {projectData.programs.map(
                 (program: { name: string; label: string }) => (

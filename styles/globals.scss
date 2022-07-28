@@ -251,3 +251,38 @@ h6 {
 .iframe-border {
   border-radius: 10px !important;
 }
+
+.audio-player {
+  background: #5504aa !important;
+  border-radius: 10px;
+  font-family: "Outfit", sans-serif !important;
+
+  .rhap_time {
+    color: #fff !important;
+  }
+
+  .rhap_progress-bar {
+    background-color: #fff !important;
+  }
+
+  .rhap_progress-indicator {
+    background: #d8d8d8 !important;
+  }
+
+  .rhap_repeat-button {
+    color: #fff !important;
+  }
+
+  .rhap_main-controls-button {
+    color: #fff !important;
+  }
+
+  .rhap_volume-button {
+    color: #fff !important;
+  }
+
+  .rhap_volume-indicator {
+    background: #d8d8d8 !important;
+    opacity: 1;
+  }
+}
