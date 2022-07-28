@@ -104,29 +104,11 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
               <ProjectInformation data={projectData} />
               <ProjectButtonGroup />
             </Box>
-            <Carousel
-              navButtonsAlwaysVisible
-              sx={{
-                marginTop: '35px',
-                width: '100%',
-                height: `${
-                  smBreakpointDown
-                    ? '250px'
-                    : mdBreakpointDown
-                    ? '350px'
-                    : lgBreakpointDown
-                    ? '450px'
-                    : '450px'
-                }`,
-                borderRadius: '10px',
-                position: 'relative',
-              }}
-            >
-              <ProjectPictures
-                thumbnailId={projectData.cover_photo}
-                relationNumbers={projectData.files}
-              />
-            </Carousel>
+            <ProjectPictures
+              thumbnailId={projectData.cover_photo}
+              relationNumbers={projectData.files}
+            />
+
             <ProjectEmbedded />
             <ProjectAudioFile />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
