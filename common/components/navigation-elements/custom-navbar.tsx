@@ -42,29 +42,6 @@ export const CustomNavbar = ({ menuOpen, setMenuOpen }: AppBarHeaderProps) => {
           alignItems: 'flex-start',
         }}
       >
-        <ButtonBase
-          sx={{
-            background: '#fff',
-            paddingY: '1rem',
-            width: '100%',
-            cursor: 'pointer',
-            paddingX: '20px',
-            display: 'flex',
-            justifyContent: 'flex-start',
-          }}
-        >
-          <Typography
-            sx={{
-              fontWeight: 500,
-              color: '#746D69',
-              fontSize: `${
-                smBreakpointDown ? '14px' : lgBreakpointUp ? '18px' : '16px'
-              }`,
-            }}
-          >
-            Avatar
-          </Typography>
-        </ButtonBase>
         {menuOpen &&
           Globals.mobileMenuProfileElements.map((navElement) => (
             <CustomNavButton

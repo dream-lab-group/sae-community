@@ -70,11 +70,12 @@
   "navigation": {
     "blog": "Blog",
     "jobboard": "Job Board",
-    "marketplace": "Marktplatz",
+    "projects": "Meine Projekte",
     "uploadproject": "Projektupload",
     "profile": "Mein Profil",
     "likes": "Meine Likes",
-    "collections": "Meine Merkliste"
+    "collections": "Meine Merkliste",
+    "profileSettings": "Profileinstellungen"
   },
   "pageNavigation": {
     "film": "Film",
