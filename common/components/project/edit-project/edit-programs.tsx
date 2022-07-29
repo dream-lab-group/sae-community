@@ -1,21 +1,20 @@
 import { Autocomplete, Grid, TextField } from '@mui/material';
 
 export const EditPrograms = ({ programs }: { programs: any }) => {
+  const programsData = Object.values(programs || {});
+
   return programs ? (
     <Grid item sm={12} md={6} width="100%">
       <Autocomplete
         multiple
         options={softwares}
         sx={{ width: '100%', marginTop: '20px' }}
-        value={programs}
-        isOptionEqualToValue={(softwares, value) => softwares.code === value}
+        value={programsData}
+        // @ts-expect-error: todo
+        isOptionEqualToValue={(option, value) => option.label === value.label}
         renderInput={(params) => (
           <>
-            <TextField
-              {...params}
-              label={programs.label}
-              name={programs.name}
-            />
+            <TextField {...params} label="Programme" />
           </>
         )}
       />

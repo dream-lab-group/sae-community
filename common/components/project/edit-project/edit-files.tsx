@@ -234,7 +234,7 @@ export const EditFiles = ({ files }: EditFilesProps) => {
             }}
           >
             {files.map((relationId: any) => (
-              <EditFilesUpload relationId={relationId} />
+              <EditFilesUpload key={relationId} relationId={relationId} />
             ))}
           </Box>
         </Box>
