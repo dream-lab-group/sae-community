@@ -29,7 +29,7 @@ export const SkillsInterests = ({
           size="small"
           options={programsData}
           sx={{ marginTop: '20px' }}
-          onChange={(e, value) => {
+          onChange={(value) => {
             formik.setFieldValue(
               'programs',
               value !== null ? value : formikProps.initialValues.programs,
@@ -45,7 +45,7 @@ export const SkillsInterests = ({
           size="small"
           options={interestsData}
           sx={{ marginTop: '20px' }}
-          onChange={(e, value) => {
+          onChange={(value) => {
             formik.setFieldValue(
               'interests',
               value !== null ? value : formikProps.initialValues.interests,

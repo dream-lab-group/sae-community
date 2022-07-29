@@ -96,9 +96,9 @@ export interface UserInformation{
       email: string;
       description: string;
       course: string;
-      urls: string;
-      programs: {};
-      interests: {};
+      urls: [];
+      programs: [];
+      interests: [];
       liked_notifications: boolean;
       mentions_notifications: boolean;
       project_commented_notifications: boolean;

@@ -7,6 +7,8 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { directus } from '../../../../pages';
+import { apiClient } from '../../../data/apiClient';
 import { UserInformation } from '../../../types/types';
 
 type EditProfileSettingsProps = {
@@ -19,8 +21,6 @@ export const UserProfileSettingsDeleteProfile = ({
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const { t } = useTranslation();
-
-  console.log(userData.id);
 
   return (
     <Box
