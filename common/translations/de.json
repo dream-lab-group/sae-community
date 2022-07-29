@@ -129,12 +129,54 @@
     },
     "commentFunction": "Kommentarfunktion"
   },
+  "fileUpload": {
+    "insert": "Füge dein",
+    "thumbnail": "Titelbild",
+    "profilepicture": "Profilbild",
+    "here": "hier ein",
+    "or": "oder",
+    "selectFile": "wähle eine Datei aus",
+    "acceptedFiles": "Zugelassene Datei: JPG, PNG",
+    "acceptedFilesWithMusic": "Zugelassene Datei: JPB, PNG, MP3",
+    "maxSize": "Max. grösse: 5MB",
+    "maxSize10": "Max. grösse: 10MB",
+    "maxSize1": "Max. grösse: 1MB",
+    "picture": "Bild",
+    "audio": "Audio"
+  },
+  "profileUpload": {
+    "publishProfile": "Profil veröffentlichen",
+    "changeProfilePicture": "Profilbild ändern",
+    "newProfilePicture": "Dein neues Profilbild",
+    "maxProfilePictureUpload": "Leider kannst du nicht mehr als 1 Datei heraufladen"
+  },
+  "profileSettings": {
+    "password": "Neues Passwort",
+    "newPassword": "Neues Passwort erneut eingeben",
+    "profileSettings": "Profil Einstellungen",
+    "savePassword": "Speichern",
+    "updatedPassword": "Passwort gespeichert",
+    "notifications": "Benachrichtungen",
+    "updateNotifications": "Benachrichtungungen aktualisieren",
+    "messageMe": "Sende mir eine E-Mail, wenn:",
+    "commentProject": "jemand mein Projekt kommentiert",
+    "mention": "jemand erwähnt mich in seinem Projekt",
+    "likeProject": "jemand liked mein Projekt",
+    "deleteProfile": "Profil löschen",
+    "confirmationDeleteProfile": "Möchtest du dein Konto löschen?",
+    "confirmationDeleteProfileBottom": "Wenn du dein Konto löschst, werden auch alle damit verbundenen Projekte entfernt."
+  },
   "profile": {
+    "myProfile": "Mein Profil",
     "programSkills": "Programm Skills",
     "interests": "Interessen",
     "contactNow": "Jetzt kontaktieren",
     "aboutMe": "Über mich",
     "lastProjects": "Letzte Projekte",
     "viewAll": "Alle ansehen"
+  },
+  "404": {
+    "description": "Oops, etwas scheint falsch gelaufen zu sein!",
+    "back": "Zurück zur Homepage"
   }
 }

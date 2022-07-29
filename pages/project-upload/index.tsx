@@ -299,7 +299,7 @@ const ProjectUpload = () => {
                 {embedUrlList.map(({ url }, index) => (
                   <EmbedUrl
                     key={index}
-                    index={index}
+                    index={index} 
                     url={url}
                     removeEmbedUrl={removeEmbedUrl}
                   />

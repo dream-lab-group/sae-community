@@ -86,3 +86,24 @@ export interface ProjectDto {
   external_project: boolean;
   project_files: [] | null;
 }
+
+export interface UserInformation{
+      id: string;
+      first_name: string;
+      last_name: string;
+      password: string;
+      avatar: string;
+      email: string;
+      description: string;
+      course: string;
+      urls: [];
+      programs: [];
+      interests: [];
+      liked_notifications: boolean;
+      mentions_notifications: boolean;
+      project_commented_notifications: boolean;
+      formikProps?: any;
+}
+export interface UserAvatar {
+      userAvatar: string;
+}
