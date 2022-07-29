@@ -13,6 +13,10 @@ import { NextPage } from 'next';
 import { Router, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { CommunityHead } from '../../../common/components/community-head';
+import { EditFiles } from '../../../common/components/project/edit-project/edit-files';
+import { EditPrograms } from '../../../common/components/project/edit-project/edit-programs';
+import { EditThumbnail } from '../../../common/components/project/edit-project/edit-thumbnail';
 import { apiClient } from '../../../common/data/apiClient';
 
 type Props = {
@@ -53,7 +57,76 @@ const EditProject: NextPage = withRouter<Props>(
       fetchProject();
     }, [setProjectData]);
 
-    return <h1>This is the edit project of {projectData.id}</h1>;
+    return projectData ? (
+      <>
+        <CommunityHead />
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            position: 'relative',
+          }}
+        >
+          <Box
+            sx={{
+              height: '60px',
+              background: '#192D3E',
+              width: '100%',
+              clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          />
+          <Box
+            sx={{
+              paddingTop: '25px',
+              paddingBottom: '50px',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              maxWidth: `${smBreakpointDown ? '381px' : '774px'}`,
+              paddingX: `${
+                smBreakpointDown ? '20px' : lgBreakpointDown ? '60px' : '40px'
+              }`,
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: '20px',
+                fontWeight: 'fontWeightBold',
+                alignSelf: 'flex-start',
+              }}
+            >
+              {t('projects.editProject')}
+            </Typography>
+            <TextField
+              id="project_name"
+              name="project_name"
+              size="small"
+              label="Projektname"
+              variant="outlined"
+              fullWidth
+              type="text"
+              sx={{
+                marginTop: '20px',
+                fontSize: '8px',
+                maxWidth: '465px',
+                alignSelf: 'flex-start',
+              }}
+              defaultValue={projectData.project_name}
+            />
+            <EditThumbnail thumbnailId={projectData.cover_photo} />
+            <EditFiles files={projectData.files} />
+            <EditPrograms programs={projectData.programs} />
+          </Box>
+        </Box>
+      </>
+    ) : (
+      <></>
+    );
   },
 );
 

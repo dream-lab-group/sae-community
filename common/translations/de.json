@@ -110,7 +110,8 @@
     },
     "alumni": {
       "label": "Alumni"
-    }
+    },
+    "editProject": "Projekt editieren"
   },
   "projectUpload": {
     "createProject": "Projekt erstellen",
