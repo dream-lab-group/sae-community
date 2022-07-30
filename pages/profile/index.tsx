@@ -11,13 +11,13 @@ import { useTranslation } from 'react-i18next';
 import { SetStateAction, useEffect, useState } from 'react';
 import { FaRegUser } from 'react-icons/fa';
 import { RiSettings3Line } from 'react-icons/ri';
-
-import { ProfileSettings } from './profile-settings';
 import { NextPage } from 'next';
 import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
 import { UserInformation } from '../../common/types/types';
-import { EditMyProfile } from './edit-my-profile';
+
+import ProfileSettings from './profile-settings';
+import EditMyProfile from './edit-my-profile';
 
 export type SessionContextProps = {
   setSessionContext?: React.Dispatch<SetStateAction<string>>;
@@ -93,7 +93,7 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
           />
           {sessionContext === false ? (
             <>
-            <EditMyProfile userData={currentUser} userAvatar={userAvatar} />
+              <EditMyProfile userData={currentUser} userAvatar={userAvatar} />
             </>
           ) : (
             <ProfileSettings userData={currentUser} />

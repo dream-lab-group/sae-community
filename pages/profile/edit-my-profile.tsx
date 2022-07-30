@@ -21,7 +21,7 @@ type EditMyProfileProps = {
   userAvatar: UserAvatar;
 };
 
-export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
+const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -238,3 +238,5 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
     </>
   );
 };
+
+export default EditMyProfile;
