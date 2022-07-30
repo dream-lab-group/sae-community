@@ -55,17 +55,22 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       .string()
       .min(2, 'Deine Beschreibung muss mindestens 2 Zeichen lang sein.'),
     course: yup.string(),
-    urls: yup.array(
-      yup.object().shape({
-        website: yup.string(),
-        url: yup
-          .string()
-          .matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-            'Enter correct url!',
-          ),
-      }).nullable(),
-    ).nullable(),
+    urls: yup
+      .array(
+        yup
+          .object()
+          .shape({
+            website: yup.string(),
+            url: yup
+              .string()
+              .matches(
+                /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                'Enter correct url!',
+              ),
+          })
+          .nullable(),
+      )
+      .nullable(),
     programs: yup.array(
       yup.object().shape({
         label: yup.string(),
@@ -101,40 +106,40 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
         console.log(values);
       }
     },
-//     onSubmit: async (values: any) => {
-//       const directus = new Directus('https://www.whatthebre.com/');
+    //     onSubmit: async (values: any) => {
+    //       const directus = new Directus('https://www.whatthebre.com/');
 
-//       if (changedAvatar == true) {
-//         const formData = new FormData();
-//         formData.append('file', avatarFile[0]);
-//         const avatarId = await directus.files.createOne(formData);
+    //       if (changedAvatar == true) {
+    //         const formData = new FormData();
+    //         formData.append('file', avatarFile[0]);
+    //         const avatarId = await directus.files.createOne(formData);
 
-//         if (avatarId) {
-//           await directus.users.me.update({
-//             first_name: values.first_name,
-//             last_name: values.last_name,
-//             avatar: avatarId.id,
-//             email: values.email,
-//             description: values.description,
-//             course: values.course,
-//         //     urls: values.urls,
-//             programs: values.programs,
-//             interests: values.interests,
-//           });
-//         }
-//       } else {
-//         await directus.users.me.update({
-//           first_name: values.first_name,
-//           last_name: values.last_name,
-//           email: values.email,
-//           description: values.description,
-//           course: values.course,
-//         //   urls: values.urls,
-//           programs: values.programs,
-//           interests: values.interests,
-//         });
-//       }
-//     },
+    //         if (avatarId) {
+    //           await directus.users.me.update({
+    //             first_name: values.first_name,
+    //             last_name: values.last_name,
+    //             avatar: avatarId.id,
+    //             email: values.email,
+    //             description: values.description,
+    //             course: values.course,
+    //         //     urls: values.urls,
+    //             programs: values.programs,
+    //             interests: values.interests,
+    //           });
+    //         }
+    //       } else {
+    //         await directus.users.me.update({
+    //           first_name: values.first_name,
+    //           last_name: values.last_name,
+    //           email: values.email,
+    //           description: values.description,
+    //           course: values.course,
+    //         //   urls: values.urls,
+    //           programs: values.programs,
+    //           interests: values.interests,
+    //         });
+    //       }
+    //     },
   });
 
   return (
@@ -168,19 +173,20 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             setChangedAvatar={setChangedAvatar}
             userAvatar={userAvatar}
           />
-          {userData.urls.map((url: any) => {
-            return (
-              // console.log(url)
-              <UserProfileUrls
-                key={url.website}
-                urlName={url.website}
-                url={url.url}
-                formik={formik}
-                formikProps={formik}
-              />
-            );
-          })}
-{/*                     <UserProfileUrls
+          {userData.urls &&
+            userData.urls.map((url: any) => {
+              return (
+                // console.log(url)
+                <UserProfileUrls
+                  key={url.website}
+                  urlName={url.website}
+                  url={url.url}
+                  formik={formik}
+                  formikProps={formik}
+                />
+              );
+            })}
+          {/*                     <UserProfileUrls
             urls={formik.values.urls}
             formik={formik}
             formikProps={formik}
