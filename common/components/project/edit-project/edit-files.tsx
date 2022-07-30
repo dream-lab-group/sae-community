@@ -1,4 +1,6 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import { FaFrownOpen } from 'react-icons/fa';
@@ -9,12 +11,32 @@ import { EditFilesUpload } from './edit-files-upload';
 
 type EditFilesProps = {
   files: [];
+  formikProps: any;
 };
 
-export const EditFiles = ({ files }: EditFilesProps) => {
+export const EditFiles = ({ files, formikProps }: EditFilesProps) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const { t } = useTranslation();
+  const [allFiles, setAllFiles] = useState<any>(files);
+
+  const onDrop = useCallback(
+    (acceptedFiles: any) => {
+      const allProjectFiles = [...allFiles, ...acceptedFiles];
+      setAllFiles(allProjectFiles);
+      formikProps('project_files', acceptedFiles);
+    },
+    [allFiles],
+  );
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/*': [],
+      'audio/*': [],
+    },
+    maxFiles: 5,
+    onDrop,
+  });
 
   return (
     <>
@@ -38,6 +60,7 @@ export const EditFiles = ({ files }: EditFilesProps) => {
               width: '100%',
               height: '100%',
             }}
+            {...getRootProps()}
           >
             <Box
               sx={{
@@ -112,6 +135,7 @@ export const EditFiles = ({ files }: EditFilesProps) => {
               </Typography>
             </Box>
           </Box>
+          <input multiple {...getInputProps()} />
         </Box>
       ) : (
         <Box
@@ -124,7 +148,7 @@ export const EditFiles = ({ files }: EditFilesProps) => {
             boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
           }}
         >
-          {files.length >= 5 ? (
+          {allFiles.length >= 5 ? (
             <Box
               sx={{
                 width: '100%',
@@ -169,6 +193,7 @@ export const EditFiles = ({ files }: EditFilesProps) => {
                   color: '#8519f6',
                   cursor: 'pointer',
                 }}
+                {...getRootProps()}
               >
                 <GiHeavyFall size={50} />
                 <Box
@@ -199,6 +224,7 @@ export const EditFiles = ({ files }: EditFilesProps) => {
                     {t('projectUpload.fileUpload.maxSize10')}
                   </Typography>
                 </Box>
+                <input multiple {...getInputProps()} />
               </Box>
               <Box
                 className="project-button-fixed-cancel"
@@ -218,6 +244,7 @@ export const EditFiles = ({ files }: EditFilesProps) => {
                   zIndex: 20000,
                 }}
                 type="button"
+                onClick={() => setAllFiles([])}
               >
                 <IoCloseSharp size={25} />
               </Box>
@@ -232,8 +259,15 @@ export const EditFiles = ({ files }: EditFilesProps) => {
               padding: '20px',
             }}
           >
-            {files.map((relationId: any) => (
-              <EditFilesUpload key={relationId} relationId={relationId} />
+            {allFiles.map((relationId: any, index: number) => (
+              <EditFilesUpload
+                key={relationId}
+                index={relationId}
+                relationId={relationId}
+                allFiles={allFiles}
+                setAllFiles={setAllFiles}
+                formikProps={formikProps}
+              />
             ))}
           </Box>
         </Box>
