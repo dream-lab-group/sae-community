@@ -11,9 +11,10 @@ import { Globals } from '../../../utils/utils';
 
 type EditCourseProps = {
   course: string;
+  formikProps: any;
 };
 
-export const EditCourse = ({ course }: EditCourseProps) => {
+export const EditCourse = ({ course, formikProps }: EditCourseProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -37,7 +38,10 @@ export const EditCourse = ({ course }: EditCourseProps) => {
           display: `${smBreakpointDown && 'flex'}`,
           alignItems: `${smBreakpointDown && 'center'}`,
         }}
-        defaultValue={course}
+        inputProps={{ 'aria-label': 'controlled' }}
+        value={course}
+        onChange={formikProps.handleChange}
+        error={formikProps.touched.course && Boolean(formikProps.errors.course)}
       >
         {Globals.uploadCourses.map((course) => (
           <MenuItem key={course} value={course}>

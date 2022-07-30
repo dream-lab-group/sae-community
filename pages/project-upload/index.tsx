@@ -20,13 +20,13 @@ import { apiClient } from '../../common/data/apiClient';
 import { FormikProvider, useFormik } from 'formik';
 import * as yup from 'yup';
 import { IoCloseSharp } from 'react-icons/io5';
-import { Directus } from '@directus/sdk';
 import { EmbedUrl } from '../../common/components/project-upload/modules/embed-url';
 import { AlumniCourseSelection } from '../../common/components/project-upload/modules/alumni-course-selection';
 import { Collaborators } from '../../common/components/project-upload/modules/collaborators';
 import { ProjectUploadButtons } from '../../common/components/project-upload/modules/project-upload-buttons';
 import { ProgramsUsed } from '../../common/components/project-upload/modules/programs-used';
 import TipTapEditor from '../../common/components/common/tiptap-editor';
+import { Directus } from '@directus/sdk';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();

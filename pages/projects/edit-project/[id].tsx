@@ -134,6 +134,7 @@ const EditProject: NextPage = withRouter<Props>(
             </Typography>
             {projectData && (
               <Formik
+                validationSchema={editProjectValidationSchema}
                 initialValues={{
                   project_name: projectData.project_name,
                   cover_photo: projectData.cover_photo,
@@ -165,11 +166,25 @@ const EditProject: NextPage = withRouter<Props>(
                         alignSelf: 'flex-start',
                       }}
                       defaultValue={formikProps.values.project_name}
+                      onChange={formikProps.handleChange}
+                      error={
+                        formikProps.touched.project_name &&
+                        Boolean(formikProps.errors.project_name)
+                      }
+                      // @ts-expect-error: todo
+                      helperText={
+                        formikProps.touched.project_name &&
+                        formikProps.errors.project_name
+                      }
                     />
                     <EditThumbnail
                       thumbnailId={formikProps.values.cover_photo}
+                      formikProps={formikProps.setFieldValue}
                     />
-                    <EditFiles files={formikProps.values.files} />
+                    <EditFiles
+                      files={formikProps.values.files}
+                      formikProps={formikProps.setFieldValue}
+                    />
                     <EditPrograms programs={formikProps.values.programs} />
                     <Box
                       sx={{
@@ -222,7 +237,10 @@ const EditProject: NextPage = withRouter<Props>(
                       content={formikProps.values.description}
                     />
                     {currentUser && currentUser.course === 'alumni' && (
-                      <EditCourse course={formikProps.values.course} />
+                      <EditCourse
+                        course={formikProps.values.course}
+                        formikProps={formikProps}
+                      />
                     )}
                     <Grid
                       container

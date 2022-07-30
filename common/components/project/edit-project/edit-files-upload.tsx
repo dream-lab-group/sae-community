@@ -1,19 +1,29 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaMusic } from 'react-icons/fa';
 import { IoCloseSharp } from 'react-icons/io5';
 import { apiClient } from '../../../data/apiClient';
 
 type EditFilesUploadProps = {
   relationId: number;
+  index: number;
+  allFiles: any;
+  setAllFiles: React.Dispatch<React.SetStateAction<any>>;
+  formikProps: any;
 };
 
-export const EditFilesUpload = ({ relationId }: EditFilesUploadProps) => {
+export const EditFilesUpload = ({
+  relationId,
+  index,
+  allFiles,
+  setAllFiles,
+  formikProps,
+}: EditFilesUploadProps) => {
   //   const [ImagePreview] = useState(URL.createObjectURL(acceptedFile));
   const [isAudio, setIsAudio] = useState<boolean>(false);
-  const [filePreview, setFilePreview] = useState<string>();
+  const [filePreview, setFilePreview] = useState<any>();
 
   useEffect(() => {
     const getFile = async () => {
@@ -36,7 +46,18 @@ export const EditFilesUpload = ({ relationId }: EditFilesUploadProps) => {
       }
     };
     getFile();
-  }, []);
+  }, [setFilePreview]);
+
+  const deleteFile = (index: number) => {
+    const newFiles = [...allFiles];
+    newFiles.splice(index, 1);
+    setAllFiles(newFiles);
+    formikProps('project_files', newFiles);
+  };
+
+  // setTimeout(() => {
+  //   URL.revokeObjectURL(ImagePreview);
+  // }, 1000);
 
   return (
     <Box
@@ -103,6 +124,7 @@ export const EditFilesUpload = ({ relationId }: EditFilesUploadProps) => {
           cursor: 'pointer',
         }}
         type="button"
+        onClick={() => deleteFile(index)}
       >
         <IoCloseSharp size={18} />
       </Box>
