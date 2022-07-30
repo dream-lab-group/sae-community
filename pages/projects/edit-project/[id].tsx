@@ -25,6 +25,8 @@ import { EditPrograms } from '../../../common/components/project/edit-project/ed
 import { EditProjectButtons } from '../../../common/components/project/edit-project/edit-project-buttons';
 import { EditThumbnail } from '../../../common/components/project/edit-project/edit-thumbnail';
 import { apiClient } from '../../../common/data/apiClient';
+import * as yup from 'yup';
+import { Formik } from 'formik';
 
 type Props = {
   router: Router;
@@ -76,6 +78,13 @@ const EditProject: NextPage = withRouter<Props>(
       fetchProject();
     }, [setProjectData, setCurrentUser, projectId]);
 
+    const editProjectValidationSchema = yup.object({
+      project_name: yup
+        .string()
+        .required('Ein Projektname muss unbedingt eingegeben werden')
+        .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
+    });
+
     const removeEmbedUrl = (index: number) => {};
 
     return projectData ? (
@@ -123,118 +132,147 @@ const EditProject: NextPage = withRouter<Props>(
             >
               {t('projects.editProject')}
             </Typography>
-            <TextField
-              id="project_name"
-              name="project_name"
-              size="small"
-              label="Projektname"
-              variant="outlined"
-              fullWidth
-              type="text"
-              sx={{
-                marginTop: '20px',
-                fontSize: '8px',
-                maxWidth: '465px',
-                alignSelf: 'flex-start',
-              }}
-              defaultValue={projectData.project_name}
-            />
-            <EditThumbnail thumbnailId={projectData.cover_photo} />
-            <EditFiles files={projectData.files} />
-            <EditPrograms programs={projectData.programs} />
-            <Box
-              sx={{
-                width: '100%',
-                height: '56px',
-                marginTop: '20px',
-                marginBottom: '10px',
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <TextField
-                id="videoUrl"
-                name="videoUrl"
-                label="Video Url"
-                sx={{ width: '75%' }}
-                variant="outlined"
-                value={newUrl}
-                onChange={(event) => {
-                  setNewUrl(event.target.value);
+            {projectData && (
+              <Formik
+                initialValues={{
+                  project_name: projectData.project_name,
+                  cover_photo: projectData.cover_photo,
+                  programs: projectData.programs,
+                  course: projectData.course,
+                  description: projectData.description,
+                  collaborators: projectData.collaborators,
+                  embedded_urls: projectData.embedded_urls,
+                  comment_function: projectData.comment_function,
+                  external_project: projectData.external_project,
+                  files: projectData.files,
                 }}
-              />
-              <ButtonBase
-                className="project-add-button"
-                sx={{
-                  height: '100%',
-                  padding: '10px 15px',
-                  color: '#fff',
-                  borderRadius: '5px',
-                  alignSelf: 'flex-end',
-                }}
-                onClick={() => {}}
+                onSubmit={(values) => console.log(values)}
               >
-                <Typography>URL hinzufügen</Typography>
-              </ButtonBase>
-            </Box>
-            {embedUrlList &&
-              embedUrlList.map(({ url }: { url: any }, index: number) => (
-                <EmbedUrl
-                  key={index}
-                  index={index}
-                  url={url}
-                  removeEmbedUrl={removeEmbedUrl}
-                />
-              ))}
-            <TipTapEditor edit content={projectData.description} />
-            {currentUser && currentUser.course === 'alumni' && (
-              <EditCourse course={projectData.course} />
+                {(formikProps) => (
+                  <form onSubmit={formikProps.handleSubmit}>
+                    <TextField
+                      id="project_name"
+                      name="project_name"
+                      size="small"
+                      label="Projektname"
+                      variant="outlined"
+                      fullWidth
+                      type="text"
+                      sx={{
+                        marginTop: '20px',
+                        fontSize: '8px',
+                        maxWidth: '465px',
+                        alignSelf: 'flex-start',
+                      }}
+                      defaultValue={formikProps.values.project_name}
+                    />
+                    <EditThumbnail
+                      thumbnailId={formikProps.values.cover_photo}
+                    />
+                    <EditFiles files={formikProps.values.files} />
+                    <EditPrograms programs={formikProps.values.programs} />
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '56px',
+                        marginTop: '20px',
+                        marginBottom: '10px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <TextField
+                        id="videoUrl"
+                        name="videoUrl"
+                        label="Video Url"
+                        sx={{ width: '75%' }}
+                        variant="outlined"
+                        value={newUrl}
+                        onChange={(event) => {
+                          setNewUrl(event.target.value);
+                        }}
+                      />
+                      <ButtonBase
+                        className="project-add-button"
+                        sx={{
+                          height: '100%',
+                          padding: '10px 15px',
+                          color: '#fff',
+                          borderRadius: '5px',
+                          alignSelf: 'flex-end',
+                        }}
+                        onClick={() => {}}
+                      >
+                        <Typography>URL hinzufügen</Typography>
+                      </ButtonBase>
+                    </Box>
+                    {embedUrlList &&
+                      embedUrlList.map(
+                        ({ url }: { url: any }, index: number) => (
+                          <EmbedUrl
+                            key={index}
+                            index={index}
+                            url={url}
+                            removeEmbedUrl={removeEmbedUrl}
+                          />
+                        ),
+                      )}
+                    <TipTapEditor
+                      edit
+                      content={formikProps.values.description}
+                    />
+                    {currentUser && currentUser.course === 'alumni' && (
+                      <EditCourse course={formikProps.values.course} />
+                    )}
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      sx={{ direction: `${mdBreakpointDown && 'flex-start'}` }}
+                    >
+                      <EditCollaborators
+                        currentCollaborators={formikProps.values.collaborators}
+                      />
+                      <Grid
+                        item
+                        xs={6}
+                        alignItems="center"
+                        sx={{
+                          marginTop: `${smBreakpointUp ? '20px' : '5px'}`,
+                          alignSelf: `${mdBreakpointDown && 'flex-start'}`,
+                        }}
+                      >
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              type="checkbox"
+                              name="comment_function"
+                              defaultValue={formikProps.values.comment_function}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                          }
+                          label={t('projectUpload.commentFunction')}
+                        />
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              type="checkbox"
+                              name="external_project"
+                              defaultValue={formikProps.values.external_project}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                          }
+                          label="SchulProjekt"
+                        />
+                      </Grid>
+                    </Grid>
+                    <EditProjectButtons
+                      handleCancelProjectUpload={handleCancelProjectUpload}
+                    />
+                  </form>
+                )}
+              </Formik>
             )}
-            <Grid
-              container
-              spacing={2}
-              alignItems="center"
-              sx={{ direction: `${mdBreakpointDown && 'flex-start'}` }}
-            >
-              <EditCollaborators
-                currentCollaborators={projectData.collaborators}
-              />
-              <Grid
-                item
-                xs={6}
-                alignItems="center"
-                sx={{
-                  marginTop: `${smBreakpointUp ? '20px' : '5px'}`,
-                  alignSelf: `${mdBreakpointDown && 'flex-start'}`,
-                }}
-              >
-                <FormControlLabel
-                  control={
-                    <Switch
-                      type="checkbox"
-                      name="comment_function"
-                      defaultValue={projectData.comment_function}
-                      inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                  }
-                  label={t('projectUpload.commentFunction')}
-                />
-                <FormControlLabel
-                  control={
-                    <Switch
-                      type="checkbox"
-                      name="external_project"
-                      defaultValue={projectData.external_project}
-                      inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                  }
-                  label="SchulProjekt"
-                />
-              </Grid>
-            </Grid>
-            <EditProjectButtons
-              handleCancelProjectUpload={handleCancelProjectUpload}
-            />
           </Box>
           <Box
             className="project-button-fixed-cancel"

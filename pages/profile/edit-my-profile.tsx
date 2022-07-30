@@ -14,7 +14,6 @@ import { SkillsInterests } from '../../common/components/profile/user-profile/us
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useState } from 'react';
-import { Directus } from '@directus/sdk';
 
 type EditMyProfileProps = {
   userData: UserInformation;
