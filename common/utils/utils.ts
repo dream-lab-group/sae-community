@@ -37,17 +37,12 @@ export class Globals {
     'contentcreation',
   ];
 
-  public static readonly mobileMenuElements = [
-    'blog',
-    'jobboard',
-    'marketplace',
-    'uploadproject',
-  ];
-
   public static readonly mobileMenuProfileElements = [
     'profile',
+    'projects',
     'likes',
     'collections',
+    'profileSettings'
   ];
 
   public static readonly pageNavigationElements = [

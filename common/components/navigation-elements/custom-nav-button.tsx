@@ -6,6 +6,7 @@ import { AppBarHeaderProps } from '../header/types';
 export const CustomNavButton = ({
   navElement,
   setMenuOpen,
+  currentUser,
 }: AppBarHeaderProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -18,6 +19,9 @@ export const CustomNavButton = ({
     if (navElement === 'profile') {
       setMenuOpen(false);
       router.push('/profile');
+    } else if (navElement === 'projects') {
+      setMenuOpen(false);
+      router.push({ pathname: 'projects/[cur]', query: { cur: currentUser } });
     } else if (navElement === 'likes') {
       setMenuOpen(false);
       router.push('/likes');

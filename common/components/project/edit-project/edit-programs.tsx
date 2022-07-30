@@ -1,40 +1,30 @@
 import { Autocomplete, Grid, TextField } from '@mui/material';
-import { CommonAutocompleteProps } from '../../../types/types';
 
-export const ProgramsUsed = ({
-  label,
-  formikProps,
-  ...props
-}: CommonAutocompleteProps) => {
-  return (
+export const EditPrograms = ({ programs }: { programs: any }) => {
+  const programsData = Object.values(programs || {});
+
+  return programs ? (
     <Grid item sm={12} md={6} width="100%">
       <Autocomplete
         multiple
-        options={programs}
+        options={softwares}
         sx={{ width: '100%', marginTop: '20px' }}
-        onChange={(e, value) => {
-          formikProps.setFieldValue(
-            'programs',
-            value !== null ? value : formikProps.initialValues.programs,
-          );
-        }}
+        value={programsData}
+        // @ts-expect-error: todo
+        isOptionEqualToValue={(option, value) => option.label === value.label}
         renderInput={(params) => (
           <>
-            <TextField
-              {...props}
-              {...params}
-              label={label}
-              name={props.name}
-              value={formikProps.values.programs}
-            />
+            <TextField {...params} label="Programme" />
           </>
         )}
       />
     </Grid>
+  ) : (
+    <></>
   );
 };
 
-const programs = [
+const softwares = [
   { label: 'Ableton', program: 'Ableton' },
   { label: 'Adobe After Effects', program: 'Adobe After Effects' },
   { label: 'Adobe Animate', program: 'Adobe Animate' },

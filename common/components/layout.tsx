@@ -1,11 +1,13 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBarHeader } from './app-header';
 
 import { CustomNavbar } from './navigation-elements/custom-navbar';
 import { Footer } from './footer/footer';
 import { CommunityHead } from './community-head';
+import { apiClient } from '../data/apiClient';
+import { directus } from '../../pages';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
@@ -13,6 +15,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<any>();
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const userId = await directus.users.me.read();
+      setCurrentUserId(userId.id);
+    };
+    getCurrentUser();
+  }, [setCurrentUserId]);
 
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -39,7 +50,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           handleCloseMenu={handleCloseMenu}
         />
         {menuOpen && (
-          <CustomNavbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+          <CustomNavbar
+            menuOpen={menuOpen}
+            setMenuOpen={setMenuOpen}
+            currentUser={currentUserId}
+          />
         )}
         <Box
           sx={{
