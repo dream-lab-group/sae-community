@@ -5,11 +5,10 @@ import { FaFrownOpen } from 'react-icons/fa';
 import { GiHeavyFall } from 'react-icons/gi';
 import { IoCloseSharp } from 'react-icons/io5';
 import { RiFolderMusicLine } from 'react-icons/ri';
-import { ProgramsUsed } from '../../project-upload/modules/programs-used';
 import { EditFilesUpload } from './edit-files-upload';
 
 type EditFilesProps = {
-  files: any;
+  files: [];
 };
 
 export const EditFiles = ({ files }: EditFilesProps) => {
