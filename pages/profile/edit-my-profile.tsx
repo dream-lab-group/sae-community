@@ -34,7 +34,7 @@ export const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const router = useRouter();
 
   const handleCancelProfileSaving = () => {
-    router.push('/public-profile/123');
+    router.push('/');
   };
 
   const myProfilValidationSchema = yup.object({

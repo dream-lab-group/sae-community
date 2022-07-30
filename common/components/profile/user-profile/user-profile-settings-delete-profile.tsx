@@ -9,6 +9,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { directus } from '../../../../pages';
 import { apiClient } from '../../../data/apiClient';
+import { deleteFiles } from '../../../data/delete-profile/requests';
 import { UserInformation } from '../../../types/types';
 
 type EditProfileSettingsProps = {
@@ -54,6 +55,7 @@ export const UserProfileSettingsDeleteProfile = ({
           marginTop: '20px',
           height: '56px',
         }}
+        onClick={deleteFiles}
       >
         {t('profileSettings.deleteProfile')}
       </Button>
