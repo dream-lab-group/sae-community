@@ -1,20 +1,51 @@
 import { Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
+import { Formik, FormikValues } from 'formik';
 import Image from 'next/image';
+import { useCallback, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import { IoCloseSharp } from 'react-icons/io5';
 
 type EditThumbnailProps = {
   thumbnailId: string;
+  formikProps: any;
 };
 
-export const EditThumbnail = ({ thumbnailId }: EditThumbnailProps) => {
+export const EditThumbnail = ({
+  thumbnailId,
+  formikProps,
+}: EditThumbnailProps) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const [displayThumbnail, setDisplayThumbnail] = useState<any>(
+    `https://www.whatthebre.com/assets/${thumbnailId}?quality=50`,
+  );
 
-  const imageUrl = `https://www.whatthebre.com/assets/${thumbnailId}?quality=50`;
-  const { t } = useTranslation();
+  const onDrop = useCallback(
+    (acceptedFiles: any) => {
+      setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
+      formikProps('cover_photo', acceptedFiles[0]);
+    },
+    [setDisplayThumbnail],
+  );
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/jpg': [],
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': [],
+    },
+    maxFiles: 1,
+    onDrop,
+  });
+
+  const deleteFile = () => {
+    setDisplayThumbnail(null);
+  };
 
   const ThumbnailFile = () => {
     return (
@@ -27,41 +58,44 @@ export const EditThumbnail = ({ thumbnailId }: EditThumbnailProps) => {
           position: 'relative',
         }}
       >
-        {thumbnailId && (
-          <Image
-            className="project-image-border-radius image-container"
-            src={imageUrl}
-            layout="fill"
-          />
+        {displayThumbnail !== null && (
+          <>
+            <Image
+              className="project-image-border-radius image-container"
+              src={displayThumbnail}
+              layout="fill"
+            />
+            <Box
+              className="project-button-fixed-cancel"
+              component="button"
+              sx={{
+                border: 'none',
+                position: 'absolute',
+                right: 10,
+                top: 10,
+                color: '#000000cc',
+                padding: '10px 15px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                zIndex: 20000,
+              }}
+              type="button"
+              onClick={() => deleteFile()}
+            >
+              <IoCloseSharp size={25} />
+            </Box>
+          </>
         )}
-        <Box
-          className="project-button-fixed-cancel"
-          component="button"
-          sx={{
-            border: 'none',
-            position: 'absolute',
-            right: 10,
-            top: 10,
-            color: '#000000cc',
-            padding: '10px 15px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: '10px',
-            cursor: 'pointer',
-            zIndex: 20000,
-          }}
-          type="button"
-        >
-          <IoCloseSharp size={25} />
-        </Box>
       </Box>
     );
   };
 
   return (
     <>
-      {thumbnailId ? (
+      {displayThumbnail !== null ? (
         <Box
           sx={{
             display: 'flex',
@@ -103,6 +137,7 @@ export const EditThumbnail = ({ thumbnailId }: EditThumbnailProps) => {
               width: '100%',
               height: '100%',
             }}
+            {...getRootProps()}
           >
             <Box
               sx={{
@@ -164,6 +199,7 @@ export const EditThumbnail = ({ thumbnailId }: EditThumbnailProps) => {
               </Typography>
             </Box>
           </Box>
+          <input multiple {...getInputProps()} />
         </Box>
       )}
     </>

@@ -20,7 +20,6 @@ import { apiClient } from '../../common/data/apiClient';
 import { FormikProvider, useFormik } from 'formik';
 import * as yup from 'yup';
 import { IoCloseSharp } from 'react-icons/io5';
-import { Directus } from '@directus/sdk';
 import { EmbedUrl } from '../../common/components/project-upload/modules/embed-url';
 import { AlumniCourseSelection } from '../../common/components/project-upload/modules/alumni-course-selection';
 import { Collaborators } from '../../common/components/project-upload/modules/collaborators';
@@ -81,7 +80,7 @@ const ProjectUpload = () => {
       cover_photo: null,
       programs: [],
       course: '',
-      description: {},
+      description: null,
       collaborators: null,
       embedded_urls: [],
       comment_function: false,
@@ -91,7 +90,6 @@ const ProjectUpload = () => {
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
       formik.setFieldValue('description', textareaContent);
-      const directus = new Directus('https://www.whatthebre.com/');
       const formData = new FormData();
       formData.append('name', thumbnailFile[0].name);
       formData.append('file', thumbnailFile[0]);
@@ -299,7 +297,7 @@ const ProjectUpload = () => {
                 {embedUrlList.map(({ url }, index) => (
                   <EmbedUrl
                     key={index}
-                    index={index} 
+                    index={index}
                     url={url}
                     removeEmbedUrl={removeEmbedUrl}
                   />
