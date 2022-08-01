@@ -81,7 +81,7 @@ const ProjectUpload = () => {
       cover_photo: null,
       programs: [],
       course: '',
-      description: {},
+      description: null,
       collaborators: null,
       embedded_urls: [],
       comment_function: false,
@@ -299,7 +299,7 @@ const ProjectUpload = () => {
                 {embedUrlList.map(({ url }, index) => (
                   <EmbedUrl
                     key={index}
-                    index={index} 
+                    index={index}
                     url={url}
                     removeEmbedUrl={removeEmbedUrl}
                   />

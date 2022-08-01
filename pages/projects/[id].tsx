@@ -37,7 +37,7 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
       }
     };
     fetchMyProjects();
-  }, [setAllUserProjects]);
+  }, [setAllUserProjects, userId]);
 
   return (
     <>

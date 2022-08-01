@@ -74,7 +74,7 @@ const EditProject: NextPage = withRouter<Props>(
       };
       getCurrentUser();
       fetchProject();
-    }, [setProjectData, setCurrentUser]);
+    }, [setProjectData, setCurrentUser, projectId]);
 
     const removeEmbedUrl = (index: number) => {};
 
