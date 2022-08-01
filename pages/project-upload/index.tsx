@@ -38,7 +38,6 @@ const ProjectUpload = () => {
 
   const [currentUser, setCurrentUser] = useState<any>();
   const [thumbnailFile, setThumbnailFile] = useState<any>([]);
-  const [textareaContent, setTextareaContent] = useState<any>();
 
   const router = useRouter();
 
@@ -90,7 +89,6 @@ const ProjectUpload = () => {
     },
     validationSchema: courseValidationSchema,
     onSubmit: async (values: any) => {
-      formik.setFieldValue('description', textareaContent);
       const directus = new Directus('https://www.whatthebre.com/');
       const formData = new FormData();
       formData.append('name', thumbnailFile[0].name);
@@ -305,10 +303,7 @@ const ProjectUpload = () => {
                   />
                 ))}
               </>
-              <TipTapEditor
-                edit={true}
-                setTextareaContent={setTextareaContent}
-              />
+              <TipTapEditor edit={true} formik={formik.setFieldValue} />
               <AlumniCourseSelection formik={formik} />
               <Grid
                 container

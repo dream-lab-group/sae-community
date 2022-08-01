@@ -2,6 +2,7 @@ import { ButtonBase, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { EditorContent, JSONContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { FormikValues } from 'formik';
 import {
   BsArrowLeft,
   BsArrowReturnLeft,
@@ -191,18 +192,18 @@ const MenuBar = ({ editor }: { editor: any }) => {
 const TipTapEditor = ({
   content,
   edit,
-  setTextareaContent,
+  formik,
 }: {
   content?: string;
   edit: boolean;
-  setTextareaContent?: any;
+  formik: any;
 }) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: `${content ? content : ''}`,
     onUpdate: ({ editor }) => {
       const json = editor.getHTML();
-      setTextareaContent(json);
+      formik('description', json);
     },
   });
 
