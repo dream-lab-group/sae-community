@@ -179,7 +179,7 @@ const EditProject: NextPage = withRouter<Props>(
                     />
                     <EditThumbnail
                       thumbnailId={formikProps.values.cover_photo}
-                      formikProps={formikProps.setFieldValue}
+                      formikProps={formikProps}
                     />
                     <EditFiles
                       files={formikProps.values.files}
@@ -235,6 +235,7 @@ const EditProject: NextPage = withRouter<Props>(
                     <TipTapEditor
                       edit
                       content={formikProps.values.description}
+                      formik={formikProps.setFieldValue}
                     />
                     {currentUser && currentUser.course === 'alumni' && (
                       <EditCourse
