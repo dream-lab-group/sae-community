@@ -71,7 +71,7 @@ const ProjectUpload = () => {
     //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
     //     'Enter correct url!',
     //   ),
-    // course: yup.string().required('Bitte ein Fachrichtung auswählen'),
+    course: yup.string().required('Bitte ein Fachrichtung auswählen'),
   });
 
   const formik = useFormik({
@@ -80,7 +80,7 @@ const ProjectUpload = () => {
       project_name: '',
       cover_photo: null,
       programs: [],
-      course: '',
+      course: null,
       description: null,
       collaborators: null,
       embedded_urls: [],
@@ -309,11 +309,7 @@ const ProjectUpload = () => {
                 edit={true}
                 setTextareaContent={setTextareaContent}
               />
-              {currentUser.course === 'alumni' ? (
-                <AlumniCourseSelection formik={formik} />
-              ) : (
-                <></>
-              )}
+              <AlumniCourseSelection formik={formik} />
               <Grid
                 container
                 spacing={2}

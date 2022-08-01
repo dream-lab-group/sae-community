@@ -42,6 +42,8 @@ export const AlumniCourseSelection = ({
         value={formik.values.course}
         onChange={formik.handleChange}
         error={formik.touched.course && Boolean(formik.errors.course)}
+        // @ts-expect-error: todo
+        helperText={formik.touched.course && formik.errors.course}
       >
         {Globals.uploadCourses.map((course) => (
           <MenuItem key={course} value={course}>
