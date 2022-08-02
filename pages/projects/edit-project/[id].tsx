@@ -216,7 +216,20 @@ const EditProject: NextPage = withRouter<Props>(
                           borderRadius: '5px',
                           alignSelf: 'flex-end',
                         }}
-                        onClick={() => {}}
+                        onClick={() => {
+                          const newEmbedUrls = [
+                            ...embedUrlList,
+                            {
+                              url: newUrl,
+                            },
+                          ];
+                          formikProps.setFieldValue(
+                            'embedded_urls',
+                            newEmbedUrls,
+                          );
+                          setEmbedUrlList(newEmbedUrls);
+                          setNewUrl('');
+                        }}
                       >
                         <Typography>URL hinzufügen</Typography>
                       </ButtonBase>
@@ -228,7 +241,9 @@ const EditProject: NextPage = withRouter<Props>(
                             key={index}
                             index={index}
                             url={url}
-                            removeEmbedUrl={removeEmbedUrl}
+                            embedUrlList={embedUrlList}
+                            setEmbedUrlList={setEmbedUrlList}
+                            formikProps={formikProps}
                           />
                         ),
                       )}

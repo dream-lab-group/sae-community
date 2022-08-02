@@ -5,11 +5,30 @@ import { FaMinus } from 'react-icons/fa';
 
 type embedUrlProps = {
   url: string;
+  embedUrlList?: any;
   index: number;
-  removeEmbedUrl: (index: number) => void;
+  setEmbedUrlList?: React.Dispatch<React.SetStateAction<any>>;
+  removeEmbedUrl?: (index: number) => void;
+  formikProps?: any;
 };
 
-export const EmbedUrl = ({ url, index, removeEmbedUrl }: embedUrlProps) => {
+export const EmbedUrl = ({
+  url,
+  index,
+  embedUrlList,
+  setEmbedUrlList,
+  formikProps,
+}: embedUrlProps) => {
+  const removeEmbedUrl = (index: number) => {
+    if (setEmbedUrlList) {
+      const rows = [...embedUrlList];
+      rows.splice(index, 1);
+      const newEmbedUrlList = rows;
+      setEmbedUrlList(newEmbedUrlList);
+      formikProps.setFieldValue('embedUrls', newEmbedUrlList);
+    }
+  };
+
   return (
     <Box
       sx={{
