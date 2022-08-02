@@ -18,6 +18,7 @@ export const resetPasswordRequest = async ({ email }: PasswordResetProps) => {
       return {
         name: error.name,
         message: error.message,
+        response: error.response && error.response.data
       };
     }
   }
@@ -54,6 +55,7 @@ export const createNewUser = async ({
         return {
           name: error.name,
           message: error.message,
+          response: error.response && error.response.data
         };
       }
     }
@@ -81,6 +83,7 @@ export const createNewUser = async ({
         return {
           name: error.name,
           message: error.message,
+          response: error.response && error.response.data
         };
       }
     }
@@ -107,6 +110,8 @@ export const createNewUser = async ({
       if (axios.isAxiosError(error)) {
         return {
           name: error.name,
+          message: error.message,
+          response: error.response && error.response.data
         };
       }
     }
@@ -134,6 +139,7 @@ export const createNewUser = async ({
         return {
           name: error.name,
           message: error.message,
+          response: error.response && error.response.data
         };
       }
     }
@@ -161,6 +167,7 @@ export const createNewUser = async ({
         return {
           name: error.name,
           message: error.message,
+          response: error.response && error.response.data
         };
       }
     }
@@ -188,6 +195,7 @@ export const createNewUser = async ({
         return {
           name: error.name,
           message: error.message,
+          response: error.response && error.response.data
         };
       }
     }
@@ -215,6 +223,7 @@ export const createNewUser = async ({
         return {
           name: error.name,
           message: error.message,
+          response: error.response && error.response.data
         };
       }
     }
@@ -242,6 +251,7 @@ export const createNewUser = async ({
         return {
           name: error.name,
           message: error.message,
+          response: error.response && error.response.data
         };
       }
     }

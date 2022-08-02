@@ -34,6 +34,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values: any) => {
+      setErrorMessage(undefined);
       await directus.auth
         .login(values)
         .then(() => {
@@ -69,7 +71,12 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
           router.push(returnUrl);
           window.location.reload();
         })
-        .catch(() => {
+        .catch((reason) => {
+          if (reason.errors[0].message === 'Invalid user credentials.') {
+            setErrorMessage(
+              'Ungültige Anmeldeinformationen. Bitte versuche es erneut.',
+            );
+          }
           setOpenSnackbar(true);
         });
     },
@@ -281,7 +288,7 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
               onClose={handleClose}
               sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
             >
-              {t('error.loginRegistration.loginError')}
+              {errorMessage}
             </Alert>
           </Snackbar>
         </Box>
