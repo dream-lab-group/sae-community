@@ -267,7 +267,8 @@ const EditProject: NextPage = withRouter<Props>(
                             <Switch
                               type="checkbox"
                               name="comment_function"
-                              defaultValue={formikProps.values.comment_function}
+                              checked={formikProps.values.comment_function}
+                              onChange={formikProps.handleChange}
                               inputProps={{ 'aria-label': 'controlled' }}
                             />
                           }
@@ -278,7 +279,8 @@ const EditProject: NextPage = withRouter<Props>(
                             <Switch
                               type="checkbox"
                               name="external_project"
-                              defaultValue={formikProps.values.external_project}
+                              checked={formikProps.values.external_project}
+                              onChange={formikProps.handleChange}
                               inputProps={{ 'aria-label': 'controlled' }}
                             />
                           }
