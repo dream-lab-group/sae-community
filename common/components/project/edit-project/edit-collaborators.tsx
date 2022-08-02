@@ -2,8 +2,10 @@ import { Autocomplete, Grid, TextField } from '@mui/material';
 
 export const EditCollaborators = ({
   currentCollaborators,
+  formikProps,
 }: {
   currentCollaborators: any;
+  formikProps: any;
 }) => {
   const collaboratorsData = Object.values(currentCollaborators || {});
 
@@ -16,6 +18,12 @@ export const EditCollaborators = ({
         value={collaboratorsData}
         // @ts-expect-error: todo
         isOptionEqualToValue={(option, value) => option.label === value.label}
+        onChange={(e, value) => {
+          formikProps.setFieldValue(
+            'collaborators',
+            value !== null ? value : formikProps.initialValues.collaborators,
+          );
+        }}
         renderInput={(params) => (
           <>
             <TextField {...params} label="Collaborators" />

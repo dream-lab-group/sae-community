@@ -251,6 +251,7 @@ const EditProject: NextPage = withRouter<Props>(
                     >
                       <EditCollaborators
                         currentCollaborators={formikProps.values.collaborators}
+                        formikProps={formikProps}
                       />
                       <Grid
                         item

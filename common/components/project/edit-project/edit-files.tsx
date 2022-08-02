@@ -262,7 +262,7 @@ export const EditFiles = ({ files, formikProps }: EditFilesProps) => {
             {allFiles.map((relationId: any, index: number) => (
               <EditFilesUpload
                 key={relationId}
-                index={relationId}
+                index={index}
                 relationId={relationId}
                 allFiles={allFiles}
                 setAllFiles={setAllFiles}
