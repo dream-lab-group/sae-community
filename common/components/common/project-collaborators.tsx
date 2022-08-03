@@ -1,14 +1,32 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { apiClient } from '../../data/apiClient';
 
 type ProjectCollaboratorsProps = {
-  projectCollaboratorsElement: string;
+  projectCollaboratorsId: string;
 };
 
 export const ProjectCollaborators = ({
-  projectCollaboratorsElement,
+  projectCollaboratorsId,
 }: ProjectCollaboratorsProps) => {
-  return (
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userResponse = await apiClient.get(
+        `users?filter={ "id": { "_eq": "${projectCollaboratorsId}" }}`,
+      );
+      if (userResponse.status === 200) {
+        setUser(userResponse.data.data[0]);
+      }
+    };
+    fetchUser();
+  }, [setUser]);
+
+  return user !== null ? (
     <Box
       className="user-default-button"
       sx={{
@@ -17,11 +35,19 @@ export const ProjectCollaborators = ({
         marginRight: '15px',
         marginBottom: '15px',
         cursor: 'pointer',
+        background: 'none',
+        border: 'none',
+      }}
+      component="button"
+      onClick={() => {
+        router.push(`/public-profile/${user.id}`);
       }}
     >
       <Typography sx={{ fontSize: '15px' }}>
-        {projectCollaboratorsElement}
+        {`${user.first_name} ${user.last_name}`}
       </Typography>
     </Box>
+  ) : (
+    <></>
   );
 };

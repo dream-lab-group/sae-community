@@ -159,10 +159,10 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
                   }}
                 >
                   {projectData.collaborators.map(
-                    (collaborator: { label: string; index: number }) => (
+                    (collaborator: { id: string; index: number }) => (
                       <ProjectCollaborators
                         key={collaborator.index}
-                        projectCollaboratorsElement={collaborator.label}
+                        projectCollaboratorsId={collaborator.id}
                       />
                     ),
                   )}
