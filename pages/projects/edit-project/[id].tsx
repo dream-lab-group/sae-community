@@ -27,6 +27,14 @@ import { EditThumbnail } from '../../../common/components/project/edit-project/e
 import { apiClient } from '../../../common/data/apiClient';
 import * as yup from 'yup';
 import { Formik } from 'formik';
+import { ProjectCollaborators } from '../../../common/components/common/project-collaborators';
+import TipTapViewer from '../../../common/components/common/tiptap-viewer';
+import { UsedProgram } from '../../../common/components/common/used-programs';
+import { ProjectAudioFile } from '../../../common/components/project/project-audio-file';
+import { ProjectEmbedded } from '../../../common/components/project/project-embedded';
+import { ProjectPictures } from '../../../common/components/project/project-pictures';
+import { ProjectButtonGroup } from '../../../common/components/project/project-button-group';
+import { ProjectInformation } from '../../../common/components/project/project-information';
 
 type Props = {
   router: Router;
@@ -44,6 +52,7 @@ const EditProject: NextPage = withRouter<Props>(
     const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
     const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
     const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
+    const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
     const projectId = router.asPath.split('/').at(-1);
     const [projectData, setProjectData] = useState<any>(null);
@@ -51,9 +60,10 @@ const EditProject: NextPage = withRouter<Props>(
     const [embedUrlList, setEmbedUrlList] = useState<any>();
     const [currentUser, setCurrentUser] = useState<any>();
     const [changedThumbnail, setChangedThumbnail] = useState<boolean>(false);
+    const [editMode, setEditMode] = useState<boolean>(false);
 
     const handleCancelProjectUpload = () => {
-      router.push('/');
+      setEditMode(false);
     };
 
     useEffect(() => {
@@ -85,6 +95,10 @@ const EditProject: NextPage = withRouter<Props>(
         .required('Ein Projektname muss unbedingt eingegeben werden')
         .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     });
+
+    const handleBackToMyProject = () => {
+      router.push(`/projects/${projectData.user_created}`);
+    };
 
     return projectData ? (
       <>
@@ -122,244 +136,356 @@ const EditProject: NextPage = withRouter<Props>(
               }`,
             }}
           >
-            <Typography
-              sx={{
-                fontSize: '20px',
-                fontWeight: 'fontWeightBold',
-                alignSelf: 'flex-start',
-              }}
-            >
-              {t('projects.editProject')}
-            </Typography>
-            {projectData && (
-              <Formik
-                validationSchema={editProjectValidationSchema}
-                initialValues={{
-                  project_name: projectData.project_name,
-                  cover_photo: projectData.cover_photo,
-                  programs: projectData.programs,
-                  course: projectData.course,
-                  description: projectData.description,
-                  collaborators: projectData.collaborators,
-                  embedded_urls: projectData.embedded_urls,
-                  comment_function: projectData.comment_function,
-                  external_project: projectData.external_project,
-                  files: projectData.files,
-                }}
-                onSubmit={async (values) => {
-                  if (changedThumbnail === true) {
-                    const formData = new FormData();
-                    formData.append('name', values.cover_photo.name);
-                    formData.append('file', values.cover_photo);
-                    await directus.files
-                      .createOne(formData)
-                      .then(async (file) => {
-                        if (file) {
-                          const projects = directus.items('projects');
-                          await projects
-                            .updateOne(projectData.id, {
-                              project_name: values.project_name,
-                              cover_photo: file.id,
-                              programs: values.programs,
-                              course: values.course,
-                              description: values.description,
-                              collaborators: values.collaborators,
-                              embedded_urls: values.embedded_urls,
-                              comment_function: values.comment_function,
-                              external_project: values.external_project,
-                            })
-                            .then(() => {
-                              apiClient.delete(
-                                `https://www.whatthebre.com/files/${projectData.cover_photo}`,
-                              );
+            {editMode ? (
+              <>
+                <Typography
+                  sx={{
+                    fontSize: '20px',
+                    fontWeight: 'fontWeightBold',
+                    alignSelf: 'flex-start',
+                  }}
+                >
+                  {t('projects.editProject')}
+                </Typography>
+                {projectData && (
+                  <Formik
+                    validationSchema={editProjectValidationSchema}
+                    initialValues={{
+                      project_name: projectData.project_name,
+                      cover_photo: projectData.cover_photo,
+                      programs: projectData.programs,
+                      course: projectData.course,
+                      description: projectData.description,
+                      collaborators: projectData.collaborators,
+                      embedded_urls: projectData.embedded_urls,
+                      comment_function: projectData.comment_function,
+                      external_project: projectData.external_project,
+                      files: projectData.files,
+                    }}
+                    onSubmit={async (values) => {
+                      if (changedThumbnail === true) {
+                        const formData = new FormData();
+                        formData.append('name', values.cover_photo.name);
+                        formData.append('file', values.cover_photo);
+                        await directus.files
+                          .createOne(formData)
+                          .then(async (file) => {
+                            if (file) {
+                              const projects = directus.items('projects');
+                              await projects
+                                .updateOne(projectData.id, {
+                                  project_name: values.project_name,
+                                  cover_photo: file.id,
+                                  programs: values.programs,
+                                  course: values.course,
+                                  description: values.description,
+                                  collaborators: values.collaborators,
+                                  embedded_urls: values.embedded_urls,
+                                  comment_function: values.comment_function,
+                                  external_project: values.external_project,
+                                })
+                                .then(() => {
+                                  apiClient.delete(
+                                    `https://www.whatthebre.com/files/${projectData.cover_photo}`,
+                                  );
 
-                              router.push(`/project/${projectData.id}`);
-                            });
-                        }
-                      });
-                  } else {
-                    const projects = directus.items('projects');
-                    await projects
-                      .updateOne(projectData.id, {
-                        project_name: values.project_name,
-                        programs: values.programs,
-                        course: values.course,
-                        description: values.description,
-                        collaborators: values.collaborators,
-                        embedded_urls: values.embedded_urls,
-                        comment_function: values.comment_function,
-                        external_project: values.external_project,
-                      })
-                      .then(async () => {
-                        router.push(`/project/${projectData.id}`);
-                      });
-                  }
-                }}
-              >
-                {(formikProps) => (
-                  <form onSubmit={formikProps.handleSubmit}>
-                    <TextField
-                      id="project_name"
-                      name="project_name"
-                      size="small"
-                      label="Projektname"
-                      variant="outlined"
-                      fullWidth
-                      type="text"
-                      sx={{
-                        marginTop: '20px',
-                        fontSize: '8px',
-                        maxWidth: '465px',
-                        alignSelf: 'flex-start',
-                      }}
-                      defaultValue={formikProps.values.project_name}
-                      onChange={formikProps.handleChange}
-                      error={
-                        formikProps.touched.project_name &&
-                        Boolean(formikProps.errors.project_name)
+                                  router.push(`/project/${projectData.id}`);
+                                });
+                            }
+                          });
+                      } else {
+                        const projects = directus.items('projects');
+                        await projects
+                          .updateOne(projectData.id, {
+                            project_name: values.project_name,
+                            programs: values.programs,
+                            course: values.course,
+                            description: values.description,
+                            collaborators: values.collaborators,
+                            embedded_urls: values.embedded_urls,
+                            comment_function: values.comment_function,
+                            external_project: values.external_project,
+                          })
+                          .then(async () => {
+                            router.push(`/project/${projectData.id}`);
+                          });
                       }
-                      // @ts-expect-error: todo
-                      helperText={
-                        formikProps.touched.project_name &&
-                        formikProps.errors.project_name
-                      }
-                    />
-                    <EditThumbnail
-                      thumbnailId={formikProps.initialValues.cover_photo}
-                      formikProps={formikProps}
-                      setChangedThumbnail={setChangedThumbnail}
-                    />
-                    {/* <EditFiles
+                    }}
+                  >
+                    {(formikProps) => (
+                      <form onSubmit={formikProps.handleSubmit}>
+                        <TextField
+                          id="project_name"
+                          name="project_name"
+                          size="small"
+                          label="Projektname"
+                          variant="outlined"
+                          fullWidth
+                          type="text"
+                          sx={{
+                            marginTop: '20px',
+                            fontSize: '8px',
+                            maxWidth: '465px',
+                            alignSelf: 'flex-start',
+                          }}
+                          defaultValue={formikProps.values.project_name}
+                          onChange={formikProps.handleChange}
+                          error={
+                            formikProps.touched.project_name &&
+                            Boolean(formikProps.errors.project_name)
+                          }
+                          // @ts-expect-error: todo
+                          helperText={
+                            formikProps.touched.project_name &&
+                            formikProps.errors.project_name
+                          }
+                        />
+                        <EditThumbnail
+                          thumbnailId={formikProps.initialValues.cover_photo}
+                          formikProps={formikProps}
+                          setChangedThumbnail={setChangedThumbnail}
+                        />
+                        {/* <EditFiles
                       files={formikProps.values.files}
                       formikProps={formikProps.setFieldValue}
                     /> */}
-                    <EditPrograms
-                      programs={formikProps.values.programs}
-                      formikProps={formikProps}
+                        <EditPrograms
+                          programs={formikProps.values.programs}
+                          formikProps={formikProps}
+                        />
+                        <Box
+                          sx={{
+                            width: '100%',
+                            height: '56px',
+                            marginTop: '20px',
+                            marginBottom: '10px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <TextField
+                            id="videoUrl"
+                            name="videoUrl"
+                            label="Video Url"
+                            sx={{ width: '75%' }}
+                            variant="outlined"
+                            value={newUrl}
+                            onChange={(event) => {
+                              setNewUrl(event.target.value);
+                            }}
+                          />
+                          <ButtonBase
+                            className="project-add-button"
+                            sx={{
+                              height: '100%',
+                              padding: '10px 15px',
+                              color: '#fff',
+                              borderRadius: '5px',
+                              alignSelf: 'flex-end',
+                            }}
+                            onClick={() => {
+                              const newEmbedUrls = [
+                                ...embedUrlList,
+                                {
+                                  url: newUrl,
+                                },
+                              ];
+                              formikProps.setFieldValue(
+                                'embedded_urls',
+                                newEmbedUrls,
+                              );
+                              setEmbedUrlList(newEmbedUrls);
+                              setNewUrl('');
+                            }}
+                          >
+                            <Typography>URL hinzufügen</Typography>
+                          </ButtonBase>
+                        </Box>
+                        {embedUrlList &&
+                          embedUrlList.map(
+                            ({ url }: { url: any }, index: number) => (
+                              <EmbedUrl
+                                key={index}
+                                index={index}
+                                url={url}
+                                embedUrlList={embedUrlList}
+                                setEmbedUrlList={setEmbedUrlList}
+                                formikProps={formikProps}
+                              />
+                            ),
+                          )}
+                        <TipTapEditor
+                          edit
+                          content={formikProps.values.description}
+                          formik={formikProps.setFieldValue}
+                        />
+                        {currentUser && currentUser.course === 'alumni' && (
+                          <EditCourse
+                            course={formikProps.values.course}
+                            formikProps={formikProps}
+                          />
+                        )}
+                        <Grid
+                          container
+                          spacing={2}
+                          alignItems="center"
+                          sx={{
+                            direction: `${mdBreakpointDown && 'flex-start'}`,
+                          }}
+                        >
+                          <EditCollaborators
+                            currentCollaborators={
+                              formikProps.values.collaborators
+                            }
+                            formikProps={formikProps}
+                          />
+                          <Grid
+                            item
+                            xs={6}
+                            alignItems="center"
+                            sx={{
+                              marginTop: `${smBreakpointUp ? '20px' : '5px'}`,
+                              alignSelf: `${mdBreakpointDown && 'flex-start'}`,
+                            }}
+                          >
+                            <FormControlLabel
+                              control={
+                                <Switch
+                                  type="checkbox"
+                                  name="comment_function"
+                                  checked={formikProps.values.comment_function}
+                                  onChange={formikProps.handleChange}
+                                  inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                              }
+                              label={t('projectUpload.commentFunction')}
+                            />
+                            <FormControlLabel
+                              control={
+                                <Switch
+                                  type="checkbox"
+                                  name="external_project"
+                                  checked={formikProps.values.external_project}
+                                  onChange={formikProps.handleChange}
+                                  inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                              }
+                              label="SchulProjekt"
+                            />
+                          </Grid>
+                        </Grid>
+                        <EditProjectButtons
+                          handleCancelProjectUpload={handleCancelProjectUpload}
+                        />
+                      </form>
+                    )}
+                  </Formik>
+                )}
+              </>
+            ) : (
+              <>
+                <Box
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: `${lgBreakpointDown ? 'column' : 'row'}`,
+                    alignItems: `${lgBreakpointUp && 'center'}`,
+                  }}
+                >
+                  <ProjectInformation data={projectData} />
+                  <ProjectButtonGroup
+                    editMode={editMode}
+                    setEditMode={setEditMode}
+                  />
+                </Box>
+                <ProjectPictures
+                  thumbnailId={projectData.cover_photo}
+                  relationNumbers={projectData.files}
+                />
+                {projectData.embedded_urls.map((videoUrl: any) => {
+                  return (
+                    <ProjectEmbedded
+                      key={videoUrl.url}
+                      videoUrl={videoUrl.url}
                     />
+                  );
+                })}
+                <ProjectAudioFile relationNumbers={projectData.files} />
+                {projectData.programs !== null ? (
+                  <>
+                    <Box sx={{ width: '100%', marginTop: '20px' }}>
+                      <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>
+                        Benutzte Programme
+                      </Typography>
+                    </Box>
                     <Box
                       sx={{
                         width: '100%',
-                        height: '56px',
-                        marginTop: '20px',
-                        marginBottom: '10px',
                         display: 'flex',
-                        justifyContent: 'space-between',
+                        flexWrap: 'wrap',
+                        marginTop: '10px',
+                        justifyContent: 'start',
                       }}
                     >
-                      <TextField
-                        id="videoUrl"
-                        name="videoUrl"
-                        label="Video Url"
-                        sx={{ width: '75%' }}
-                        variant="outlined"
-                        value={newUrl}
-                        onChange={(event) => {
-                          setNewUrl(event.target.value);
-                        }}
-                      />
-                      <ButtonBase
-                        className="project-add-button"
-                        sx={{
-                          height: '100%',
-                          padding: '10px 15px',
-                          color: '#fff',
-                          borderRadius: '5px',
-                          alignSelf: 'flex-end',
-                        }}
-                        onClick={() => {
-                          const newEmbedUrls = [
-                            ...embedUrlList,
-                            {
-                              url: newUrl,
-                            },
-                          ];
-                          formikProps.setFieldValue(
-                            'embedded_urls',
-                            newEmbedUrls,
-                          );
-                          setEmbedUrlList(newEmbedUrls);
-                          setNewUrl('');
-                        }}
-                      >
-                        <Typography>URL hinzufügen</Typography>
-                      </ButtonBase>
-                    </Box>
-                    {embedUrlList &&
-                      embedUrlList.map(
-                        ({ url }: { url: any }, index: number) => (
-                          <EmbedUrl
-                            key={index}
-                            index={index}
-                            url={url}
-                            embedUrlList={embedUrlList}
-                            setEmbedUrlList={setEmbedUrlList}
-                            formikProps={formikProps}
+                      {projectData.programs.map(
+                        (program: { name: string; label: string }) => (
+                          <UsedProgram
+                            key={program.label}
+                            usedProgramElement={program.label}
                           />
                         ),
                       )}
-                    <TipTapEditor
-                      edit
-                      content={formikProps.values.description}
-                      formik={formikProps.setFieldValue}
-                    />
-                    {currentUser && currentUser.course === 'alumni' && (
-                      <EditCourse
-                        course={formikProps.values.course}
-                        formikProps={formikProps}
-                      />
-                    )}
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      sx={{ direction: `${mdBreakpointDown && 'flex-start'}` }}
-                    >
-                      <EditCollaborators
-                        currentCollaborators={formikProps.values.collaborators}
-                        formikProps={formikProps}
-                      />
-                      <Grid
-                        item
-                        xs={6}
-                        alignItems="center"
-                        sx={{
-                          marginTop: `${smBreakpointUp ? '20px' : '5px'}`,
-                          alignSelf: `${mdBreakpointDown && 'flex-start'}`,
-                        }}
-                      >
-                        <FormControlLabel
-                          control={
-                            <Switch
-                              type="checkbox"
-                              name="comment_function"
-                              checked={formikProps.values.comment_function}
-                              onChange={formikProps.handleChange}
-                              inputProps={{ 'aria-label': 'controlled' }}
-                            />
-                          }
-                          label={t('projectUpload.commentFunction')}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Switch
-                              type="checkbox"
-                              name="external_project"
-                              checked={formikProps.values.external_project}
-                              onChange={formikProps.handleChange}
-                              inputProps={{ 'aria-label': 'controlled' }}
-                            />
-                          }
-                          label="SchulProjekt"
-                        />
-                      </Grid>
-                    </Grid>
-                    <EditProjectButtons
-                      handleCancelProjectUpload={handleCancelProjectUpload}
-                    />
-                  </form>
+                    </Box>
+                  </>
+                ) : (
+                  <></>
                 )}
-              </Formik>
+                {projectData.collaborators !== null ? (
+                  <>
+                    <Box sx={{ width: '100%', marginTop: '20px' }}>
+                      <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>
+                        Mitwirkende
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        width: '100%',
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        marginTop: '10px',
+                        justifyContent: 'start',
+                      }}
+                    >
+                      {projectData.collaborators.map(
+                        (collaborator: { id: string; index: number }) => (
+                          <ProjectCollaborators
+                            key={collaborator.index}
+                            projectCollaboratorsId={collaborator.id}
+                          />
+                        ),
+                      )}
+                    </Box>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <Box
+                  sx={{
+                    width: '100%',
+                    marginTop: `${smBreakpointUp && '20px'}`,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontWeight: 700,
+                      fontSize: `${smBreakpointDown ? '15px' : '20px'}`,
+                    }}
+                  >
+                    {projectData.project_name}
+                  </Typography>
+                  <TipTapViewer content={projectData.description} />
+                </Box>
+              </>
             )}
           </Box>
           <Box
@@ -379,7 +505,7 @@ const EditProject: NextPage = withRouter<Props>(
               borderBottomLeftRadius: '5px',
               cursor: 'pointer',
             }}
-            onClick={handleCancelProjectUpload}
+            onClick={handleBackToMyProject}
           >
             <IoCloseSharp size={28} />
           </Box>
