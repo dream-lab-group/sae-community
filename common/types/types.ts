@@ -71,6 +71,7 @@ export type CommonAutocompleteProps = {
   label: string;
   name: string;
   formikProps?: any;
+  allUsersId?: string
 };
 
 export interface ProjectDto {
