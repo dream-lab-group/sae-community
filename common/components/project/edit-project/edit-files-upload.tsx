@@ -46,14 +46,13 @@ export const EditFilesUpload = ({
           const fileResponse = await apiClient.get(
             `assets/${fileIdResponse.data.data.directus_files_id}`,
           );
-          console.log(fileResponse);
           const imageUrl = `https://www.whatthebre.com/assets/${fileIdResponse.data.data.directus_files_id}?quality=50`;
           setFilePreview(imageUrl);
         }
       }
     };
     getFile();
-  }, [setFilePreview]);
+  }, []);
 
   const deleteFile = (index: number) => {
     const newFiles = [...allFiles];

@@ -25,7 +25,7 @@ export const EmbedUrl = ({
       rows.splice(index, 1);
       const newEmbedUrlList = rows;
       setEmbedUrlList(newEmbedUrlList);
-      formikProps.setFieldValue('embedUrls', newEmbedUrlList);
+      formikProps.setFieldValue('embedded_urls', newEmbedUrlList);
     }
   };
 

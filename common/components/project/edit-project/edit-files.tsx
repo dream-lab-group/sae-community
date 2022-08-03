@@ -31,7 +31,10 @@ export const EditFiles = ({ files, formikProps }: EditFilesProps) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': [],
+      'image/jpg': [],
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': [],
       'audio/*': [],
     },
     maxFiles: 5,
