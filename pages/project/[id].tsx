@@ -112,6 +112,9 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
               );
             })}
             <ProjectAudioFile relationNumbers={projectData.files} />
+            <Box sx={{ width: '100%' }}>
+              <Typography>Benutzte Programme</Typography>
+            </Box>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
               {projectData.programs.map(
                 (program: { name: string; label: string }) => (

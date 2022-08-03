@@ -7,7 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { GetServerSideProps, NextPage } from 'next';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 import { ProjectCard } from '../common/components/project-card/project-card';
@@ -82,6 +82,15 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
 
   const [isLoading, setIsLoading] = useState(true);
+  const [currentUserId, setCurrentUserId] = useState<any>();
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const userId = await directus.users.me.read();
+      setCurrentUserId(userId.id);
+    };
+    getCurrentUser();
+  }, [setCurrentUserId]);
 
   return (
     // @ts-expect-error: Todo
@@ -98,17 +107,22 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
       >
         {/* @ts-expect-error: todo */}
         {props.data.map(({ id, user_created, course, cover_photo }) => {
-          return (
-            <ProjectCard
-              key={id}
-              projectId={id}
-              coverPhotoId={cover_photo}
-              userCreated={user_created}
-              course={course}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-            />
-          );
+          if (currentUserId !== user_created) {
+            return (
+              <ProjectCard
+                key={id}
+                projectId={id}
+                coverPhotoId={cover_photo}
+                userCreated={user_created}
+                course={course}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
+            );
+          } else {
+            // @ts-expect-error: todo
+            return <React.Fragment key={id} />;
+          }
         })}
       </Grid>
     </ThemeProvider>
