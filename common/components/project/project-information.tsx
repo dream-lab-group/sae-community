@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from '../../data/apiClient';
 
@@ -9,8 +10,10 @@ type ProjectInformationProps = {
 };
 
 export const ProjectInformation = ({ data }: ProjectInformationProps) => {
+  const router = useRouter();
   const [user, setUser] = useState('');
   const [avatarId, setAvatarId] = useState(null);
+  const [userId, setUserId] = useState<string>();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,11 +24,12 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
         setUser(
           `${userResponse.data.data[0].first_name} ${userResponse.data.data[0].last_name}`,
         );
+        setUserId(userResponse.data.data[0].id);
         setAvatarId(userResponse.data.data[0].avatar);
       }
     };
     fetchUser();
-  }, [setUser]);
+  }, [setUser, setUserId, setAvatarId]);
 
   const avatarUrl = `https://www.whatthebre.com/assets/${avatarId}`;
 
@@ -63,7 +67,20 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
         <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>
           {data.project_name}
         </Typography>
-        <Typography sx={{ fontSize: '16px' }}>{user}</Typography>
+        <Typography
+          sx={{
+            fontSize: '16px',
+            cursor: 'pointer',
+            background: 'none',
+            border: 'none',
+          }}
+          component="button"
+          onClick={() => {
+            router.push(`/public-profile/${userId}`);
+          }}
+        >
+          {user}
+        </Typography>
       </Box>
     </Box>
   );
