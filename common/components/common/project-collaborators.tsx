@@ -1,0 +1,27 @@
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
+
+type ProjectCollaboratorsProps = {
+  projectCollaboratorsElement: string;
+};
+
+export const ProjectCollaborators = ({
+  projectCollaboratorsElement,
+}: ProjectCollaboratorsProps) => {
+  return (
+    <Box
+      className="user-default-button"
+      sx={{
+        padding: '5px 15px',
+        borderRadius: '60px',
+        marginRight: '15px',
+        marginBottom: '15px',
+        cursor: 'pointer',
+      }}
+    >
+      <Typography sx={{ fontSize: '15px' }}>
+        {projectCollaboratorsElement}
+      </Typography>
+    </Box>
+  );
+};
