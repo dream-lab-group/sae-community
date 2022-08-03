@@ -17,7 +17,7 @@ export const UsedProgram = ({ usedProgramElement }: UsedProgramProps) => {
         cursor: 'default',
       }}
     >
-      <Typography>{usedProgramElement}</Typography>
+      <Typography sx={{ fontSize: '15px' }}>{usedProgramElement}</Typography>
     </Box>
   );
 };

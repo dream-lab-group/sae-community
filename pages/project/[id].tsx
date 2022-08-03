@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react';
 import { apiClient } from '../../common/data/apiClient';
 import TipTapViewer from '../../common/components/common/tiptap-viewer';
 import { UsedProgram } from '../../common/components/common/used-programs';
+import { ProjectCollaborators } from '../../common/components/common/project-collaborators';
 
 type Props = {
   router: Router;
@@ -112,16 +113,64 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
               );
             })}
             <ProjectAudioFile relationNumbers={projectData.files} />
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
-              {projectData.programs.map(
-                (program: { name: string; label: string }) => (
-                  <UsedProgram
-                    key={program.label}
-                    usedProgramElement={program.label}
-                  />
-                ),
-              )}
-            </Box>
+            {projectData.programs !== null ? (
+              <>
+                <Box sx={{ width: '100%', marginTop: '20px' }}>
+                  <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>
+                    Benutzte Programme
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    marginTop: '10px',
+                    justifyContent: 'start',
+                  }}
+                >
+                  {projectData.programs.map(
+                    (program: { name: string; label: string }) => (
+                      <UsedProgram
+                        key={program.label}
+                        usedProgramElement={program.label}
+                      />
+                    ),
+                  )}
+                </Box>
+              </>
+            ) : (
+              <></>
+            )}
+            {projectData.collaboratos !== null ? (
+              <>
+                <Box sx={{ width: '100%', marginTop: '20px' }}>
+                  <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>
+                    Mitwirkende
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    marginTop: '10px',
+                    justifyContent: 'start',
+                  }}
+                >
+                  {projectData.collaborators.map(
+                    (collaborator: { label: string; index: number }) => (
+                      <ProjectCollaborators
+                        key={collaborator.index}
+                        projectCollaboratorsElement={collaborator.label}
+                      />
+                    ),
+                  )}
+                </Box>
+              </>
+            ) : (
+              <></>
+            )}
             <Box
               sx={{ width: '100%', marginTop: `${smBreakpointUp && '20px'}` }}
             >
