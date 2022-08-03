@@ -1,17 +1,60 @@
-import { ButtonBase, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Button,
+  ButtonBase,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import { BiMessageDetail } from 'react-icons/bi';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FiMail } from 'react-icons/fi';
 import { BsBookmark } from 'react-icons/bs';
 import { FaRegHeart } from 'react-icons/fa';
+import React from 'react';
 
-export const ProjectButtonGroup = () => {
+type ProjectButtonGroupProps = {
+  editMode?: boolean;
+  setEditMode?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const ProjectButtonGroup = ({
+  editMode,
+  setEditMode,
+}: ProjectButtonGroupProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
 
-  return (
+  return editMode === false ? (
+    <Box
+      sx={{
+        height: '50px',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginTop: `${mdBreakpointDown && '20px'}`,
+      }}
+    >
+      {setEditMode ? (
+        <Button
+          className="project-button-publish"
+          variant="contained"
+          sx={{
+            width: `${mdBreakpointDown ? '100%' : '250px'}`,
+            height: '56px',
+            marginLeft: `${mdBreakpointDown ? '' : '20px'}`,
+          }}
+          onClick={() => setEditMode(true)}
+        >
+          Projekt editieren
+        </Button>
+      ) : (
+        <></>
+      )}
+    </Box>
+  ) : (
     <Box
       sx={{
         height: '50px',
