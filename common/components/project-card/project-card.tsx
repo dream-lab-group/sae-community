@@ -40,7 +40,8 @@ export const ProjectCard = ({
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = useTranslation();
   const router = useRouter();
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState<string>();
+  const [userId, setUserId] = useState<string>();
 
   const imageUrl = `https://www.whatthebre.com/assets/${coverPhotoId}?quality=50`;
 
@@ -53,11 +54,12 @@ export const ProjectCard = ({
         setUser(
           `${userResponse.data.data[0].first_name} ${userResponse.data.data[0].last_name}`,
         );
+        setUserId(userResponse.data.data[0].id);
         setIsLoading(false);
       }
     };
     fetchUser();
-  }, [setUser]);
+  }, [setUser, setUserId]);
 
   const handleOpenProject = () => {
     if (editProject) {
@@ -171,7 +173,19 @@ export const ProjectCard = ({
             alignItems="center"
           >
             <Grid item xs={8}>
-              <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+              <Typography
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  background: 'none',
+                  border: 'none',
+                }}
+                component="button"
+                onClick={() => {
+                  router.push(`/public-profile/${userId}`);
+                }}
+              >
                 {user}
               </Typography>
             </Grid>

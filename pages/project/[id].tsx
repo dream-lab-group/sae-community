@@ -142,7 +142,7 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
             ) : (
               <></>
             )}
-            {projectData.collaboratos !== null ? (
+            {projectData.collaborators !== null ? (
               <>
                 <Box sx={{ width: '100%', marginTop: '20px' }}>
                   <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>
