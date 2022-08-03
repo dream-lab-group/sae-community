@@ -79,7 +79,7 @@ const ProjectUpload = () => {
       project_name: '',
       cover_photo: null,
       programs: [],
-      course: null,
+      course: '',
       description: null,
       collaborators: null,
       embedded_urls: [],
