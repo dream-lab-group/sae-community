@@ -31,7 +31,10 @@ export const EditFiles = ({ files, formikProps }: EditFilesProps) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': [],
+      'image/jpg': [],
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': [],
       'audio/*': [],
     },
     maxFiles: 5,
@@ -262,7 +265,7 @@ export const EditFiles = ({ files, formikProps }: EditFilesProps) => {
             {allFiles.map((relationId: any, index: number) => (
               <EditFilesUpload
                 key={relationId}
-                index={relationId}
+                index={index}
                 relationId={relationId}
                 allFiles={allFiles}
                 setAllFiles={setAllFiles}

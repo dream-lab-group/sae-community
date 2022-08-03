@@ -200,6 +200,7 @@ const TipTapEditor = ({
 }) => {
   const editor = useEditor({
     extensions: [StarterKit],
+    autofocus: true,
     content: `${content ? content : ''}`,
     onUpdate: ({ editor }) => {
       const json = editor.getHTML();

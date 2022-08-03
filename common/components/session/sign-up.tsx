@@ -73,6 +73,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
   const { t } = useTranslation();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const formik = useFormik({
     initialValues: {
@@ -86,6 +87,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
     },
     validationSchema: signUpValidationSchema,
     onSubmit: async (values: any) => {
+      setErrorMessage(undefined);
       const response = await handleCreateNewUser({
         first_name: values.first_name,
         last_name: values.last_name,
@@ -100,6 +102,17 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
         // @ts-ignore: Unreachable code error
         setCreatedUser(response.createNewUserStatus!.user.first_name);
       } else {
+        if (response.createNewUserStatus) {
+          if (
+            // @ts-expect-error: todo
+            response.createNewUserStatus.response.errors[0].message ===
+            'Field "email" has to be unique.'
+          ) {
+            setErrorMessage(
+              'Die eingegebene E-Mail wird bereits von einem aktiven Account verwendet.',
+            );
+          }
+        }
         setOpenSnackbar(true);
       }
     },
@@ -378,7 +391,7 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           onClose={handleClose}
           sx={{ fontSize: `${smBreakpointDown && '10px'}` }}
         >
-          {t('error.loginRegistration.signupError')}
+          {errorMessage}
         </Alert>
       </Snackbar>
     </>

@@ -1,6 +1,12 @@
 import { Autocomplete, Grid, TextField } from '@mui/material';
 
-export const EditPrograms = ({ programs }: { programs: any }) => {
+export const EditPrograms = ({
+  programs,
+  formikProps,
+}: {
+  programs: any;
+  formikProps: any;
+}) => {
   const programsData = Object.values(programs || {});
 
   return programs ? (
@@ -12,6 +18,12 @@ export const EditPrograms = ({ programs }: { programs: any }) => {
         value={programsData}
         // @ts-expect-error: todo
         isOptionEqualToValue={(option, value) => option.label === value.label}
+        onChange={(e, value) => {
+          formikProps.setFieldValue(
+            'programs',
+            value !== null ? value : formikProps.initialValues.programs,
+          );
+        }}
         renderInput={(params) => (
           <>
             <TextField {...params} label="Programme" />

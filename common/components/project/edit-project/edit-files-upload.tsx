@@ -39,14 +39,20 @@ export const EditFilesUpload = ({
           fileTypeResponse.data.data.type.split('/')[0] === 'audio'
         ) {
           setIsAudio(true);
-        } else {
+        } else if (
+          fileIdResponse.status === 200 &&
+          fileTypeResponse.data.data.type.split('/')[0] === 'image'
+        ) {
+          const fileResponse = await apiClient.get(
+            `assets/${fileIdResponse.data.data.directus_files_id}`,
+          );
           const imageUrl = `https://www.whatthebre.com/assets/${fileIdResponse.data.data.directus_files_id}?quality=50`;
           setFilePreview(imageUrl);
         }
       }
     };
     getFile();
-  }, [setFilePreview]);
+  }, []);
 
   const deleteFile = (index: number) => {
     const newFiles = [...allFiles];

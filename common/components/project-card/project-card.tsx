@@ -180,7 +180,23 @@ export const ProjectCard = ({
                 // @ts-expect-error: todo
                 label={t(`projects.${course}.label`)}
                 sx={{
-                  background: '#364156',
+                  background: `${
+                    course === 'film'
+                      ? '#e0be36'
+                      : course === 'gameart'
+                      ? '#ef6351'
+                      : course === 'gamesprogramming'
+                      ? '#f87060'
+                      : course === 'webdesign'
+                      ? '#593f62'
+                      : course === 'audio'
+                      ? '#1f7a8c'
+                      : course === 'visualeffects'
+                      ? '#647aa3'
+                      : course === 'contentcreation'
+                      ? '#17bebb '
+                      : ''
+                  }`,
                   color: '#fff',
                   fontSize: '14px',
                   width: '100%',

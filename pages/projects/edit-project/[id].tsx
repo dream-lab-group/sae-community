@@ -50,6 +50,7 @@ const EditProject: NextPage = withRouter<Props>(
     const [newUrl, setNewUrl] = useState('');
     const [embedUrlList, setEmbedUrlList] = useState<any>();
     const [currentUser, setCurrentUser] = useState<any>();
+    const [changedThumbnail, setChangedThumbnail] = useState<boolean>(false);
 
     const handleCancelProjectUpload = () => {
       router.push('/');
@@ -84,8 +85,6 @@ const EditProject: NextPage = withRouter<Props>(
         .required('Ein Projektname muss unbedingt eingegeben werden')
         .min(5, 'Der Projektname muss mindestens 5 Zeichen lang sein'),
     });
-
-    const removeEmbedUrl = (index: number) => {};
 
     return projectData ? (
       <>
@@ -147,7 +146,55 @@ const EditProject: NextPage = withRouter<Props>(
                   external_project: projectData.external_project,
                   files: projectData.files,
                 }}
-                onSubmit={(values) => console.log(values)}
+                onSubmit={async (values) => {
+                  if (changedThumbnail === true) {
+                    const formData = new FormData();
+                    formData.append('name', values.cover_photo.name);
+                    formData.append('file', values.cover_photo);
+                    await directus.files
+                      .createOne(formData)
+                      .then(async (file) => {
+                        if (file) {
+                          const projects = directus.items('projects');
+                          await projects
+                            .updateOne(projectData.id, {
+                              project_name: values.project_name,
+                              cover_photo: file.id,
+                              programs: values.programs,
+                              course: values.course,
+                              description: values.description,
+                              collaborators: values.collaborators,
+                              embedded_urls: values.embedded_urls,
+                              comment_function: values.comment_function,
+                              external_project: values.external_project,
+                            })
+                            .then(() => {
+                              apiClient.delete(
+                                `https://www.whatthebre.com/files/${projectData.cover_photo}`,
+                              );
+
+                              router.push(`/project/${projectData.id}`);
+                            });
+                        }
+                      });
+                  } else {
+                    const projects = directus.items('projects');
+                    await projects
+                      .updateOne(projectData.id, {
+                        project_name: values.project_name,
+                        programs: values.programs,
+                        course: values.course,
+                        description: values.description,
+                        collaborators: values.collaborators,
+                        embedded_urls: values.embedded_urls,
+                        comment_function: values.comment_function,
+                        external_project: values.external_project,
+                      })
+                      .then(async () => {
+                        router.push(`/project/${projectData.id}`);
+                      });
+                  }
+                }}
               >
                 {(formikProps) => (
                   <form onSubmit={formikProps.handleSubmit}>
@@ -178,14 +225,18 @@ const EditProject: NextPage = withRouter<Props>(
                       }
                     />
                     <EditThumbnail
-                      thumbnailId={formikProps.values.cover_photo}
+                      thumbnailId={formikProps.initialValues.cover_photo}
                       formikProps={formikProps}
+                      setChangedThumbnail={setChangedThumbnail}
                     />
-                    <EditFiles
+                    {/* <EditFiles
                       files={formikProps.values.files}
                       formikProps={formikProps.setFieldValue}
+                    /> */}
+                    <EditPrograms
+                      programs={formikProps.values.programs}
+                      formikProps={formikProps}
                     />
-                    <EditPrograms programs={formikProps.values.programs} />
                     <Box
                       sx={{
                         width: '100%',
@@ -216,7 +267,20 @@ const EditProject: NextPage = withRouter<Props>(
                           borderRadius: '5px',
                           alignSelf: 'flex-end',
                         }}
-                        onClick={() => {}}
+                        onClick={() => {
+                          const newEmbedUrls = [
+                            ...embedUrlList,
+                            {
+                              url: newUrl,
+                            },
+                          ];
+                          formikProps.setFieldValue(
+                            'embedded_urls',
+                            newEmbedUrls,
+                          );
+                          setEmbedUrlList(newEmbedUrls);
+                          setNewUrl('');
+                        }}
                       >
                         <Typography>URL hinzufügen</Typography>
                       </ButtonBase>
@@ -228,7 +292,9 @@ const EditProject: NextPage = withRouter<Props>(
                             key={index}
                             index={index}
                             url={url}
-                            removeEmbedUrl={removeEmbedUrl}
+                            embedUrlList={embedUrlList}
+                            setEmbedUrlList={setEmbedUrlList}
+                            formikProps={formikProps}
                           />
                         ),
                       )}
@@ -251,6 +317,7 @@ const EditProject: NextPage = withRouter<Props>(
                     >
                       <EditCollaborators
                         currentCollaborators={formikProps.values.collaborators}
+                        formikProps={formikProps}
                       />
                       <Grid
                         item
@@ -266,7 +333,8 @@ const EditProject: NextPage = withRouter<Props>(
                             <Switch
                               type="checkbox"
                               name="comment_function"
-                              defaultValue={formikProps.values.comment_function}
+                              checked={formikProps.values.comment_function}
+                              onChange={formikProps.handleChange}
                               inputProps={{ 'aria-label': 'controlled' }}
                             />
                           }
@@ -277,7 +345,8 @@ const EditProject: NextPage = withRouter<Props>(
                             <Switch
                               type="checkbox"
                               name="external_project"
-                              defaultValue={formikProps.values.external_project}
+                              checked={formikProps.values.external_project}
+                              onChange={formikProps.handleChange}
                               inputProps={{ 'aria-label': 'controlled' }}
                             />
                           }

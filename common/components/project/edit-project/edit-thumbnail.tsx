@@ -2,7 +2,7 @@ import { Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { Formik, FormikValues } from 'formik';
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
@@ -11,11 +11,13 @@ import { IoCloseSharp } from 'react-icons/io5';
 type EditThumbnailProps = {
   thumbnailId: string;
   formikProps: any;
+  setChangedThumbnail: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const EditThumbnail = ({
   thumbnailId,
   formikProps,
+  setChangedThumbnail,
 }: EditThumbnailProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -27,7 +29,8 @@ export const EditThumbnail = ({
   const onDrop = useCallback(
     (acceptedFiles: any) => {
       setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
-      formikProps('cover_photo', acceptedFiles[0]);
+      formikProps.setFieldValue('cover_photo', acceptedFiles[0]);
+      setChangedThumbnail(true);
     },
     [setDisplayThumbnail],
   );
@@ -45,6 +48,7 @@ export const EditThumbnail = ({
 
   const deleteFile = () => {
     setDisplayThumbnail(null);
+    setChangedThumbnail(false);
   };
 
   const ThumbnailFile = () => {
@@ -103,7 +107,7 @@ export const EditThumbnail = ({
             width: '100%',
             height: `${smBreakpointDown ? '260px' : '450px'}`,
             borderRadius: '10px',
-            marginTop: '30px',
+            marginY: '30px',
             boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
           }}
         >
@@ -124,7 +128,7 @@ export const EditThumbnail = ({
             height: `${smBreakpointDown ? '260px' : '450px'}`,
             border: '3px dashed #00000033',
             borderRadius: '10px',
-            marginTop: '30px',
+            marginY: '30px',
             cursor: 'pointer',
           }}
         >
