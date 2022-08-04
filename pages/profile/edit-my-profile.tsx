@@ -136,7 +136,6 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             interests: userData.interests,
             user_files: null,
           }}
-          //     onSubmit={(values) => console.log(values)}
           onSubmit={async (values: any) => {
             const directus = new Directus('https://www.whatthebre.com/');
 

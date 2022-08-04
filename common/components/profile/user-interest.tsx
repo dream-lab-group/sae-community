@@ -2,9 +2,8 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 type UserInterestProps = {
-  userInterestElement: string;
+      userInterestElement: string;
 };
-
 export const UserInterest = ({ userInterestElement }: UserInterestProps) => {
   return (
     <Box
