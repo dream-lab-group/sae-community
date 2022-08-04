@@ -176,7 +176,12 @@
     "contactNow": "Jetzt kontaktieren",
     "aboutMe": "Über mich",
     "lastProjects": "Letzte Projekte",
-    "viewAll": "Alle ansehen"
+    "viewAll": "Alle ansehen",
+    "noData": "Du hast noch keine",
+    "description": "Beschreibung.",
+    "programs": "Programme.",
+    "noInterests": "interessen.",
+    "noLastProjects": "Projekte."
   },
   "404": {
     "description": "Oops, etwas scheint falsch gelaufen zu sein!",

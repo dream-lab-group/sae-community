@@ -37,10 +37,8 @@ export const UserContactInformation = ({
         <IoLogoYoutube size={20} />
       ) : userContactElement === 'Instagram' ? (
         <SiInstagram size={20} />
-      ) : userContactElement === 'LinkedIn' ? (
+      ) :  (
         <IoLogoLinkedin size={20} />
-      ) : (
-        <IoLogoVimeo size={20} />
       )}
 
       <Typography sx={{ marginLeft: '10px' }}>{userContactElement}</Typography>

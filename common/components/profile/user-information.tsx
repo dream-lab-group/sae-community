@@ -1,6 +1,14 @@
 import { Box, Typography } from '@mui/material';
+import Image from 'next/image';
+import placeholderImage from '../../../public/assets/placeholder.png';
 
-export const UserInformation = () => {
+type UserInformationProps = {
+  currentUser: any;
+};
+
+export const UserInformation = ({ currentUser }: UserInformationProps) => {
+  const imageUrl = `https://www.whatthebre.com/assets/${currentUser.avatar}`;
+
   return (
     <Box
       sx={{
@@ -17,30 +25,43 @@ export const UserInformation = () => {
           width: '100px',
           height: '100px',
           borderRadius: '50%',
-          border: '5px solid #fff',
-          background: '#e2a165',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          border: '5px solid #7514f5',
+          background: "#fff",
           marginRight: '30px',
+          position: 'relative',
         }}
       >
-        <Typography sx={{ color: '#fff', fontWeight: 700, fontSize: '30px' }}>
-          SC
-        </Typography>
+        {currentUser.avatar === null ? (
+          <Image
+            src={placeholderImage}
+            style={{ borderRadius: '50%'}}
+            layout="fill"
+            alt="profilepicture"
+            priority
+            className="project-image-border-radius image-container"
+          />
+        ) : (
+          <Image
+            src={imageUrl}
+            style={{ borderRadius: '50%' }}
+            layout="fill"
+            alt="profilepicture"
+            priority
+          />
+        )}
       </Box>
       <Box>
         <Box sx={{ display: 'flex' }}>
           <Typography sx={{ fontWeight: 700, fontSize: '20px' }}>
-            Sarah
+            {currentUser.first_name}
           </Typography>
           <Typography
             sx={{ fontWeight: 700, fontSize: '20px', marginLeft: '5px' }}
           >
-            Candolfi
+            {currentUser.last_name}{' '}
           </Typography>
         </Box>
-        <Typography>Webdevelopment</Typography>
+        <Typography>{currentUser.course}</Typography>
       </Box>
     </Box>
   );
