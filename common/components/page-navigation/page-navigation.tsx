@@ -13,28 +13,20 @@ import {
 import { Globals } from '../../utils/utils';
 
 import { HiOutlineSearch } from 'react-icons/hi';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { PageNavigationElement } from './page-navigation-elements';
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+type PageNavigationProps = {
+  setUsedFilter: React.Dispatch<React.SetStateAction<string | undefined>>;
+};
 
-export const PageNavigation = () => {
+export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
+  const [activeTagFilter, setActiveTagFilter] = useState<string>();
   const [sortFilter, setSortFilter] = useState<string[]>([]);
 
   return (
@@ -146,7 +138,13 @@ export const PageNavigation = () => {
             justifyContent={`${lgBreakpointUp && 'center'}`}
           >
             {Globals.pageNavigationElements.map((element) => (
-              <PageNavigationElement key={element} element={element} />
+              <PageNavigationElement
+                key={element}
+                element={element}
+                setUsedFilter={setUsedFilter}
+                activeTagFilter={activeTagFilter}
+                setActiveTagFitler={setActiveTagFilter}
+              />
             ))}
           </Grid>
         </Grid>
