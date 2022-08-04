@@ -61,10 +61,6 @@ export const EditFilesUpload = ({
     formikProps('project_files', newFiles);
   };
 
-  // setTimeout(() => {
-  //   URL.revokeObjectURL(ImagePreview);
-  // }, 1000);
-
   return (
     <Box
       key={relationId}
