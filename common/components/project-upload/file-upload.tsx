@@ -36,6 +36,7 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
       'audio/*': [],
     },
     maxFiles: 5,
+    maxSize: 209715,
     onDrop,
   });
 
@@ -175,7 +176,7 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
                   textAlign: 'center',
                 }}
               >
-                Leider kannst du nicht mehr als 6 Dateien heraufladen
+                Leider kannst du nicht mehr als 5 Dateien heraufladen
               </Typography>
             </Box>
           ) : (
