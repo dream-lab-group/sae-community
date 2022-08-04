@@ -16,19 +16,6 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { useState } from 'react';
 import { PageNavigationElement } from './page-navigation-elements';
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 export const PageNavigation = () => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));

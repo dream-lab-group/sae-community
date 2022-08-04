@@ -36,8 +36,6 @@ export const PageNavigationElement = ({
           '&:last-child': {
             marginRight: '0px',
           },
-          maxWidth: '180px',
-          width: '100%',
           borderRadius: '2rem',
           background: '#75818b',
         }}
@@ -50,6 +48,9 @@ export const PageNavigationElement = ({
             color: '#fff',
             fontWeight: '300',
             textAlign: 'center',
+            minWidth: '120px',
+            overflow: 'unset',
+            textOverflow: 'clip',
           }}
         >
           {/* @ts-expect-error: translation error during runtime */}
