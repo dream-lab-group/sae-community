@@ -1,4 +1,10 @@
-import { Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Alert,
+  Snackbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import { Formik, FormikValues } from 'formik';
 import Image from 'next/image';
@@ -22,20 +28,55 @@ export const EditThumbnail = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
   const [displayThumbnail, setDisplayThumbnail] = useState<any>(
     `https://www.whatthebre.com/assets/${thumbnailId}?quality=50`,
   );
 
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
-      formikProps.setFieldValue('cover_photo', acceptedFiles[0]);
-      setChangedThumbnail(true);
+      if (fileRejections.length > 0) {
+        setErrorMessage(undefined);
+        setErrorMessage(
+          'Eines der Dateien ist zu gross. Die maximale Filegrösse ist 2MB',
+        );
+        setOpenSnackbar(true);
+        fileRejections.length === 0;
+      } else {
+        setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
+        formikProps.setFieldValue('cover_photo', acceptedFiles[0]);
+        setChangedThumbnail(true);
+        fileRejections.length === 0;
+      }
     },
     [setDisplayThumbnail],
   );
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const maxFileSizeThumbnailEdit = 2597150;
+
+  function maxFileSizeValidator(file: File) {
+    if (file.size > maxFileSizeThumbnailEdit) {
+      return {
+        code: 'size-too-large',
+        message: `Die Datei ist zu gross. Die maximale Dateigrösse beträgt 2MB`,
+      };
+    }
+
+    return null;
+  }
+
+  const { getRootProps, getInputProps, fileRejections } = useDropzone({
     accept: {
       'image/jpg': [],
       'image/jpeg': [],
@@ -44,6 +85,7 @@ export const EditThumbnail = ({
     },
     maxFiles: 1,
     onDrop,
+    validator: maxFileSizeValidator,
   });
 
   const deleteFile = () => {
@@ -206,6 +248,21 @@ export const EditThumbnail = ({
           <input multiple {...getInputProps()} />
         </Box>
       )}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
+      >
+        <Alert
+          severity="error"
+          variant="filled"
+          onClose={handleClose}
+          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
+        >
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

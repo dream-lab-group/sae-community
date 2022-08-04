@@ -1,4 +1,11 @@
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Snackbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,28 +30,66 @@ export const ThumbnailUpload = ({
 }: ThumbnailUploadProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
   const [displayThumbnail, setDisplayThumbnail] = useState<string>();
 
   const { t } = useTranslation();
 
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
+  const maxFileSizeThumbnail = 2597150;
+
+  function maxFileSizeValidator(file: File) {
+    if (file.size > maxFileSizeThumbnail) {
+      return {
+        code: 'size-too-large',
+        message: `Die Datei ist zu gross. Die maximale Dateigrösse beträgt 2MB`,
+      };
+    }
+
+    return null;
+  }
+
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      const allFiles = [...thumbnailFile, ...acceptedFiles];
-      setThumbnailFile(allFiles);
-      formik.setFieldValue('cover_photo', acceptedFiles);
-      setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
+      if (fileRejections.length > 0) {
+        setErrorMessage(undefined);
+        setErrorMessage(
+          'Eines der Dateien ist zu gross. Die maximale Filegrösse ist 2MB',
+        );
+        setOpenSnackbar(true);
+        fileRejections.length === 0;
+      } else {
+        const allFiles = [...thumbnailFile, ...acceptedFiles];
+        setThumbnailFile(allFiles);
+        formik.setFieldValue('cover_photo', acceptedFiles);
+        setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
+        fileRejections.length === 0;
+      }
     },
     [thumbnailFile],
   );
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, fileRejections } = useDropzone({
     accept: {
-      'image/*': [],
+      'image/jpg': [],
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': [],
     },
     maxFiles: 1,
     onDrop,
     noDragEventsBubbling: true,
+    validator: maxFileSizeValidator,
   });
 
   const deleteFile = (file: any, index: number) => {
@@ -203,6 +248,21 @@ export const ThumbnailUpload = ({
           </Box>
         </Box>
       )}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
+      >
+        <Alert
+          severity="error"
+          variant="filled"
+          onClose={handleClose}
+          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
+        >
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
