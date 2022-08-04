@@ -60,23 +60,6 @@ export const CustomMenu = ({
           <Grid item container alignItems="center">
             <Grid
               item
-              sx={{ marginRight: `${smBreakpointDown ? '5px' : '10px'}` }}
-            >
-              <Box
-                sx={{
-                  height: `${
-                    smBreakpointDown ? '40px' : lgBreakpointUp ? '55px' : '50px'
-                  }`,
-                  width: `${
-                    smBreakpointDown ? '40px' : lgBreakpointUp ? '55px' : '50px'
-                  }`,
-                  background: '#000',
-                  borderRadius: '50%',
-                }}
-              />
-            </Grid>
-            <Grid
-              item
               component="button"
               border="none"
               sx={{
@@ -84,6 +67,7 @@ export const CustomMenu = ({
                 display: 'flex',
                 flexDirection: 'column',
                 cursor: 'pointer',
+                marginRight: `${smBreakpointDown ? '5px' : '10px'}`,
               }}
               onClick={handleOnClickHome}
             >
@@ -107,7 +91,7 @@ export const CustomMenu = ({
                   lineHeight: 1,
                 }}
               >
-                Community
+                Plattform
               </Typography>
             </Grid>
           </Grid>

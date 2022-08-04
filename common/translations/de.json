@@ -116,6 +116,7 @@
   "projectUpload": {
     "createProject": "Projekt erstellen",
     "publishProject": "Projekt veröffentlichen",
+    "addUrl": "URL hinzufügen",
     "fileUpload": {
       "insert": "Füge dein",
       "thumbnail": "Titelbild",
