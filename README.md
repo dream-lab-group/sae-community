@@ -35,6 +35,8 @@
 ## :white_check_mark: Screenshots
 
 <img src="./public/landing.png" width="900"/>
+&#xa0;
+<img src="./public/homepage.png" width="900"/>
 
 ## :checkered_flag: Information
 
