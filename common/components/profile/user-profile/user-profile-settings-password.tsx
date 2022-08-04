@@ -8,7 +8,6 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { UserInformation } from '../../../types/types';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Directus } from '@directus/sdk';

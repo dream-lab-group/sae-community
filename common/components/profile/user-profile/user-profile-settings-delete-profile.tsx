@@ -1,4 +1,3 @@
-import { Directus } from '@directus/sdk';
 import {
   Box,
   Button,
@@ -7,17 +6,8 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { directus } from '../../../../pages';
-import { apiClient } from '../../../data/apiClient';
-import { UserInformation } from '../../../types/types';
 
-type EditProfileSettingsProps = {
-  userData: UserInformation;
-};
-
-export const UserProfileSettingsDeleteProfile = ({
-  userData,
-}: EditProfileSettingsProps) => {
+export const UserProfileSettingsDeleteProfile = () => {
   const theme = useTheme();
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const { t } = useTranslation();
