@@ -48,6 +48,21 @@ export const ProjectPictures = ({
       navButtonsAlwaysVisible
       autoPlay={false}
       stopAutoPlayOnHover
+      navButtonsWrapperProps={
+        files.length === 1
+          ? {
+              style: {
+                display: 'none',
+              },
+            }
+          : {}
+      }
+      navButtonsProps={{
+        style: {
+          background: 'rgba(255, 255, 255, 0.6)',
+          color: 'black',
+        },
+      }}
       sx={{
         marginTop: '35px',
         width: '100%',
