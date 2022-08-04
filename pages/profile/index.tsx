@@ -159,8 +159,6 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
                 cursor: 'pointer',
               }}
               onClick={toggleFunc}
-              /*                     onClick={handleCancelProfileSaving}
-               */
             >
               <RiSettings3Line
                 style={{

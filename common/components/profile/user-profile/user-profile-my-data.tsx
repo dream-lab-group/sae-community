@@ -40,9 +40,6 @@ export const UserProfileMyData = ({
               helperText={
                   formik.touched.first_name && formik.errors.first_name 
                 }
-              InputLabelProps={{
-                shrink: true,
-              }}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px', color: '#00000066' }}
             />
@@ -61,9 +58,6 @@ export const UserProfileMyData = ({
                 helperText={
                   formik.touched.last_name && formik.errors.last_name 
                 }
-              InputLabelProps={{
-                shrink: true,
-              }}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px' }}
             />
@@ -82,9 +76,6 @@ export const UserProfileMyData = ({
                 helperText={
                   formik.touched.email && formik.errors.email 
                 }
-              InputLabelProps={{
-                shrink: true,
-              }}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px' }}
             />
@@ -104,9 +95,6 @@ export const UserProfileMyData = ({
                 helperText={
                   formik.touched.course && formik.errors.course 
                 }
-              InputLabelProps={{
-                shrink: true,
-              }}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px' }}
             />
@@ -133,9 +121,6 @@ export const UserProfileMyData = ({
           helperText={
             formik.touched.description && formik.errors.description 
           }
-          InputLabelProps={{
-            shrink: true,
-          }}
           variant="outlined"
           minRows={7}
           fullWidth

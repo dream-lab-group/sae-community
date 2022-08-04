@@ -73,7 +73,6 @@ export type CommonAutocompleteProps = {
   formikProps?: any;
   allUsersId?: string
 };
-
 export interface ProjectDto {
   id?: string | null;
   user_created: string;
@@ -97,7 +96,10 @@ export interface UserInformation{
       email: string;
       description: string;
       course: string;
-      urls: [];
+      url_website: string;
+      url_youtube: string;
+      url_instagram: string;
+      url_linkedin: string;
       programs: [];
       interests: [];
       liked_notifications: boolean;
