@@ -60,6 +60,68 @@ export const PageNavigationElement = ({
     }
   };
 
+  const handleActiveOnClick = () => {
+    if (element === 'film') {
+      if (activeTagFilter === 'activeFilmButton') {
+        setActiveTagFitler(undefined);
+        setUsedFilter(undefined);
+      } else {
+        setUsedFilter('film');
+        setActiveTagFitler('activeFilmButton');
+      }
+    } else if (element === 'gameArts') {
+      if (activeTagFilter === 'activeGameArtsButton') {
+        setActiveTagFitler(undefined);
+        setUsedFilter(undefined);
+      } else {
+        setUsedFilter('gameArts');
+        setActiveTagFitler('activeGameArtsButton');
+      }
+    } else if (element === 'gamesProgramming') {
+      if (activeTagFilter === 'activeGamesProgrammingButton') {
+        setActiveTagFitler(undefined);
+        setUsedFilter(undefined);
+      } else {
+        setUsedFilter('gamesProgramming');
+        setActiveTagFitler('activeGamesProgrammingButton');
+      }
+    } else if (element === 'web') {
+      if (activeTagFilter === 'activeWebButton') {
+        setActiveTagFitler(undefined);
+        setUsedFilter(undefined);
+      } else {
+        setUsedFilter('web');
+        setActiveTagFitler('activeWebButton');
+      }
+    } else if (element === 'audio') {
+      if (activeTagFilter === 'activeAudioButton') {
+        setActiveTagFitler(undefined);
+        setUsedFilter(undefined);
+      } else {
+        setUsedFilter('audio');
+        setActiveTagFitler('activeAudioButton');
+      }
+    } else if (element === 'animation') {
+      if (activeTagFilter === 'activeAnimationButton') {
+        setActiveTagFitler(undefined);
+        setUsedFilter(undefined);
+      } else {
+        setUsedFilter('animation');
+        setActiveTagFitler('activeAnimationButton');
+      }
+    } else if (element === 'crossMedia') {
+      if (activeTagFilter === 'activeCrossMediaButton') {
+        setActiveTagFitler(undefined);
+        setUsedFilter(undefined);
+      } else {
+        setUsedFilter('crossMedia');
+        setActiveTagFitler('activeCrossMediaButton');
+      }
+    } else {
+      return '';
+    }
+  };
+
   return (
     <>
       <ButtonBase
@@ -75,35 +137,7 @@ export const PageNavigationElement = ({
           background: '#75818b',
         }}
         onClick={() => {
-          element === 'film'
-            ? (setUsedFilter('film'),
-              setActiveTagFitler(undefined),
-              setActiveTagFitler('activeFilmButton'))
-            : element === 'gameArts'
-            ? (setUsedFilter('gameArts'),
-              setActiveTagFitler(undefined),
-              setActiveTagFitler('activeGameArtsButton'))
-            : element === 'gamesProgramming'
-            ? (setUsedFilter('gamesProgramming'),
-              setActiveTagFitler(undefined),
-              setActiveTagFitler('activeGamesProgrammingButton'))
-            : element === 'web'
-            ? (setUsedFilter('web'),
-              setActiveTagFitler(undefined),
-              setActiveTagFitler('activeWebButton'))
-            : element === 'audio'
-            ? (setUsedFilter('audio'),
-              setActiveTagFitler(undefined),
-              setActiveTagFitler('activeAudioButton'))
-            : element === 'animation'
-            ? (setUsedFilter('animation'),
-              setActiveTagFitler(undefined),
-              setActiveTagFitler('activeAnimationButton'))
-            : element === 'crossMedia'
-            ? (setUsedFilter('crossMedia'),
-              setActiveTagFitler(undefined),
-              setActiveTagFitler('activeCrossMediaButton'))
-            : '';
+          handleActiveOnClick();
         }}
       >
         <Typography

@@ -102,6 +102,15 @@ const ProjectsOverview = ({
         }
       };
       getContentCreationProjects();
+    } else if (usedFilter === undefined) {
+      const getAllProjects = async () => {
+        setProjects(undefined);
+        const allProjectsResponse = await apiClient.get(`items/projects`);
+        if (allProjectsResponse.status === 200) {
+          setProjects(allProjectsResponse.data.data);
+        }
+      };
+      getAllProjects();
     }
   }, [setProjects, usedFilter]);
 
