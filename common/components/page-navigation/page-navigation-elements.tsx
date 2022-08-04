@@ -5,33 +5,67 @@ import { PageNavigationElementProps } from './types';
 export const PageNavigationElement = ({
   element,
   setUsedFilter,
+  activeTagFilter,
+  setActiveTagFitler,
 }: PageNavigationElementProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+
+  const buttonStyling = () => {
+    if (element === 'film') {
+      if (activeTagFilter === 'activeFilmButton') {
+        return 'film-button-active';
+      } else {
+        return 'film-button';
+      }
+    } else if (element === 'gameArts') {
+      if (activeTagFilter === 'activeGameArtsButton') {
+        return 'gamearts-button-active';
+      } else {
+        return 'gamearts-button';
+      }
+    } else if (element === 'gamesProgramming') {
+      if (activeTagFilter === 'activeGamesProgrammingButton') {
+        return 'gamesprogramming-button-active';
+      } else {
+        return 'gamesprogramming-button';
+      }
+    } else if (element === 'web') {
+      if (activeTagFilter === 'activeWebButton') {
+        return 'web-button-active';
+      } else {
+        return 'web-button';
+      }
+    } else if (element === 'audio') {
+      if (activeTagFilter === 'activeAudioButton') {
+        return 'audio-button-active';
+      } else {
+        return 'audio-button';
+      }
+    } else if (element === 'animation') {
+      if (activeTagFilter === 'activeAnimationButton') {
+        return 'animation-button-active';
+      } else {
+        return 'animation-button';
+      }
+    } else if (element === 'crossMedia') {
+      if (activeTagFilter === 'activeCrossMediaButton') {
+        return 'cross-media-button-active';
+      } else {
+        return 'cross-media-button';
+      }
+    } else {
+      return '';
+    }
+  };
 
   return (
     <>
       <ButtonBase
         key={element}
         value={element}
-        className={
-          element === 'film'
-            ? 'film-button'
-            : element === 'gameArts'
-            ? 'gamearts-button'
-            : element === 'gamesProgramming'
-            ? 'gamesprogramming-button'
-            : element === 'web'
-            ? 'web-button'
-            : element === 'audio'
-            ? 'audio-button'
-            : element === 'animation'
-            ? 'animation-button'
-            : element === 'crossMedia'
-            ? 'cross-media-button'
-            : ''
-        }
+        className={buttonStyling()}
         sx={{
           marginRight: `${lgBreakpointUp ? '15px' : '10px'}`,
           '&:last-child': {
@@ -42,19 +76,33 @@ export const PageNavigationElement = ({
         }}
         onClick={() => {
           element === 'film'
-            ? setUsedFilter('film')
+            ? (setUsedFilter('film'),
+              setActiveTagFitler(undefined),
+              setActiveTagFitler('activeFilmButton'))
             : element === 'gameArts'
-            ? setUsedFilter('gameArts')
+            ? (setUsedFilter('gameArts'),
+              setActiveTagFitler(undefined),
+              setActiveTagFitler('activeGameArtsButton'))
             : element === 'gamesProgramming'
-            ? setUsedFilter('gamesProgramming')
+            ? (setUsedFilter('gamesProgramming'),
+              setActiveTagFitler(undefined),
+              setActiveTagFitler('activeGamesProgrammingButton'))
             : element === 'web'
-            ? setUsedFilter('web')
+            ? (setUsedFilter('web'),
+              setActiveTagFitler(undefined),
+              setActiveTagFitler('activeWebButton'))
             : element === 'audio'
-            ? setUsedFilter('audio')
+            ? (setUsedFilter('audio'),
+              setActiveTagFitler(undefined),
+              setActiveTagFitler('activeAudioButton'))
             : element === 'animation'
-            ? setUsedFilter('animation')
+            ? (setUsedFilter('animation'),
+              setActiveTagFitler(undefined),
+              setActiveTagFitler('activeAnimationButton'))
             : element === 'crossMedia'
-            ? setUsedFilter('crossMedia')
+            ? (setUsedFilter('crossMedia'),
+              setActiveTagFitler(undefined),
+              setActiveTagFitler('activeCrossMediaButton'))
             : '';
         }}
       >

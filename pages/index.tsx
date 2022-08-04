@@ -87,7 +87,6 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
     // @ts-expect-error: Todo
     <ThemeProvider theme={appTheme}>
       <PageNavigation setUsedFilter={setUsedFilter} />
-      {/* @ts-expect-error: Todo */}
       <ProjectsOverview
         currentUserId={currentUserId}
         data={props.data}

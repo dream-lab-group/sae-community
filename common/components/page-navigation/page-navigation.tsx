@@ -26,6 +26,7 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
+  const [activeTagFilter, setActiveTagFilter] = useState<string>();
   const [sortFilter, setSortFilter] = useState<string[]>([]);
 
   return (
@@ -141,6 +142,8 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
                 key={element}
                 element={element}
                 setUsedFilter={setUsedFilter}
+                activeTagFilter={activeTagFilter}
+                setActiveTagFitler={setActiveTagFilter}
               />
             ))}
           </Grid>
