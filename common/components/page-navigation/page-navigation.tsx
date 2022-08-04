@@ -13,10 +13,14 @@ import {
 import { Globals } from '../../utils/utils';
 
 import { HiOutlineSearch } from 'react-icons/hi';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { PageNavigationElement } from './page-navigation-elements';
 
-export const PageNavigation = () => {
+type PageNavigationProps = {
+  setUsedFilter: React.Dispatch<React.SetStateAction<string | undefined>>;
+};
+
+export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
@@ -133,7 +137,11 @@ export const PageNavigation = () => {
             justifyContent={`${lgBreakpointUp && 'center'}`}
           >
             {Globals.pageNavigationElements.map((element) => (
-              <PageNavigationElement key={element} element={element} />
+              <PageNavigationElement
+                key={element}
+                element={element}
+                setUsedFilter={setUsedFilter}
+              />
             ))}
           </Grid>
         </Grid>

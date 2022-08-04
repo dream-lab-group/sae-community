@@ -1,16 +1,10 @@
 import { Directus } from '@directus/sdk';
-import {
-  createTheme,
-  Grid,
-  ThemeProvider,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import { GetServerSideProps, NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
-import { ProjectCard } from '../common/components/project-card/project-card';
+import ProjectsOverview from '../common/components/projects-overview/projects-overview';
 import { apiClient } from '../common/data/apiClient';
 import { ProjectProperties } from '../common/types/types';
 
@@ -77,12 +71,9 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
   //   return null;
   // }
 
-  const theme = useTheme();
-  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
-
   const [isLoading, setIsLoading] = useState(true);
   const [currentUserId, setCurrentUserId] = useState<any>();
+  const [usedFilter, setUsedFilter] = useState<string>();
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -95,36 +86,15 @@ const Home: NextPage<{ data: ProjectProperties }> = (props) => {
   return (
     // @ts-expect-error: Todo
     <ThemeProvider theme={appTheme}>
-      <PageNavigation />
-      <Grid
-        container
-        paddingY="40px"
-        paddingX={`${
-          smBreakpointDown ? '0px' : desktopBreakpointUp ? '60px' : '40px'
-        }`}
-        spacing={{ sm: 5, md: 3, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
-        className="grid-container"
-      >
-        {/* @ts-expect-error: todo */}
-        {props.data.map(({ id, user_created, course, cover_photo }) => {
-          if (currentUserId !== user_created) {
-            return (
-              <ProjectCard
-                key={id}
-                projectId={id}
-                coverPhotoId={cover_photo}
-                userCreated={user_created}
-                course={course}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
-            );
-          } else {
-            // @ts-expect-error: todo
-            return <React.Fragment key={id} />;
-          }
-        })}
-      </Grid>
+      <PageNavigation setUsedFilter={setUsedFilter} />
+      {/* @ts-expect-error: Todo */}
+      <ProjectsOverview
+        currentUserId={currentUserId}
+        data={props.data}
+        usedFilter={usedFilter}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
     </ThemeProvider>
   );
 };

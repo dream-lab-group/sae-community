@@ -4,6 +4,7 @@ import { PageNavigationElementProps } from './types';
 
 export const PageNavigationElement = ({
   element,
+  setUsedFilter,
 }: PageNavigationElementProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -38,6 +39,23 @@ export const PageNavigationElement = ({
           },
           borderRadius: '2rem',
           background: '#75818b',
+        }}
+        onClick={() => {
+          element === 'film'
+            ? setUsedFilter('film')
+            : element === 'gameArts'
+            ? setUsedFilter('gameArts')
+            : element === 'gamesProgramming'
+            ? setUsedFilter('gamesProgramming')
+            : element === 'web'
+            ? setUsedFilter('web')
+            : element === 'audio'
+            ? setUsedFilter('audio')
+            : element === 'animation'
+            ? setUsedFilter('animation')
+            : element === 'crossMedia'
+            ? setUsedFilter('crossMedia')
+            : '';
         }}
       >
         <Typography
