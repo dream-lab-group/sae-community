@@ -27,6 +27,7 @@ import { ProjectUploadButtons } from '../../common/components/project-upload/mod
 import { ProgramsUsed } from '../../common/components/project-upload/modules/programs-used';
 import TipTapEditor from '../../common/components/common/tiptap-editor';
 import { Directus } from '@directus/sdk';
+import { BiPlus } from 'react-icons/bi';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -290,7 +291,17 @@ const ProjectUpload = () => {
                         setNewUrl('');
                       }}
                     >
-                      <Typography>URL hinzufügen</Typography>
+                      {smBreakpointDown ? (
+                        <>
+                          <BiPlus size={30} />
+                        </>
+                      ) : mdBreakpointDown ? (
+                        <Typography sx={{ fontSize: '12px' }}>
+                          {t('projectUpload.addUrl')}
+                        </Typography>
+                      ) : (
+                        <Typography>{t('projectUpload.addUrl')}</Typography>
+                      )}
                     </ButtonBase>
                   </FormikProvider>
                 </Box>

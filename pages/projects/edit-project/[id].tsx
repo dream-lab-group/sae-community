@@ -35,6 +35,7 @@ import { ProjectEmbedded } from '../../../common/components/project/project-embe
 import { ProjectPictures } from '../../../common/components/project/project-pictures';
 import { ProjectButtonGroup } from '../../../common/components/project/project-button-group';
 import { ProjectInformation } from '../../../common/components/project/project-information';
+import { BiPlus } from 'react-icons/bi';
 
 type Props = {
   router: Router;
@@ -298,7 +299,19 @@ const EditProject: NextPage = withRouter<Props>(
                               setNewUrl('');
                             }}
                           >
-                            <Typography>URL hinzufügen</Typography>
+                            {smBreakpointDown ? (
+                              <>
+                                <BiPlus size={30} />
+                              </>
+                            ) : mdBreakpointDown ? (
+                              <Typography sx={{ fontSize: '12px' }}>
+                                {t('projectUpload.addUrl')}
+                              </Typography>
+                            ) : (
+                              <Typography>
+                                {t('projectUpload.addUrl')}
+                              </Typography>
+                            )}
                           </ButtonBase>
                         </Box>
                         {embedUrlList &&

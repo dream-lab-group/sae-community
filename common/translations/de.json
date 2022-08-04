@@ -116,16 +116,17 @@
   "projectUpload": {
     "createProject": "Projekt erstellen",
     "publishProject": "Projekt veröffentlichen",
+    "addUrl": "URL hinzufügen",
     "fileUpload": {
       "insert": "Füge dein",
       "thumbnail": "Titelbild",
       "here": "hier ein",
       "or": "oder",
       "selectFile": "wähle eine Datei aus",
-      "acceptedFiles": "Zugelassene Datei: JPG, PNG",
-      "acceptedFilesWithMusic": "Zugelassene Datei: JPB, PNG, MP3",
-      "maxSize": "Max. grösse: 5MB",
-      "maxSize10": "Max. grösse: 10MB",
+      "acceptedFiles": "Zugelassene Datei: JPG, PNG, WebP",
+      "acceptedFilesWithMusic": "Zugelassene Datei: JPG, PNG, WebP, MP3",
+      "maxSize": "Max. grösse: 2MB",
+      "maxSize10": "Max. grösse: 2MB",
       "picture": "Bild",
       "audio": "Audio"
     },
