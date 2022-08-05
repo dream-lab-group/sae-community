@@ -36,11 +36,6 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
   };
 
   const router = useRouter();
-
-  const handleCancelProfileSaving = () => {
-    router.push('/public-profile/123');
-  };
-
   const [currentUser, setCurrentUser] = useState<any>('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -57,6 +52,9 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
   }, [setCurrentUser]);
 
   const userAvatar = currentUser.avatar;
+  const handleCancelProfileSaving = () => {
+      router.push(`/public-profile/${currentUser.id}`);
+    };
 
   return (
     <>
@@ -81,7 +79,6 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
             position: 'relative',
           }}
         >
-          {/* Polygon */}
           <Box
             sx={{
               height: '60px',
@@ -98,7 +95,6 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
           ) : (
             <ProfileSettings userData={currentUser} />
           )}
-          {/* Fixed Buttons */}
           <Box
             sx={{
               zIndex: 5,

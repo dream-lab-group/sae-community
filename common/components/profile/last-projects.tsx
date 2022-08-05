@@ -2,9 +2,9 @@ import { ButtonBase, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import Image from 'next/image';
 import { BiChevronRight } from 'react-icons/bi';
-import { FiMail } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { apiClient } from '../../data/apiClient';
 
 type LastProjectsProps = {
@@ -23,6 +23,13 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
 
   const userId = currentUser.id;
   const [allUserProjects, setAllUserProjects] = useState<any>([]);
+  const router = useRouter();
+  const EditProfile = () => {
+    router.push('/profile');
+  };
+  const AllProject = () => {
+    router.push(`/projects/${userId}`);
+  };
 
   useEffect(() => {
     const fetchMyProjects = async () => {
@@ -31,7 +38,6 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
       );
       if (projectsResponse.status === 200) {
         setAllUserProjects(projectsResponse.data.data);
-        console.log(allUserProjects);
       }
     };
     fetchMyProjects();
@@ -39,48 +45,73 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
 
   return allUserProjects.length !== 0 ? (
     <>
-      <Box sx={{ width: '100%' }}>
+      <Box
+        sx={{ width: '100%', marginLeft: `${lgBreakpointUp ? '3rem' : ' '}` }}
+      >
         {lgBreakpointUp ? (
-          <ButtonBase
-            sx={{
-              height: '60px',
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-around',
-              boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-              borderRadius: '10px',
-              background: '#D0A3BF',
-              marginTop: '100px',
-            }}
-          >
-            <Box
+          <>
+            <Typography
+              onClick={EditProfile}
               sx={{
-                height: '100%',
-                display: 'flex',
-                width: '20%',
-                alignItems: 'center',
-                justifyContent: 'center',
+                fontSize: '20px',
+                alignSelf: 'flex-start',
+                background: '#7514f5',
+                width: '15rem',
+                padding: '.5rem',
+                borderRadius: '10px',
+                textAlign: 'center',
+                color: 'white',
+                cursor: 'pointer',
+                boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                marginTop: '100px',
               }}
             >
-              <FiMail size={25} />
-            </Box>
-            <Box
-              sx={{
-                height: '100%',
+              {t('profile.editProfile')}
+            </Typography>
+            {/* <a
+              href={`mailto:${currentUser.mail}?subject=${currentUser.first_name} möchte dich über Sai Plattform kontaktieren.`}
+              rel="noreferrer"
+              target="_blank"
+              style={{
+                height: '60px',
+                width: '100%',
                 display: 'flex',
-                width: '80%',
-                alignItems: 'center',
-                paddingLeft: '20px',
-                background: '#fff',
-                borderTopRightRadius: '10px',
-                borderBottomRightRadius: '10px',
+                justifyContent: 'space-around',
+                boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                borderRadius: '10px',
+                background: '#D0A3BF',
+                marginTop: "1rem"
               }}
             >
-              <Typography sx={{ fontSize: '18px' }}>
-                {t('profile.contactNow')}
-              </Typography>
-            </Box>
-          </ButtonBase>
+              <Box
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  width: '20%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <FiMail size={25} />
+              </Box>
+              <Box
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  width: '80%',
+                  alignItems: 'center',
+                  paddingLeft: '20px',
+                  background: '#fff',
+                  borderTopRightRadius: '10px',
+                  borderBottomRightRadius: '10px',
+                }}
+              >
+                <Typography sx={{ fontSize: '18px' }}>
+                  {t('profile.contactNow')}
+                </Typography>
+              </Box>
+            </a> */}
+          </>
         ) : (
           <></>
         )}
@@ -133,7 +164,6 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
                         : '360px'
                     }`,
                     display: 'flex',
-                    justifyContent: `${mdBreakpointUp && 'space-between'}`,
                     borderRadius: '10px',
                     position: 'relative',
                     marginTop: '1rem',
@@ -167,6 +197,7 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
               maxWidth: '130px',
               marginTop: '20px',
             }}
+            onClick={AllProject}
           >
             <Typography> {t('profile.viewAll')}</Typography>
             <BiChevronRight size={30} />
@@ -181,7 +212,7 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
         justifyContent: 'flex-start',
         flexDirection: 'column',
         width: '100%',
-        marginTop: `${lgBreakpointUp ? "7rem" : "2rem"}`
+        marginTop: `${lgBreakpointUp ? '7rem' : '2rem'}`,
       }}
     >
       <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>

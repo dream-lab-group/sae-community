@@ -52,7 +52,7 @@ const programs = [
   { label: 'Balsamiq', program: 'Balsamiq' },
   { label: 'Blender', program: 'Blender' },
   { label: 'Cinema4D', program: 'Cinema4D' },
-  { label: 'DaVinCI Resolve', program: 'DaVinci Resolve' },
+  { label: 'Blackmagic Design DaVinci Resolve', program: 'Blackmagic Design DaVinci Resolve' },
   { label: 'Docker', program: 'Docker' },
   { label: 'Figma', program: 'Figma' },
   { label: 'Final Cut Pro', program: 'Final Cut Pro' },

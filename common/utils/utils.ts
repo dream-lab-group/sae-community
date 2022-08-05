@@ -42,7 +42,6 @@ export class Globals {
     'projects',
     'likes',
     'collections',
-    'profileSettings'
   ];
 
   public static readonly pageNavigationElements = [
@@ -53,15 +52,6 @@ export class Globals {
     'audio',
     'animation',
     'crossMedia',
-  ];
-
-  public static readonly userContactInformation = [
-    'E-Mail',
-    'Webseite',
-    'Youtube',
-    'Instagram',
-    'LinkedIn',
-    'Vimeo',
   ];
 
   public static readonly userSkills = [

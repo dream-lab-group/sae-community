@@ -177,11 +177,12 @@
     "aboutMe": "Über mich",
     "lastProjects": "Letzte Projekte",
     "viewAll": "Alle ansehen",
-    "noData": "Du hast noch keine",
-    "description": "Beschreibung.",
+    "noData": "Ergänze dein Profil durch",
+    "description": "eine Beschreibung.",
     "programs": "Programme.",
-    "noInterests": "interessen.",
-    "noLastProjects": "Projekte."
+    "noInterests": "deine Interessen.",
+    "noLastProjects": "Projekte.",
+    "editProfile": "Profil editieren"
   },
   "404": {
     "description": "Oops, etwas scheint falsch gelaufen zu sein!",
