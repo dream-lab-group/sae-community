@@ -1,8 +1,9 @@
 import { NextPage } from 'next';
 import { Box, Typography } from '@mui/material';
-
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import image from '../public/404.png';
 
 const NotFoundPage: NextPage = () => {
   const { t } = useTranslation();
@@ -17,15 +18,22 @@ const NotFoundPage: NextPage = () => {
       <Box
         sx={{
           height: '100vh',
-          width: '100vw',
-          background: 'white',
-          /* backgroundImage: `linear-gradient(to bottom, #AD23F6 3.51%, #7E17F6 74.06%)`, */
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'space-evenly',
           alignItems: 'center',
+          flexDirection: 'column',
+          position: 'relative',
         }}
       >
-        <Box sx={{ textAlign: 'center' }}>
+        <Box
+          sx={{
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
           <Typography
             sx={{
               fontSize: '15rem',
@@ -34,25 +42,49 @@ const NotFoundPage: NextPage = () => {
               background: `linear-gradient(to bottom, #AD23F6 3.51%, #7E17F6 74.06%)`,
               backgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              marginBottom: '7.5rem',
+              letterSpacing: '3rem',
             }}
           >
             404
           </Typography>
-          <Typography sx={{ fontSize: '2rem' /* color: 'white'  */ }}>
+
+          <Box sx={{ position: 'fixed' }}>
+            <Image
+              className="project-image-border-radius image-container"
+              src={image}
+              alt="Sai"
+            />
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography sx={{ fontSize: '2rem' }}>
             {t('404.description')}
           </Typography>
-          <p
+
+          <Typography
             onClick={BackToHomePage}
-            style={{
-              fontSize: '2rem',
-              background: `linear-gradient(to bottom, #AD23F6 3.51%, #7E17F6 74.06%)`,
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+            sx={{
               cursor: 'pointer',
+              fontSize: '1.5rem',
+              color: 'white',
+              padding: '.7rem',
+              background: `linear-gradient(to bottom, #AD23F6 3.51%, #7E17F6 99.06%)`,
+              borderRadius: '20px',
+              marginTop: '1rem',
+              width: '100%',
+              textAlign: 'center',
             }}
           >
             {t('404.back')}
-          </p>
+          </Typography>
         </Box>
       </Box>
     </>

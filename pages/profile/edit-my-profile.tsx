@@ -34,7 +34,7 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const router = useRouter();
 
   const handleCancelProfileSaving = () => {
-    router.push('/public-profile/123');
+    router.push(`/public-profile/${userData.id}`);
   };
 
   const myProfilValidationSchema = yup.object({
@@ -99,7 +99,7 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       .array(
         yup.object().shape({
           label: yup.string(),
-          interests: yup.string(),
+          interest: yup.string(),
         }),
       )
       .nullable(true),
@@ -159,7 +159,7 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
                   programs: values.programs,
                   interests: values.interests,
                 });
-                router.push('/public-profile/123');
+                router.push(`/public-profile/${userData.id}`);
               }
             } else {
               await directus.users.me.update({
@@ -175,7 +175,7 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
                 programs: values.programs,
                 interests: values.interests,
               });
-              router.push('/public-profile/123');
+              router.push(`/public-profile/${userData.id}`);
             }
           }}
         >

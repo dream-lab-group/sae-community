@@ -1,9 +1,7 @@
-import { Link, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Globals } from '../../utils/utils';
-import { UserContactInformation } from './user-contact-information';
-import { FiMail } from 'react-icons/fi';
-import { IoMdBrowsers, IoLogoLinkedin, IoLogoYoutube, IoLogoInstagram } from 'react-icons/io';
+import { IoLogoLinkedin, IoLogoYoutube, IoLogoInstagram } from 'react-icons/io';
+import { CgWebsite } from 'react-icons/cg';
 
 type UserInformationProps = {
   currentUser: any;
@@ -11,7 +9,7 @@ type UserInformationProps = {
 
 export const UserDescription = ({ currentUser }: UserInformationProps) => {
   const theme = useTheme();
-  const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { t } = useTranslation();
 
@@ -55,180 +53,111 @@ export const UserDescription = ({ currentUser }: UserInformationProps) => {
         </Typography>
       )}
 
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: ' 20px' }}>
-        <Box
-          className="user-contact-element-button"
-          sx={{
-            padding: '5px 15px',
-            borderRadius: '60px',
-            marginRight: '15px',
-            marginBottom: '15px',
-            cursor: 'default',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-                      <a
-              href={`https://${currentUser.mail}`}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: `${smBreakpointDown ? 'column' : 'row'}`,
+          height: 'auto',
+          padding: 'none',
+          margin: 'none',
+          marginTop: ' 20px',
+        }}
+      >
+        {currentUser.url_website === null ? (
+          <></>
+        ) : (
+          <Box className="user-profile-url-active">
+            <a
+              href={`https://${currentUser.url_website}`}
               rel="noreferrer"
               target="_blank"
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'space-around',
+              }}
             >
-              <FiMail />
+              <CgWebsite /> <Typography>Webseite</Typography>
             </a>
-        </Box>
-        {currentUser.url_youtube === null ? (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              flexDirection: 'column',
-              width: '100%',
-              marginTop: `${lgBreakpointUp ? '7rem' : '2rem'}`,
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
-              {t('profile.lastProjects')}
-            </Typography>
-            <Typography>
-              {t('profile.noData')} {t('profile.noLastProjects')}
-            </Typography>
           </Box>
+        )}
+        {currentUser.url_youtube === null ? (
+          <></>
         ) : (
           <Box
-            className="user-contact-element-button"
-            sx={{
-              padding: '5px 15px',
-              borderRadius: '60px',
-              marginRight: '15px',
-              marginBottom: '15px',
-              cursor: 'default',
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            className="user-profile-url-active"
+            sx={{ marginTop: `${smBreakpointDown ? '20px' : ''}`, width:"12rem" }}
           >
             <a
               href={`https://${currentUser.url_youtube}`}
               rel="noreferrer"
               target="_blank"
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'space-around',
+              }}
             >
-              <IoLogoYoutube />
-            </a>
-          </Box>
-        )}
-        {currentUser.url_website === null ? (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              flexDirection: 'column',
-              width: '100%',
-              marginTop: `${lgBreakpointUp ? '7rem' : '2rem'}`,
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
-              {t('profile.lastProjects')}
-            </Typography>
-            <Typography>
-              {t('profile.noData')} {t('profile.noLastProjects')}
-            </Typography>
-          </Box>
-        ) : (
-          <Box
-            className="user-contact-element-button"
-            sx={{
-              padding: '5px 15px',
-              borderRadius: '60px',
-              marginRight: '15px',
-              marginBottom: '15px',
-              cursor: 'default',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <a
-              href={`https://${currentUser.url_website}`}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <IoMdBrowsers />
+              <IoLogoYoutube
+                style={{ fontSize: '1.5rem', marginRight: '.5rem' }}
+              />
+              <Typography>Youtube</Typography>
             </a>
           </Box>
         )}
         {currentUser.url_instagram === null ? (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              flexDirection: 'column',
-              width: '100%',
-              marginTop: `${lgBreakpointUp ? '7rem' : '2rem'}`,
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
-              {t('profile.lastProjects')}
-            </Typography>
-            <Typography>
-              {t('profile.noData')} {t('profile.noLastProjects')}
-            </Typography>
-          </Box>
+          <></>
         ) : (
           <Box
-            className="user-contact-element-button"
-            sx={{
-              padding: '5px 15px',
-              borderRadius: '60px',
-              marginRight: '15px',
-              marginBottom: '15px',
-              cursor: 'default',
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            className="user-profile-url-active"
+            sx={{ marginTop: `${smBreakpointDown ? '20px' : ''}`, width:"12rem" }}
           >
             <a
               href={`https://${currentUser.url_instagram}`}
               rel="noreferrer"
               target="_blank"
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'space-around',
+              }}
             >
-              <IoLogoInstagram />
+              <IoLogoInstagram
+                style={{ fontSize: '1.5rem', marginRight: '.5rem' }}
+              />
+              <Typography>Instagram</Typography>
             </a>
           </Box>
         )}
         {currentUser.url_linkedin === null ? (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              flexDirection: 'column',
-              width: '100%',
-              marginTop: `${lgBreakpointUp ? '7rem' : '2rem'}`,
-            }}
-          >
-            <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
-              {t('profile.lastProjects')}
-            </Typography>
-            <Typography>
-              {t('profile.noData')} {t('profile.noLastProjects')}
-            </Typography>
-          </Box>
+          <></>
         ) : (
           <Box
-            className="user-contact-element-button"
-            sx={{
-              padding: '5px 15px',
-              borderRadius: '60px',
-              marginRight: '15px',
-              marginBottom: '15px',
-              cursor: 'default',
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            className="user-profile-url-active"
+            sx={{ marginTop: `${smBreakpointDown ? '20px' : ''}`, width:"12rem" }}
           >
             <a
-              href={`https://${currentUser.url_youtube}`}
+              href={`https://${currentUser.url_linkedin}`}
               rel="noreferrer"
               target="_blank"
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'space-around',
+              }}
             >
-              <IoLogoLinkedin />
+              <IoLogoLinkedin
+                style={{ fontSize: '1.5rem', marginRight: '.5rem' }}
+              />{' '}
+              <Typography>LinkedIn</Typography>
             </a>
           </Box>
         )}

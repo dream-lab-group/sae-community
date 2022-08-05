@@ -25,16 +25,13 @@ export const SkillsInterests = ({
           isOptionEqualToValue={(option, value) => option.label === value.label}
           onChange={(e, value) => {
             formik.setFieldValue(
-                  'programs',
-                  value !== null ? value : formik.initialValues.programs,
-                  );
+              'programs',
+              value !== null ? value : formik.initialValues.programs,
+            );
           }}
           renderInput={(params) => (
             <>
-              <TextField
-                {...params}
-                label="Programme"
-              />
+              <TextField {...params} label="Programme" />
             </>
           )}
         />
@@ -44,21 +41,19 @@ export const SkillsInterests = ({
           multiple
           size="small"
           options={interests}
+          sx={{ marginTop: '30px' }}
           value={interestsData}
           // @ts-expect-error: todo
           isOptionEqualToValue={(option, value) => option.label === value.label}
           onChange={(e, value) => {
             formik.setFieldValue(
-                  'interests',
-                  value !== null ? value : formik.initialValues.interests,
-                  );
+              'interests',
+              value !== null ? value : formik.initialValues.interests,
+            );
           }}
           renderInput={(params) => (
             <>
-              <TextField
-                {...params}
-                label="Interessen"
-              />
+              <TextField {...params} label="Interessen" />
             </>
           )}
         />
@@ -70,55 +65,56 @@ export const SkillsInterests = ({
 };
 
 const programs = [
-  {
-    label: 'Visual Studio Code',
-    interests: 'VsCode',
-  },
-  {
-    label: 'Figma',
-    program: 'Figma',
-  },
-  {
-    label: 'Docker',
-    program: 'Docker',
-  },
-  {
-    label: 'Adobe Lightroom',
-    program: 'Adobe Lightroom',
-  },
-  {
-    label: 'Adobe Photoshop',
-    program: 'Adobe Photoshop',
-  },
-  {
-    label: 'Adobe Illustrator',
-    program: 'Adobe Illustrator',
-  },
+  { label: 'Ableton', program: 'Ableton' },
+  { label: 'Adobe After Effects', program: 'Adobe After Effects' },
+  { label: 'Adobe Animate', program: 'Adobe Animate' },
+  { label: 'Adobe Audition', program: 'Adobe Audition' },
+  { label: 'Adobe Character Animator', program: 'Adobe Character Animator' },
+  { label: 'Adobe Dimension', program: 'Adobe Dimension' },
+  { label: 'Adobe Dreamweaver', program: 'Adobe Dreamweaver' },
+  { label: 'Adobe Illustrator', program: 'Adobe Illustrator' },
+  { label: 'Adobe InDesign', program: 'Adobe InDesign' },
+  { label: 'Adobe Lightroom', program: 'Adobe Lightroom' },
+  { label: 'Adobe Photoshop', program: 'Adobe Photoshop' },
+  { label: 'Adobe Premiere Pro', program: 'Adobe Premiere Pro' },
+  { label: 'Adobe Premiere Rush', program: 'Adobe Premiere Rush' },
+  { label: 'Adobe XD', program: 'Adobe XD' },
+  { label: 'Balsamiq', program: 'Balsamiq' },
+  { label: 'Blender', program: 'Blender' },
+  { label: 'Cinema4D', program: 'Cinema4D' },
+  { label: 'Blackmagic Design DaVinci Resolve', program: 'Blackmagic Design DaVinci Resolve' },
+  { label: 'Docker', program: 'Docker' },
+  { label: 'Figma', program: 'Figma' },
+  { label: 'Final Cut Pro', program: 'Final Cut Pro' },
+  { label: 'Garage Band', program: 'Garage Band' },
+  { label: 'Sketch', program: 'Skech' },
+  { label: 'Visual Studio Code', program: 'VsCode' },
+  { label: 'Maya', program: 'Maya' },
 ];
 
 const interests = [
   {
     label: 'Visual Studio Code',
-    interests: 'VsCode',
+    interest: 'VsCode',
   },
   {
     label: 'Figma',
-    program: 'Figma',
+    interest: 'Figma',
   },
   {
     label: 'Docker',
-    program: 'Docker',
+    interest: 'Docker',
   },
   {
     label: 'Adobe Lightroom',
-    program: 'Adobe Lightroom',
+    interest: 'Adobe Lightroom',
   },
   {
     label: 'Adobe Photoshop',
-    program: 'Adobe Photoshop',
+    interest: 'Adobe Photoshop',
   },
   {
     label: 'Adobe Illustrator',
-    program: 'Adobe Illustrator',
+    interest: 'Adobe Illustrator',
   },
 ];

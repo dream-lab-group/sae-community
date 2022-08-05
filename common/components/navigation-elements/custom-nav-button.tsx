@@ -18,7 +18,6 @@ export const CustomNavButton = ({
   const hanldeOnClickMenuElement = () => {
     if (navElement === 'profile') {
       setMenuOpen(false);
-      // router.push('/public-profile/123');
       router.push({ pathname: 'public-profile/[cur]', query: { cur: currentUser } });
     } else if (navElement === 'projects') {
       setMenuOpen(false);
@@ -29,9 +28,6 @@ export const CustomNavButton = ({
     } else if (navElement === 'collections') {
       setMenuOpen(false);
       router.push('/collections');
-    } else if (navElement === 'profileSettings') {
-      setMenuOpen(false);
-      router.push('/profile');
     }
   };
 

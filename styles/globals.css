@@ -13,7 +13,8 @@ a {
 *,
 ::after,
 ::before {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 * {
@@ -32,15 +33,22 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Outfit", sans-serif !important;
+  font-family: 'Outfit', sans-serif !important;
 }
 
 .main-container {
   min-height: 100vh;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
 }
 
@@ -121,20 +129,30 @@ h6 {
 }
 
 .grid-container {
+  display: -ms-grid !important;
   display: grid !important;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
-  justify-content: center;
-  flex-flow: nowrap !important;
+  -ms-grid-columns: (minmax(320px, 1fr))[auto-fit] !important;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-flow: nowrap !important;
+      flex-flow: nowrap !important;
 }
 
 .grid-container-upload {
+  display: -ms-grid !important;
   display: grid !important;
   width: 100%;
   gap: 10px !important;
-  grid-template-columns: repeat(auto-fit, 110px) !important;
-  justify-content: center;
-  flex-flow: nowrap !important;
+  -ms-grid-columns: (110px)[auto-fit] !important;
+      grid-template-columns: repeat(auto-fit, 110px) !important;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-flow: nowrap !important;
+      flex-flow: nowrap !important;
 }
 
 .project-button-publish {
@@ -146,7 +164,7 @@ h6 {
 }
 
 .project-button-cancel {
-  background: rgba(0, 0, 0, 0.4) !important;
+  background: #00000066 !important;
 }
 
 .project-button-cancel:hover {
@@ -205,6 +223,24 @@ h6 {
   color: #fff !important;
 }
 
+.user-profile-url-active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px 15px;
+  border-radius: 60px;
+  margin-right: 1rem;
+  background: #e8e9eb;
+  color: black;
+  height: 45px;
+}
+
 /* TIPTAP WYSIWYG Editor */
 .ProseMirror {
   margin-left: 20px;
@@ -212,10 +248,12 @@ h6 {
   overflow-y: scroll;
   min-height: 240px;
 }
+
 .ProseMirror ul,
 .ProseMirror ol {
   padding: 0 1rem;
 }
+
 .ProseMirror h1,
 .ProseMirror h2,
 .ProseMirror h3,
@@ -226,31 +264,37 @@ h6 {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
 .ProseMirror code {
   background-color: rgba(97, 97, 97, 0.1);
   color: #616161;
 }
+
 .ProseMirror pre {
   background: #0d0d0d;
   color: #fff;
-  font-family: "JetBrainsMono", monospace;
+  font-family: 'JetBrainsMono', monospace;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
 }
+
 .ProseMirror pre code {
   color: inherit;
   padding: 0;
   background: none;
   font-size: 0.8rem;
 }
+
 .ProseMirror img {
   max-width: 100%;
   height: auto;
 }
+
 .ProseMirror blockquote {
   padding-left: 1rem;
   border-left: 2px solid rgba(13, 13, 13, 0.1);
 }
+
 .ProseMirror hr {
   border: none;
   border-top: 2px solid rgba(13, 13, 13, 0.1);
@@ -280,27 +324,35 @@ h6 {
 .audio-player {
   background: #5504aa !important;
   border-radius: 10px;
-  font-family: "Outfit", sans-serif !important;
+  font-family: 'Outfit', sans-serif !important;
 }
+
 .audio-player .rhap_time {
   color: #fff !important;
 }
+
 .audio-player .rhap_progress-bar {
   background-color: #fff !important;
 }
+
 .audio-player .rhap_progress-indicator {
   background: #d8d8d8 !important;
 }
+
 .audio-player .rhap_repeat-button {
   color: #fff !important;
 }
+
 .audio-player .rhap_main-controls-button {
   color: #fff !important;
 }
+
 .audio-player .rhap_volume-button {
   color: #fff !important;
 }
+
 .audio-player .rhap_volume-indicator {
   background: #d8d8d8 !important;
   opacity: 1;
-}/*# sourceMappingURL=globals.css.map */
+}
+/*# sourceMappingURL=globals.css.map */

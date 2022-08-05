@@ -12,9 +12,7 @@ import { UserDescription } from '../../common/components/profile/user-descriptio
 import { UserInformation } from '../../common/components/profile/user-information';
 import { UserInterest } from '../../common/components/profile/user-interest';
 import { UserSkills } from '../../common/components/profile/user-skills';
-import { Globals } from '../../common/utils/utils';
 import { FiMail } from 'react-icons/fi';
-import { directus } from '..';
 import { apiClient } from '../../common/data/apiClient';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
@@ -32,6 +30,7 @@ type PropsWithRouter = Props & {
 const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const breakpointBetweenMdLg = useMediaQuery(
     theme.breakpoints.between('md', 'lg'),
   );
@@ -40,6 +39,9 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
 
   const { t } = useTranslation();
 
+  const EditProfile = () => {
+    router.push('/profile');
+  };
   const userId = router.asPath.split('/').at(-1);
   const [currentUser, setCurrentUser] = useState<any>('');
 
@@ -120,7 +122,7 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
             >
               {t('profile.programSkills')}
             </Typography>
-            {currentUser.programs !== null ? (
+            {currentUser.programs.length !== 0 ? (
               <>
                 <Box
                   sx={{
@@ -166,7 +168,7 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
             >
               {t('profile.interests')}
             </Typography>
-            {currentUser.interests !== null ? (
+            {currentUser.interests.length !== 0 ? (
               <>
                 <Box
                   sx={{
@@ -178,11 +180,11 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
                   }}
                 >
                   {currentUser.interests.map(
-                    (interest: { label: string; interests: string }) => {
+                    (interest: { label: string; interest: string }) => {
                       return (
                         <UserInterest
                           key={interest.label}
-                          userInterestElement={interest.interests}
+                          userInterestElement={interest.interest}
                         />
                       );
                     },
@@ -204,50 +206,119 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
                 </Box>
               </>
             )}
+            {lgBreakpointUp ? (
+              <Typography
+                onClick={EditProfile}
+                sx={{
+                  fontSize: '20px',
+                  alignSelf: 'flex-start',
+                  background: '#7514f5',
+                  width: '15rem',
+                  padding: '.5rem',
+                  borderRadius: '10px',
+                  textAlign: 'center',
+                  color: 'white',
+                  cursor: 'pointer',
+                  boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                  marginTop: '3rem',
+                }}
+              >
+                {t('profile.editProfile')}
+              </Typography>
+            ) : (
+              <></>
+            )}
           </Box>
           <LastProjects currentUser={currentUser} />
+          {lgBreakpointDown ? (
+            <Typography
+              onClick={EditProfile}
+              sx={{
+                fontSize: '20px',
+                alignSelf: 'flex-start',
+                background: '#7514f5',
+                width: '15rem',
+                padding: '.5rem',
+                borderRadius: '10px',
+                textAlign: 'center',
+                color: 'white',
+                cursor: 'pointer',
+                boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                marginTop: '3rem',
+              }}
+            >
+              {t('profile.editProfile')}
+            </Typography>
+          ) : (
+            <></>
+          )}
         </Box>
-        {breakpointBetweenMdLg ? (
-          <ButtonBase
+        {lgBreakpointDown ? (
+          <Typography
+            onClick={EditProfile}
             sx={{
-              position: 'fixed',
-              right: 0,
-              top: 160,
-              height: '50px',
-              width: '220px',
-              display: 'flex',
-              justifyContent: 'space-around',
+              position: 'absolute',
+              right: `${mdBreakpointDown ? "50px" : "45px"}`,
+            //   right: 250,
+              top: 55,
+              fontSize: '20px',
+              alignSelf: 'flex-start',
+              background: '#7514f5',
+              width: '10rem',
+              padding: '.5rem',
+              borderRadius: '10px',
+              textAlign: 'center',
+              color: 'white',
+              cursor: 'pointer',
               boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
-              background: '#D0A3BF',
+              marginTop: '100px',
             }}
           >
-            <Box
-              sx={{
-                height: '100%',
-                display: 'flex',
-                width: '25%',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <FiMail size={25} />
-            </Box>
-            <Box
-              sx={{
-                height: '100%',
-                display: 'flex',
-                width: '75%',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: '#fff',
-              }}
-            >
-              <Typography> {t('profile.contactNow')}</Typography>
-            </Box>
-          </ButtonBase>
+            {t('profile.editProfile')}
+          </Typography>
         ) : (
+          //     <a
+          //       href={`https://${currentUser.url_youtube}`}
+          //       rel="noreferrer"
+          //       target="_blank"
+          //       style={{
+          //         position: 'fixed',
+          //         right: 0,
+          //         top: 160,
+          //         height: '50px',
+          //         width: '220px',
+          //         display: 'flex',
+          //         justifyContent: 'space-around',
+          //         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+          //         borderTopLeftRadius: '10px',
+          //         borderBottomLeftRadius: '10px',
+          //         background: '#D0A3BF',
+          //       }}
+          //     >
+          //       <Box
+          //         sx={{
+          //           height: '100%',
+          //           display: 'flex',
+          //           width: '25%',
+          //           alignItems: 'center',
+          //           justifyContent: 'center',
+          //         }}
+          //       >
+          //         <FiMail size={25} />
+          //       </Box>
+          //       <Box
+          //         sx={{
+          //           height: '100%',
+          //           display: 'flex',
+          //           width: '75%',
+          //           alignItems: 'center',
+          //           justifyContent: 'center',
+          //           background: '#fff',
+          //         }}
+          //       >
+          //         <Typography> {t('profile.contactNow')}</Typography>
+          //       </Box>
+          //     </a>
           <></>
         )}
       </Box>
