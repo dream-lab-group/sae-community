@@ -6,7 +6,7 @@
     "PROFILE": "Profil"
   },
   "general": {
-    "saeCommunityPlatform": "SAE Community Plattform",
+    "saeCommunityPlatform": "SAE Plattform",
     "platformForStudents": "Plattform for students",
     "fromStudents": "by students",
     "cancel": "Abbrechen",
@@ -16,7 +16,7 @@
   },
   "loginRegistration": {
     "createAccount": "Erstelle ein Benutzerkonto",
-    "termsOfUse": "Wenn du ein Konto erstellst, erklären du dich mit unseren Nutzungsbedingungen, Datenschutzrichtlinien und unseren Standardeinstellungen für Benachrichtigungen einverstanden.",
+    "termsOfUse": "Wenn du ein Konto erstellst, erklärst du dich mit unseren Nutzungsbedingungen, Datenschutzrichtlinien und unseren Standardeinstellungen für Benachrichtigungen einverstanden.",
     "login": "Hier anmelden",
     "existingUser": "Du hast bereits ein Konto?",
     "welcomeBack": "Willkommen zurück!",
