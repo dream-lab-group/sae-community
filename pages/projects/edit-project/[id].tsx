@@ -137,7 +137,7 @@ const EditProject: NextPage = withRouter<Props>(
               }`,
             }}
           >
-            {editMode ? (
+            {editMode === true ? (
               <>
                 <Typography
                   sx={{
@@ -407,8 +407,9 @@ const EditProject: NextPage = withRouter<Props>(
                 >
                   <ProjectInformation data={projectData} />
                   <ProjectButtonGroup
-                    editMode={editMode}
                     setEditMode={setEditMode}
+                    currentUser={currentUser}
+                    projectUser={projectData.user_created}
                   />
                 </Box>
                 <ProjectPictures

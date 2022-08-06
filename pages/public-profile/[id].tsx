@@ -47,7 +47,6 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
       if (userId !== '[id]') {
         const userResponse = await apiClient.get(`users/${userId}`);
         if (userResponse.status === 200) {
-          console.log(userResponse.data.data);
           setCurrentUser(userResponse.data.data);
         }
       }
