@@ -26,7 +26,7 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
           height: '100px',
           borderRadius: '50%',
           border: '5px solid #7514f5',
-          background: "#fff",
+          background: '#fff',
           marginRight: '30px',
           position: 'relative',
         }}
@@ -34,7 +34,7 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
         {currentUser.avatar === null ? (
           <Image
             src={placeholderImage}
-            style={{ borderRadius: '50%'}}
+            style={{ borderRadius: '50%' }}
             layout="fill"
             alt="profilepicture"
             priority
@@ -58,7 +58,7 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
           <Typography
             sx={{ fontWeight: 700, fontSize: '20px', marginLeft: '5px' }}
           >
-            {currentUser.last_name}{' '}
+            {currentUser.last_name}
           </Typography>
         </Box>
         <Typography>{currentUser.course}</Typography>

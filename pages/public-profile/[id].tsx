@@ -31,9 +31,6 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const breakpointBetweenMdLg = useMediaQuery(
-    theme.breakpoints.between('md', 'lg'),
-  );
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -59,7 +56,6 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   }, [setCurrentUser, userId]);
 
   if (currentUser) {
-    console.log(currentUser);
     return (
       <Box
         sx={{
@@ -122,7 +118,7 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
             >
               {t('profile.programSkills')}
             </Typography>
-            {currentUser.programs.length !== 0 ? (
+            {currentUser.programs !== null ? (
               <>
                 <Box
                   sx={{
@@ -168,7 +164,7 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
             >
               {t('profile.interests')}
             </Typography>
-            {currentUser.interests.length !== 0 ? (
+            {currentUser.interests !== null ? (
               <>
                 <Box
                   sx={{
@@ -258,8 +254,8 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
             onClick={EditProfile}
             sx={{
               position: 'absolute',
-              right: `${mdBreakpointDown ? "50px" : "45px"}`,
-            //   right: 250,
+              right: `${mdBreakpointDown ? '50px' : '45px'}`,
+              //   right: 250,
               top: 55,
               fontSize: '20px',
               alignSelf: 'flex-start',
