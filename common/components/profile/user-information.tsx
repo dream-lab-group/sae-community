@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import placeholderImage from '../../../public/assets/placeholder.png';
+import { useTranslation } from 'react-i18next';
 
 type UserInformationProps = {
   currentUser: any;
@@ -8,6 +9,7 @@ type UserInformationProps = {
 
 export const UserInformation = ({ currentUser }: UserInformationProps) => {
   const imageUrl = `https://www.whatthebre.com/assets/${currentUser.avatar}`;
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -61,7 +63,8 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
             {currentUser.last_name}
           </Typography>
         </Box>
-        <Typography>{currentUser.course}</Typography>
+        {/* @ts-expect-error: todo */}
+        <Typography>{t(`courses.${currentUser.course}.label`)}</Typography>
       </Box>
     </Box>
   );

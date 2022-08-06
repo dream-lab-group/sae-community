@@ -1,9 +1,17 @@
-import { Grid, TextField } from '@mui/material';
+import {
+  Grid,
+  MenuItem,
+  Select,
+  TextField,
+  InputLabel,
+  FormControl,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { FormikValues } from 'formik';
 
 import { UserProfileAvatarUpload } from './user-profile-avatar-upload';
 import React from 'react';
+import { Globals } from '../../../utils/utils';
 
 type UserProfileMyDataProps = {
   formik: FormikValues;
@@ -73,19 +81,27 @@ export const UserProfileMyData = ({
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              size="small"
-              id="profession"
-              label="Fachrichtung"
-              name="course"
-              type="text"
-              defaultValue={t(`courses.${formik.values.course}.label`)}
-              onChange={formik.handleChange}
-              error={formik.touched.course && Boolean(formik.errors.course)}
-              helperText={formik.touched.course && formik.errors.course}
-              fullWidth
-              sx={{ marginTop: '10px', fontSize: '8px' }}
-            />
+            <FormControl fullWidth size="small" sx={{ marginTop: '10px' }}>
+              <InputLabel id="course">
+                {t('loginRegistration.course')}
+              </InputLabel>
+              <Select
+                labelId="course"
+                label="Fachrichtung"
+                id="course"
+                name="course"
+                value={formik.values.course}
+                onChange={formik.handleChange}
+                error={formik.touched.course && Boolean(formik.errors.course)}
+              >
+                {Globals.allCourses.map((course) => (
+                  <MenuItem key={course} value={course}>
+                    {/* @ts-expect-error Translation keys only exist during runtime */}
+                    {t(`courses.${course}.label`)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
         <UserProfileAvatarUpload
