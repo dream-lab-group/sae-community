@@ -1,14 +1,7 @@
-import {
-  Alert,
-  Snackbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Alert, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import { Formik, FormikValues } from 'formik';
 import Image from 'next/image';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
@@ -28,7 +21,6 @@ export const EditThumbnail = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [displayThumbnail, setDisplayThumbnail] = useState<any>(
     `https://www.whatthebre.com/assets/${thumbnailId}?quality=50`,
   );
@@ -66,31 +58,6 @@ export const EditThumbnail = ({
     onDrop,
     validator: maxFileSizeValidator,
   });
-
-  const SetFileError = () => {
-    setOpenSnackbar(true);
-
-    return (
-      <Snackbar
-        open={openSnackbar}
-        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
-      >
-        <Alert
-          severity="error"
-          variant="filled"
-          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
-        >
-          <Typography>
-            Das ausgewählte Thumbnail ist zu gross. Die maximale Grösse beträgt
-            5MB
-          </Typography>
-          {fileRejections.map(({ file }: { file: File; errors: any }) => (
-            <Typography>{`${file.name}`}</Typography>
-          ))}
-        </Alert>
-      </Snackbar>
-    );
-  };
 
   const deleteFile = () => {
     setDisplayThumbnail(null);
@@ -252,7 +219,29 @@ export const EditThumbnail = ({
           <input multiple {...getInputProps()} />
         </Box>
       )}
-      {fileRejections.length > 0 && <SetFileError />}
+      {fileRejections.length > 0 ? (
+        <Box sx={{ width: '100%', marginTop: '30px' }}>
+          <Alert severity="error" variant="filled">
+            <Typography
+              sx={{
+                fontSize: `${smBreakpointDown ? '12px' : ''}`,
+              }}
+            >
+              Die maximale Grösse beträgt 5MB, folgendes Thumbnail ist zu gross:
+            </Typography>
+            {fileRejections.map(({ file }: { file: File; errors: any }) => (
+              <Typography
+                key={file.name}
+                sx={{
+                  fontSize: `${smBreakpointDown ? '12px' : ''}`,
+                }}
+              >{`${file.name}`}</Typography>
+            ))}
+          </Alert>
+        </Box>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

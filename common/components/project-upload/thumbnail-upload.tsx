@@ -1,11 +1,4 @@
-import {
-  Alert,
-  Box,
-  Snackbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Alert, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -30,7 +23,6 @@ export const ThumbnailUpload = ({
 }: ThumbnailUploadProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [displayThumbnail, setDisplayThumbnail] = useState<string>();
 
   const { t } = useTranslation();
@@ -70,31 +62,6 @@ export const ThumbnailUpload = ({
     noDragEventsBubbling: true,
     validator: maxFileSizeValidator,
   });
-
-  const SetFileError = () => {
-    setOpenSnackbar(true);
-
-    return (
-      <Snackbar
-        open={openSnackbar}
-        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
-      >
-        <Alert
-          severity="error"
-          variant="filled"
-          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
-        >
-          <Typography>
-            Das ausgewählte Thumbnail ist zu gross. Die maximale Grösse beträgt
-            5MB
-          </Typography>
-          {fileRejections.map(({ file }: { file: File; errors: any }) => (
-            <Typography>{`${file.name}`}</Typography>
-          ))}
-        </Alert>
-      </Snackbar>
-    );
-  };
 
   const deleteFile = (file: any, index: number) => {
     setThumbnailFile([]);
@@ -252,7 +219,29 @@ export const ThumbnailUpload = ({
           </Box>
         </Box>
       )}
-      {fileRejections.length > 0 && <SetFileError />}
+      {fileRejections.length > 0 ? (
+        <Box sx={{ width: '100%', marginTop: '20px' }}>
+          <Alert severity="error" variant="filled">
+            <Typography
+              sx={{
+                fontSize: `${smBreakpointDown ? '12px' : ''}`,
+              }}
+            >
+              Die maximale Grösse beträgt 5MB, folgendes Thumbnail ist zu gross:
+            </Typography>
+            {fileRejections.map(({ file }: { file: File; errors: any }) => (
+              <Typography
+                key={file.name}
+                sx={{
+                  fontSize: `${smBreakpointDown ? '12px' : ''}`,
+                }}
+              >{`${file.name}`}</Typography>
+            ))}
+          </Alert>
+        </Box>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

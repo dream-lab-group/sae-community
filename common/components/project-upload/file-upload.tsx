@@ -1,11 +1,4 @@
-import {
-  Alert,
-  Box,
-  Snackbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Alert, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
@@ -27,7 +20,6 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
 
   const { t } = useTranslation();
   const [files, setFiles] = useState<any>([]);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const maxFileSize = 5097150;
 
@@ -64,30 +56,6 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
     validator: maxFileSizeValidator,
   });
 
-  const SetFileError = () => {
-    setOpenSnackbar(true);
-
-    return (
-      <Snackbar
-        open={openSnackbar}
-        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
-      >
-        <Alert
-          severity="error"
-          variant="filled"
-          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
-        >
-          <Typography>
-            Folgende Dateien überschreiten die maximale grösse von 5MB.
-          </Typography>
-          {fileRejections.map(({ file }: { file: File; errors: any }) => (
-            <Typography key={file.name}>{`${file.name}`}</Typography>
-          ))}
-        </Alert>
-      </Snackbar>
-    );
-  };
-
   return (
     <>
       {files.length === 0 ? (
@@ -98,7 +66,7 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
               height: `${smBreakpointDown ? '260px' : '450px'}`,
               border: '3px dashed #00000033',
               borderRadius: '10px',
-              marginTop: '30px',
+              marginTop: '20px',
               cursor: 'pointer',
             }}
           >
@@ -330,7 +298,29 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
           </Box>
         </>
       )}
-      {fileRejections.length > 0 && <SetFileError />}
+      {fileRejections.length > 0 ? (
+        <Box sx={{ width: '100%', marginTop: '20px' }}>
+          <Alert severity="error" variant="filled">
+            <Typography
+              sx={{
+                fontSize: `${smBreakpointDown ? '12px' : ''}`,
+              }}
+            >
+              Folgende Dateien überschreiten die maximale grösse von 5MB:
+            </Typography>
+            {fileRejections.map(({ file }: { file: File; errors: any }) => (
+              <Typography
+                key={file.name}
+                sx={{
+                  fontSize: `${smBreakpointDown ? '12px' : ''}`,
+                }}
+              >{`${file.name}`}</Typography>
+            ))}
+          </Alert>
+        </Box>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
