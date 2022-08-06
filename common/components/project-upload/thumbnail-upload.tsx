@@ -31,22 +31,11 @@ export const ThumbnailUpload = ({
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
   const [displayThumbnail, setDisplayThumbnail] = useState<string>();
 
   const { t } = useTranslation();
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
-
-  const maxFileSizeThumbnail = 2597150;
+  const maxFileSizeThumbnail = 5097150;
 
   function maxFileSizeValidator(file: File) {
     if (file.size > maxFileSizeThumbnail) {
@@ -61,20 +50,10 @@ export const ThumbnailUpload = ({
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      if (fileRejections.length > 0) {
-        setErrorMessage(undefined);
-        setErrorMessage(
-          'Eines der Dateien ist zu gross. Die maximale Filegrösse ist 2MB',
-        );
-        setOpenSnackbar(true);
-        fileRejections.length === 0;
-      } else {
-        const allFiles = [...thumbnailFile, ...acceptedFiles];
-        setThumbnailFile(allFiles);
-        formik.setFieldValue('cover_photo', acceptedFiles);
-        setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
-        fileRejections.length === 0;
-      }
+      const allFiles = [...thumbnailFile, ...acceptedFiles];
+      setThumbnailFile(allFiles);
+      formik.setFieldValue('cover_photo', acceptedFiles);
+      setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
     },
     [thumbnailFile],
   );
@@ -91,6 +70,31 @@ export const ThumbnailUpload = ({
     noDragEventsBubbling: true,
     validator: maxFileSizeValidator,
   });
+
+  const SetFileError = () => {
+    setOpenSnackbar(true);
+
+    return (
+      <Snackbar
+        open={openSnackbar}
+        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
+      >
+        <Alert
+          severity="error"
+          variant="filled"
+          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
+        >
+          <Typography>
+            Das ausgewählte Thumbnail ist zu gross. Die maximale Grösse beträgt
+            5MB
+          </Typography>
+          {fileRejections.map(({ file }: { file: File; errors: any }) => (
+            <Typography>{`${file.name}`}</Typography>
+          ))}
+        </Alert>
+      </Snackbar>
+    );
+  };
 
   const deleteFile = (file: any, index: number) => {
     setThumbnailFile([]);
@@ -248,21 +252,7 @@ export const ThumbnailUpload = ({
           </Box>
         </Box>
       )}
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={5000}
-        onClose={handleClose}
-        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
-      >
-        <Alert
-          severity="error"
-          variant="filled"
-          onClose={handleClose}
-          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
-        >
-          {errorMessage}
-        </Alert>
-      </Snackbar>
+      {fileRejections.length > 0 && <SetFileError />}
     </>
   );
 };

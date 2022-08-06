@@ -29,41 +29,20 @@ export const EditThumbnail = ({
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
   const [displayThumbnail, setDisplayThumbnail] = useState<any>(
     `https://www.whatthebre.com/assets/${thumbnailId}?quality=50`,
   );
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
-
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      if (fileRejections.length > 0) {
-        setErrorMessage(undefined);
-        setErrorMessage(
-          'Eines der Dateien ist zu gross. Die maximale Filegrösse ist 2MB',
-        );
-        setOpenSnackbar(true);
-        fileRejections.length === 0;
-      } else {
-        setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
-        formikProps.setFieldValue('cover_photo', acceptedFiles[0]);
-        setChangedThumbnail(true);
-        fileRejections.length === 0;
-      }
+      setDisplayThumbnail(URL.createObjectURL(acceptedFiles[0]));
+      formikProps.setFieldValue('cover_photo', acceptedFiles[0]);
+      setChangedThumbnail(true);
     },
     [setDisplayThumbnail],
   );
 
-  const maxFileSizeThumbnailEdit = 2597150;
+  const maxFileSizeThumbnailEdit = 5097150;
 
   function maxFileSizeValidator(file: File) {
     if (file.size > maxFileSizeThumbnailEdit) {
@@ -87,6 +66,31 @@ export const EditThumbnail = ({
     onDrop,
     validator: maxFileSizeValidator,
   });
+
+  const SetFileError = () => {
+    setOpenSnackbar(true);
+
+    return (
+      <Snackbar
+        open={openSnackbar}
+        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
+      >
+        <Alert
+          severity="error"
+          variant="filled"
+          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
+        >
+          <Typography>
+            Das ausgewählte Thumbnail ist zu gross. Die maximale Grösse beträgt
+            5MB
+          </Typography>
+          {fileRejections.map(({ file }: { file: File; errors: any }) => (
+            <Typography>{`${file.name}`}</Typography>
+          ))}
+        </Alert>
+      </Snackbar>
+    );
+  };
 
   const deleteFile = () => {
     setDisplayThumbnail(null);
@@ -248,21 +252,7 @@ export const EditThumbnail = ({
           <input multiple {...getInputProps()} />
         </Box>
       )}
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={5000}
-        onClose={handleClose}
-        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
-      >
-        <Alert
-          severity="error"
-          variant="filled"
-          onClose={handleClose}
-          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
-        >
-          {errorMessage}
-        </Alert>
-      </Snackbar>
+      {fileRejections.length > 0 && <SetFileError />}
     </>
   );
 };
