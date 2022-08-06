@@ -21,6 +21,7 @@ import { apiClient } from '../../common/data/apiClient';
 import TipTapViewer from '../../common/components/common/tiptap-viewer';
 import { UsedProgram } from '../../common/components/common/used-programs';
 import { ProjectCollaborators } from '../../common/components/common/project-collaborators';
+import { directus } from '..';
 
 type Props = {
   router: Router;
@@ -39,8 +40,16 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
 
   const projectId = router.asPath.split('/').at(-1);
   const [projectData, setProjectData] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<any>();
 
   useEffect(() => {
+    const getCurrentUser = async () => {
+      const userId = await directus.users.me.read();
+      const userResponse = await apiClient.get(`users/${userId.id}`);
+      if (userResponse.status === 200) {
+        setCurrentUser(userResponse.data.data);
+      }
+    };
     const fetchProject = async () => {
       if (projectId !== '[id]') {
         const projectResponse = await apiClient.get(
@@ -51,8 +60,9 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
         }
       }
     };
+    getCurrentUser();
     fetchProject();
-  }, [setProjectData, projectId]);
+  }, [setProjectData, projectId, setCurrentUser]);
 
   const handleBackToHome = () => {
     router.push('/');
@@ -101,7 +111,10 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
               }}
             >
               <ProjectInformation data={projectData} />
-              <ProjectButtonGroup />
+              <ProjectButtonGroup
+                currentUser={currentUser}
+                projectUser={projectData.id}
+              />
             </Box>
             <ProjectPictures
               thumbnailId={projectData.cover_photo}
