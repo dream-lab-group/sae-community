@@ -1,11 +1,4 @@
-import {
-  Alert,
-  Box,
-  Snackbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Alert, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
@@ -27,26 +20,14 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
 
   const { t } = useTranslation();
   const [files, setFiles] = useState<any>([]);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
-
-  const maxFileSize = 2597150;
+  const maxFileSize = 5097150;
 
   function maxFileSizeValidator(file: File) {
     if (file.size > maxFileSize) {
       return {
         code: 'size-too-large',
-        message: `Eine oder mehrere Dateien sind zu gross. Die maximale Dateigrösse beträgt 2MB`,
+        message: `konnte nicht heraufgeladen werden. Die maximale Dateigrösse beträgt 5MB`,
       };
     }
 
@@ -55,19 +36,9 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      if (fileRejections.length > 0) {
-        setErrorMessage(undefined);
-        setErrorMessage(
-          'Eines der Dateien ist zu gross. Die maximale Filegrösse ist 2MB',
-        );
-        setOpenSnackbar(true);
-        fileRejections.length === 0;
-      } else {
-        const allFiles = [...files, ...acceptedFiles];
-        setFiles(allFiles);
-        formik.setFieldValue('project_files', acceptedFiles);
-        fileRejections.length === 0;
-      }
+      const allFiles = [...files, ...acceptedFiles];
+      setFiles(allFiles);
+      formik.setFieldValue('project_files', acceptedFiles);
     },
     [files],
   );
@@ -95,7 +66,7 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
               height: `${smBreakpointDown ? '260px' : '450px'}`,
               border: '3px dashed #00000033',
               borderRadius: '10px',
-              marginTop: '30px',
+              marginTop: '20px',
               cursor: 'pointer',
             }}
           >
@@ -327,21 +298,29 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
           </Box>
         </>
       )}
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={5000}
-        onClose={handleClose}
-        sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
-      >
-        <Alert
-          severity="error"
-          variant="filled"
-          onClose={handleClose}
-          sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
-        >
-          {errorMessage}
-        </Alert>
-      </Snackbar>
+      {fileRejections.length > 0 ? (
+        <Box sx={{ width: '100%', marginTop: '20px' }}>
+          <Alert severity="error" variant="filled">
+            <Typography
+              sx={{
+                fontSize: `${smBreakpointDown ? '12px' : ''}`,
+              }}
+            >
+              Folgende Dateien überschreiten die maximale grösse von 5MB:
+            </Typography>
+            {fileRejections.map(({ file }: { file: File; errors: any }) => (
+              <Typography
+                key={file.name}
+                sx={{
+                  fontSize: `${smBreakpointDown ? '12px' : ''}`,
+                }}
+              >{`${file.name}`}</Typography>
+            ))}
+          </Alert>
+        </Box>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

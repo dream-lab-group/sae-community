@@ -89,8 +89,8 @@
       "selectFile": "wähle eine Datei aus",
       "acceptedFiles": "Zugelassene Datei: JPG, PNG, WebP",
       "acceptedFilesWithMusic": "Zugelassene Datei: JPG, PNG, WebP, MP3",
-      "maxSize": "Max. grösse: 2MB",
-      "maxSize10": "Max. grösse: 2MB",
+      "maxSize": "Max. grösse: 5MB",
+      "maxSize10": "Max. grösse: 5MB",
       "picture": "Bild",
       "audio": "Audio"
     },
