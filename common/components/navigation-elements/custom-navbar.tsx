@@ -6,8 +6,10 @@ import {
   useTheme,
 } from '@mui/material';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { directus } from '../../../pages';
+import useOnClickOutside from '../../hooks/use-on-click-outside';
 import { Globals } from '../../utils/utils';
 import { AppBarHeaderProps } from '../header/types';
 
@@ -27,8 +29,18 @@ export const CustomNavbar = ({
 
   const router = useRouter();
 
+  const ref = useRef(null);
+
+  const handleClickOutside = () => {
+    setMenuOpen(false);
+  };
+
+  useOnClickOutside(ref, handleClickOutside);
+
   return (
     <Box
+      // @ts-expect-error: todo
+      ref={ref}
       sx={{
         position: 'fixed',
         zIndex: 2000,

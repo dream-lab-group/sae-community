@@ -127,7 +127,8 @@ const ProjectsOverview = ({
       {projects !== undefined ? (
         <>
           {projects.map((project: any) => (
-            <>
+            // @ts-expect-error: todo
+            <React.Fragment key={project.id}>
               {currentUserId !== project.user_created && (
                 <ProjectCard
                   key={project.id}
@@ -139,7 +140,7 @@ const ProjectsOverview = ({
                   setIsLoading={setIsLoading}
                 />
               )}
-            </>
+            </React.Fragment>
           ))}
         </>
       ) : (
