@@ -68,49 +68,13 @@
     }
   },
   "navigation": {
-    "blog": "Blog",
-    "jobboard": "Job Board",
     "projects": "Meine Projekte",
-    "uploadproject": "Projektupload",
     "profile": "Mein Profil",
     "likes": "Meine Likes",
     "collections": "Meine Merkliste",
     "profileSettings": "Profileinstellungen"
   },
-  "pageNavigation": {
-    "film": "Film",
-    "gameArts": "Game Arts",
-    "gamesProgramming": "Games Programming",
-    "web": "Webdevelopment",
-    "audio": "Audio",
-    "animation": "VFX & 3D Animation",
-    "crossMedia": "Cross Media"
-  },
   "projects": {
-    "webdesign": {
-      "label": "Web & Mobile"
-    },
-    "gameart": {
-      "label": "Game Arts"
-    },
-    "gamesprogramming": {
-      "label": "Games Programming"
-    },
-    "film": {
-      "label": "Film"
-    },
-    "visualeffects": {
-      "label": "Animation"
-    },
-    "audio": {
-      "label": "Audio"
-    },
-    "contentcreation": {
-      "label": "Cross Media"
-    },
-    "alumni": {
-      "label": "Alumni"
-    },
     "editProject": "Projekt editieren"
   },
   "projectUpload": {

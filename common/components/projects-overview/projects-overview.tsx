@@ -36,7 +36,7 @@ const ProjectsOverview = ({
         }
       };
       getFilmProjects();
-    } else if (usedFilter === 'gameArts') {
+    } else if (usedFilter === 'gameart') {
       setProjects(undefined);
       const getGameArtsProjects = async () => {
         const gameArtsProjectsResponse = await apiClient.get(
@@ -47,7 +47,7 @@ const ProjectsOverview = ({
         }
       };
       getGameArtsProjects();
-    } else if (usedFilter === 'gamesProgramming') {
+    } else if (usedFilter === 'gamesprogramming') {
       const getGamesProgrammingProjects = async () => {
         setProjects(undefined);
         const gamesProgrammingProjectsResponse = await apiClient.get(
@@ -58,7 +58,7 @@ const ProjectsOverview = ({
         }
       };
       getGamesProgrammingProjects();
-    } else if (usedFilter === 'web') {
+    } else if (usedFilter === 'webdesign') {
       setProjects(undefined);
       const webProjects = async () => {
         const webProjectsResponse = await apiClient.get(
@@ -80,7 +80,7 @@ const ProjectsOverview = ({
         }
       };
       getAudioProjects();
-    } else if (usedFilter === 'animation') {
+    } else if (usedFilter === 'visualeffects') {
       const getvisualEffectsProjects = async () => {
         setProjects(undefined);
         const visualEffectsProjectsResponse = await apiClient.get(
@@ -91,7 +91,7 @@ const ProjectsOverview = ({
         }
       };
       getvisualEffectsProjects();
-    } else if (usedFilter === 'crossMedia') {
+    } else if (usedFilter === 'contentcreation') {
       const getContentCreationProjects = async () => {
         setProjects(undefined);
         const contentCreationProjectsResponse = await apiClient.get(

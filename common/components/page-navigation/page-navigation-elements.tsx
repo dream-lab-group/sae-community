@@ -19,19 +19,19 @@ export const PageNavigationElement = ({
       } else {
         return 'film-button';
       }
-    } else if (element === 'gameArts') {
+    } else if (element === 'gameart') {
       if (activeTagFilter === 'activeGameArtsButton') {
         return 'gamearts-button-active';
       } else {
         return 'gamearts-button';
       }
-    } else if (element === 'gamesProgramming') {
+    } else if (element === 'gamesprogramming') {
       if (activeTagFilter === 'activeGamesProgrammingButton') {
         return 'gamesprogramming-button-active';
       } else {
         return 'gamesprogramming-button';
       }
-    } else if (element === 'web') {
+    } else if (element === 'webdesign') {
       if (activeTagFilter === 'activeWebButton') {
         return 'web-button-active';
       } else {
@@ -43,13 +43,13 @@ export const PageNavigationElement = ({
       } else {
         return 'audio-button';
       }
-    } else if (element === 'animation') {
+    } else if (element === 'visualeffects') {
       if (activeTagFilter === 'activeAnimationButton') {
         return 'animation-button-active';
       } else {
         return 'animation-button';
       }
-    } else if (element === 'crossMedia') {
+    } else if (element === 'contentcreation') {
       if (activeTagFilter === 'activeCrossMediaButton') {
         return 'cross-media-button-active';
       } else {
@@ -69,28 +69,28 @@ export const PageNavigationElement = ({
         setUsedFilter('film');
         setActiveTagFitler('activeFilmButton');
       }
-    } else if (element === 'gameArts') {
+    } else if (element === 'gameart') {
       if (activeTagFilter === 'activeGameArtsButton') {
         setActiveTagFitler(undefined);
         setUsedFilter(undefined);
       } else {
-        setUsedFilter('gameArts');
+        setUsedFilter('gameart');
         setActiveTagFitler('activeGameArtsButton');
       }
-    } else if (element === 'gamesProgramming') {
+    } else if (element === 'gamesprogramming') {
       if (activeTagFilter === 'activeGamesProgrammingButton') {
         setActiveTagFitler(undefined);
         setUsedFilter(undefined);
       } else {
-        setUsedFilter('gamesProgramming');
+        setUsedFilter('gamesprogramming');
         setActiveTagFitler('activeGamesProgrammingButton');
       }
-    } else if (element === 'web') {
+    } else if (element === 'webdesign') {
       if (activeTagFilter === 'activeWebButton') {
         setActiveTagFitler(undefined);
         setUsedFilter(undefined);
       } else {
-        setUsedFilter('web');
+        setUsedFilter('webdesign');
         setActiveTagFitler('activeWebButton');
       }
     } else if (element === 'audio') {
@@ -101,20 +101,20 @@ export const PageNavigationElement = ({
         setUsedFilter('audio');
         setActiveTagFitler('activeAudioButton');
       }
-    } else if (element === 'animation') {
+    } else if (element === 'visualeffects') {
       if (activeTagFilter === 'activeAnimationButton') {
         setActiveTagFitler(undefined);
         setUsedFilter(undefined);
       } else {
-        setUsedFilter('animation');
+        setUsedFilter('visualeffects');
         setActiveTagFitler('activeAnimationButton');
       }
-    } else if (element === 'crossMedia') {
+    } else if (element === 'contentcreation') {
       if (activeTagFilter === 'activeCrossMediaButton') {
         setActiveTagFitler(undefined);
         setUsedFilter(undefined);
       } else {
-        setUsedFilter('crossMedia');
+        setUsedFilter('contentcreation');
         setActiveTagFitler('activeCrossMediaButton');
       }
     } else {
@@ -154,7 +154,7 @@ export const PageNavigationElement = ({
           }}
         >
           {/* @ts-expect-error: translation error during runtime */}
-          {t(`pageNavigation.${element}`)}
+          {t(`courses.${element}.label`)}
         </Typography>
       </ButtonBase>
     </>

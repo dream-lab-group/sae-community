@@ -46,12 +46,12 @@ export class Globals {
 
   public static readonly pageNavigationElements = [
     'film',
-    'gameArts',
-    'gamesProgramming',
-    'web',
+    'gameart',
+    'gamesprogramming',
+    'webdesign',
     'audio',
-    'animation',
-    'crossMedia',
+    'visualeffects',
+    'contentcreation',
   ];
 
   public static readonly userSkills = [

@@ -37,9 +37,7 @@ export const UserProfileMyData = ({
               error={
                 formik.touched.first_name && Boolean(formik.errors.first_name)
               }
-              helperText={
-                  formik.touched.first_name && formik.errors.first_name 
-                }
+              helperText={formik.touched.first_name && formik.errors.first_name}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px', color: '#00000066' }}
             />
@@ -53,11 +51,9 @@ export const UserProfileMyData = ({
               defaultValue={formik.values.last_name}
               onChange={formik.handleChange}
               error={
-                  formik.touched.last_name && Boolean(formik.errors.last_name)
-                }
-                helperText={
-                  formik.touched.last_name && formik.errors.last_name 
-                }
+                formik.touched.last_name && Boolean(formik.errors.last_name)
+              }
+              helperText={formik.touched.last_name && formik.errors.last_name}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px' }}
             />
@@ -70,12 +66,8 @@ export const UserProfileMyData = ({
               type="text"
               defaultValue={formik.values.email}
               onChange={formik.handleChange}
-              error={
-                  formik.touched.email && Boolean(formik.errors.email)
-                }
-                helperText={
-                  formik.touched.email && formik.errors.email 
-                }
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px' }}
             />
@@ -87,14 +79,10 @@ export const UserProfileMyData = ({
               label="Fachrichtung"
               name="course"
               type="text"
-              defaultValue={formik.values.course}
+              defaultValue={t(`courses.${formik.values.course}.label`)}
               onChange={formik.handleChange}
-              error={
-                  formik.touched.course && Boolean(formik.errors.course)
-                }
-                helperText={
-                  formik.touched.course && formik.errors.course 
-                }
+              error={formik.touched.course && Boolean(formik.errors.course)}
+              helperText={formik.touched.course && formik.errors.course}
               fullWidth
               sx={{ marginTop: '10px', fontSize: '8px' }}
             />
@@ -118,9 +106,7 @@ export const UserProfileMyData = ({
           error={
             formik.touched.description && Boolean(formik.errors.description)
           }
-          helperText={
-            formik.touched.description && formik.errors.description 
-          }
+          helperText={formik.touched.description && formik.errors.description}
           variant="outlined"
           minRows={7}
           fullWidth

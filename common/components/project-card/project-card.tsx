@@ -172,7 +172,7 @@ export const ProjectCard = ({
             padding="5px 0"
             alignItems="center"
           >
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <Typography
                 sx={{
                   fontSize: '16px',
@@ -189,10 +189,10 @@ export const ProjectCard = ({
                 {user}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <Chip
                 // @ts-expect-error: todo
-                label={t(`projects.${course}.label`)}
+                label={t(`courses.${course}.label`)}
                 sx={{
                   background: `${
                     course === 'film'

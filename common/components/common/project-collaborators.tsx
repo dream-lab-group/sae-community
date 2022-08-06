@@ -26,7 +26,7 @@ export const ProjectCollaborators = ({
     fetchUser();
   }, [setUser]);
 
-  return user !== null ? (
+  return user !== null || undefined ? (
     <Box
       className="user-default-button"
       sx={{
@@ -43,9 +43,11 @@ export const ProjectCollaborators = ({
         router.push(`/public-profile/${user.id}`);
       }}
     >
-      <Typography sx={{ fontSize: '15px' }}>
-        {`${user.first_name} ${user.last_name}`}
-      </Typography>
+      {user.first_name && user.last_name && (
+        <Typography sx={{ fontSize: '15px' }}>
+          {`${user.first_name} ${user.last_name}`}
+        </Typography>
+      )}
     </Box>
   ) : (
     <></>

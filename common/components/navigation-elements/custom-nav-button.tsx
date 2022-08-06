@@ -18,10 +18,13 @@ export const CustomNavButton = ({
   const hanldeOnClickMenuElement = () => {
     if (navElement === 'profile') {
       setMenuOpen(false);
-      router.push({ pathname: 'public-profile/[cur]', query: { cur: currentUser } });
+      router.push({
+        pathname: '/public-profile/[cur]',
+        query: { cur: currentUser },
+      });
     } else if (navElement === 'projects') {
       setMenuOpen(false);
-      router.push({ pathname: 'projects/[cur]', query: { cur: currentUser } });
+      router.push({ pathname: '/projects/[cur]', query: { cur: currentUser } });
     } else if (navElement === 'likes') {
       setMenuOpen(false);
       router.push('/likes');
