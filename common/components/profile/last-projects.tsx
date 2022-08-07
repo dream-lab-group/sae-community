@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { apiClient } from '../../data/apiClient';
+import { FiMail } from 'react-icons/fi';
 
 type LastProjectsProps = {
   currentUser: any;
@@ -23,11 +24,12 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
 
   const userId = currentUser.id;
   const [allUserProjects, setAllUserProjects] = useState<any>([]);
+  const [userProject, setUserProject] = useState<any>([]);
   const router = useRouter();
   const EditProfile = () => {
     router.push('/profile');
   };
-  const AllProject = () => {
+  const AllProjects = () => {
     router.push(`/projects/${userId}`);
   };
 
@@ -43,10 +45,22 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
     fetchMyProjects();
   }, [setAllUserProjects]);
 
+  useEffect(() => {
+    const fetchOneProject = async () => {
+      const projectsResponse = await apiClient.get(
+        `items/projects?filter={"user_created": { "_eq": "${userId}"}}&sort=-date_created&limit=1`,
+      );
+      if (projectsResponse.status === 200) {
+        setUserProject(projectsResponse.data.data);
+      }
+    };
+    fetchOneProject();
+  }, [setUserProject]);
+
   return allUserProjects.length !== 0 ? (
     <>
       <Box
-        sx={{ width: '100%', marginLeft: `${lgBreakpointUp ? '3rem' : ' '}` }}
+        sx={{ width: `${lgBreakpointUp ? "367px" : "100%"}`, marginLeft: `${lgBreakpointUp ? '3rem' : ' '}` }}
       >
         {lgBreakpointUp ? (
           <>
@@ -54,9 +68,12 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
               onClick={EditProfile}
               sx={{
                 fontSize: '20px',
-                alignSelf: 'flex-start',
+                display: "flex",
+                justifyContent:"center",
+                alignItems:"center",
                 background: '#7514f5',
-                width: '15rem',
+                height: "60px",
+                width: '336px',
                 padding: '.5rem',
                 borderRadius: '10px',
                 textAlign: 'center',
@@ -68,20 +85,20 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
             >
               {t('profile.editProfile')}
             </Typography>
-            {/* <a
+            <a
               href={`mailto:${currentUser.mail}?subject=${currentUser.first_name} möchte dich über Sai Plattform kontaktieren.`}
               rel="noreferrer"
               target="_blank"
               style={{
                 height: '60px',
-                width: '100%',
+                width: '336px',
                 display: 'flex',
                 justifyContent: 'space-around',
                 boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
                 borderRadius: '10px',
                 background: '#D0A3BF',
-                marginTop: "1rem"
-              }}
+                marginTop: '20px',
+            }}
             >
               <Box
                 sx={{
@@ -110,27 +127,27 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
                   {t('profile.contactNow')}
                 </Typography>
               </Box>
-            </a> */}
+            </a>
           </>
         ) : (
           <></>
         )}
         <Box
           sx={{
-            width: '100%',
+            width: `${lgBreakpointDown ? '100%' : '335px'}`,
+            height: 'auto',
             borderRadius: '15px',
             boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            padding: '15px',
             marginTop: '20px',
           }}
         >
           <Box
             sx={{
               width: '100%',
-              marginTop: '30px',
+              marginTop: '20px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -139,69 +156,129 @@ export const LastProjects = ({ currentUser }: LastProjectsProps) => {
                   ? '774px'
                   : smBreakpointDown
                   ? '381px'
-                  : '400px'
+                  : '300px'
               }`,
-              position: `${lgBreakpointDown ? '' : 'relative'}`,
-              top: `${lgBreakpointDown ? '' : '80'}`,
-              marginBottom: `${lgBreakpointDown ? '' : '100px'}`,
             }}
           >
-            <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: '18px',
+                marginLeft: `${lgBreakpointDown ? '20px' : ''}`,
+              }}
+            >
               {t('profile.lastProjects')}
             </Typography>
-            {/* @ts-expect-error: todo */}
-            {allUserProjects.map(({ id, cover_photo }) => {
-              const imageUrl = `https://www.whatthebre.com/assets/${cover_photo}?quality=50`;
-              return (
-                <Box
-                  sx={{
-                    width: '100%',
-                    height: `${
-                      smBreakpointDown
-                        ? '285px'
-                        : mdBreakpointDown
-                        ? '360px'
-                        : '360px'
-                    }`,
-                    display: 'flex',
-                    borderRadius: '10px',
-                    position: 'relative',
-                    marginTop: '1rem',
-                  }}
-                  key={id}
-                >
-                  <Image
-                    className="project-image-border-radius image-container"
-                    src={imageUrl}
-                    layout="fill"
-                    alt="Project Cover Picture"
-                  />
-                </Box>
-              );
-            })}
+
+            {smBreakpointDown ? (
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  marginTop: '20px',
+                }}
+              >
+                {/* @ts-expect-error: todo */}
+                {userProject.map(({ id, cover_photo }) => {
+                  const imageUrl = `https://www.whatthebre.com/assets/${cover_photo}?quality=50`;
+                  return (
+                    <Box
+                      sx={{
+                        height: '300px',
+                        width: '300px',
+                        borderRadius: '10px',
+                        position: 'relative',
+                        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                      }}
+                      key={id}
+                    >
+                      <Image
+                        className="project-image-border-radius image-container"
+                        src={imageUrl}
+                        layout="fill"
+                        alt="Project Cover Picture"
+                      />
+                    </Box>
+                  );
+                })}
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: `${lgBreakpointDown ? 'row' : 'column'}`,
+                  justifyContent: 'space-evenly',
+                  marginTop: `${lgBreakpointUp ? '0' : '20px'}`,
+            }}
+              >
+                {/* @ts-expect-error: todo */}
+                {allUserProjects.map(({ id, cover_photo }) => {
+                  const imageUrl = `https://www.whatthebre.com/assets/${cover_photo}?quality=50`;
+                  return (
+                    <Box
+                      sx={{
+                        height: `${mdBreakpointDown ? '230px' : '276px'}`,
+                        width: `${mdBreakpointDown ? '230px' : '297px'}`,
+                        marginTop: `${lgBreakpointUp ? '15px' : ''}`,
+                        borderRadius: '10px',
+                        position: 'relative',
+                        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                      }}
+                      key={id}
+                    >
+                      <Image
+                        className="project-image-border-radius image-container"
+                        src={imageUrl}
+                        layout="fill"
+                        alt="Project Cover Picture"
+                      />
+                    </Box>
+                  );
+                })}
+              </Box>
+            )}
           </Box>
           <Box
             sx={{
               width: '100%',
-              height: '2px',
-              background: '#e8e9eb',
-              marginTop: '25px',
-            }}
-          />
-          <ButtonBase
-            sx={{
-              width: '100%',
               display: 'flex',
-              alignSelf: 'center',
-              justifyContent: 'space-between',
-              maxWidth: '130px',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
               marginTop: '20px',
+              cursor: 'pointer',
             }}
-            onClick={AllProject}
+            onClick={AllProjects}
           >
-            <Typography> {t('profile.viewAll')}</Typography>
-            <BiChevronRight size={30} />
-          </ButtonBase>
+            <Box
+              sx={{
+                width: `${
+                  smBreakpointDown
+                    ? '70%'
+                    : mdBreakpointDown
+                    ? '80%'
+                    : lgBreakpointDown
+                    ? '70%'
+                    : '100%'
+                }`,
+                height: '2px',
+                background: '#e8e9eb',
+              }}
+            />
+            <ButtonBase
+              sx={{
+                width: '100%',
+                display: 'flex',
+                alignSelf: 'center',
+                justifyContent: 'space-between',
+                maxWidth: '130px',
+                margin: '10px 0 10px 0',
+              }}
+            >
+              <Typography> {t('profile.viewAll')}</Typography>
+              <BiChevronRight size={30} />
+            </ButtonBase>
+          </Box>
         </Box>
       </Box>
     </>

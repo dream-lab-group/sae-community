@@ -63,8 +63,9 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
             {currentUser.last_name}
           </Typography>
         </Box>
-        {/* @ts-expect-error: todo */}
-        <Typography>{t(`courses.${currentUser.course}.label`)}</Typography>
+        <Typography>
+          {currentUser.course.charAt(0).toUpperCase() + currentUser.course.slice(1)}
+        </Typography>
       </Box>
     </Box>
   );

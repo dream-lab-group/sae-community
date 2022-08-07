@@ -12,7 +12,6 @@ import { UserDescription } from '../../common/components/profile/user-descriptio
 import { UserInformation } from '../../common/components/profile/user-information';
 import { UserInterest } from '../../common/components/profile/user-interest';
 import { UserSkills } from '../../common/components/profile/user-skills';
-import { FiMail } from 'react-icons/fi';
 import { apiClient } from '../../common/data/apiClient';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
@@ -201,52 +200,9 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
                 </Box>
               </>
             )}
-            {lgBreakpointUp ? (
-              <Typography
-                onClick={EditProfile}
-                sx={{
-                  fontSize: '20px',
-                  alignSelf: 'flex-start',
-                  background: '#7514f5',
-                  width: '15rem',
-                  padding: '.5rem',
-                  borderRadius: '10px',
-                  textAlign: 'center',
-                  color: 'white',
-                  cursor: 'pointer',
-                  boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-                  marginTop: '3rem',
-                }}
-              >
-                {t('profile.editProfile')}
-              </Typography>
-            ) : (
-              <></>
-            )}
+
           </Box>
           <LastProjects currentUser={currentUser} />
-          {lgBreakpointDown ? (
-            <Typography
-              onClick={EditProfile}
-              sx={{
-                fontSize: '20px',
-                alignSelf: 'flex-start',
-                background: '#7514f5',
-                width: '15rem',
-                padding: '.5rem',
-                borderRadius: '10px',
-                textAlign: 'center',
-                color: 'white',
-                cursor: 'pointer',
-                boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-                marginTop: '3rem',
-              }}
-            >
-              {t('profile.editProfile')}
-            </Typography>
-          ) : (
-            <></>
-          )}
         </Box>
         {lgBreakpointDown ? (
           <Typography
