@@ -56,7 +56,8 @@ export const UserDescription = ({ currentUser }: UserInformationProps) => {
       <Box
         sx={{
           display: 'flex',
-          flexDirection: `${smBreakpointDown ? 'column' : 'row'}`,
+          //     flexDirection: `${smBreakpointDown ? 'column' : 'row'}`,
+          flexWrap: 'wrap',
           height: 'auto',
           padding: 'none',
           margin: 'none',
@@ -88,7 +89,10 @@ export const UserDescription = ({ currentUser }: UserInformationProps) => {
         ) : (
           <Box
             className="user-profile-url-active"
-            sx={{ marginTop: `${smBreakpointDown ? '20px' : ''}`, width:"12rem" }}
+            sx={{
+              marginTop: `${smBreakpointDown ? '20px' : ''}`,
+              width: '12rem',
+            }}
           >
             <a
               href={`https://${currentUser.url_youtube}`}
@@ -114,7 +118,10 @@ export const UserDescription = ({ currentUser }: UserInformationProps) => {
         ) : (
           <Box
             className="user-profile-url-active"
-            sx={{ marginTop: `${smBreakpointDown ? '20px' : ''}`, width:"12rem" }}
+            sx={{
+              marginTop: `${smBreakpointDown ? '20px' : ''}`,
+              width: '12rem',
+            }}
           >
             <a
               href={`https://${currentUser.url_instagram}`}
@@ -140,7 +147,10 @@ export const UserDescription = ({ currentUser }: UserInformationProps) => {
         ) : (
           <Box
             className="user-profile-url-active"
-            sx={{ marginTop: `${smBreakpointDown ? '20px' : ''}`, width:"12rem" }}
+            sx={{
+              marginTop: `${smBreakpointDown ? '20px' : ''}`,
+              width: '12rem',
+            }}
           >
             <a
               href={`https://${currentUser.url_linkedin}`}
