@@ -1,6 +1,14 @@
-import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  Grid,
+  ThemeProvider,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import React, { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { appTheme } from '..';
 import { CommunityHead } from '../../common/components/community-head';
 import { LogIn } from '../../common/components/session/login';
 import { ResetPassword } from '../../common/components/session/reset-password';
@@ -37,7 +45,8 @@ const SignIn = () => {
   };
 
   return (
-    <>
+    // @ts-expect-error: Todo
+    <ThemeProvider theme={appTheme}>
       <CommunityHead />
       <Grid
         container
@@ -147,7 +156,7 @@ const SignIn = () => {
           </Grid>
         )}
       </Grid>
-    </>
+    </ThemeProvider>
   );
 };
 

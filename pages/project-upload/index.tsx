@@ -1,3 +1,4 @@
+import { Directus } from '@directus/sdk';
 import {
   Box,
   ButtonBase,
@@ -5,29 +6,29 @@ import {
   Grid,
   Switch,
   TextField,
+  ThemeProvider,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { CommunityHead } from '../../common/components/community-head';
-import { useTranslation } from 'react-i18next';
-import { FileUpload } from '../../common/components/project-upload/file-upload';
-import React, { useEffect, useState } from 'react';
-import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
-import { useRouter } from 'next/router';
-import { directus } from '..';
-import { apiClient } from '../../common/data/apiClient';
 import { FormikProvider, useFormik } from 'formik';
-import * as yup from 'yup';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { BiPlus } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
-import { EmbedUrl } from '../../common/components/project-upload/modules/embed-url';
+import * as yup from 'yup';
+import { appTheme, directus } from '..';
+import TipTapEditor from '../../common/components/common/tiptap-editor';
+import { CommunityHead } from '../../common/components/community-head';
+import { FileUpload } from '../../common/components/project-upload/file-upload';
 import { AlumniCourseSelection } from '../../common/components/project-upload/modules/alumni-course-selection';
 import { Collaborators } from '../../common/components/project-upload/modules/collaborators';
-import { ProjectUploadButtons } from '../../common/components/project-upload/modules/project-upload-buttons';
+import { EmbedUrl } from '../../common/components/project-upload/modules/embed-url';
 import { ProgramsUsed } from '../../common/components/project-upload/modules/programs-used';
-import TipTapEditor from '../../common/components/common/tiptap-editor';
-import { Directus } from '@directus/sdk';
-import { BiPlus } from 'react-icons/bi';
+import { ProjectUploadButtons } from '../../common/components/project-upload/modules/project-upload-buttons';
+import { ThumbnailUpload } from '../../common/components/project-upload/thumbnail-upload';
+import { apiClient } from '../../common/data/apiClient';
 
 const ProjectUpload = () => {
   const { t } = useTranslation();
@@ -159,9 +160,9 @@ const ProjectUpload = () => {
 
   if (currentUser) {
     formik.values.user_created = currentUser.id;
-
     return (
-      <>
+      // @ts-expect-error: Todo
+      <ThemeProvider theme={appTheme}>
         <CommunityHead />
         <form onSubmit={formik.handleSubmit}>
           <Box
@@ -359,7 +360,7 @@ const ProjectUpload = () => {
                         inputProps={{ 'aria-label': 'controlled' }}
                       />
                     }
-                    label="SchulProjekt"
+                    label="Externes Projekt"
                   />
                 </Grid>
               </Grid>
@@ -390,7 +391,7 @@ const ProjectUpload = () => {
             </Box>
           </Box>
         </form>
-      </>
+      </ThemeProvider>
     );
   } else {
     return <></>;

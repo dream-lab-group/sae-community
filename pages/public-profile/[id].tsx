@@ -1,22 +1,15 @@
-import {
-  Box,
-  ButtonBase,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { NextPage } from 'next';
 import { Router, withRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Layout from '../../common/components/layout';
 import { LastProjects } from '../../common/components/profile/last-projects';
 import { UserDescription } from '../../common/components/profile/user-description';
 import { UserInformation } from '../../common/components/profile/user-information';
 import { UserInterest } from '../../common/components/profile/user-interest';
 import { UserSkills } from '../../common/components/profile/user-skills';
-import { FiMail } from 'react-icons/fi';
 import { apiClient } from '../../common/data/apiClient';
-import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
-import { NextPage } from 'next';
 
 type Props = {
   router: Router;

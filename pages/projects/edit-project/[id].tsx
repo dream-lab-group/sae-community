@@ -5,37 +5,37 @@ import {
   Grid,
   Switch,
   TextField,
+  ThemeProvider,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { Formik } from 'formik';
 import { NextPage } from 'next';
 import { Router, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BiPlus } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
-import { directus } from '../..';
+import * as yup from 'yup';
+import { appTheme, directus } from '../..';
+import { ProjectCollaborators } from '../../../common/components/common/project-collaborators';
 import TipTapEditor from '../../../common/components/common/tiptap-editor';
+import TipTapViewer from '../../../common/components/common/tiptap-viewer';
+import { UsedProgram } from '../../../common/components/common/used-programs';
 import { CommunityHead } from '../../../common/components/community-head';
 import { EmbedUrl } from '../../../common/components/project-upload/modules/embed-url';
 import { EditCollaborators } from '../../../common/components/project/edit-project/edit-collaborators';
 import { EditCourse } from '../../../common/components/project/edit-project/edit-course';
-import { EditFiles } from '../../../common/components/project/edit-project/edit-files';
 import { EditPrograms } from '../../../common/components/project/edit-project/edit-programs';
 import { EditProjectButtons } from '../../../common/components/project/edit-project/edit-project-buttons';
 import { EditThumbnail } from '../../../common/components/project/edit-project/edit-thumbnail';
-import { apiClient } from '../../../common/data/apiClient';
-import * as yup from 'yup';
-import { Formik } from 'formik';
-import { ProjectCollaborators } from '../../../common/components/common/project-collaborators';
-import TipTapViewer from '../../../common/components/common/tiptap-viewer';
-import { UsedProgram } from '../../../common/components/common/used-programs';
 import { ProjectAudioFile } from '../../../common/components/project/project-audio-file';
-import { ProjectEmbedded } from '../../../common/components/project/project-embedded';
-import { ProjectPictures } from '../../../common/components/project/project-pictures';
 import { ProjectButtonGroup } from '../../../common/components/project/project-button-group';
+import { ProjectEmbedded } from '../../../common/components/project/project-embedded';
 import { ProjectInformation } from '../../../common/components/project/project-information';
-import { BiPlus } from 'react-icons/bi';
+import { ProjectPictures } from '../../../common/components/project/project-pictures';
+import { apiClient } from '../../../common/data/apiClient';
 
 type Props = {
   router: Router;
@@ -102,7 +102,8 @@ const EditProject: NextPage = withRouter<Props>(
     };
 
     return projectData ? (
-      <>
+      // @ts-expect-error: Todo
+      <ThemeProvider theme={appTheme}>
         <CommunityHead />
         <Box
           sx={{
@@ -524,7 +525,7 @@ const EditProject: NextPage = withRouter<Props>(
             <IoCloseSharp size={28} />
           </Box>
         </Box>
-      </>
+      </ThemeProvider>
     ) : (
       <></>
     );

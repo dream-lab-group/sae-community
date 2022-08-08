@@ -1,27 +1,28 @@
 import {
   Box,
   ButtonBase,
+  ThemeProvider,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import { Router, withRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { BiMessageDetail } from 'react-icons/bi';
 import { BsXCircle } from 'react-icons/bs';
+import { FiMail } from 'react-icons/fi';
+import { IoInformationCircleOutline } from 'react-icons/io5';
+import { appTheme, directus } from '..';
+import { ProjectCollaborators } from '../../common/components/common/project-collaborators';
+import TipTapViewer from '../../common/components/common/tiptap-viewer';
+import { UsedProgram } from '../../common/components/common/used-programs';
+import { CommunityHead } from '../../common/components/community-head';
 import { ProjectAudioFile } from '../../common/components/project/project-audio-file';
 import { ProjectButtonGroup } from '../../common/components/project/project-button-group';
 import { ProjectEmbedded } from '../../common/components/project/project-embedded';
 import { ProjectInformation } from '../../common/components/project/project-information';
 import { ProjectPictures } from '../../common/components/project/project-pictures';
-import { BiMessageDetail } from 'react-icons/bi';
-import { IoInformationCircleOutline } from 'react-icons/io5';
-import { FiMail } from 'react-icons/fi';
-import { CommunityHead } from '../../common/components/community-head';
-import { useEffect, useState } from 'react';
 import { apiClient } from '../../common/data/apiClient';
-import TipTapViewer from '../../common/components/common/tiptap-viewer';
-import { UsedProgram } from '../../common/components/common/used-programs';
-import { ProjectCollaborators } from '../../common/components/common/project-collaborators';
-import { directus } from '..';
 
 type Props = {
   router: Router;
@@ -70,7 +71,8 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
 
   if (projectData) {
     return (
-      <>
+      // @ts-expect-error: Todo
+      <ThemeProvider theme={appTheme}>
         <CommunityHead />
         <Box
           sx={{
@@ -334,7 +336,7 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
             </Box>
           )}
         </Box>
-      </>
+      </ThemeProvider>
     );
   } else {
     return <></>;

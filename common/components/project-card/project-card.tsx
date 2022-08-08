@@ -115,7 +115,7 @@ export const ProjectCard = ({
             justifyContent="center"
             alignItems="center"
             alignContent="center"
-            sx={{ cursor: 'pointer', border: 'none' }}
+            sx={{ cursor: 'pointer', border: 'none', background: 'none' }}
             component="button"
             onClick={handleOpenProject}
           >
