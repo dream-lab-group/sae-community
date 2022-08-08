@@ -1,7 +1,7 @@
 import { Directus } from '@directus/sdk';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { GetServerSideProps, NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 import ProjectsOverview from '../common/components/projects-overview/projects-overview';
@@ -58,19 +58,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Home: NextPage<{ data: ProjectProperties }> = (props) => {
-  // force app to rehydrate after login to match the original HTML
-  // hasMounted, to false. While it's false, doesn't bother rendering the "real" content.
-  // const [hasMounted, setHasMounted] = useState(false);
-
-  // Inside the useEffect immediately trigger a re-render, setting hasMounted to true. While  true, the "real" content gets rendered.
-  // useEffect only triggers after the component has mounted
-  // useEffect(() => {
-  //   setHasMounted(true);
-  // }, []);
-  // if (!hasMounted) {
-  //   return null;
-  // }
-
   const [isLoading, setIsLoading] = useState(true);
   const [currentUserId, setCurrentUserId] = useState<any>();
   const [usedFilter, setUsedFilter] = useState<string>();

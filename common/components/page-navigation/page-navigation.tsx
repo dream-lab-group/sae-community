@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   Grid,
@@ -7,13 +8,13 @@ import {
   OutlinedInput,
   Select,
   useMediaQuery,
-  Box,
   useTheme,
 } from '@mui/material';
 import { Globals } from '../../utils/utils';
 
-import { HiOutlineSearch } from 'react-icons/hi';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { HiOutlineSearch } from 'react-icons/hi';
 import { PageNavigationElement } from './page-navigation-elements';
 
 type PageNavigationProps = {
@@ -28,6 +29,7 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
   const [activeTagFilter, setActiveTagFilter] = useState<string>();
   const [sortFilter, setSortFilter] = useState<string[]>([]);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -106,9 +108,14 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
                   <MenuItem value="">
                     <p>Nichts</p>
                   </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={10}>
+                    {t('navigation.newestProjects')}
+                  </MenuItem>
+                  <MenuItem value={20}>
+                    {t('navigation.oldestProjects')}
+                  </MenuItem>
+                  <MenuItem value={30}>{t('navigation.studentsAZ')}</MenuItem>
+                  <MenuItem value={40}>{t('navigation.stutendsZA')}</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

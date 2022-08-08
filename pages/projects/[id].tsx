@@ -1,7 +1,14 @@
-import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  Grid,
+  ThemeProvider,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { NextPage } from 'next';
 import { Router, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { appTheme } from '..';
 import Layout from '../../common/components/layout';
 import { ProjectCard } from '../../common/components/project-card/project-card';
 import { apiClient } from '../../common/data/apiClient';
@@ -40,7 +47,8 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   }, [setAllUserProjects, userId]);
 
   return (
-    <>
+    // @ts-expect-error: Todo
+    <ThemeProvider theme={appTheme}>
       <Box
         sx={{
           height: `${
@@ -82,7 +90,7 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
           );
         })}
       </Grid>
-    </>
+    </ThemeProvider>
   );
 });
 
