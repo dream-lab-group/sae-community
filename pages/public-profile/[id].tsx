@@ -1,8 +1,14 @@
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { NextPage } from 'next';
+import {
+  Box,
+  ThemeProvider,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Router, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { appTheme, directus } from '..';
 import Layout from '../../common/components/layout';
 import { LastProjects } from '../../common/components/profile/last-projects';
 import { UserDescription } from '../../common/components/profile/user-description';
@@ -34,6 +40,7 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   };
   const userId = router.asPath.split('/').at(-1);
   const [currentUser, setCurrentUser] = useState<any>('');
+  const [readMe, setReadMe] = useState<any>('');
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -47,233 +54,210 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
     getCurrentUser();
   }, [setCurrentUser, userId]);
 
+  useEffect(() => {
+    const readMe = async () => {
+      const readCurrentUser = await directus.users.me.read();
+      const response = await apiClient.get(`users/${readCurrentUser.id}`);
+      if (response.status === 200) {
+        setReadMe(response.data.data);
+      }
+    };
+    readMe();
+  }, [setReadMe]);
+
   if (currentUser) {
     return (
-      <Box
-        sx={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginBottom: '60px',
-          position: 'relative',
-        }}
-      >
-        <Box
-          sx={{
-            height: '80px',
-            background: '#192D3E',
-            width: '100%',
-            clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
-            display: 'flex',
-          }}
-        />
+      // @ts-expect-error: Todo
+      <ThemeProvider theme={appTheme}>
         <Box
           sx={{
             width: '100%',
             display: 'flex',
-            flexDirection: `${lgBreakpointDown && 'column'}`,
-            alignItems: `${lgBreakpointDown && 'center'}`,
-            maxWidth: `${
-              smBreakpointDown ? '381px' : lgBreakpointDown ? '774px' : '1150px'
-            }`,
-            paddingX: `${
-              smBreakpointDown ? '20px' : lgBreakpointDown ? '60px' : '40px'
-            }`,
-            justifyContent: `${lgBreakpointUp && 'space-between'}`,
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginBottom: '60px',
+            position: 'relative',
           }}
         >
           <Box
             sx={{
+              height: '80px',
+              background: '#192D3E',
+              width: '100%',
+              clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%);',
+              display: 'flex',
+            }}
+          />
+          <Box
+            sx={{
               width: '100%',
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              flexDirection: `${lgBreakpointDown && 'column'}`,
+              alignItems: `${lgBreakpointDown && 'center'}`,
               maxWidth: `${
                 smBreakpointDown
                   ? '381px'
                   : lgBreakpointDown
                   ? '774px'
-                  : '600px'
+                  : '1150px'
               }`,
+              paddingX: `${
+                smBreakpointDown ? '20px' : lgBreakpointDown ? '60px' : '40px'
+              }`,
+              justifyContent: `${lgBreakpointUp && 'space-between'}`,
             }}
           >
-            <UserInformation currentUser={currentUser} />
-            <UserDescription currentUser={currentUser} />
-            <Typography
+            <Box
               sx={{
-                fontWeight: 700,
-                fontSize: '18px',
-                marginTop: '30px',
                 width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                maxWidth: `${
+                  smBreakpointDown
+                    ? '381px'
+                    : lgBreakpointDown
+                    ? '774px'
+                    : '600px'
+                }`,
               }}
             >
-              {t('profile.programSkills')}
-            </Typography>
-            {currentUser.programs !== null ? (
-              <>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'flex-start',
-                    width: '100%',
-                    marginTop: '20px',
-                  }}
-                >
-                  {currentUser.programs.map(
-                    (program: { label: string; program: string }) => (
-                      <UserSkills
-                        key={program.label}
-                        userSkillsElement={program.program}
-                      />
-                    ),
-                  )}
-                </Box>
-              </>
-            ) : (
-              <>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-start',
-                    width: '100%',
-                  }}
-                >
-                  <Typography>
-                    {t('profile.noData')} {t('profile.programs')}
-                  </Typography>
-                </Box>
-              </>
-            )}
-            <Typography
-              sx={{
-                fontWeight: 700,
-                fontSize: '18px',
-                marginTop: '30px',
-                width: '100%',
-              }}
-            >
-              {t('profile.interests')}
-            </Typography>
-            {currentUser.interests !== null ? (
-              <>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'flex-start',
-                    width: '100%',
-                    marginTop: '20px',
-                  }}
-                >
-                  {currentUser.interests.map(
-                    (interest: { label: string; interest: string }) => {
-                      return (
-                        <UserInterest
-                          key={interest.label}
-                          userInterestElement={interest.interest}
+              <UserInformation currentUser={currentUser} />
+              <UserDescription currentUser={currentUser} />
+              <Typography
+                sx={{
+                  fontWeight: 700,
+                  fontSize: '18px',
+                  marginTop: '30px',
+                  width: '100%',
+                }}
+              >
+                {t('profile.programSkills')}
+              </Typography>
+              {currentUser.programs !== null ? (
+                <>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'flex-start',
+                      width: '100%',
+                      marginTop: '20px',
+                    }}
+                  >
+                    {currentUser.programs.map(
+                      (program: { label: string; program: string }) => (
+                        <UserSkills
+                          key={program.label}
+                          userSkillsElement={program.program}
                         />
-                      );
-                    },
-                  )}
-                </Box>
-              </>
-            ) : (
-              <>
-                <Box
+                      ),
+                    )}
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      width: '100%',
+                    }}
+                  >
+                    <Typography>
+                      {t('profile.noData')} {t('profile.programs')}
+                    </Typography>
+                  </Box>
+                </>
+              )}
+              <Typography
+                sx={{
+                  fontWeight: 700,
+                  fontSize: '18px',
+                  marginTop: '30px',
+                  width: '100%',
+                }}
+              >
+                {t('profile.interests')}
+              </Typography>
+              {currentUser.interests !== null ? (
+                <>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'flex-start',
+                      width: '100%',
+                      marginTop: '20px',
+                    }}
+                  >
+                    {currentUser.interests.map(
+                      (interest: { label: string; interest: string }) => {
+                        return (
+                          <UserInterest
+                            key={interest.label}
+                            userInterestElement={interest.interest}
+                          />
+                        );
+                      },
+                    )}
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      width: '100%',
+                    }}
+                  >
+                    <Typography>
+                      {t('profile.noData')} {t('profile.noInterests')}
+                    </Typography>
+                  </Box>
+                </>
+              )}
+            </Box>
+            <LastProjects currentUser={currentUser} readMe={readMe} />
+          </Box>
+          {lgBreakpointDown ? (
+            <>
+              {userId === readMe.id && (
+                <Typography
+                  onClick={EditProfile}
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-start',
-                    width: '100%',
+                    position: 'absolute',
+                    right: `${mdBreakpointDown ? '50px' : '45px'}`,
+                    //   right: 250,
+                    top: 55,
+                    fontSize: '20px',
+                    alignSelf: 'flex-start',
+                    background: '#7514f5',
+                    width: '10rem',
+                    padding: '.5rem',
+                    borderRadius: '10px',
+                    textAlign: 'center',
+                    color: 'white',
+                    cursor: 'pointer',
+                    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                    marginTop: '100px',
                   }}
                 >
-                  <Typography>
-                    {t('profile.noData')} {t('profile.noInterests')}
-                  </Typography>
-                </Box>
-              </>
-            )}
-
-          </Box>
-          <LastProjects currentUser={currentUser} />
+                  {t('profile.editProfile')}
+                </Typography>
+              )}
+            </>
+          ) : (
+            <></>
+          )}
         </Box>
-        {lgBreakpointDown ? (
-          <Typography
-            onClick={EditProfile}
-            sx={{
-              position: 'absolute',
-              right: `${mdBreakpointDown ? '50px' : '45px'}`,
-              //   right: 250,
-              top: 55,
-              fontSize: '20px',
-              alignSelf: 'flex-start',
-              background: '#7514f5',
-              width: '10rem',
-              padding: '.5rem',
-              borderRadius: '10px',
-              textAlign: 'center',
-              color: 'white',
-              cursor: 'pointer',
-              boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-              marginTop: '100px',
-            }}
-          >
-            {t('profile.editProfile')}
-          </Typography>
-        ) : (
-          //     <a
-          //       href={`https://${currentUser.url_youtube}`}
-          //       rel="noreferrer"
-          //       target="_blank"
-          //       style={{
-          //         position: 'fixed',
-          //         right: 0,
-          //         top: 160,
-          //         height: '50px',
-          //         width: '220px',
-          //         display: 'flex',
-          //         justifyContent: 'space-around',
-          //         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-          //         borderTopLeftRadius: '10px',
-          //         borderBottomLeftRadius: '10px',
-          //         background: '#D0A3BF',
-          //       }}
-          //     >
-          //       <Box
-          //         sx={{
-          //           height: '100%',
-          //           display: 'flex',
-          //           width: '25%',
-          //           alignItems: 'center',
-          //           justifyContent: 'center',
-          //         }}
-          //       >
-          //         <FiMail size={25} />
-          //       </Box>
-          //       <Box
-          //         sx={{
-          //           height: '100%',
-          //           display: 'flex',
-          //           width: '75%',
-          //           alignItems: 'center',
-          //           justifyContent: 'center',
-          //           background: '#fff',
-          //         }}
-          //       >
-          //         <Typography> {t('profile.contactNow')}</Typography>
-          //       </Box>
-          //     </a>
-          <></>
-        )}
-      </Box>
+      </ThemeProvider>
     );
   }
 });
 
-// @ts-expect-error: Todo
 MyProfile.getLayout = function getLayout(page: typeof MyProfile) {
-  // @ts-expect-error: Todo
   return <Layout>{page}</Layout>;
 };
 

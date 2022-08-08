@@ -136,48 +136,51 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             interests: userData.interests,
             user_files: null,
           }}
-          onSubmit={async (values: any) => {
-            const directus = new Directus('https://www.whatthebre.com/');
-
-            if (changedAvatar == true) {
-              const formData = new FormData();
-              formData.append('file', avatarFile[0]);
-              const avatarId = await directus.files.createOne(formData);
-
-              if (avatarId) {
-                await directus.users.me.update({
-                  first_name: values.first_name,
-                  last_name: values.last_name,
-                  avatar: avatarId.id,
-                  email: values.email,
-                  description: values.description,
-                  course: values.course,
-                  url_website: values.url_website,
-                  url_youtube: values.url_youtube,
-                  url_instagram: values.url_instagram,
-                  url_linkedin: values.url_linkedin,
-                  programs: values.programs,
-                  interests: values.interests,
-                });
-                router.push(`/public-profile/${userData.id}`);
-              }
-            } else {
-              await directus.users.me.update({
-                first_name: values.first_name,
-                last_name: values.last_name,
-                email: values.email,
-                description: values.description,
-                course: values.course,
-                url_website: values.url_website,
-                url_youtube: values.url_youtube,
-                url_instagram: values.url_instagram,
-                url_linkedin: values.url_linkedin,
-                programs: values.programs,
-                interests: values.interests,
-              });
-              router.push(`/public-profile/${userData.id}`);
-            }
+          onSubmit={(values: any) => {
+            console.log(values)
           }}
+      //     onSubmit={async (values: any) => {
+      //       const directus = new Directus('https://www.whatthebre.com/');
+
+      //       if (changedAvatar == true) {
+      //         const formData = new FormData();
+      //         formData.append('file', avatarFile[0]);
+      //         const avatarId = await directus.files.createOne(formData);
+
+      //         if (avatarId) {
+      //           await directus.users.me.update({
+      //             first_name: values.first_name,
+      //             last_name: values.last_name,
+      //             avatar: avatarId.id,
+      //             email: values.email,
+      //             description: values.description,
+      //             course: values.course,
+      //             url_website: values.url_website,
+      //             url_youtube: values.url_youtube,
+      //             url_instagram: values.url_instagram,
+      //             url_linkedin: values.url_linkedin,
+      //             programs: values.programs,
+      //             interests: values.interests,
+      //           });
+      //           router.push(`/public-profile/${userData.id}`);
+      //         }
+      //       } else {
+      //         await directus.users.me.update({
+      //           first_name: values.first_name,
+      //           last_name: values.last_name,
+      //           email: values.email,
+      //           description: values.description,
+      //           course: values.course,
+      //           url_website: values.url_website,
+      //           url_youtube: values.url_youtube,
+      //           url_instagram: values.url_instagram,
+      //           url_linkedin: values.url_linkedin,
+      //           programs: values.programs,
+      //           interests: values.interests,
+      //         });
+      //         router.push(`/public-profile/${userData.id}`);
+      //       }
+      //     }}
         >
           {(formikProps) => (
             <form onSubmit={formikProps.handleSubmit}>
