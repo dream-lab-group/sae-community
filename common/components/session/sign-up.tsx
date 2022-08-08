@@ -14,13 +14,13 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { useTranslation } from 'react-i18next';
-import { handleCreateNewUser } from '../../data/signup-signin/hooks';
 import { useState } from 'react';
-import { Globals } from '../../utils/utils';
+import { useTranslation } from 'react-i18next';
+import * as yup from 'yup';
 import { SessionContextProps } from '../../../pages/signin';
+import { handleCreateNewUser } from '../../data/signup-signin/hooks';
+import { Globals } from '../../utils/utils';
 
 const signUpValidationSchema = yup.object({
   first_name: yup.string().required('Bitte Vorname angeben'),
@@ -53,27 +53,22 @@ const modalStyle = {
   p: 4,
 };
 
-export const SignUp = ({ setSessionContext }: SessionContextProps) => {
+export const SignUp = ({
+  setSessionContext,
+  openSnackbar,
+  setOpenSnackbar,
+  errorMessage,
+  setErrorMessage,
+  handleCloseSnackbar,
+}: SessionContextProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
-
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const handleCloseSnackbar = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
   const [open, setOpen] = useState(false);
   const [createdUser, setCreatedUser] = useState('');
   const { t } = useTranslation();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
 
   const formik = useFormik({
     initialValues: {
@@ -111,9 +106,9 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
             setErrorMessage(
               'Die eingegebene E-Mail wird bereits von einem aktiven Account verwendet.',
             );
+            setOpenSnackbar(true);
           }
         }
-        setOpenSnackbar(true);
       }
     },
   });
@@ -351,6 +346,21 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
             </Box>
           </Box>
         </Box>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={5000}
+          onClose={handleCloseSnackbar}
+          sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
+        >
+          <Alert
+            severity="error"
+            variant="filled"
+            onClose={handleCloseSnackbar}
+            sx={{ fontSize: `${smBreakpointDown && '10px'}` }}
+          >
+            {errorMessage}
+          </Alert>
+        </Snackbar>
       </form>
       <Modal
         open={open}
@@ -379,21 +389,6 @@ export const SignUp = ({ setSessionContext }: SessionContextProps) => {
           </Typography>
         </Box>
       </Modal>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={5000}
-        onClose={handleCloseSnackbar}
-        sx={{ padding: `${smBreakpointDown && '2em'}` }}
-      >
-        <Alert
-          severity="error"
-          variant="filled"
-          onClose={handleClose}
-          sx={{ fontSize: `${smBreakpointDown && '10px'}` }}
-        >
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </>
   );
 };

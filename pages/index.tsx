@@ -1,7 +1,7 @@
 import { Directus } from '@directus/sdk';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { GetServerSideProps, NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
 import ProjectsOverview from '../common/components/projects-overview/projects-overview';

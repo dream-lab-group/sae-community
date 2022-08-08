@@ -2,7 +2,7 @@
   <img src="./public/dreamlab-logo.png" alt="Sae Community" width="300" />
 </div>
 &#xa0;
-<h2 align="center">Sae Community</h2>
+<h2 align="center">SAI Platform</h2>
 
 &#xa0;
 

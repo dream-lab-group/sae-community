@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { SetStateAction, useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CommunityHead } from '../../common/components/community-head';
 import { LogIn } from '../../common/components/session/login';
@@ -8,6 +8,11 @@ import { SignUp } from '../../common/components/session/sign-up';
 
 export type SessionContextProps = {
   setSessionContext: React.Dispatch<SetStateAction<string>>;
+  openSnackbar: boolean;
+  setOpenSnackbar: React.Dispatch<React.SetStateAction<boolean>>;
+  errorMessage: string | undefined;
+  setErrorMessage: React.Dispatch<React.SetStateAction<string | undefined>>;
+  handleCloseSnackbar: () => void;
 };
 
 const SignIn = () => {
@@ -18,6 +23,18 @@ const SignIn = () => {
 
   const { t } = useTranslation();
   const [sessionContext, setSessionContext] = useState('signin');
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
+
+  const handleCloseSnackbar = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   return (
     <>
@@ -40,11 +57,32 @@ const SignIn = () => {
             }}
           >
             {sessionContext === 'signin' ? (
-              <LogIn setSessionContext={setSessionContext} />
+              <LogIn
+                setSessionContext={setSessionContext}
+                openSnackbar={openSnackbar}
+                setOpenSnackbar={setOpenSnackbar}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+                handleCloseSnackbar={handleCloseSnackbar}
+              />
             ) : sessionContext === 'signup' ? (
-              <SignUp setSessionContext={setSessionContext} />
+              <SignUp
+                setSessionContext={setSessionContext}
+                openSnackbar={openSnackbar}
+                setOpenSnackbar={setOpenSnackbar}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+                handleCloseSnackbar={handleCloseSnackbar}
+              />
             ) : (
-              <ResetPassword setSessionContext={setSessionContext} />
+              <ResetPassword
+                setSessionContext={setSessionContext}
+                openSnackbar={openSnackbar}
+                setOpenSnackbar={setOpenSnackbar}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+                handleCloseSnackbar={handleCloseSnackbar}
+              />
             )}
           </Box>
           <Typography

@@ -1,18 +1,18 @@
 import {
+  Box,
   Chip,
   Grid,
-  Box,
+  Skeleton,
   Typography,
   useMediaQuery,
   useTheme,
-  Skeleton,
 } from '@mui/material';
 import Image from 'next/image';
-import { HiOutlineHeart, HiOutlineBookmark } from 'react-icons/hi';
-import React, { useEffect, useState } from 'react';
-import { apiClient } from '../../data/apiClient';
-import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { HiOutlineBookmark, HiOutlineHeart } from 'react-icons/hi';
+import { apiClient } from '../../data/apiClient';
 
 type ProjectCardProps = {
   projectId: string;

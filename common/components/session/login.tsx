@@ -8,13 +8,13 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { SessionContextProps } from '../../../pages/signin';
-import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
-import { directus, token } from '../../../pages';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import * as yup from 'yup';
+import { directus, token } from '../../../pages';
+import { SessionContextProps } from '../../../pages/signin';
 
 const loginValidationSchema = yup.object({
   email: yup
@@ -27,14 +27,18 @@ const loginValidationSchema = yup.object({
     .required('Darf nicht leer sein'),
 });
 
-export const LogIn = ({ setSessionContext }: SessionContextProps) => {
+export const LogIn = ({
+  setSessionContext,
+  openSnackbar,
+  setOpenSnackbar,
+  errorMessage,
+  setErrorMessage,
+  handleCloseSnackbar,
+}: SessionContextProps) => {
   const router = useRouter();
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
-
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -43,16 +47,6 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
       router.push('/');
     }
   }, []);
-
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -76,8 +70,13 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
             setErrorMessage(
               'Ungültige Anmeldeinformationen. Bitte versuche es erneut.',
             );
+            setOpenSnackbar(true);
+          } else if (reason.errors[0].message === 'User suspended.') {
+            setErrorMessage(
+              'Account wurde blockiert wegen zu vielen fehlgeschlagenen Anmeldeversuche. Bitte melde dich ans Admin-Team',
+            );
+            setOpenSnackbar(true);
           }
-          setOpenSnackbar(true);
         });
     },
   });
@@ -279,13 +278,13 @@ export const LogIn = ({ setSessionContext }: SessionContextProps) => {
           <Snackbar
             open={openSnackbar}
             autoHideDuration={5000}
-            onClose={handleClose}
+            onClose={handleCloseSnackbar}
             sx={{ padding: `${smBreakpointDown ? '2em' : ''}` }}
           >
             <Alert
               severity="error"
               variant="filled"
-              onClose={handleClose}
+              onClose={handleCloseSnackbar}
               sx={{ fontSize: `${smBreakpointDown ? '10px' : ''}` }}
             >
               {errorMessage}
