@@ -11,11 +11,12 @@ export const SkillsInterests = ({
 }) => {
   const programsData = Object.values(currentPrograms || {});
   const interestsData = Object.values(currentInterests || {});
+
   console.log(programsData);
 
   return programs || interests ? (
     <Grid container spacing={2}>
-      <Grid item sm={12} md={6} width="100%">
+      {/* <Grid item sm={12} md={6} width="100%">
         <Autocomplete
           multiple
           size="small"
@@ -38,8 +39,37 @@ export const SkillsInterests = ({
             </>
           )}
         />
-      </Grid>
+      </Grid> */}
+
       <Grid item sm={12} md={6} width="100%">
+        <Autocomplete
+          multiple
+          size="small"
+          freeSolo
+          options={programs}
+          sx={{ marginTop: '30px' }}
+          value={programsData}
+          // @ts-expect-error: todo
+          isOptionEqualToValue={(option, value) => option.label === value.label}
+          onChange={(e, value) => {
+            console.log(value);
+            formik.setFieldValue(
+              'programs',
+              value !== null ? value : formik.initialValues.programs,
+            );
+            if (value !== formik.initialValues.programs) {
+              console.log('New Data');
+              formik.setFieldValue();
+            }
+          }}
+          renderInput={(params) => (
+            <>
+              <TextField {...params} label="Programme" />
+            </>
+          )}
+        />
+      </Grid>
+      {/* <Grid item sm={12} md={6} width="100%">
         <Autocomplete
           multiple
           size="small"
@@ -60,7 +90,7 @@ export const SkillsInterests = ({
             </>
           )}
         />
-      </Grid>
+      </Grid> */}
     </Grid>
   ) : (
     <></>

@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import placeholderImage from '../../../public/assets/placeholder.png';
 import { apiClient } from '../../data/apiClient';
 
 type ProjectInformationProps = {
@@ -60,7 +61,26 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
             layout="fill"
           />
         ) : (
-          <></>
+          <Box
+            sx={{
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              border: '5px solid #7514f5',
+              background: '#fff',
+              marginRight: '30px',
+              position: 'relative',
+            }}
+          >
+            <Image
+              src={placeholderImage}
+              style={{ borderRadius: '50%' }}
+              layout="fill"
+              alt="profilepicture"
+              priority
+              className="project-image-border-radius image-container"
+            />
+          </Box>
         )}
       </Box>
       <Box sx={{ widht: '100%', marginLeft: '20px' }}>
