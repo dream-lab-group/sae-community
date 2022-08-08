@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import placeholderImage from '../../../public/assets/placeholder.png';
 import { useTranslation } from 'react-i18next';
+import placeholderImage from '../../../public/assets/placeholder.png';
 
 type UserInformationProps = {
   currentUser: any;
@@ -64,7 +64,8 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
           </Typography>
         </Box>
         <Typography>
-          {currentUser.course.charAt(0).toUpperCase() + currentUser.course.slice(1)}
+          {currentUser.course.charAt(0).toUpperCase() +
+            currentUser.course.slice(1)}
         </Typography>
       </Box>
     </Box>
