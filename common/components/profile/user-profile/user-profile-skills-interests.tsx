@@ -11,6 +11,7 @@ export const SkillsInterests = ({
 }) => {
   const programsData = Object.values(currentPrograms || {});
   const interestsData = Object.values(currentInterests || {});
+  console.log(programsData);
 
   return programs || interests ? (
     <Grid container spacing={2}>
@@ -18,12 +19,14 @@ export const SkillsInterests = ({
         <Autocomplete
           multiple
           size="small"
+          freeSolo
           options={programs}
           sx={{ marginTop: '30px' }}
           value={programsData}
           // @ts-expect-error: todo
           isOptionEqualToValue={(option, value) => option.label === value.label}
           onChange={(e, value) => {
+            console.log(value)
             formik.setFieldValue(
               'programs',
               value !== null ? value : formik.initialValues.programs,
@@ -82,7 +85,10 @@ const programs = [
   { label: 'Balsamiq', program: 'Balsamiq' },
   { label: 'Blender', program: 'Blender' },
   { label: 'Cinema4D', program: 'Cinema4D' },
-  { label: 'Blackmagic Design DaVinci Resolve', program: 'Blackmagic Design DaVinci Resolve' },
+  {
+    label: 'Blackmagic Design DaVinci Resolve',
+    program: 'Blackmagic Design DaVinci Resolve',
+  },
   { label: 'Docker', program: 'Docker' },
   { label: 'Figma', program: 'Figma' },
   { label: 'Final Cut Pro', program: 'Final Cut Pro' },
