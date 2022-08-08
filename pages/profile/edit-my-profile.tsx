@@ -1,3 +1,4 @@
+import { Directus } from '@directus/sdk';
 import {
   Box,
   Button,
@@ -5,16 +6,15 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { Directus } from '@directus/sdk';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
-import { UserProfileMyData } from '../../common/components/profile/user-profile/user-profile-my-data';
-import { UserAvatar, UserInformation } from '../../common/types/types';
-import { UserProfileUrls } from '../../common/components/profile/user-profile/user-profile-urls';
-import { SkillsInterests } from '../../common/components/profile/user-profile/user-profile-skills-interests';
 import { Formik } from 'formik';
-import * as yup from 'yup';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import * as yup from 'yup';
+import { UserProfileMyData } from '../../common/components/profile/user-profile/user-profile-my-data';
+import { SkillsInterests } from '../../common/components/profile/user-profile/user-profile-skills-interests';
+import { UserProfileUrls } from '../../common/components/profile/user-profile/user-profile-urls';
+import { UserAvatar, UserInformation } from '../../common/types/types';
 
 type EditMyProfileProps = {
   userData: UserInformation;
@@ -136,51 +136,48 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             interests: userData.interests,
             user_files: null,
           }}
-          onSubmit={(values: any) => {
-            console.log(values)
+          onSubmit={async (values: any) => {
+            const directus = new Directus('https://www.whatthebre.com/');
+
+            if (changedAvatar == true) {
+              const formData = new FormData();
+              formData.append('file', avatarFile[0]);
+              const avatarId = await directus.files.createOne(formData);
+
+              if (avatarId) {
+                await directus.users.me.update({
+                  first_name: values.first_name,
+                  last_name: values.last_name,
+                  avatar: avatarId.id,
+                  email: values.email,
+                  description: values.description,
+                  course: values.course,
+                  url_website: values.url_website,
+                  url_youtube: values.url_youtube,
+                  url_instagram: values.url_instagram,
+                  url_linkedin: values.url_linkedin,
+                  programs: values.programs,
+                  interests: values.interests,
+                });
+                router.push(`/public-profile/${userData.id}`);
+              }
+            } else {
+              await directus.users.me.update({
+                first_name: values.first_name,
+                last_name: values.last_name,
+                email: values.email,
+                description: values.description,
+                course: values.course,
+                url_website: values.url_website,
+                url_youtube: values.url_youtube,
+                url_instagram: values.url_instagram,
+                url_linkedin: values.url_linkedin,
+                programs: values.programs,
+                interests: values.interests,
+              });
+              router.push(`/public-profile/${userData.id}`);
+            }
           }}
-      //     onSubmit={async (values: any) => {
-      //       const directus = new Directus('https://www.whatthebre.com/');
-
-      //       if (changedAvatar == true) {
-      //         const formData = new FormData();
-      //         formData.append('file', avatarFile[0]);
-      //         const avatarId = await directus.files.createOne(formData);
-
-      //         if (avatarId) {
-      //           await directus.users.me.update({
-      //             first_name: values.first_name,
-      //             last_name: values.last_name,
-      //             avatar: avatarId.id,
-      //             email: values.email,
-      //             description: values.description,
-      //             course: values.course,
-      //             url_website: values.url_website,
-      //             url_youtube: values.url_youtube,
-      //             url_instagram: values.url_instagram,
-      //             url_linkedin: values.url_linkedin,
-      //             programs: values.programs,
-      //             interests: values.interests,
-      //           });
-      //           router.push(`/public-profile/${userData.id}`);
-      //         }
-      //       } else {
-      //         await directus.users.me.update({
-      //           first_name: values.first_name,
-      //           last_name: values.last_name,
-      //           email: values.email,
-      //           description: values.description,
-      //           course: values.course,
-      //           url_website: values.url_website,
-      //           url_youtube: values.url_youtube,
-      //           url_instagram: values.url_instagram,
-      //           url_linkedin: values.url_linkedin,
-      //           programs: values.programs,
-      //           interests: values.interests,
-      //         });
-      //         router.push(`/public-profile/${userData.id}`);
-      //       }
-      //     }}
         >
           {(formikProps) => (
             <form onSubmit={formikProps.handleSubmit}>
