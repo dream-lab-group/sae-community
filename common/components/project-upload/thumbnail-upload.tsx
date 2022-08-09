@@ -1,11 +1,11 @@
 import { Alert, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { FormikValues } from 'formik';
 import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
 import { IoCloseSharp } from 'react-icons/io5';
-import { FormikValues } from 'formik';
-import { useDropzone } from 'react-dropzone';
 
 type ThumbnailUploadProps = {
   label: string;
@@ -74,15 +74,20 @@ export const ThumbnailUpload = ({
       sx={{
         width: '100%',
         height: '100%',
+        marginTop: '30px',
+        marginBottom: '20px',
         borderRadius: '10px',
         position: 'relative',
+        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
       }}
     >
       {displayThumbnail && (
         <Image
           className="project-image-border-radius image-container"
           src={displayThumbnail}
-          layout="fill"
+          width="100%"
+          height="100%"
+          layout="responsive"
         />
       )}
       <Box
@@ -120,6 +125,7 @@ export const ThumbnailUpload = ({
             border: '3px dashed #00000033',
             borderRadius: '10px',
             marginTop: '30px',
+            marginBottom: '20px',
             cursor: 'pointer',
           }}
         >
@@ -197,30 +203,10 @@ export const ThumbnailUpload = ({
           <input {...getInputProps()} />
         </Box>
       ) : (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            height: `${smBreakpointDown ? '260px' : '450px'}`,
-            borderRadius: '10px',
-            marginTop: '30px',
-            boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-          }}
-        >
-          <Box
-            sx={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-            }}
-          >
-            {acceptedFileItem}
-          </Box>
-        </Box>
+        <>{acceptedFileItem}</>
       )}
       {fileRejections.length > 0 ? (
-        <Box sx={{ width: '100%', marginTop: '20px' }}>
+        <Box sx={{ width: '100%' }}>
           <Alert severity="error" variant="filled">
             <Typography
               sx={{
