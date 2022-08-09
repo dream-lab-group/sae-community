@@ -123,7 +123,8 @@ export const ProjectCard = ({
               src={imageUrl}
               layout="fill"
               quality={75}
-              className="project-image-border-radius image-container"
+              className="project-image-border-radius image-container-project-card"
+              priority
             />
             <Box
               component="button"

@@ -1,5 +1,4 @@
 import { useMediaQuery, useTheme } from '@mui/material';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { apiClient } from '../../data/apiClient';
@@ -48,6 +47,7 @@ export const ProjectPictures = ({
       navButtonsAlwaysVisible
       autoPlay={false}
       stopAutoPlayOnHover
+      indicators={false}
       navButtonsWrapperProps={
         files.length === 1
           ? {
@@ -68,12 +68,12 @@ export const ProjectPictures = ({
         width: '100%',
         height: `${
           smBreakpointDown
-            ? '250px'
-            : mdBreakpointDown
             ? '350px'
-            : lgBreakpointDown
+            : mdBreakpointDown
             ? '450px'
-            : '450px'
+            : lgBreakpointDown
+            ? '550px'
+            : '550px'
         }`,
         borderRadius: '10px',
         position: 'relative',

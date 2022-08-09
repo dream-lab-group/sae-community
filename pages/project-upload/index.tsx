@@ -117,21 +117,28 @@ const ProjectUpload = () => {
                 `https://www.whatthebre.com/items/projects?filter={ "cover_photo": { "_eq": "${fileId.id}" }}`,
               );
               if (result.status === 200) {
-                values.project_files.forEach(async (projectFile: any) => {
-                  const formData = new FormData();
-                  formData.append('name', projectFile.name);
-                  formData.append('file', projectFile);
-                  const fileRelationId = await directus.files.createOne(
-                    formData,
-                  );
-                  if (fileRelationId) {
-                    const projectsFiles = directus.items('projects_files');
-                    await projectsFiles.createOne({
-                      projects_id: result.data.data[0].id,
-                      directus_files_id: fileRelationId,
-                    });
-                    router.push(`/project/${result.data.data[0].id}`);
-                  }
+                await values.project_files.reduce(
+                  async (memo: any, projectFile: any) => {
+                    await memo;
+                    const formData = new FormData();
+                    formData.append('name', projectFile.name);
+                    formData.append('file', projectFile);
+                    const fileRelationId = await directus.files.createOne(
+                      formData,
+                    );
+                    if (fileRelationId) {
+                      const projectsFiles = directus.items('projects_files');
+                      await projectsFiles.createOne({
+                        projects_id: result.data.data[0].id,
+                        directus_files_id: fileRelationId,
+                      });
+                    }
+                  },
+                  undefined,
+                );
+                router.push({
+                  pathname: 'projects/edit-project/[pid]',
+                  query: { pid: result.data.data[0].id },
                 });
               }
             } else {
@@ -139,7 +146,10 @@ const ProjectUpload = () => {
                 `https://www.whatthebre.com/items/projects?filter={ "cover_photo": { "_eq": "${fileId.id}" }}`,
               );
               if (result.status === 200) {
-                router.push(`/project/${fileId.id}`);
+                router.push({
+                  pathname: 'projects/edit-project/[pid]',
+                  query: { pid: result.data.data[0].id },
+                });
               }
             }
           });
