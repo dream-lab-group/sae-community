@@ -35,7 +35,9 @@ export const UserProfileUrls = ({
             label="Webseiten URL"
             value={url_website || ''}
             onChange={formik.handleChange}
-            error={formik.touched.url_website && Boolean(formik.errors.url_website)}
+            error={
+              formik.touched.url_website && Boolean(formik.errors.url_website)
+            }
             helperText={formik.touched.url_website && formik.errors.url_website}
           />
         </Grid>
@@ -49,7 +51,9 @@ export const UserProfileUrls = ({
             label="Youtube URL"
             value={url_youtube || ''}
             onChange={formik.handleChange}
-            error={formik.touched.url_youtube && Boolean(formik.errors.url_youtube)}
+            error={
+              formik.touched.url_youtube && Boolean(formik.errors.url_youtube)
+            }
             helperText={formik.touched.url_youtube && formik.errors.url_youtube}
           />
         </Grid>
@@ -63,8 +67,13 @@ export const UserProfileUrls = ({
             label="Instagram URL"
             value={url_instagram || ''}
             onChange={formik.handleChange}
-            error={formik.touched.url_instagram && Boolean(formik.errors.url_instagram)}
-            helperText={formik.touched.url_instagram && formik.errors.url_instagram}
+            error={
+              formik.touched.url_instagram &&
+              Boolean(formik.errors.url_instagram)
+            }
+            helperText={
+              formik.touched.url_instagram && formik.errors.url_instagram
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -77,8 +86,12 @@ export const UserProfileUrls = ({
             label="Linkedin URL"
             value={url_linkedin || ''}
             onChange={formik.handleChange}
-            error={formik.touched.url_linkedin && Boolean(formik.errors.url_linkedin)}
-            helperText={formik.touched.url_linkedin && formik.errors.url_linkedin}
+            error={
+              formik.touched.url_linkedin && Boolean(formik.errors.url_linkedin)
+            }
+            helperText={
+              formik.touched.url_linkedin && formik.errors.url_linkedin
+            }
           />
         </Grid>
       </>

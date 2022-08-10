@@ -12,12 +12,15 @@ export const SkillsInterests = ({
   const programsData = Object.values(currentPrograms || {});
   const interestsData = Object.values(currentInterests || {});
 
-  console.log(programsData);
+  //   console.log(programsData);
+  const programElement = programs.map((element) => element);
+  //   programs.map((element) => console.log(element));
 
   return programs || interests ? (
     <Grid container spacing={2}>
       <Grid item sm={12} md={6} width="100%">
         <Autocomplete
+          id="test"
           multiple
           size="small"
           freeSolo
@@ -26,11 +29,21 @@ export const SkillsInterests = ({
           value={programsData}
           // @ts-expect-error: todo
           isOptionEqualToValue={(option, value) => option.label === value.label}
+          //     onChange={(e, value) => {
+          //       console.log(value);
+          //       formik.setFieldValue(
+          //         'programs',
+          //         value !== null ? value : formik.initialValues.programs,
+          //       );
+          //     }}
           onChange={(e, value) => {
-            console.log(value);
+            // console.log(value);
+            // console.log(programs);
             formik.setFieldValue(
               'programs',
-              value !== null ? value : formik.initialValues.programs,
+              value !== null
+                ? value || programs
+                : formik.initialValues.programs,
             );
           }}
           renderInput={(params) => (
@@ -69,34 +82,59 @@ export const SkillsInterests = ({
 };
 
 const programs = [
-  { label: 'Ableton', program: 'Ableton' },
-  { label: 'Adobe After Effects', program: 'Adobe After Effects' },
-  { label: 'Adobe Animate', program: 'Adobe Animate' },
-  { label: 'Adobe Audition', program: 'Adobe Audition' },
-  { label: 'Adobe Character Animator', program: 'Adobe Character Animator' },
-  { label: 'Adobe Dimension', program: 'Adobe Dimension' },
-  { label: 'Adobe Dreamweaver', program: 'Adobe Dreamweaver' },
-  { label: 'Adobe Illustrator', program: 'Adobe Illustrator' },
-  { label: 'Adobe InDesign', program: 'Adobe InDesign' },
-  { label: 'Adobe Lightroom', program: 'Adobe Lightroom' },
-  { label: 'Adobe Photoshop', program: 'Adobe Photoshop' },
-  { label: 'Adobe Premiere Pro', program: 'Adobe Premiere Pro' },
-  { label: 'Adobe Premiere Rush', program: 'Adobe Premiere Rush' },
-  { label: 'Adobe XD', program: 'Adobe XD' },
-  { label: 'Balsamiq', program: 'Balsamiq' },
-  { label: 'Blender', program: 'Blender' },
-  { label: 'Cinema4D', program: 'Cinema4D' },
-  {
-    label: 'Blackmagic Design DaVinci Resolve',
-    program: 'Blackmagic Design DaVinci Resolve',
-  },
-  { label: 'Docker', program: 'Docker' },
-  { label: 'Figma', program: 'Figma' },
-  { label: 'Final Cut Pro', program: 'Final Cut Pro' },
-  { label: 'Garage Band', program: 'Garage Band' },
-  { label: 'Sketch', program: 'Skech' },
-  { label: 'Visual Studio Code', program: 'VsCode' },
-  { label: 'Maya', program: 'Maya' },
+  'Ableton',
+  'Adobe After Effects',
+  'Adobe Animate',
+  'Adobe Audition',
+  'Adobe Character Animator',
+  'Adobe Dimension',
+  'Adobe Dreamweaver',
+  'Adobe Illustrator',
+  'Adobe InDesign',
+  'Adobe Lightroom',
+  'Adobe Photoshop',
+  'Adobe Premiere Pro',
+  'Adobe Premiere Rush',
+  "Adobe XD', program",
+  'Balsamiq',
+  'Blender',
+  'Cinema4D',
+  'Blackmagic Design DaVinci Resolve',
+  'Docker',
+  'Figma',
+  'Final Cut Pro',
+  'Garage Band',
+  'Sketch',
+  'Visual Studio Code',
+  'Maya',
+  //   { label: 'Ableton', program: 'Ableton' },
+  //   { label: 'Adobe After Effects', program: 'Adobe After Effects' },
+  //   { label: 'Adobe Animate', program: 'Adobe Animate' },
+  //   { label: 'Adobe Audition', program: 'Adobe Audition' },
+  //   { label: 'Adobe Character Animator', program: 'Adobe Character Animator' },
+  //   { label: 'Adobe Dimension', program: 'Adobe Dimension' },
+  //   { label: 'Adobe Dreamweaver', program: 'Adobe Dreamweaver' },
+  //   { label: 'Adobe Illustrator', program: 'Adobe Illustrator' },
+  //   { label: 'Adobe InDesign', program: 'Adobe InDesign' },
+  //   { label: 'Adobe Lightroom', program: 'Adobe Lightroom' },
+  //   { label: 'Adobe Photoshop', program: 'Adobe Photoshop' },
+  //   { label: 'Adobe Premiere Pro', program: 'Adobe Premiere Pro' },
+  //   { label: 'Adobe Premiere Rush', program: 'Adobe Premiere Rush' },
+  //   { label: 'Adobe XD', program: 'Adobe XD' },
+  //   { label: 'Balsamiq', program: 'Balsamiq' },
+  //   { label: 'Blender', program: 'Blender' },
+  //   { label: 'Cinema4D', program: 'Cinema4D' },
+  //   {
+  //     label: 'Blackmagic Design DaVinci Resolve',
+  //     program: 'Blackmagic Design DaVinci Resolve',
+  //   },
+  //   { label: 'Docker', program: 'Docker' },
+  //   { label: 'Figma', program: 'Figma' },
+  //   { label: 'Final Cut Pro', program: 'Final Cut Pro' },
+  //   { label: 'Garage Band', program: 'Garage Band' },
+  //   { label: 'Sketch', program: 'Skech' },
+  //   { label: 'Visual Studio Code', program: 'VsCode' },
+  //   { label: 'Maya', program: 'Maya' },
 ];
 
 const interests = [

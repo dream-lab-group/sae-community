@@ -27,6 +27,7 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const containsHttps = (string: any) => /http*/.test(string);
 
   const [avatarFile, setAvatarFile] = useState<any>([]);
   const [changedAvatar, setChangedAvatar] = useState<boolean>(false);
@@ -63,7 +64,11 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       .string()
       .matches(
         /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        'Bitte gib einen URL ein.',
+        'Bitte gib einen URL ein. Beispielsweise: www.sai.ch',
+      )
+      .test(
+        'Bitte füge dein URL ohne HTTP ein.',
+        (value) => !containsHttps(value),
       )
       .nullable(true),
     url_youtube: yup
@@ -97,10 +102,11 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       .nullable(true),
     interests: yup
       .array(
-        yup.object().shape({
+        yup.string(),
+        /*         yup.object().shape({
           label: yup.string(),
           interest: yup.string(),
-        }),
+        }), */
       )
       .nullable(true),
   });
@@ -136,6 +142,9 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             interests: userData.interests,
             user_files: null,
           }}
+          //     onSubmit={(values: any) => {
+          //       console.log(values);
+          //     }}
           onSubmit={async (values: any) => {
             const directus = new Directus('https://www.whatthebre.com/');
 
