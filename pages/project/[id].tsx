@@ -145,11 +145,8 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
                   }}
                 >
                   {projectData.programs.map(
-                    (program: { name: string; label: string }) => (
-                      <UsedProgram
-                        key={program.label}
-                        usedProgramElement={program.label}
-                      />
+                    (program: string, index: number) => (
+                      <UsedProgram key={index} usedProgramElement={program} />
                     ),
                   )}
                 </Box>

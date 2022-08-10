@@ -1,7 +1,7 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { IoLogoLinkedin, IoLogoYoutube, IoLogoInstagram } from 'react-icons/io';
 import { CgWebsite } from 'react-icons/cg';
+import { IoLogoInstagram, IoLogoLinkedin, IoLogoYoutube } from 'react-icons/io';
 
 type UserInformationProps = {
   currentUser: any;
@@ -166,7 +166,7 @@ export const UserDescription = ({ currentUser }: UserInformationProps) => {
             >
               <IoLogoLinkedin
                 style={{ fontSize: '1.5rem', marginRight: '.5rem' }}
-              />{' '}
+              />
               <Typography>LinkedIn</Typography>
             </a>
           </Box>

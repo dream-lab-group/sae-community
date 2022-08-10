@@ -17,7 +17,6 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const mdBreakpointUp = useMediaQuery(theme.breakpoints.up('md'));
   const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -100,7 +99,7 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
           )}
           {userId !== readMe.id && (
             <a
-              href={`mailto:${currentUser.mail}?subject=${currentUser.first_name} möchte dich über Sai Plattform kontaktieren.`}
+              href={`mailto:${currentUser.email}?subject=${readMe.first_name} möchte dich über Sai Plattform kontaktieren.`}
               rel="noreferrer"
               target="_blank"
               style={{
@@ -304,21 +303,54 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
       </Box>
     </Box>
   ) : (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-start',
-        flexDirection: 'column',
-        width: '100%',
-        marginTop: `${lgBreakpointUp ? '7rem' : '2rem'}`,
-      }}
-    >
-      <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
-        {t('profile.lastProjects')}
-      </Typography>
-      <Typography>
-        {t('profile.noData')} {t('profile.noLastProjects')}
-      </Typography>
-    </Box>
+    <>
+      {lgBreakpointUp ? (
+        <Box
+          sx={{
+            marginLeft: `${lgBreakpointUp ? '3rem' : ' '}`,
+            maxWidth: `${
+              lgBreakpointDown
+                ? '774px'
+                : mdBreakpointDown
+                ? '500px'
+                : smBreakpointDown
+                ? '381px'
+                : '367px'
+            }`,
+          }}
+        >
+          <Typography
+            onClick={EditProfile}
+            sx={{
+              fontSize: '20px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: '#7514f5',
+              height: '60px',
+              width: '336px',
+              padding: '.5rem',
+              borderRadius: '10px',
+              textAlign: 'center',
+              color: 'white',
+              cursor: 'pointer',
+              boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+              marginTop: '110px',
+              marginBottom: '20px',
+            }}
+          >
+            {t('profile.editProfile')}
+          </Typography>
+          <Typography sx={{ fontWeight: 700, fontSize: '18px' }}>
+            {t('profile.lastProjects')}
+          </Typography>
+          <Typography>
+            {t('profile.noData')} {t('profile.noLastProjects')}
+          </Typography>
+        </Box>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };

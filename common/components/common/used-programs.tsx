@@ -6,6 +6,7 @@ type UsedProgramProps = {
 };
 
 export const UsedProgram = ({ usedProgramElement }: UsedProgramProps) => {
+  console.log(usedProgramElement);
   return (
     <Box
       className="user-default-button"

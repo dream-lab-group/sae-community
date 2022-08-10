@@ -1,4 +1,3 @@
-import { Directus } from '@directus/sdk';
 import {
   Box,
   Button,
@@ -11,6 +10,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
+import { directus } from '..';
 import { UserProfileMyData } from '../../common/components/profile/user-profile/user-profile-my-data';
 import { SkillsInterests } from '../../common/components/profile/user-profile/user-profile-skills-interests';
 import { UserProfileUrls } from '../../common/components/profile/user-profile/user-profile-urls';
@@ -92,23 +92,6 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
         'Bitte gib einen URL ein.',
       )
       .nullable(true),
-    programs: yup
-      .array(
-        yup.object().shape({
-          label: yup.string(),
-          program: yup.string(),
-        }),
-      )
-      .nullable(true),
-    interests: yup
-      .array(
-        yup.string(),
-        /*         yup.object().shape({
-          label: yup.string(),
-          interest: yup.string(),
-        }), */
-      )
-      .nullable(true),
   });
 
   return (
@@ -142,12 +125,7 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             interests: userData.interests,
             user_files: null,
           }}
-          //     onSubmit={(values: any) => {
-          //       console.log(values);
-          //     }}
           onSubmit={async (values: any) => {
-            const directus = new Directus('https://www.whatthebre.com/');
-
             if (changedAvatar == true) {
               const formData = new FormData();
               formData.append('file', avatarFile[0]);
