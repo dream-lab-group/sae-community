@@ -1,4 +1,3 @@
-import { Directus } from '@directus/sdk';
 import {
   Box,
   Button,
@@ -11,6 +10,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
+import { directus } from '..';
 import { UserProfileMyData } from '../../common/components/profile/user-profile/user-profile-my-data';
 import { SkillsInterests } from '../../common/components/profile/user-profile/user-profile-skills-interests';
 import { UserProfileUrls } from '../../common/components/profile/user-profile/user-profile-urls';
@@ -27,6 +27,7 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
+  const containsHttps = (string: any) => /http*/.test(string);
 
   const [avatarFile, setAvatarFile] = useState<any>([]);
   const [changedAvatar, setChangedAvatar] = useState<boolean>(false);
@@ -63,7 +64,11 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       .string()
       .matches(
         /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        'Bitte gib einen URL ein.',
+        'Bitte gib einen URL ein. Beispielsweise: www.sai.ch',
+      )
+      .test(
+        'Bitte füge dein URL ohne HTTP ein.',
+        (value) => !containsHttps(value),
       )
       .nullable(true),
     url_youtube: yup
@@ -85,22 +90,6 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
       .matches(
         /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
         'Bitte gib einen URL ein.',
-      )
-      .nullable(true),
-    programs: yup
-      .array(
-        yup.object().shape({
-          label: yup.string(),
-          program: yup.string(),
-        }),
-      )
-      .nullable(true),
-    interests: yup
-      .array(
-        yup.object().shape({
-          label: yup.string(),
-          interest: yup.string(),
-        }),
       )
       .nullable(true),
   });
@@ -137,8 +126,6 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
             user_files: null,
           }}
           onSubmit={async (values: any) => {
-            const directus = new Directus('https://www.whatthebre.com/');
-
             if (changedAvatar == true) {
               const formData = new FormData();
               formData.append('file', avatarFile[0]);

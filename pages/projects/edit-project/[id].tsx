@@ -443,10 +443,10 @@ const EditProject: NextPage = withRouter<Props>(
                       }}
                     >
                       {projectData.programs.map(
-                        (program: { name: string; label: string }) => (
+                        (program: string, index: number) => (
                           <UsedProgram
-                            key={program.label}
-                            usedProgramElement={program.label}
+                            key={index}
+                            usedProgramElement={program}
                           />
                         ),
                       )}

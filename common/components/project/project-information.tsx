@@ -47,7 +47,6 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
           width: '80px',
           height: '80px',
           borderRadius: '50%',
-          background: '#e2a165',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -55,20 +54,35 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
         }}
       >
         {avatarId !== null ? (
-          <Image
-            className="project-image-border-radius image-container"
-            src={avatarUrl}
-            layout="fill"
-          />
+          <Box
+            sx={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+            }}
+          >
+            <Image
+              className="project-image-border-radius image-container"
+              src={avatarUrl}
+              layout="fill"
+              alt="Profile Picture"
+            />
+          </Box>
         ) : (
           <Box
             sx={{
-              width: '100px',
-              height: '100px',
+              width: '80px',
+              height: '80px',
               borderRadius: '50%',
               border: '5px solid #7514f5',
               background: '#fff',
-              marginRight: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               position: 'relative',
             }}
           >
@@ -76,8 +90,7 @@ export const ProjectInformation = ({ data }: ProjectInformationProps) => {
               src={placeholderImage}
               style={{ borderRadius: '50%' }}
               layout="fill"
-              alt="profilepicture"
-              priority
+              alt="Profile Picture"
               className="project-image-border-radius image-container"
             />
           </Box>

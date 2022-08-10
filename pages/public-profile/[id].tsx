@@ -146,11 +146,8 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
                     }}
                   >
                     {currentUser.programs.map(
-                      (program: { label: string; program: string }) => (
-                        <UserSkills
-                          key={program.label}
-                          userSkillsElement={program.program}
-                        />
+                      (program: string, index: number) => (
+                        <UserSkills key={index} userSkillsElement={program} />
                       ),
                     )}
                   </Box>
@@ -192,11 +189,11 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
                     }}
                   >
                     {currentUser.interests.map(
-                      (interest: { label: string; interest: string }) => {
+                      (interest: string, index: number) => {
                         return (
                           <UserInterest
-                            key={interest.label}
-                            userInterestElement={interest.interest}
+                            key={index}
+                            userInterestElement={interest}
                           />
                         );
                       },
