@@ -33,6 +33,14 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
     router.push(`/projects/${userId}`);
   };
 
+  console.log(userProject);
+  console.log(allUserProjects);
+
+  const ShowProject = () => {
+    router.push(`/project/${userProject[0].id}`);
+    //     console.log(userProject[0]);
+  };
+
   useEffect(() => {
     const fetchMyProjects = async () => {
       const projectsResponse = await apiClient.get(
@@ -207,6 +215,7 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
                       margin: '0 10px 0 10px',
                     }}
                     key={id}
+                    onClick={ShowProject}
                   >
                     <Image
                       className="project-image-border-radius image-container"
