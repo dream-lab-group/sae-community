@@ -17,24 +17,24 @@ export class Globals {
   public static readonly noneValue = 'none';
 
   public static readonly allCourses = [
+    'audio',
+    'contentcreation',
     'film',
     'gameart',
     'gamesprogramming',
     'webdesign',
-    'audio',
     'visualeffects',
-    'contentcreation',
     'alumni',
   ];
 
   public static readonly uploadCourses = [
+    'audio',
+    'contentcreation',
     'film',
     'gameart',
     'gamesprogramming',
     'webdesign',
-    'audio',
     'visualeffects',
-    'contentcreation',
   ];
 
   public static readonly mobileMenuProfileElements = [
@@ -45,13 +45,13 @@ export class Globals {
   ];
 
   public static readonly pageNavigationElements = [
+    'audio',
+    'contentcreation',
     'film',
     'gameart',
     'gamesprogramming',
     'webdesign',
-    'audio',
     'visualeffects',
-    'contentcreation',
   ];
 
   public static readonly userSkills = [

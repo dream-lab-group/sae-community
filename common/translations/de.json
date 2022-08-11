@@ -15,7 +15,6 @@
   },
   "loginRegistration": {
     "createAccount": "Erstelle ein Benutzerkonto",
-    "termsOfUse": "Wenn du ein Konto erstellst, erklärst du dich mit unseren Nutzungsbedingungen, Datenschutzrichtlinien und unseren Standardeinstellungen für Benachrichtigungen einverstanden.",
     "login": "Hier anmelden",
     "existingUser": "Du hast bereits ein Konto?",
     "welcomeBack": "Willkommen zurück!",
