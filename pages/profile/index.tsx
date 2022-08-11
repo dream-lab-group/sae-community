@@ -5,19 +5,19 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import Layout from '../../common/components/layout';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 import { SetStateAction, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaRegUser } from 'react-icons/fa';
 import { RiSettings3Line } from 'react-icons/ri';
-import { NextPage } from 'next';
-import { directus } from '..';
+import { directus, token } from '..';
+import Layout from '../../common/components/layout';
 import { apiClient } from '../../common/data/apiClient';
 import { UserInformation } from '../../common/types/types';
 
-import ProfileSettings from './profile-settings';
 import EditMyProfile from './edit-my-profile';
+import ProfileSettings from './profile-settings';
 
 export type SessionContextProps = {
   setSessionContext?: React.Dispatch<SetStateAction<string>>;
@@ -40,6 +40,13 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    //redirect to home if aleady logged in
+    if (!token) {
+      router.push('/signin');
+    }
+  }, []);
+
+  useEffect(() => {
     const getCurrentUser = async () => {
       const userId = await directus.users.me.read();
       const userResponse = await apiClient.get(`users/${userId.id}`);
@@ -53,8 +60,8 @@ const ProfileOverview: NextPage<{ data: UserInformation }> = (props) => {
 
   const userAvatar = currentUser.avatar;
   const handleCancelProfileSaving = () => {
-      router.push(`/public-profile/${currentUser.id}`);
-    };
+    router.push(`/public-profile/${currentUser.id}`);
+  };
 
   return (
     <>

@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { BiPlus } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
 import * as yup from 'yup';
-import { appTheme, directus } from '..';
+import { appTheme, directus, token } from '..';
 import TipTapEditor from '../../common/components/common/tiptap-editor';
 import { CommunityHead } from '../../common/components/community-head';
 import { FileUpload } from '../../common/components/project-upload/file-upload';
@@ -42,6 +42,13 @@ const ProjectUpload = () => {
   const [thumbnailFile, setThumbnailFile] = useState<any>([]);
 
   const router = useRouter();
+
+  useEffect(() => {
+    //redirect to home if aleady logged in
+    if (!token) {
+      router.push('/signin');
+    }
+  }, []);
 
   const handleCancelProjectUpload = () => {
     router.push('/');

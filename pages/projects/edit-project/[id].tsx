@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { BiPlus } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
 import * as yup from 'yup';
-import { appTheme, directus } from '../..';
+import { appTheme, directus, token } from '../..';
 import { ProjectCollaborators } from '../../../common/components/common/project-collaborators';
 import TipTapEditor from '../../../common/components/common/tiptap-editor';
 import TipTapViewer from '../../../common/components/common/tiptap-viewer';
@@ -62,6 +62,13 @@ const EditProject: NextPage = withRouter<Props>(
     const [currentUser, setCurrentUser] = useState<any>();
     const [changedThumbnail, setChangedThumbnail] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
+
+    useEffect(() => {
+      //redirect to home if aleady logged in
+      if (!token) {
+        router.push('/signin');
+      }
+    }, []);
 
     const handleCancelProjectUpload = () => {
       setEditMode(false);

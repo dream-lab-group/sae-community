@@ -1,6 +1,7 @@
 import { Directus } from '@directus/sdk';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../common/components/layout';
 import { PageNavigation } from '../common/components/page-navigation/page-navigation';
@@ -58,9 +59,17 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Home: NextPage<{ data: ProjectProperties }> = (props) => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [currentUserId, setCurrentUserId] = useState<any>();
   const [usedFilter, setUsedFilter] = useState<string>();
+
+  useEffect(() => {
+    //redirect to home if aleady logged in
+    if (!token) {
+      router.push('/signin');
+    }
+  }, []);
 
   useEffect(() => {
     const getCurrentUser = async () => {

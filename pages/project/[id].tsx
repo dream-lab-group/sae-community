@@ -12,7 +12,7 @@ import { BiMessageDetail } from 'react-icons/bi';
 import { BsXCircle } from 'react-icons/bs';
 import { FiMail } from 'react-icons/fi';
 import { IoInformationCircleOutline } from 'react-icons/io5';
-import { appTheme, directus } from '..';
+import { appTheme, directus, token } from '..';
 import { ProjectCollaborators } from '../../common/components/common/project-collaborators';
 import TipTapViewer from '../../common/components/common/tiptap-viewer';
 import { UsedProgram } from '../../common/components/common/used-programs';
@@ -42,6 +42,13 @@ const Project = withRouter<Props>(({ router }: PropsWithRouter) => {
   const projectId = router.asPath.split('/').at(-1);
   const [projectData, setProjectData] = useState<any>(null);
   const [currentUser, setCurrentUser] = useState<any>();
+
+  useEffect(() => {
+    //redirect to home if aleady logged in
+    if (!token) {
+      router.push('/signin');
+    }
+  }, []);
 
   useEffect(() => {
     const getCurrentUser = async () => {

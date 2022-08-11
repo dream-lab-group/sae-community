@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { Router, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { appTheme } from '..';
+import { appTheme, token } from '..';
 import Layout from '../../common/components/layout';
 import { ProjectCard } from '../../common/components/project-card/project-card';
 import { apiClient } from '../../common/data/apiClient';
@@ -37,6 +37,13 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   const userId = router.asPath.split('/').at(-1);
   const [allUserProjects, setAllUserProjects] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    //redirect to home if aleady logged in
+    if (!token) {
+      router.push('/signin');
+    }
+  }, []);
 
   useEffect(() => {
     const fetchMyProjects = async () => {

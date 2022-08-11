@@ -8,7 +8,7 @@ import {
 import { Router, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { appTheme, directus } from '..';
+import { appTheme, directus, token } from '..';
 import Layout from '../../common/components/layout';
 import { LastProjects } from '../../common/components/profile/last-projects';
 import { UserDescription } from '../../common/components/profile/user-description';
@@ -34,6 +34,13 @@ const MyProfile: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    //redirect to home if aleady logged in
+    if (!token) {
+      router.push('/signin');
+    }
+  }, []);
 
   const EditProfile = () => {
     router.push('/profile');
