@@ -56,7 +56,6 @@ export const UserDescription = ({ currentUser }: UserInformationProps) => {
       <Box
         sx={{
           display: 'flex',
-          //     flexDirection: `${smBreakpointDown ? 'column' : 'row'}`,
           flexWrap: 'wrap',
           height: 'auto',
           padding: 'none',
