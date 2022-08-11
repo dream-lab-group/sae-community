@@ -56,7 +56,7 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
           <Image
             src={placeholderImage}
             style={{ borderRadius: '50%' }}
-            layout="fill"
+            layout="intrinsic"
             alt="profilepicture"
             priority
             className="project-image-border-radius image-container"
