@@ -33,12 +33,10 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
     router.push(`/projects/${userId}`);
   };
 
-  console.log(userProject);
   console.log(allUserProjects);
 
-  const ShowProject = () => {
-    router.push(`/project/${userProject[0].id}`);
-    //     console.log(userProject[0]);
+  const ShowProject = (id: string) => {
+    router.push(`/project/${id}`);
   };
 
   useEffect(() => {
@@ -213,9 +211,10 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
                       position: 'relative',
                       boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
                       margin: '0 10px 0 10px',
+                      cursor: 'pointer',
                     }}
                     key={id}
-                    onClick={ShowProject}
+                    onClick={() => ShowProject(id)}
                   >
                     <Image
                       className="project-image-border-radius image-container"
@@ -247,6 +246,7 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
                       borderRadius: '10px',
                       position: 'relative',
                       boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                      cursor: 'pointer',
                       '&:nth-child(1)': {
                         margin: `${lgBreakpointDown ? '0 10px 0 10px' : ''}`,
                       },
@@ -255,6 +255,7 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
                       },
                     }}
                     key={id}
+                    onClick={() => ShowProject(id)}
                   >
                     <Image
                       className="project-image-border-radius image-container"
