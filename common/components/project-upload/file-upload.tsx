@@ -24,7 +24,6 @@ export const FileUpload = ({ formik }: FileUploadProps) => {
   const maxFileSize = 5097150;
 
   function maxFileSizeValidator(file: File) {
-    console.log(file.type);
     if (file.size > maxFileSize) {
       return {
         code: 'size-too-large',

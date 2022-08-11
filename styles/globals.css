@@ -61,6 +61,12 @@ h6 {
   position: relative;
 }
 
+.image-container-profile {
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: relative;
+}
+
 .image-container-project-card {
   -o-object-fit: cover;
      object-fit: cover;

@@ -68,6 +68,7 @@ export const UserInformation = ({ currentUser }: UserInformationProps) => {
             layout="fill"
             alt="profilepicture"
             priority
+            className="project-image-border-radius image-container-profile"
           />
         )}
       </Box>
