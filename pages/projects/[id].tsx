@@ -85,7 +85,7 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
         spacing={{ sm: 5, md: 3, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
         className="grid-container"
       >
-        {allUserProjects.lengt > 0 ? (
+        {allUserProjects.length !== 0 ? (
           <>
             {allUserProjects.map(
               ({
