@@ -27,7 +27,6 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const smBreakpointUp = useMediaQuery(theme.breakpoints.up('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const containsHttps = (string: any) => /http*/.test(string);
 
   const [avatarFile, setAvatarFile] = useState<any>([]);
   const [changedAvatar, setChangedAvatar] = useState<boolean>(false);
@@ -63,33 +62,29 @@ const EditMyProfile = ({ userData, userAvatar }: EditMyProfileProps) => {
     url_website: yup
       .string()
       .matches(
-        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        'Bitte gib einen URL ein. Beispielsweise: www.sai.ch',
-      )
-      .test(
-        'Bitte füge dein URL ohne HTTP ein.',
-        (value) => !containsHttps(value),
+        /^(www\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
+        'Bitte gib einen URL ein. Beispielsweise: www.sai.ch (ohne http:// oder https://)',
       )
       .nullable(true),
     url_youtube: yup
       .string()
       .matches(
-        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        'Bitte gib einen URL ein.',
+        /^(www\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
+        'Bitte gib einen URL ein. Beispielsweise: www.sai.ch (ohne http:// oder https://)',
       )
       .nullable(true),
     url_instagram: yup
       .string()
       .matches(
-        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        'Bitte gib einen URL ein.',
+        /^(www\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
+        'Bitte gib einen URL ein. Beispielsweise: www.sai.ch (ohne http:// oder https://)',
       )
       .nullable(true),
     url_linkedin: yup
       .string()
       .matches(
-        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        'Bitte gib einen URL ein.',
+        /^(www\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
+        'Bitte gib einen URL ein. Beispielsweise: www.sai.ch (ohne http:// oder https://)',
       )
       .nullable(true),
   });
