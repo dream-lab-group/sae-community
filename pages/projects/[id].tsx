@@ -1,17 +1,22 @@
 import {
   Box,
+  Button,
   Grid,
   ThemeProvider,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import { Router, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { appTheme } from '..';
 import Layout from '../../common/components/layout';
 import { ProjectCard } from '../../common/components/project-card/project-card';
 import { apiClient } from '../../common/data/apiClient';
+import saiImage from '../../public/404.png';
 
 type Props = {
   router: Router;
@@ -27,6 +32,7 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
+  const { t } = useTranslation();
 
   const userId = router.asPath.split('/').at(-1);
   const [allUserProjects, setAllUserProjects] = useState<any>([]);
@@ -45,6 +51,11 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
     };
     fetchMyProjects();
   }, [setAllUserProjects, userId]);
+
+  const handleOnClickProjectUpload = (e: any) => {
+    e.preventDefault();
+    router.push('/project-upload');
+  };
 
   return (
     // @ts-expect-error: Todo
@@ -74,21 +85,94 @@ const Projects: NextPage = withRouter<Props>(({ router }: PropsWithRouter) => {
         spacing={{ sm: 5, md: 3, lg: 3, xl: 3, desktop: 4, uhd: 4, kuhd: 4 }}
         className="grid-container"
       >
-        {/* @ts-expect-error: todo */}
-        {allUserProjects.map(({ id, user_created, course, cover_photo }) => {
-          return (
-            <ProjectCard
-              key={id}
-              projectId={id}
-              coverPhotoId={cover_photo}
-              userCreated={user_created}
-              course={course}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              editProject
-            />
-          );
-        })}
+        {allUserProjects.lengt > 0 ? (
+          <>
+            {allUserProjects.map(
+              ({
+                id,
+                user_created,
+                course,
+                cover_photo,
+              }: {
+                id: string;
+                user_created: string;
+                course: string;
+                cover_photo: string;
+              }) => {
+                return (
+                  <ProjectCard
+                    key={id}
+                    projectId={id}
+                    coverPhotoId={cover_photo}
+                    userCreated={user_created}
+                    course={course}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                    editProject
+                  />
+                );
+              },
+            )}
+          </>
+        ) : (
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Box
+              sx={{
+                position: 'relative',
+                height: `${mdBreakpointDown ? '200px' : '400px'}`,
+                width: `${mdBreakpointDown ? '200px' : '300px'}`,
+              }}
+            >
+              <Image
+                className="project-image-border-radius image-container"
+                layout="fill"
+                src={saiImage}
+              />
+            </Box>
+            <Box
+              sx={{
+                position: 'relative',
+                background: '#192D3E',
+                top: '-1px',
+                width: `${mdBreakpointDown ? '350px' : '650px'}`,
+                padding: '20px',
+                borderRadius: '20px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Typography
+                sx={{
+                  fontWeight: 700,
+                  color: '#fff',
+                  fontSize: `${mdBreakpointDown ? '20px' : '30px'}`,
+                  marginBottom: '30px',
+                  textAlign: 'center',
+                }}
+              >
+                {t('projects.noProjects')}
+              </Typography>
+              <Button
+                className="secondary-button"
+                variant="contained"
+                sx={{
+                  marginBottom: '10px',
+                }}
+                onClick={handleOnClickProjectUpload}
+              >
+                Projekt heraufladen
+              </Button>
+            </Box>
+          </Box>
+        )}
       </Grid>
     </ThemeProvider>
   );

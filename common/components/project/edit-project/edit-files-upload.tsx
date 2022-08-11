@@ -21,7 +21,6 @@ export const EditFilesUpload = ({
   setAllFiles,
   formikProps,
 }: EditFilesUploadProps) => {
-  //   const [ImagePreview] = useState(URL.createObjectURL(acceptedFile));
   const [isAudio, setIsAudio] = useState<boolean>(false);
   const [filePreview, setFilePreview] = useState<any>();
 

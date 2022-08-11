@@ -34,6 +34,11 @@ h6 {
   font-family: "Outfit", sans-serif !important;
 }
 
+.terms-of-use {
+  color: #0000ee;
+  cursor: pointer;
+}
+
 .main-container {
   min-height: 100vh;
   width: 100%;
@@ -44,7 +49,17 @@ h6 {
 }
 
 .image-container {
-  object-fit: fill;
+  object-fit: cover;
+  position: relative;
+}
+
+.image-container-big {
+  object-fit: contain;
+  position: relative;
+}
+
+.image-container-profile {
+  object-fit: cover;
   position: relative;
 }
 
@@ -63,6 +78,16 @@ h6 {
 
 .primary-button:hover {
   background: #5504aa !important;
+}
+
+.secondary-button {
+  background: rgb(239, 239, 239) !important;
+  color: #8519f6 !important;
+}
+
+.secondary-button:hover {
+  background: rgb(239, 239, 239) !important;
+  color: #5504aa !important;
 }
 
 .film-button:hover {

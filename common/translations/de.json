@@ -7,16 +7,15 @@
   },
   "general": {
     "saeCommunityPlatform": "SAI Plattform",
-    "platformForStudents": "Plattform for students",
-    "fromStudents": "by students",
+    "platformForStudents": "For students by students",
     "cancel": "Abbrechen",
     "firstname": "Vorname",
     "lastname": "Nachname",
-    "email": "E-Mail"
+    "email": "E-Mail",
+    "futureFeature": "Zukünftiges Feature, bleib gespannt!"
   },
   "loginRegistration": {
     "createAccount": "Erstelle ein Benutzerkonto",
-    "termsOfUse": "Wenn du ein Konto erstellst, erklärst du dich mit unseren Nutzungsbedingungen, Datenschutzrichtlinien und unseren Standardeinstellungen für Benachrichtigungen einverstanden.",
     "login": "Hier anmelden",
     "existingUser": "Du hast bereits ein Konto?",
     "welcomeBack": "Willkommen zurück!",
@@ -79,7 +78,8 @@
     "stutendsZA": "Studenten Z-A"
   },
   "projects": {
-    "editProject": "Projekt editieren"
+    "editProject": "Projekt editieren",
+    "noProjects":  "Du hast noch kein Projekt heraufgeladen!"
   },
   "projectUpload": {
     "createProject": "Projekt erstellen",

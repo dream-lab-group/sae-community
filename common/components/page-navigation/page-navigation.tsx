@@ -27,6 +27,8 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
+  const udhBreakpointDown = useMediaQuery(theme.breakpoints.down('uhd'));
+  const udhBreakpointUp = useMediaQuery(theme.breakpoints.up('uhd'));
   const [activeTagFilter, setActiveTagFilter] = useState<string>();
   const [sortFilter, setSortFilter] = useState<string[]>([]);
   const { t } = useTranslation();
@@ -50,16 +52,24 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
         }}
       >
         <Grid container width="100%" direction="column">
-          <Grid
-            item
-            container
-            spacing={{ xs: 2, sm: 2, md: 2, lg: 3 }}
-            columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
-            alignItems="center"
-            marginBottom="16px"
-            width="100%"
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
           >
-            <Grid item xs={8} sm={8} md={6} lg={5}>
+            <Box
+              sx={{
+                width: `${
+                  lgBreakpointUp
+                    ? '450px'
+                    : mdBreakpointDown
+                    ? '250px'
+                    : '270px'
+                }`,
+              }}
+            >
               <FormControl fullWidth>
                 <OutlinedInput
                   fullWidth
@@ -73,22 +83,54 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
                   sx={{ background: ' #fff' }}
                 />
               </FormControl>
-            </Grid>
-            {mdBreakpointDown ? (
-              <></>
+            </Box>
+            {udhBreakpointUp ? (
+              <Grid
+                container
+                wrap="nowrap"
+                overflow="scroll"
+                width="100%"
+                justifyContent={`${lgBreakpointUp && 'center'}`}
+              >
+                {Globals.pageNavigationElements.map((element) => (
+                  <PageNavigationElement
+                    key={element}
+                    element={element}
+                    setUsedFilter={setUsedFilter}
+                    activeTagFilter={activeTagFilter}
+                    setActiveTagFitler={setActiveTagFilter}
+                  />
+                ))}
+              </Grid>
             ) : (
-              <Grid item xs={0} sm={0} md={1} lg={3} />
+              <></>
             )}
-            <Grid
-              item
-              xs={4}
-              sm={4}
-              md={3}
-              lg={2}
-              alignItems="center"
-              justifyContent="center"
+            <Box
+              sx={{
+                width: `${
+                  mdBreakpointDown
+                    ? '150px'
+                    : lgBreakpointUp
+                    ? '415px'
+                    : '380px'
+                }`,
+                display: 'flex',
+                justifyContent: `${
+                  mdBreakpointDown ? 'flex-end' : 'space-between'
+                }`,
+              }}
             >
-              <FormControl fullWidth>
+              <FormControl
+                sx={{
+                  width: `${
+                    mdBreakpointDown
+                      ? '150px'
+                      : lgBreakpointUp
+                      ? '240px'
+                      : '200px'
+                  }`,
+                }}
+              >
                 <Select
                   fullWidth
                   placeholder="Sortieren"
@@ -118,42 +160,45 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
                   <MenuItem value={40}>{t('navigation.stutendsZA')}</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-            {mdBreakpointDown ? (
-              <></>
-            ) : (
-              <Grid item xs={0} sm={0} md={2} lg={2}>
+              {mdBreakpointDown ? (
+                <></>
+              ) : (
                 <Button
                   className="primary-button"
-                  fullWidth
                   variant="contained"
                   sx={{
                     height: `${lgBreakpointUp ? '56px' : '40px'}`,
+                    width: '160px',
+                    marginLeft: '20px',
                   }}
                 >
                   Filter
                 </Button>
-              </Grid>
-            )}
-          </Grid>
-          <Grid
-            container
-            wrap="nowrap"
-            overflow="scroll"
-            width="100%"
-            marginTop={`${smBreakpointDown ? '5px' : '10px'}`}
-            justifyContent={`${lgBreakpointUp && 'center'}`}
-          >
-            {Globals.pageNavigationElements.map((element) => (
-              <PageNavigationElement
-                key={element}
-                element={element}
-                setUsedFilter={setUsedFilter}
-                activeTagFilter={activeTagFilter}
-                setActiveTagFitler={setActiveTagFilter}
-              />
-            ))}
-          </Grid>
+              )}
+            </Box>
+          </Box>
+          {udhBreakpointDown ? (
+            <Grid
+              container
+              wrap="nowrap"
+              overflow="scroll"
+              width="100%"
+              marginTop={`${smBreakpointDown ? '20px' : '25px'}`}
+              justifyContent={`${lgBreakpointUp && 'center'}`}
+            >
+              {Globals.pageNavigationElements.map((element) => (
+                <PageNavigationElement
+                  key={element}
+                  element={element}
+                  setUsedFilter={setUsedFilter}
+                  activeTagFilter={activeTagFilter}
+                  setActiveTagFitler={setActiveTagFilter}
+                />
+              ))}
+            </Grid>
+          ) : (
+            <></>
+          )}
         </Grid>
       </Box>
     </>

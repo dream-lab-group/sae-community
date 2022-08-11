@@ -10,6 +10,7 @@ export const PageNavigationElement = ({
 }: PageNavigationElementProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
+  const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
 
   const buttonStyling = () => {
@@ -144,7 +145,7 @@ export const PageNavigationElement = ({
           noWrap
           sx={{
             padding: `${lgBreakpointUp ? '10px 20px' : '8px 20px'}`,
-            fontSize: `${lgBreakpointUp ? '16px' : '14px'}`,
+            fontSize: `${smBreakpointDown ? '13px' : '15px'}`,
             color: '#fff',
             fontWeight: '300',
             textAlign: 'center',

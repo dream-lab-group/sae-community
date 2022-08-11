@@ -33,8 +33,6 @@ export const LastProjects = ({ currentUser, readMe }: LastProjectsProps) => {
     router.push(`/projects/${userId}`);
   };
 
-  console.log(allUserProjects);
-
   const ShowProject = (id: string) => {
     router.push(`/project/${id}`);
   };

@@ -54,6 +54,7 @@ const ProjectUpload = () => {
       if (userResponse.status === 200) {
         setCurrentUser(userResponse.data.data);
       }
+      window.scrollTo(0, 0);
     };
     getCurrentUser();
   }, [setCurrentUser]);

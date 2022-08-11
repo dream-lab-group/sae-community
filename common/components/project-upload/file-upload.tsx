@@ -1,13 +1,13 @@
 import { Alert, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { FormikValues } from 'formik';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { BsImage } from 'react-icons/bs';
-import { RiFolderMusicLine } from 'react-icons/ri';
-import { IoCloseSharp } from 'react-icons/io5';
 import { FaFrownOpen } from 'react-icons/fa';
 import { GiHeavyFall } from 'react-icons/gi';
-import { FormikValues } from 'formik';
+import { IoCloseSharp } from 'react-icons/io5';
+import { RiFolderMusicLine } from 'react-icons/ri';
 import { FileUploadFiles } from './modules/file-upload-files';
 
 type FileUploadProps = {

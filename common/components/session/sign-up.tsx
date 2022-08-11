@@ -289,7 +289,10 @@ export const SignUp = ({
                   lineHeight: '15px',
                 }}
               >
-                {t('loginRegistration.termsOfUse')}
+                Wenn du ein Konto erstellst, erklärst du dich mit unseren
+                <span className="terms-of-use"> Nutzungsbedingungen</span>,
+                Datenschutzrichtlinien und unseren Standardeinstellungen für
+                Benachrichtigungen einverstanden.
               </Typography>
             </Box>
             <Box

@@ -12,10 +12,6 @@ export const SkillsInterests = ({
   const programsData = Object.values(currentPrograms || {});
   const interestsData = Object.values(currentInterests || {});
 
-  //   console.log(programsData);
-  const programElement = programs.map((element) => element);
-  //   programs.map((element) => console.log(element));
-
   return programs || interests ? (
     <Grid container spacing={2}>
       <Grid item sm={12} md={6} width="100%">
