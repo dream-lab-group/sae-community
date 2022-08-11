@@ -11,7 +11,8 @@
     "cancel": "Abbrechen",
     "firstname": "Vorname",
     "lastname": "Nachname",
-    "email": "E-Mail"
+    "email": "E-Mail",
+    "futureFeature": "Zukünftiges Feature, bleib gespannt!"
   },
   "loginRegistration": {
     "createAccount": "Erstelle ein Benutzerkonto",
@@ -77,7 +78,8 @@
     "stutendsZA": "Studenten Z-A"
   },
   "projects": {
-    "editProject": "Projekt editieren"
+    "editProject": "Projekt editieren",
+    "noProjects":  "Du hast noch kein Projekt heraufgeladen!"
   },
   "projectUpload": {
     "createProject": "Projekt erstellen",

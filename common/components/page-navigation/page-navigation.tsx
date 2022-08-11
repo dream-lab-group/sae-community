@@ -25,7 +25,6 @@ export const PageNavigation = ({ setUsedFilter }: PageNavigationProps) => {
   const theme = useTheme();
   const smBreakpointDown = useMediaQuery(theme.breakpoints.down('sm'));
   const mdBreakpointDown = useMediaQuery(theme.breakpoints.down('md'));
-  const lgBreakpointDown = useMediaQuery(theme.breakpoints.down('lg'));
   const lgBreakpointUp = useMediaQuery(theme.breakpoints.up('lg'));
   const desktopBreakpointUp = useMediaQuery(theme.breakpoints.up('desktop'));
   const udhBreakpointDown = useMediaQuery(theme.breakpoints.down('uhd'));
