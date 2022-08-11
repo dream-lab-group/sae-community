@@ -141,16 +141,6 @@ const SignIn = () => {
                 >
                   {t('general.platformForStudents')}
                 </Typography>
-                <Typography
-                  color="white"
-                  sx={{
-                    fontWeight: 600,
-                    fontSize: `${desktopBreakpointUp ? '55px' : '40px'}`,
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  {t('general.fromStudents')}
-                </Typography>
               </Box>
             </Box>
           </Grid>
